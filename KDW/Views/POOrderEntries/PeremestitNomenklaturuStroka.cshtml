@@ -1,0 +1,87 @@
+﻿@model KDW.Models.ItemView
+
+
+
+@{
+    bool Sklad = true;
+    string S = "";
+    bool Nugno = true;
+    decimal Postupilo = ViewBag.QtyMust- ViewBag.QtyPick;
+    if (Postupilo<=0)
+    {
+        Nugno = false;
+    }
+    if (Model.Stocks == null || Model.Stocks.Count == 0)
+    {
+        S = Resources.Resource.NetNaSklade;
+        Sklad = false;
+
+
+    }
+}
+
+<tr id="TR_@Model.Item.FItemID">
+    <td>
+        @Model.Item.FNumber
+    </td>
+    <td>
+        @Model.Item.FName
+    </td>
+    <td>
+        @if (Sklad && Nugno)
+        {
+            @Html.DropDownList("Stock_" + Model.Item.FItemID, new SelectList(Model.Stocks, "FItemID", "FName"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+
+        }
+        else
+        {
+
+            if (!Nugno)
+            {
+                <p>@Resources.Resource.Peredano</p>
+            }
+            if (!Sklad)
+            {
+                <p>@S</p>
+            }
+
+
+        }
+
+
+    </td>
+    <td>
+        @if (Sklad&&Nugno)
+        {
+            //@Html.DropDownList("MGR_" + Model.Item.FItemID, new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+            @Html.DropDownList("MGR_" + Model.Item.FItemID, new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+
+        }
+
+
+    </td>
+    <td>
+        @ViewBag.QtyPick / @ViewBag.QtyMust
+    </td>
+    <td>
+        @if (Sklad&&Nugno)
+        {
+
+            <input class="btn btn-warning" id="QTY_@Model.Item.FItemID" placeholder="@Resources.Resource.KolichestvoNomenklaturi"  value=" @ViewBag.QtyKPerevodu.ToString().Replace(",",".")"/>
+        }
+
+
+    </td>
+    <td>
+        @if (Sklad&&Nugno)
+        {
+            <button class="btn btn-success" id="B_@Model.Item.FItemID" onclick="PeremestitNaProizvodstvo(@Model.Item.FItemID)">@Resources.Resource.PeremeshenieNaProizvodstvo</button>
+        }
+
+
+    </td>
+   
+</tr>
+
+
+

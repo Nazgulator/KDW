@@ -1,0 +1,1030 @@
+﻿@model KDW.Models.ItemView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<Center>
+    <h2>@Resources.Resource.Info</h2>
+</Center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<style>
+    .description {
+        width: 280px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+
+    .allwidth {
+        min-width: 280px;
+    }
+</style>
+@{
+    //    decimal QTYSklad = Math.Round(ViewBag.QTYNaSklade, 2);
+    string NomenklaturaName = Model.Item.FName;
+
+}
+
+
+<!-- Modal -->
+<div class="modal fade" id="OTK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" role="document" width="100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.IzmenitStatusOTK...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @Html.DropDownList("OTKStatus", new SelectList(ViewBag.StatusesOTK, "Id", "NameRu"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+
+                </p>
+                <p>
+                    <button class="btn btn-success btn-block" onclick="SaveStatusOTK()">@Resources.Resource.Save</button>
+                </p>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="CINREsult" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" role="document" width="100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>Результат выполнения</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="CINR">
+            
+
+
+
+            </div>
+            <button class="btn btn-success btn-block" onclick="ReloadPage()">Ok</button>
+        </div>
+    </div>
+</div>
+
+
+
+<table id="T" class="table table-bordered table-striped">
+    @try
+    {
+        string Zakaz = Model.Z.FBillNo;
+        string Postavshik = Model.Z.SupplierName;
+        if (Zakaz.Equals("POORD000022"))
+        {
+            Zakaz = Resources.Resource.ZakazNeizvesten;
+            Postavshik = Resources.Resource.ZakazNeizvesten;
+        }
+        <tr>
+            <th>
+                @Resources.Resource.ZakazPostavshiku
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div class="btn btn-default btn-block allwidth">@Zakaz</div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                @Resources.Resource.Postavshik
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="btn btn-default btn-block allwidth">@Postavshik</div>
+            </td>
+        </tr>
+    }
+    catch
+    {
+    }
+    <tr>
+        <th>
+            @Resources.Resource.NaimenovanieIPartNomer
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <div class=" btn btn-block btn-default ">@Model.Item.FNumber  </div>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <center>
+                <div class=" description "> @Model.Item.FName</div>
+            </center>
+        </td>
+
+    </tr>
+
+    <tr>
+        <th>
+            @Resources.Resource.NahoditsaNaSklade / @Resources.Resource.Podrazdelenie
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @if (Model.LastDvig != null && Model.LastDvig.Stock != null && Model.LastDvig.Stock.FName != null)
+            {
+                <div class="btn btn-default btn-block allwidth">@Model.LastDvig.Stock.FName</div>
+            }
+        </td>
+    </tr>
+    @try
+    {
+        {
+            string OTK = "btn btn-block btn-";
+            int Status = Model.LastControl.Status;
+
+
+            if (Status == 0)
+            {
+                OTK = "btn btn-danger btn-block";
+            }
+            else
+            {
+                OTK = "btn btn-block btn-" + Model.LastControl.StatusOTK.Colour;
+            }
+
+            <tr>
+                <th>
+                    @Resources.Resource.StatusOTK
+                </th>
+            </tr>
+
+
+            try
+            {
+                <tr>
+                    <th>
+                        <button class="@OTK">@Model.LastControl.StatusOTK.NameRu</button>
+                    </th>
+                </tr>
+            }
+            catch
+            {
+
+            }
+        }
+    }
+    catch
+    {
+
+    }
+
+    <tr>
+
+        <th>
+            @Resources.Resource.QTYPostupleniya
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input value="@Model.QTY" id="QTY" class="form-control btn btn-default " />
+        </td>
+
+
+
+    </tr>
+
+
+
+    <tr>
+
+        <th>
+            @Resources.Resource.Dvigeniya
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>
+                        @Resources.Resource.Dvigeniya
+                    </th>
+
+                    <th>
+                        @Resources.Resource.Stock / @Resources.Resource.Date
+                    </th>
+                    <th>
+                        @Resources.Resource.OstatkiNomenklaturi
+                    </th>
+
+                </tr>
+
+                @if (Model.Parent != null && Model.Parent.Id != 0 && Model.Parent.Lev != Model.Lev)
+                {
+                    string PQRString = "";
+                    try
+                    {
+                        PQRString = Model.Parent.QRTable.QRstring;
+
+                    }
+                    catch
+                    {
+
+                    }
+
+                    <tr class="table info">
+                        <td>
+                            <a href="@Url.Action("QRScan", "POOrderEntries", new { QRData = PQRString })">   <img src="~/Content/Icons/Parent.png" width="50" height="50" title=" @Resources.Resource.Parent  @Model.Parent.FBillNo" /></a>
+
+                        </td>
+                        <td>
+                            <p>  @Model.Parent.Stock.FName</p>
+                            <p>  @Model.Parent.Date</p>
+
+                        </td>
+
+                        <td>
+                            <p>  @Model.Parent.QTY</p>
+                            <p> @Model.Parent.QTYFact</p>
+
+                        </td>
+
+
+                    </tr>
+                }
+                @{bool Dvig = true;
+                    bool Otmeneno = false;
+                    bool Storno = true;
+                    bool Otmenit = true;
+                    bool Correct = false;
+                }
+                @foreach (var D in Model.Dvigenies.OrderBy(x => x.Id))
+                {
+                    string DvigType = "---";
+                    string DvigClass = "";
+                    string Ico = "/Content/Icons/Parent.png";
+                    bool Stat = false;
+                    bool Child = false;
+                    string Mnimoe = "";
+                    int DStatus = 1;
+                    string DSStatus = "";
+                    string DOTK = "danger";
+                    string QRString = "";
+                    try
+                    {
+                        QRString = D.QRTable.QRstring;
+                    }
+                    catch
+                    {
+
+                    }
+
+                    if (D.Mnimoe)
+                    {
+                        Mnimoe = "Mnimoe";
+                    }
+
+                    if (D.Control != null && D.Control.Count > 0)
+                    {
+                        try
+                        {
+                            DOTK = "success";
+                            DStatus = D.Control.OrderByDescending(x => x.Id).First().Status;
+                            try
+                            {
+                                DSStatus = D.Control.OrderByDescending(x => x.Id).First().StatusOTK.NameZh;
+                            }
+                            catch
+                            {
+
+                            }
+                            if (DStatus == 1 || DStatus == 7 || DStatus == 8 || DStatus == 6)
+                            {
+                                DOTK = "warning";
+                            }
+                            if (DStatus == 3 || DStatus == 4 || DStatus == 5 || DStatus == 10)
+                            {
+                                DOTK = "danger";
+                            }
+                            if (DStatus != 1 && DStatus != 8)
+                            {
+                                Stat = true;
+                            }
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+
+
+                    if (D.Lev == Model.LastDvig.Lev)
+                    {
+                        if (D.Otmena)
+                        {
+                            Otmeneno = true;
+                        }
+                        if (D.FBillNo.Contains("WIN") || D.FBillNo.Contains("JIN"))
+                        {
+                            DvigType = Resources.Resource.PostuplenieNaSklad;
+                            DvigClass = "success";
+                            Ico = "/Content/Icons/Postuplenir.png";
+                        }
+                        if (D.FBillNo.Contains("CHG"))
+                        {
+                            DvigType = Resources.Resource.PeremeshenieNaSklad;
+                            DvigClass = "default";
+                            Ico = "/Content/Icons/Peremeshenie.png";
+                            Storno = false;
+                        }
+                        if (D.FBillNo.Contains("CIN"))
+                        {
+                            DvigType = Resources.Resource.Proizvedeno;
+                            DvigClass = "success";
+                            Ico = "/Content/Icons/Proizvedeno.png";
+                            if (Model.Dvigenies.Count > 1)
+                            {
+                                // Dvig = false;
+                            }
+                            else
+                            {
+                                Correct = true;
+                            }
+                            Otmenit = false;
+
+                        }
+                        if (D.FBillNo.Contains("SOUT"))
+                        {
+                            DvigType = Resources.Resource.PeremeshenieNaProizvodstvo;
+                            DvigClass = "warning";
+                            Ico = "/Content/Icons/Proizvodstvo.png";
+                            if (D.Work != null && D.Work.Equals("STORNO") == false)
+                            {
+                                //  Dvig = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+
+                        DvigType = Resources.Resource.Childs;
+                        DvigClass = "info";
+                        Ico = "/Content/Icons/Razdelenie.png";
+                        Child = true;
+                    }
+
+                    if (D.Otmena)
+                    {
+                        DvigClass = "default";
+                        Ico = "/Content/Icons/Otmena.png";
+                    }
+                    if (Model.LastDvig == null || Model.LastDvig.QTYFact <= 0)
+                    {
+                        Dvig = false;
+                    }
+
+                    <tr class="table @DvigClass ">
+                        <td>
+                            <a href="@Url.Action("QRScan", "POOrderEntries", new { QRData = QRString })">   <img src="@Ico" width="50" height="50" title="@DvigType  @D.FBillNo" /></a>
+                        </td>
+
+                        <td>
+                            <p> @D.Stock.FName</p>
+                            <p>
+                                @D.Date
+                                @if (D.Mnimoe)
+                                {
+                                    <h5> @Resources.Resource.VosstanovlenniQR </h5>
+                                }
+                            </p>
+
+
+                        </td>
+
+                        @if (D.Work != null && D.Work != "")
+                        {
+                            <td>
+                                <p> @D.QTY</p>
+                                <p>@D.Work</p>
+
+                            </td>
+                        }
+                        else
+                        {
+
+                            <td>
+                                <p> @D.QTY</p>
+                                @if (D.FBillNo.Contains("CIN"))
+                                {
+                                    <p>@D.Work</p>
+                                }
+                                else
+                                {
+                                    <p>@D.QTYFact</p>
+                                }
+                            </td>
+
+                        }
+
+                    </tr>
+                    if (D.NomenklaturaPlace != null && D.NomenklaturaPlace.Count > 0)
+                    {
+                        var N = D.NomenklaturaPlace.OrderByDescending(x => x.Id).First();
+                        //  foreach (var N in D.NomenklaturaPlace)
+                        //  {
+                        try
+                        {
+                            <tr class=" @DvigClass ">
+                                <td>
+                                    @if (N.StreetId != null)
+                                    {
+                                        <p>
+                                            @Resources.Resource.Street @N.StreetId
+                                        </p>
+                                    }
+                                </td>
+                                <td>
+                                    @Resources.Resource.Stellag  @N.Stellag.Num
+                                </td>
+
+                                <td>
+
+                                    @if (N.PolkaId != null && N.YacheikaId != null)
+                                    {
+                                        string txt = Resources.Resource.Polka + " " + N.PolkaId.ToString() + " - " + Resources.Resource.Yacheika + " " + N.Yacheika.Num;
+                                        <p>
+                                            @txt
+                                        </p>
+
+                                    }
+                                </td>
+
+                            </tr>
+                        }
+                        catch
+                        {
+                            <tr>
+                                <td>
+                                    @Resources.Resource.ErrorSchitivaniiMesta
+                                </td>
+                            </tr>
+                        }
+                        // }
+                    }
+                    if (D.Komplekt != null && D.Komplekt.Count > 0)
+                    {
+                        <tr class="table @DvigClass ">
+                            <td colspan="4">
+
+                                <table class="table table-bordered table-striped">
+                                    @foreach (var k in D.Komplekt)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @k.t_Item.FNumber
+                                            </td>
+                                            <td>
+                                                @k.POOrder.FBillNo
+                                            </td>
+                                        </tr>
+                                    }
+                                </table>
+
+
+
+                            </td>
+                        </tr>
+                    }
+                    if (Stat) // если статус ОТК стоит
+                    {
+                        <tr class="@DOTK ">
+                            <td colspan="4">
+                                <Center>
+                                    <p>
+                                        @Resources.Resource.StatusOTK =  @DSStatus
+                                    </p>
+                                </Center>
+
+
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <button class="btn btn-block btn-default"> @Resources.Resource.VosmognieDeistviya </button>
+        </td>
+    </tr>
+
+
+    @if (ViewBag.WorksNeed != null && ViewBag.WorksNeed.Count > 0)
+    {
+        if (ViewBag.WorksNeed != null)
+        {
+            foreach (var W in ViewBag.WorksNeed)
+            {
+                decimal QTYNEED = Math.Round(W.QTY - W.QTYFact, 3);
+                <tr>
+                    <td>
+                        <a href="@Url.Action("PeremeshenieNaProizvodstvoQR", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id })" class="btn  btn-success btn-block allwidth">@W.SW.WorkNumber -> @QTYNEED</a>
+
+
+                    </td>
+                </tr>
+            }
+        }
+    }
+    @try
+    {
+        if (Correct && (ViewBag.Roles.Contains("Старший мастер") || ViewBag.Roles.Contains("Администратор")))
+        {
+            <tr>
+                <td>
+                    <input class="btn btn-warning btn-block" id="CorCin" value="@Model.QTY " />
+                    <button onclick="CorrectCIN()" class="btn  btn-danger btn-block allwidth"> @Resources.Resource.CorrectCIN</button>
+
+                </td>
+            </tr>
+        }
+
+        if (ViewBag.Roles.Contains("Администратор"))
+        {
+            if (Otmenit && (Model.LastDvigChild.FBillNo.Contains("WIN") || Model.LastDvigChild.FBillNo.Contains("JIN") || Model.LastDvigChild.FBillNo.Contains("CHG") || Model.LastDvigChild.FBillNo.Contains("SOUT")))
+            {
+
+                if ((((Model.LastDvig.Work != null && Model.LastDvig.Work.Equals("STORNO")) == false || Model.LastDvig.Work == null) && ((ViewBag.Roles.Contains("Кладовщик") && Model.LastDvig.Date >= DateTime.Now.AddDays(-1)) || ViewBag.Roles.Contains("Начальник склада"))) || ViewBag.Roles.Contains("Администратор"))
+                {
+                <tr>
+                    <td>
+                        <button onclick="OtmenaProvedeniya()" class="btn  btn-danger btn-block allwidth">@Resources.Resource.OtmenaProvedeniya</button>
+
+                    </td>
+                </tr>
+                }
+
+            }
+        }
+
+
+        if (Storno && !Otmeneno)
+        {
+            /*
+                    if (Model.LastDvig != null && Model.LastDvig.FBillNo.Contains("SOUT"))
+                    {
+                        if (Model.LastDvig.Work != null && Model.LastDvig.Work.Equals("STORNO") == false)
+                        {
+                            <tr>
+                                <td>
+                                    <a href="@Url.Action("StornoPeremesheniyeNaProizvodstvo", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id })" class="btn  btn-danger btn-block allwidth">@Resources.Resource.Storno</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+            */
+            if (ViewBag.Roles.Contains("Администратор"))
+            {
+                if (Model.LastDvig.FBillNo.Contains("WIN") || Model.LastDvig.FBillNo.Contains("JIN"))
+                {
+                    if (((Model.LastDvig.Work != null && Model.LastDvig.Work.Equals("STORNO")) == false || Model.LastDvig.Work == null) && ((ViewBag.Roles.Contains("Кладовщик") || ViewBag.Roles.Contains("Начальник склада")) || ViewBag.Roles.Contains("Администратор")))
+                    {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("StornoPostupleniyaNaSklad", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id })" class="btn  btn-danger btn-block allwidth">@Resources.Resource.Storno</a>
+                        </td>
+                    </tr>
+                    }
+
+                }
+            }
+        }
+
+        <tr>
+            <td>
+                <center>
+                    <input class="btn btn-warning " id="Polka" value="" />
+                    <button class="btn btn-success " onclick="PologitNaPolku()">@Resources.Resource.PologitNaPolku</button>
+                </center>
+
+            </td>
+        </tr>
+
+        if (Dvig && !Otmeneno)
+        {
+            if (ViewBag.Roles.Contains("ОТК") == false)
+            {
+
+                if (Model.LastControl.StatusOTK.Colour.Equals("danger"))
+                {
+
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("PeremeshenieSoSkladaNaSkladQR", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id, brak = true })" class="btn  btn-success btn-block allwidth">@Resources.Resource.PeremestitNaDrugoiSklad</a>
+                        </td>
+                    </tr>
+                }
+
+                if (Model.LastControl.StatusOTK.Colour.Equals("success"))
+                {
+                    <tr>
+                        <td>
+                            <a href="@Url.Action("PeremeshenieSoSkladaNaSkladQR", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id })" class="btn  btn-success btn-block allwidth">@Resources.Resource.PeremestitNaDrugoiSklad</a>
+                        </td>
+                    </tr>
+
+
+                    /*   <tr>
+                           <td>
+                               <a href="@Url.Action("PeremeshenieNaProizvodstvoQR", "POOrderEntries", new { DvigenieId = Model.LastDvig.Id })" class="btn  btn-success btn-block allwidth">@Resources.Resource.PeremeshenieNaProizvodstvo</a>
+                           </td>
+                       </tr>
+                    */
+                }
+
+                <!--
+                    <tr>
+                       <td>
+                           <center>
+                               <input class="btn btn-warning " id="EQR" value="@Model.QTY" />
+                               <button class="btn btn-success " onclick="EditQR()">@Resources.Resource.EditQR</button>
+                           </center>
+
+                       </td>
+                   </tr>
+
+                    -->
+
+            }
+
+        }
+    }
+    catch
+    {
+
+    }
+    <tr>
+        <td>
+            <button onclick="PrintQR()" class="btn btn-block btn-success glyphicon glyphicon-print">@Resources.Resource.PrintQR</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+        </td>
+    </tr>
+    @if (ViewBag.Roles.Contains("ОТК") || ViewBag.Roles.Contains("Администратор"))
+    {
+        <tr>
+            <td>
+                <button onclick="ShowStatusOTK()" class="btn btn-block btn-success glyphicon glyphicon-flash">@Resources.Resource.OTK</button>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            <a href="/Home/Index" class="btn btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+        </td>
+    </tr>
+
+
+</table>
+
+
+
+<p>QR=@ViewBag.QRData </p>
+
+
+<script>
+   
+         function EditQR(QRID)
+         {
+             var EQR = parseFloat($("#EQR").val().replace(',', '.'));
+             var url2 = "@Url.Action("EditQRJson", "POOrderEntries")?QRID=" + @Model.LastDvig.QRID +"&QTY=" + EQR;
+            $.post
+                (url2, function (data)
+                {
+                    if (data == "True")
+                    {
+                           var ReloadURL = '@Url.Action("QRScan", "POOrderEntries")?QRData=' +'@ViewBag.QRData.ToString()' ;
+
+                           window.location.replace(ReloadURL);
+
+                       // $("#QR_" + QRID).hide();
+                    }
+                }
+            );
+        }
+</script>
+
+<script>
+    function ReloadPage()
+    {
+           $("#CINREsult").modal('show');
+          var ReloadURL = '@Url.Action("QRScan", "POOrderEntries")?QRData=' +'@ViewBag.QRData.ToString()' ;
+          window.location.replace(ReloadURL);
+    }
+</script>
+
+<script>
+    function CorrectCIN() {
+        var EQR = parseFloat($("#CorCin").val().replace(',', '.'));
+        var CV = $("#CINREsult");
+        var T = $("#CINR");
+        var url2 = "@Url.Action("CINCorrect", "POOrderEntries")?DvigenieCINId=" + @Model.LastDvig.Id +"&QTY=" + EQR;
+        T.load(url2);
+        CV.modal('show');
+
+     
+
+
+    }
+</script>
+
+<script>
+        //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+        function PeremestitNaProizvodstvo() {
+            var Num = $('#NPartNumber').val().toString();
+            var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val());
+            var MaxVNZP = parseFloat($("#MaxVNZP").val());
+            var FQtyFact = parseFloat($("#SkolkoVQR").val());
+            var FQtyMax = parseFloat($("#MaxVQR").val());
+            var SkolkoPeremestit = parseFloat($("#QTYPeremestit").val());
+            var NugnoVNZP = MaxVNZP - SkolkoVNZP;
+            var Buttons = $('#Buttons');
+            var go = false;
+         /*   if (NugnoVNZP > 0)
+            {
+                if (NugnoVNZP < SkolkoPeremestit)
+                {
+                    SkolkoPeremestit = NugnoVNZP;
+                }
+
+
+                if (SkolkoPeremestit > 0 && MaxVNZP > 0) {
+                    if (FQtyFact >= SkolkoPeremestit) {
+                        go = true;
+                    }
+                    else {
+                        if (FQtyFact < SkolkoPeremestit) {
+                            $("#QTYPeremestit").val(FQtyFact);
+                            SkolkoPeremestit = FQtyFact;
+
+                            go = true;
+                        }
+                    }
+                }
+                */
+              //  else {
+               //     alert("@Resources.Resource.NomenklaturiNedostatochno");
+              //  }
+          //  }
+
+    //Если введены верные значения
+          //  if (go) {
+                if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?")) {
+                    Buttons.hide();//скрываем кнопки
+                    var ADDURL = '@Url.Action("AddNZP", "POOrderEntries")?QRData=' + Num + '&QTYFact=' + SkolkoPeremestit;
+
+                    $.post(ADDURL, function (data) {
+                        Buttons.show();
+                        SkolkoVernut();
+
+                         var S = data.split(';');
+                        if (S[0] == 'True') {
+                            alert('@Resources.Resource.PeremeshenieUspeshno');
+                            // alert(data);
+
+                                var QRID = S[1];
+
+                            var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                            $("#PrintQR").load(printurl);
+                            $("#PrintQRModal").modal('show');
+                            // window.location.replace(printurl);
+
+                        }
+
+                        // alert(data);
+     var URL = '@Url.Action("KomplektovkaTable", "POOrderEntries")';
+                    URL = URL + '?Number=' + Num;
+                    //  alert(URL);
+                        $("#NTable").load(URL);
+                        FindAllQTY();
+
+                    });
+
+
+
+
+
+                }
+                else {
+
+                }
+        }
+
+          //  else
+          //  {
+          //      alert("@Resources.Resource.Error");
+          //  }
+
+                               //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                                // alert("PING!");
+
+
+</script>
+
+
+<script>
+    function ShowStatusOTK() {
+
+        $("#OTK").modal('show');
+
+    }
+</script>
+
+<script>
+        function SaveStatusOTK()
+        {
+            var statusOTK = $("#OTKStatus").val();
+           // alert(statusOTK);
+            if (statusOTK != "" && statusOTK != null)
+            {
+
+
+                if (confirm('@Resources.Resource.IzmenitStatusOTK')) {
+                    console.log('ok');
+                    var url = '@Url.Action("AddStatusOTK", "POOrderEntries")?DvigenieId=' +@Model.LastDvig.Id+'&Status=' + statusOTK ;
+                    var ReloadURL = '@Url.Action("QRScan", "POOrderEntries")?QRData=' +'@ViewBag.QRData.ToString()' ;
+                 //   alert(ReloadURL);
+                    $.post(url,
+                        function (data)
+                        {
+                            $("#OTK").modal('hide');
+                           window.location.replace(ReloadURL);
+
+
+
+                            }
+
+
+
+                    );
+
+
+
+                    //    window.location.replace(url2);
+                } else {
+                    console.log('cancel')
+                }
+            }
+        }
+</script>
+
+<script>
+        function PologitNaPolku()
+        {
+            var statusOTK = $("#OTKStatus").val();
+            var Polka = $('#Polka').val();
+
+            // alert(statusOTK);
+            if (Polka != "" && Polka != null)
+            {
+
+
+                if (confirm( 'Изменить место хранения?')) {
+                    console.log('ok');
+                    var url = '@Url.Action("PologitNaPolku", "POOrderEntries")?Mesto=' + Polka + '&DvigenieId=' + @Model.LastDvig.Id+'&ItemId=' +@Model.LastDvig.ItemID ;
+                    var ReloadURL = '@Url.Action("QRScan", "POOrderEntries")?QRData=' +'@ViewBag.QRData.ToString()' ;
+                 //   alert(ReloadURL);
+                    $.post(url,
+                        function (data)
+                        {
+                           // $("#OTK").modal('hide');
+                           window.location.replace(ReloadURL);
+
+
+
+                            }
+
+
+
+                    );
+
+
+
+                    //    window.location.replace(url2);
+                } else {
+                    console.log('cancel')
+                }
+            }
+        }
+</script>
+
+<script>
+
+
+        function Peremestit() {
+            var QTY = $('#QTY').val();
+
+
+
+
+            var url2 = '@Url.Action("PeremeshenieSoSkladaNaSkladQR", "POOrderEntries", new {  DvigenieId = Model.LastDvig.Id })';
+                var url = '@Url.Action("PeremeshenieSoSkladaNaSklad", "POOrderEntries")?ItemID=' +@Model.Item.FItemID+', QTY=' + QTY + ', StockFrom=' +@Model.Stock.FItemID;
+               // alert(url2);
+                 //   window.location.replace(url2);
+            location.reload();
+
+
+
+        }
+
+</script>
+
+<script>
+
+
+        function OtmenaProvedeniya() {
+            var QTY = $('#QTY').val();
+           var url2 = '@Url.Action("OtmenaProvedeniya", "POOrderEntries", new { DvigenieId = Model.LastDvigChild.Id })';
+
+            // alert(url2);
+            if (confirm('@Resources.Resource.Uvereni')) {
+                console.log('ok');
+
+
+               $.post(url2,
+                    function (data)
+                    {
+                         var S = data.split(';');
+                                    if (S[0] == 'Ok')
+                                    {
+                                        alert('@Resources.Resource.Uspeshno');
+                                       // alert(data);
+                                        location.reload();
+
+                                    }
+                                    else
+                                    {
+                                        alert(data);
+
+                                    }
+
+                    }
+                );
+
+
+
+            //    window.location.replace(url2);
+            } else {
+                console.log('cancel')
+            }
+
+
+
+
+
+        }
+
+</script>
+<script>
+        function PrintQR()
+        {
+            var QRID = @Model.LastDvig.QRID;
+            var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+            window.location.replace(url);
+        }
+</script>

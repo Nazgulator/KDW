@@ -1,0 +1,235 @@
+﻿@model KDW.Models.ZakazPostavshiku
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<Center>
+    <h2>@Resources.Resource.VosstanovitQR</h2>
+</Center>
+<h4>@Resources.Resource.ZapolniteYellow</h4>
+
+
+
+
+
+<table class="table table-bordered table-striped ">
+    <tr style="align-content:center;text-align:center">
+
+
+        <th align="center">
+            @Resources.Resource.ZakazPostavshiku
+        </th>
+
+    </tr>
+    <tr>
+
+        <td>
+            @Model.FBillNo
+        </td>
+
+    </tr>
+
+    <tr>
+        <th align="center">
+            @Resources.Resource.Stock
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input class="btn btn-block btn-default" id="StockFilter" placeholder="@Resources.Resource.PoiskSklada" onkeyup="FilterStock()" />  
+        </td>
+     </tr>
+    <tr>
+        <td>
+
+            @Html.DropDownList("StockId", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "PoiskQTY()" })
+
+        </td>
+
+    </tr>
+    <tr>
+        <th align="center">
+            @Resources.Resource.Nomenklatura
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Model.SelectedEntry.Item.FName
+        </td>
+
+    </tr>
+    <tr>
+        <th align="center">
+            @Resources.Resource.QTYPostupilo
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input class="btn btn-warning" id="FCommitQty" value="@Math.Round(ViewBag.QTY,3).ToString().Replace(",",".")" />
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-block btn-success" onclick="SavePostuplenie()">@Resources.Resource.VosstanovitQR</button>
+        </td>
+    </tr>
+</table>
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+
+
+<script>
+    function SavePostuplenie() {
+
+        var POOrderId = @Model.ZakazId;
+        var ItemId = @Model.SelectedEntry.ItemId;
+        var ZakazPostavshiku = '@Model.FBillNo';
+        var Stock = $('#StockId').val();
+        var FCommitQty = $('#FCommitQty').val();//'';
+        FCommitQty = FCommitQty.replace('.', ',');
+
+      //  var QTY = parseFloat(FCommitQty);
+        var FBillNo = '@Model.FBillNo';
+       // alert(POOrderId + ";" + ItemId + ";" + Stock + ";" + FCommitQty + ";" + ZakazPostavshiku + ";" + FBillNo);
+      //  alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+
+        $.post('@Url.Action("VostPostJson", "POOrderEntries")', { POOrderId: POOrderId, ItemId: ItemId, Stock: Stock, FCommitQty: FCommitQty, FBillNo: FBillNo, ZakazPostavshiku: ZakazPostavshiku },
+            function (data)
+        {
+            var S = data.split(';');
+            if (S[0] == 'Ok') {
+                QRID = parseInt(S[1]);
+                console.log('GoToPrint');
+                var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                window.location.replace(url);
+
+
+            }
+            else {
+                alert(data);
+                //location.reload();
+            }
+        }
+
+
+        );
+
+
+
+
+    }
+
+
+
+
+</script>
+
+<script>
+    function FilterStock()
+    {
+        var Filter = $('#StockFilter').val();
+        var Dropdown = $('#StockID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorage", "POOrderEntries")?term=" + Filter;
+
+            $.post(url,
+                function (data)
+                {
+                   // alert(data);
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+
+
+                }
+        );
+
+    }
+</script>
+<script>
+    function PoiskQTY()
+    {
+        var Item = '@Model.SelectedEntry.Item.FNumber';
+        var Stock = $('#StockId').val();
+        var url = "@Url.Action("AutocompleteSearchQTYInStock", "POOrderEntries")?Item=" + Item + "&Stock=" + Stock;
+       // alert('poisk');
+            $.post(url,
+                function (data)
+                {
+                  //  alert(data);
+                    $('#FCommitQty').val(data);
+
+                }
+        );
+
+    }
+</script>
+
+
+
+<script>
+    function LoadStocks()
+    {
+        var Item = '@Model.SelectedEntry.Item.FNumber';
+         var Dropdown = $('#StockId');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorageByItem", "POOrderEntries")?term=" + Item;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(key));
+                    });
+                    PoiskQTY();
+                 
+                }
+        );
+    }
+</script>
+
+
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOL", "POOrderEntries")',
+                    minLength: 1
+
+            });
+        };
+</script>
+
+<script>
+
+        function SearchStorage () {
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                 //  alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>

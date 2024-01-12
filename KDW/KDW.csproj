@@ -1,0 +1,1166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7C73C422-3AC8-4B16-97C3-11F793FFD43C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KDW</RootNamespace>
+    <AssemblyName>KDW</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44309</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BarcodeStandard, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarcodeLib.2.4.0\lib\netstandard2.0\BarcodeStandard.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.QRCode, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MessagingToolkit.QRCode.1.3.0\lib\MessagingToolkit.QRCode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.3\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.3\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1001\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.5.0.2\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BuildingsController.cs" />
+    <Compile Include="Controllers\ComputerNamesController.cs" />
+    <Compile Include="Controllers\DepartmentsToUsersController.cs" />
+    <Compile Include="Controllers\DepartmentToStocksController.cs" />
+    <Compile Include="Controllers\ExcelExportController.cs" />
+    <Compile Include="Controllers\GPScansController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ICMOesController.cs" />
+    <Compile Include="Controllers\ICStockBillEntriesController.cs" />
+    <Compile Include="Controllers\ICStockBillsController.cs" />
+    <Compile Include="Controllers\InterfaceSelectsController.cs" />
+    <Compile Include="Controllers\KingDeeWebRolesController.cs" />
+    <Compile Include="Controllers\MonitorToLinesController.cs" />
+    <Compile Include="Controllers\Opredelenie.cs" />
+    <Compile Include="Controllers\PeremeshenieWorksController.cs" />
+    <Compile Include="Controllers\POOrderEntriesController.cs" />
+    <Compile Include="Controllers\POOrdersController.cs" />
+    <Compile Include="Controllers\StockBufersController.cs" />
+    <Compile Include="Controllers\StockPriemsController.cs" />
+    <Compile Include="Controllers\StocksMOLsController.cs" />
+    <Compile Include="Controllers\StocksSelectsController.cs" />
+    <Compile Include="Controllers\UsersKDWsController.cs" />
+    <Compile Include="Controllers\WebRolesController.cs" />
+    <Compile Include="Controllers\YZRolesController.cs" />
+    <Compile Include="Controllers\YZRoleWorksController.cs" />
+    <Compile Include="Controllers\YZUserDepartmentsController.cs" />
+    <Compile Include="Controllers\YZUserRolesController.cs" />
+    <Compile Include="Controllers\YZUsersController.cs" />
+    <Compile Include="Controllers\YZWorksController.cs" />
+    <Compile Include="Filters\CultureAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Hubs\ProgressHub.cs" />
+    <Compile Include="Models\BigQR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Buildings.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChasSmeni.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComputerNames.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Control.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DepartmentsToUsers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DepartmentToLine.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DepartmentToStocks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DocumentLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Dvigenie.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DvigenieNEW.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EnteryLogs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GPScans.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InfoWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InterfaceSelect.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model11.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MonitorToLine.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NZPNEW.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrichiniSpisaniya.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SkladLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SmenaHour.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DayView.cs" />
+    <Compile Include="Models\BomEntry.cs" />
+    <Compile Include="Models\StocksSelect.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_BillCodeRule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\wk_iot.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkView.cs" />
+    <Compile Include="Models\StarWorkView.cs" />
+    <Compile Include="Models\HR_Base_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBal.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBillAction.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBillNo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBOM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBOMChild.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICBOMGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInvBal.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInventory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInventoryInLogs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInvInitial.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInvLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICInvLogBal.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMaxNum.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMO.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMOChange.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMOChangeEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMOConvertBill.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMOConvertBillEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICMOPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICPlan_PMCDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICStockBill.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICStockBillEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICStock_Inv.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICSubContract.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICSubContractEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICTemplate.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICWork.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_Receipt.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_ReceiptEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_RefundInfo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_RefundInfoEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_Refunds.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_StockMatching.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\IC_StockPlanDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventQR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventSecondQR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventThirdQR.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\InventVedomost.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DvigeniesView.cs" />
+    <Compile Include="Models\KingDeeWebRoles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Komplekt.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\LastDvigs.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MolsOfDepartments.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NomenklaturaEnterprise.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NomenklaturaPlace.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NZP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OcheredWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PeremeshenieWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanLog.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Planogramma.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PlanoviWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POInStock.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POInvBal.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POInventory.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POOrderEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PORequest.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POStockBillEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PostuplenieNaSklad.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBOM.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBomChange.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBomChangeEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBOMEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPOrder.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPOrderEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PredNZP.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProverkaOTK.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QRTable.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\QRTableNEW.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Roles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StarMehWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StatusOTK.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockBufer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockPriem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StocksMOL.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StocksRusKit.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockWorkEntrys.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\StockWorksView.cs" />
+    <Compile Include="Models\Street.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Base_Emp.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Base_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Department.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Fee.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_ICItem.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_ICItemMaterial.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Item.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Stock.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_StockPlace.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_StockPlaceGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Supplier.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_Supply.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_SupplyEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\t_User.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UserRoles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsersKDW.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_ic_cbcostobj.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WebRoles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\WorkNeed.cs" />
+    <Compile Include="Models\ItemView.cs" />
+    <Compile Include="Models\ICMaxNumPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICSubContractEntryPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ICSubContractPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POOrderEntryPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\POOrderPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBOMEntryPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PPBOMPROD.cs">
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRODModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRODModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PRODModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PRODModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Yacheika.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZActiveWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZRoles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZRoleWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZUserDepartments.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZUserRoles.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZUsers.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\YZWorks.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZakazPostavshiku.cs" />
+    <Compile Include="Models\KomplektovkaView.cs" />
+    <Compile Include="Models\PlanoviView.cs" />
+    <Compile Include="Models\Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ZPStockBillEntry.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Resource.zh.Designer.cs">
+      <DependentUpon>Resource.zh.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Icons\edit.png" />
+    <Content Include="Content\Icons\Loading.gif" />
+    <Content Include="Content\Icons\Otmena.png" />
+    <Content Include="Content\Icons\Parent.png" />
+    <Content Include="Content\Icons\Peremeshenie.png" />
+    <Content Include="Content\Icons\Postuplenir.png" />
+    <Content Include="Content\Icons\Proizvedeno.png" />
+    <Content Include="Content\Icons\Proizvodstvo.png" />
+    <Content Include="Content\Icons\qr.png" />
+    <Content Include="Content\Icons\Razdelenie.png" />
+    <Content Include="Content\Icons\stock.png" />
+    <Content Include="Content\select2.min.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Models\PRODModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PRODModel.edmx</DependentUpon>
+      <LastGenOutput>PRODModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PRODModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PRODModel.edmx</DependentUpon>
+      <LastGenOutput>PRODModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\excelexportjs.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.js" />
+    <Content Include="Scripts\jquery-ui-1.13.1.min.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.4.3.min.js" />
+    <Content Include="Scripts\jquery.table2excel.js" />
+    <Content Include="Scripts\jquery.table2excel.min.js" />
+    <Content Include="Scripts\js.cookie.min.js" />
+    <Content Include="Scripts\ru.js" />
+    <Content Include="Scripts\Select2.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\zh-CN.js" />
+    <Content Include="Scripts\zh-TW.js" />
+    <Content Include="Views\favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Models\Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <EntityDeploy Include="Models\Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model11.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="Models\PRODModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PRODModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\PRODModel.edmx.diagram">
+      <DependentUpon>PRODModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index2.cshtml" />
+    <Content Include="Views\POOrders\Create.cshtml" />
+    <Content Include="Views\POOrders\Delete.cshtml" />
+    <Content Include="Views\POOrders\Details.cshtml" />
+    <Content Include="Views\POOrders\Edit.cshtml" />
+    <Content Include="Views\POOrders\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\Create.cshtml" />
+    <Content Include="Views\POOrderEntries\Delete.cshtml" />
+    <Content Include="Views\POOrderEntries\Details.cshtml" />
+    <Content Include="Views\POOrderEntries\Edit.cshtml" />
+    <Content Include="Views\POOrderEntries\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\NewPostuplenie.cshtml" />
+    <Content Include="Views\POOrderEntries\Peremeshenie.cshtml" />
+    <Content Include="Views\POOrderEntries\PrintToPrinter.cshtml" />
+    <Content Include="Views\ICMOes\Create.cshtml" />
+    <Content Include="Views\ICMOes\Delete.cshtml" />
+    <Content Include="Views\ICMOes\Details.cshtml" />
+    <Content Include="Views\ICMOes\Edit.cshtml" />
+    <Content Include="Views\ICMOes\Index.cshtml" />
+    <Content Include="Views\ICMOes\CompleteWork.cshtml" />
+    <Content Include="Views\Home\Proizvodstvo.cshtml" />
+    <Content Include="Views\Home\SkladskoiUchet.cshtml" />
+    <Content Include="Views\POOrderEntries\ScanQR.cshtml" />
+    <Content Include="Views\POOrderEntries\QRScan.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieSoSkladaNaSklad.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\POOrderEntries\Nomenklaturs.cshtml" />
+    <Content Include="Views\POOrderEntries\NomenklatursMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\NomenklatursTable.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieNaProizvodstvo.cshtml" />
+    <Content Include="Views\POOrderEntries\SpisokWORK.cshtml" />
+    <Content Include="Views\POOrderEntries\CompleteWork.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieNaProizvodstvoFromWork.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremestitNomenklaturuStroka.cshtml" />
+    <Content Include="Views\ICStockBills\Create.cshtml" />
+    <Content Include="Views\ICStockBills\Delete.cshtml" />
+    <Content Include="Views\ICStockBills\Details.cshtml" />
+    <Content Include="Views\ICStockBills\Edit.cshtml" />
+    <Content Include="Views\ICStockBills\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\QRScan2.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieSoSkladaNaSkladQR.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieNaProizvodstvoQR.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\PrintToPrinterOld.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieTSD.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieTSDMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieTSDTable.cshtml" />
+    <Content Include="Views\POOrderEntries\VosstanovitPostuplenie.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieTSDTableOld.cshtml" />
+    <Content Include="Views\POOrderEntries\StatusWorkTable.cshtml" />
+    <Content Include="Views\POOrderEntries\StatusWorkMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\StatusWork.cshtml" />
+    <Content Include="Views\KingDeeWebRoles\Create.cshtml" />
+    <Content Include="Views\KingDeeWebRoles\Delete.cshtml" />
+    <Content Include="Views\KingDeeWebRoles\Details.cshtml" />
+    <Content Include="Views\KingDeeWebRoles\Edit.cshtml" />
+    <Content Include="Views\KingDeeWebRoles\Index.cshtml" />
+    <Content Include="Views\DepartmentsToUsers\Create.cshtml" />
+    <Content Include="Views\DepartmentsToUsers\Delete.cshtml" />
+    <Content Include="Views\DepartmentsToUsers\Details.cshtml" />
+    <Content Include="Views\DepartmentsToUsers\Edit.cshtml" />
+    <Content Include="Views\DepartmentsToUsers\Index.cshtml" />
+    <Content Include="Views\Home\Admins.cshtml" />
+    <Content Include="Views\WebRoles\Create.cshtml" />
+    <Content Include="Views\WebRoles\Delete.cshtml" />
+    <Content Include="Views\WebRoles\Details.cshtml" />
+    <Content Include="Views\WebRoles\Edit.cshtml" />
+    <Content Include="Views\WebRoles\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\StornoPostupleniyaNaSklad.cshtml" />
+    <Content Include="Views\POOrderEntries\StornoPeremesheniyeNaProizvodstvo.cshtml" />
+    <Content Include="Views\Home\Planovi.cshtml" />
+    <Content Include="Views\Home\SkladskoiUchetOld.cshtml" />
+    <Content Include="Views\POOrderEntries\VosstanovitTSD.cshtml" />
+    <Content Include="Views\POOrderEntries\VosstanovitTSDMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\VosstanovitTSDTable.cshtml" />
+    <Content Include="Views\POOrderEntries\UploadPlanovi.cshtml" />
+    <Content Include="Views\POOrderEntries\Upload.cshtml" />
+    <Content Include="Views\POOrderEntries\GetDvigenies.cshtml" />
+    <Content Include="Views\POOrderEntries\GetDvigeniesMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\GetDvigeniesTable.cshtml" />
+    <Content Include="Views\ComputerNames\Create.cshtml" />
+    <Content Include="Views\ComputerNames\Delete.cshtml" />
+    <Content Include="Views\ComputerNames\Details.cshtml" />
+    <Content Include="Views\ComputerNames\Edit.cshtml" />
+    <Content Include="Views\ComputerNames\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\SpisokStarWORK.cshtml" />
+    <Content Include="Views\POOrderEntries\SpisokWORKOld.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInWork.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInWorkMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInWorkTable.cshtml" />
+    <Content Include="Views\UsersKDWs\Create.cshtml" />
+    <Content Include="Views\UsersKDWs\Delete.cshtml" />
+    <Content Include="Views\UsersKDWs\Details.cshtml" />
+    <Content Include="Views\UsersKDWs\Edit.cshtml" />
+    <Content Include="Views\UsersKDWs\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\PerenosDatWork.cshtml" />
+    <Content Include="Views\POOrderEntries\PerenestiDati.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaTable.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\Komplektovka.cshtml" />
+    <Content Include="Views\POOrderEntries\SpisokKomplektovki.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaView.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaTable.cshtml" />
+    <Content Include="Views\POOrderEntries\ShowInventar.cshtml" />
+    <Content Include="Views\POOrderEntries\WORKNZP.cshtml" />
+    <Content Include="Views\DepartmentToStocks\Create.cshtml" />
+    <Content Include="Views\DepartmentToStocks\Delete.cshtml" />
+    <Content Include="Views\DepartmentToStocks\Details.cshtml" />
+    <Content Include="Views\DepartmentToStocks\Edit.cshtml" />
+    <Content Include="Views\DepartmentToStocks\Index.cshtml" />
+    <Content Include="Views\Buildings\Create.cshtml" />
+    <Content Include="Views\Buildings\Delete.cshtml" />
+    <Content Include="Views\Buildings\Details.cshtml" />
+    <Content Include="Views\Buildings\Edit.cshtml" />
+    <Content Include="Views\Buildings\Index.cshtml" />
+    <Content Include="Views\Home\LastStatuses.cshtml" />
+    <Content Include="Views\POOrderEntries\MyStatuses.cshtml" />
+    <Content Include="Views\POOrderEntries\UserNow.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanoviWorks.cshtml" />
+    <Content Include="Views\StockPriems\Create.cshtml" />
+    <Content Include="Views\StockPriems\Delete.cshtml" />
+    <Content Include="Views\StockPriems\Details.cshtml" />
+    <Content Include="Views\StockPriems\Edit.cshtml" />
+    <Content Include="Views\StockPriems\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\ZalivkaFromProd.cshtml" />
+    <Content Include="Views\POOrderEntries\ZalivkaPOOrder.cshtml" />
+    <Content Include="Views\StocksMOLs\Create.cshtml" />
+    <Content Include="Views\StocksMOLs\Delete.cshtml" />
+    <Content Include="Views\StocksMOLs\Details.cshtml" />
+    <Content Include="Views\StocksMOLs\Edit.cshtml" />
+    <Content Include="Views\StocksMOLs\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\ZalivkaWORKS.cshtml" />
+    <Content Include="Views\POOrderEntries\NewQUIN.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInQR.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInQRMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiInQRTable.cshtml" />
+    <Content Include="Views\POOrderEntries\OstatkiVBOM.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieNaSkladTSD.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieNaSkladTSDMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieNaSkladTSDTable.cshtml" />
+    <Content Include="Views\POOrderEntries\NotUpload.cshtml" />
+    <Content Include="Views\POOrderEntries\UploadWorksExcel.cshtml" />
+    <Content Include="Views\POOrderEntries\SkladskieWorks.cshtml" />
+    <Content Include="Views\POOrderEntries\InvVedomostStocks.cshtml" />
+    <Content Include="Views\POOrderEntries\InvVedomost.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaPrint.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaPrintMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanogrammaPrintTable.cshtml" />
+    <Content Include="Views\POOrderEntries\InventQRs.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaNZP.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaNZPEntries.cshtml" />
+    <Content Include="Views\StockBufers\Create.cshtml" />
+    <Content Include="Views\StockBufers\Delete.cshtml" />
+    <Content Include="Views\StockBufers\Details.cshtml" />
+    <Content Include="Views\StockBufers\Edit.cshtml" />
+    <Content Include="Views\StockBufers\Index.cshtml" />
+    <Content Include="Views\PeremeshenieWorks\Create.cshtml" />
+    <Content Include="Views\PeremeshenieWorks\Delete.cshtml" />
+    <Content Include="Views\PeremeshenieWorks\Details.cshtml" />
+    <Content Include="Views\PeremeshenieWorks\Edit.cshtml" />
+    <Content Include="Views\PeremeshenieWorks\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\PredNZPQRs.cshtml" />
+    <Content Include="Views\POOrderEntries\Postuplenies.cshtml" />
+    <Content Include="Views\POOrderEntries\PostupleniesMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PostupleniesTable.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDW.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDWMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDWTable.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDWSobrano.cshtml" />
+    <Content Include="Views\POOrderEntries\CINCorrect.cshtml" />
+    <Content Include="Views\POOrderEntries\PrintToPrinterNew.cshtml" />
+    <Content Include="Views\POOrderEntries\QRScanNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\PeremeshenieSoSkladaNaSkladNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\CHGKDW.cshtml" />
+    <Content Include="Views\POOrderEntries\CHGKDWMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\CHGKDWSobrano.cshtml" />
+    <Content Include="Views\POOrderEntries\LastDvigeniesNew.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDWEdit.cshtml" />
+    <Content Include="Views\POOrderEntries\DocumentsToday.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaNZPNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaNZPNEWEntries.cshtml" />
+    <Content Include="Views\POOrderEntries\KomplektovkaNZPNEWWork.cshtml" />
+    <Content Include="Views\POOrderEntries\VozvratIsNZPNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\VozvratIsNZPNEWTable.cshtml" />
+    <Content Include="Views\POOrderEntries\PlansInHour.cshtml" />
+    <Content Include="Views\POOrderEntries\DayResult.cshtml" />
+    <Content Include="Views\POOrderEntries\SmenaToPlanshet.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanshetWorks.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanshetWorksNEW%28old%29.cshtml" />
+    <Content Include="Views\POOrderEntries\DayResultTZ.cshtml" />
+    <Content Include="Views\POOrderEntries\DayResultBlue.cshtml" />
+    <Content Include="Views\POOrderEntries\WorkInOut.cshtml" />
+    <Content Include="Views\POOrderEntries\WorkInfo.cshtml" />
+    <Content Include="Views\POOrderEntries\OtchetMinusNZP.cshtml" />
+    <Content Include="Views\POOrderEntries\SpisokAllWorks.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanshetKomplektNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\MinusNaSkladah.cshtml" />
+    <Content Include="Views\POOrderEntries\AddBigQRView.cshtml" />
+    <Content Include="Views\POOrderEntries\AddBigQRViewMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\AddBigQRViewTable.cshtml" />
+    <Content Include="Views\POOrderEntries\AddBigQRViewScan.cshtml" />
+    <Content Include="Views\POOrderEntries\InBIGQR.cshtml" />
+    <Content Include="Views\POOrderEntries\SuperKomplektovka.cshtml" />
+    <Content Include="Views\POOrderEntries\SuperKomplektovkaMenu.cshtml" />
+    <Content Include="Views\POOrderEntries\VosstanovitTSDNEWTable.cshtml" />
+    <Content Include="Views\POOrderEntries\MyDvigenies.cshtml" />
+    <Content Include="Views\POOrderEntries\PlanshetWorksNEW.cshtml" />
+    <Content Include="Views\POOrderEntries\CorrectDocks.cshtml" />
+    <Content Include="Views\MonitorToLines\Create.cshtml" />
+    <Content Include="Views\MonitorToLines\Delete.cshtml" />
+    <Content Include="Views\MonitorToLines\Details.cshtml" />
+    <Content Include="Views\MonitorToLines\Edit.cshtml" />
+    <Content Include="Views\MonitorToLines\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\ProstavitCheckerMenu.cshtml" />
+    <Content Include="Views\YZRoles\Create.cshtml" />
+    <Content Include="Views\YZRoles\Delete.cshtml" />
+    <Content Include="Views\YZRoles\Details.cshtml" />
+    <Content Include="Views\YZRoles\Edit.cshtml" />
+    <Content Include="Views\YZRoles\Index.cshtml" />
+    <Content Include="Views\YZWorks\Create.cshtml" />
+    <Content Include="Views\YZWorks\Delete.cshtml" />
+    <Content Include="Views\YZWorks\Details.cshtml" />
+    <Content Include="Views\YZWorks\Edit.cshtml" />
+    <Content Include="Views\YZWorks\Index.cshtml" />
+    <Content Include="Views\YZRoleWorks\Create.cshtml" />
+    <Content Include="Views\YZRoleWorks\Delete.cshtml" />
+    <Content Include="Views\YZRoleWorks\Details.cshtml" />
+    <Content Include="Views\YZRoleWorks\Edit.cshtml" />
+    <Content Include="Views\YZRoleWorks\Index.cshtml" />
+    <Content Include="Views\Home\YZ.cshtml" />
+    <Content Include="Views\YZUserRoles\Create.cshtml" />
+    <Content Include="Views\YZUserRoles\Delete.cshtml" />
+    <Content Include="Views\YZUserRoles\Details.cshtml" />
+    <Content Include="Views\YZUserRoles\Edit.cshtml" />
+    <Content Include="Views\YZUserRoles\Index.cshtml" />
+    <Content Include="Views\YZUserDepartments\Create.cshtml" />
+    <Content Include="Views\YZUserDepartments\Delete.cshtml" />
+    <Content Include="Views\YZUserDepartments\Details.cshtml" />
+    <Content Include="Views\YZUserDepartments\Edit.cshtml" />
+    <Content Include="Views\YZUserDepartments\Index.cshtml" />
+    <Content Include="Views\YZUsers\Create.cshtml" />
+    <Content Include="Views\YZUsers\Delete.cshtml" />
+    <Content Include="Views\YZUsers\Details.cshtml" />
+    <Content Include="Views\YZUsers\Edit.cshtml" />
+    <Content Include="Views\YZUsers\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\YZScan.cshtml" />
+    <Content Include="Views\POOrderEntries\YZ.cshtml" />
+    <Content Include="Views\POOrderEntries\YZSelectWork.cshtml" />
+    <Content Include="Views\POOrderEntries\YZInfo.cshtml" />
+    <Content Include="Views\POOrderEntries\OtchetKomplektovkaZadaniy.cshtml" />
+    <Content Include="Views\StocksSelects\Create.cshtml" />
+    <Content Include="Views\StocksSelects\Delete.cshtml" />
+    <Content Include="Views\StocksSelects\Details.cshtml" />
+    <Content Include="Views\StocksSelects\Edit.cshtml" />
+    <Content Include="Views\StocksSelects\Index.cshtml" />
+    <Content Include="Views\GPScans\ScanGP.cshtml" />
+    <Content Include="Views\GPScans\ScanGPTable.cshtml" />
+    <Content Include="Views\GPScans\Create.cshtml" />
+    <Content Include="Views\GPScans\Delete.cshtml" />
+    <Content Include="Views\GPScans\Details.cshtml" />
+    <Content Include="Views\GPScans\Edit.cshtml" />
+    <Content Include="Views\GPScans\Index.cshtml" />
+    <Content Include="Views\InterfaceSelects\Create.cshtml" />
+    <Content Include="Views\InterfaceSelects\Delete.cshtml" />
+    <Content Include="Views\InterfaceSelects\Details.cshtml" />
+    <Content Include="Views\InterfaceSelects\Edit.cshtml" />
+    <Content Include="Views\InterfaceSelects\Index.cshtml" />
+    <Content Include="Views\InterfaceSelects\InterfaceTest.cshtml" />
+    <Content Include="Views\POOrderEntries\PostuplenieKDWSelectSupplier.cshtml" />
+    <Content Include="Views\POOrderEntries\WorkLog.cshtml" />
+    <Content Include="Views\POOrderEntries\ICStockBill.cshtml" />
+    <Content Include="Views\ICStockBillEntries\Create.cshtml" />
+    <Content Include="Views\ICStockBillEntries\Delete.cshtml" />
+    <Content Include="Views\ICStockBillEntries\Details.cshtml" />
+    <Content Include="Views\ICStockBillEntries\Edit.cshtml" />
+    <Content Include="Views\ICStockBillEntries\Index.cshtml" />
+    <Content Include="Views\POOrderEntries\SkladInfo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="ProdModels\" />
+    <Folder Include="QRs\" />
+    <Folder Include="Views\Excel\" />
+    <Folder Include="Views\Finder\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Resource.zh.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.zh.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Resource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>57595</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44309/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

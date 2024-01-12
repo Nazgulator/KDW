@@ -1,0 +1,99 @@
+﻿
+
+@{
+
+
+}
+
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <a href="/POOrderEntries/Nomenklaturs" class="btn btn-default btn-block">@Resources.Resource.OstatkiNomenklaturi </a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+
+            @Html.DropDownList("StockId", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning" })
+
+        </td>
+    </tr>
+    <tr>
+        <td width="80%">
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="NPartNumber" onchange="LoadNomenklaturs()" class="btn btn-warning btn-block"></input>
+        </td>
+        
+
+       
+     
+
+        <td width="20%">
+            <button onclick="LoadNomenklaturs()" class="btn btn-success btn-block">Ok</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button class="btn btn-success" onclick="ExportToExcel()"> Excel </button>
+        </td>
+    </tr>
+</table>
+
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#NPartNumber').val().toString();
+        var StockId = $('#StockId').val().toString();
+        var URL = '@Url.Action("NomenklatursTable", "POOrderEntries")';
+        URL = URL + '?Number=' + Num + '&StockId=' + StockId;
+      //  alert(URL);
+        $("#NTable").load(URL);
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>
+<script>
+    function ExportToExcel() {
+
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('T'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+        {
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        }
+        LoadVedomost();
+
+        return (sa);
+
+    }
+
+</script>

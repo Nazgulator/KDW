@@ -1,0 +1,131 @@
+﻿@model IEnumerable<KDW.Models.BomEntry>
+
+
+<table id="SS" class="table table-bordered table-striped">
+    <tr>
+        <td>
+            @Resources.Resource.Nomenklatura
+        </td>
+        <td>
+            Требуется укомплектовать
+        </td>
+        <td>
+            В наличии на складах
+        </td>
+        <td>
+            Количество на складе
+        </td>
+
+
+    </tr>
+
+    @foreach (var i in Model) //.Where(x=>x.FQtyMust>0).ToList()
+    {
+        string Ready = "";
+        decimal Peremestit = i.QTYNEED ;
+        decimal Est = Math.Round(i.QTYFACT,3);
+        if (Peremestit < 0) { Peremestit = 0; }
+
+
+<tr style="text-align:right" class="@Ready">
+    <td>
+        @i.Item.FNumber
+    </td>
+    <td>
+        @Peremestit
+    </td>
+    <td id="Stocks_@i.Item.FItemID">
+        <select id="StockID_@i.Item.FItemID" class="form-control btn btn-warning" OnChange="PoiskQTY(@i.Item.FItemID)"></select>
+        
+
+    </td>
+    <td>
+        <input id="QTY_@i.Item.FItemID" class="btn btn-warning btn-danger" />
+    </td>
+    <td>
+        <button OnClick="LoadStocks('@i.Item.FItemID')" class="btn btn-success"> Поиск остатков </button>
+    </td>
+    <td>
+        <button id="Buttons_@i.Item.FItemID" OnClick="PeremestitNaProizvodstvo('@i.Item.FItemID', @i.WORKID)" class="btn btn-success"> Залить в НЗП </button>
+    </td>
+
+</tr>
+
+    }
+   
+
+</table>
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function LoadStocks(ItemId)
+    {
+
+        var Dropdown = $('#StockID_' + ItemId);
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorageByItem", "POOrderEntries")?term=" + ItemId;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+                    PoiskQTY(ItemId);
+                   
+                }
+        );
+    }
+</script>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function PeremestitNaProizvodstvo(GUID, WorkId) {
+        var QTY = $("#QTY_" + GUID).val();
+       // alert(QTY);
+        var SkolkoPeremestit = parseFloat($("#QTY_" + GUID).val());
+        var Buttons = $('#Buttons_' + GUID);
+        var StockId = $('#StockID_' + GUID).val();
+
+        var go = false;
+
+//Если введены верные значения
+      //  if (go) {
+        if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?"))
+        {
+                Buttons.hide();//скрываем кнопки
+
+            var ADDURL = '@Url.Action("AddSuperNZP", "POOrderEntries")?QTYFact=' + SkolkoPeremestit + '&WorkId=' + WorkId + "&StockId=" + StockId + "&ItemId=" + GUID;
+              //  alert(ADDURL);
+                $.post(ADDURL, function (data) {
+                    Buttons.show();
+                        ReloadBOM();
+
+                   
+                });
+            }
+            else
+            {
+
+            }
+    }
+</script>
+
+<script>
+    function PoiskQTY(ItemId)
+    {
+        
+        var Stock = $('#StockID_' + ItemId).val();
+        var url = "@Url.Action("AutocompleteSearchQTYInStock", "POOrderEntries")?Item=" + ItemId + "&Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $('#QTY_' + ItemId).val(data);
+
+                }
+        );
+
+    }
+</script>

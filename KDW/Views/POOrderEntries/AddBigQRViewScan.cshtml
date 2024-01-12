@@ -1,0 +1,74 @@
+﻿@model KDW.Models.DvigenieNEW
+
+<img src="~/Content/Icons/qr.png" width="70" height="70"/><input class="btn btn-default" id="QRScan" style="height:70px;font-size:30px;width:500px" onchange="AddToBIGQR()" autofocus/> <button class="btn btn-success" onclick="AddToBIGQR()" id="ScanButton" style="height:70px;font-size:30px">Ok</button>
+@if (Model != null)
+{ 
+    <table id="SS" class="table table-bordered table-striped">
+
+
+        <tr class="@Model.Work">
+            <td>
+                <button class="btn btn-@Model.Work"> @Model.ItemNumber </button>
+            </td>
+            <td>
+                <button class="btn btn-@Model.Work">  @Model.StockName </button>
+            </td>
+            <td>
+                <button class="btn btn-@Model.Work">  @Model.QTYFact </button>
+            </td>
+            
+
+        </tr>
+        <tr>
+            <td colspan="3" class="@Model.Work" style="font-size:30px;text-align:center" >
+                @Model.StartFBillNo
+            </td>
+        </tr>
+    </table>
+}
+
+<script>
+    function AddToBIGQR()
+    {
+        var WorkId = $("#WorkId").val();
+        var QR = $("#QR");
+        var INQR = $("#INBIGQR");
+        var QRDATA = $("#QRScan").val();
+        if (QRDATA == "")
+        {
+            return;
+        }
+        $("#ScanButton").hide("fast");
+   
+        var url = "@Url.Action("AddToBigQR", "POOrderEntries")?WorkId=" + WorkId + "&QRDATA=" + QRDATA;
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+        $("#QRScan").val("");
+
+        $.post(url,
+            function (data) {
+                $("#ScanButton").show("fast");
+                
+                var S = data.split(';');
+                if (S[0] == 'Error') {
+                  //  alert(S[0]);
+                  
+                    QR.load("@Url.Action("AddBigQRViewScan", "POOrderEntries")?QRDATA=" + QRDATA + "&STATUS=ERROR&TEXT=" + S[1]);
+                    INQR.load("@Url.Action("InBIGQR", "POOrderEntries")");
+                }
+                else
+                {
+                  //  alert(S[0]);
+                    $("#Sobrano").load(Tableurl);
+                    QR.load("@Url.Action("AddBigQRViewScan", "POOrderEntries")?QRDATA=" + QRDATA + "&STATUS=OK&TEXT=" + S[1]);
+                    INQR.load("@Url.Action("InBIGQR", "POOrderEntries")");
+                }
+
+
+            }
+        );
+    }
+</script>
+
+
+

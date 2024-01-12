@@ -1,0 +1,71 @@
+﻿@model IEnumerable<KDW.Models.GPScans>
+
+
+<table id="SOBRANO" class="table table-bordered table-striped">
+
+    @{ string Old = ""; int OldNomer = 0;}
+    @foreach (var i in Model.OrderBy(x => x.ZakazString).ToList())
+    {
+        string Ready = "";
+        
+        int TekNomer = 0;
+
+        try
+        {
+            TekNomer = Convert.ToInt16(i.QRString.Remove(0,i.QRString.Length - 2));
+        }
+        catch
+                {
+
+                }
+
+        if (TekNomer != OldNomer - 1 && OldNomer != 0)
+        {
+            Ready = "danger";
+        }
+
+        OldNomer = TekNomer;
+
+
+
+
+        if (Old.Equals(i.QRString))
+        {
+            Ready = "danger";
+        }
+        else
+        {
+            Old = i.QRString;
+        }
+
+
+
+    <tr style="text-align:right" class="@Ready">
+
+        <td style="font-size:70px">
+            @try
+            {
+            @i.QRString.Remove(0, i.QRString.Length - 5)
+            }
+            catch
+            {
+
+            }
+        </td>
+        <td>
+           <button class="btn btn-danger" style="height:100px;width:100px" onclick="RemoveString(@i.Id)">X</button>
+        </td>
+    </tr>  
+    }
+
+</table>
+
+
+
+
+
+
+
+
+
+

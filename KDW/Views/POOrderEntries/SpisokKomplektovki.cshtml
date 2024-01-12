@@ -1,0 +1,251 @@
+﻿@model IEnumerable<KDW.Models.StarMehWorks>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+
+
+<table id="T" class="table table-bordered table-striped"
+
+       data-toggle="table"
+       data-search="true"
+       data-filter-control="true">
+    <thead>
+        <tr>
+
+            <th data-field="PartNumber" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.PartNumber
+            </th>
+        </tr>
+    </thead>
+
+    <tr>
+        <td>
+            N
+        </td>
+        <td>
+@Resources.Resource.ZadanieNaProizvodstvo
+        </td>
+        <td>
+            @Resources.Resource.Nomenklatura
+        </td>
+        <td>
+            @Resources.Resource.QTYKPeremesheniu
+        </td>
+    </tr>
+    @{ DateTime date = new DateTime(2000, 1, 1);}
+    @foreach (var sw in Model)
+    {
+        string Cvet = "";
+
+        if (sw.QTY == sw.QTYFact)
+        {
+            Cvet = "success";
+        }
+        if (date!=sw.DateStart.Value)
+                {
+            date = sw.DateStart.Value;
+                    <tr>
+                        <td colspan="4">
+                            <center>
+                                <h2>
+                                    @sw.DateStart.Value.ToString("dd.MM.yyyy")
+                                </h2>
+                            </center>
+                        </td>
+                    </tr>
+                }
+
+<tr class="@Cvet">
+    <td>
+        @sw.Poryadok
+    </td>
+    <td>
+        <p>
+            @sw.ICMO.FBillNo
+        </p>
+        <p>
+            @sw.ICMO.t_Department.FName
+        </p>
+     
+    </td>
+    <td>
+        <p>
+            @sw.ICMO.t_Item.FNumber
+        </p>
+        
+    </td>
+  
+    <td>
+      
+
+        <a href="~/POOrderEntries/Komplektovka?QRData=KOMPLEKTOVKA;@sw.WorkId;@sw.Id;@sw.ICMO.FWorkShop;@sw.PlanshetId;@sw.QTY" class="btn btn-block btn-success glyphicon glyphicon-circle-arrow-right">@Resources.Resource.Komplektovka</a>
+    </td>
+</tr>
+
+
+    
+              
+             
+    }
+
+</table>
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<!-- Modal -->
+<div class="modal fade" id="SelectDvigenieID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <input id="Dvigenie" class="btn btn-warning" title="@Resources.Resource.OtskaniruiteNomenklaturu" autofocus onchange="PoiskQTY()" placeholder="@Resources.Resource.OtskaniruiteNomenklaturu" />
+                </p>
+                <p>
+                    <input id="DvigenieQTY" class="btn btn-warning" title="@Resources.Resource.QTYKPeremesheniu" />
+                </p>
+
+                <p>
+                    <button class="btn btn-block btn-success" onclick="VozvratNZP()">Ok</button>
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function SkipWork(id)
+    {
+             var url2 = "@Url.Action("SkipWorkJson", "POOrderEntries")?Id=" + id ;
+
+        $.post
+            (url2, function (data)
+        {
+                var S = data.split(';');
+
+                if (S[0] == "Ok")
+                {
+                    alert("@Resources.Resource.Ok");
+                    location.reload();
+
+
+                }
+                else
+                {
+                    alert(data);
+
+                  //  location.reload();
+                }
+
+
+
+
+
+        }
+
+            );
+
+    }
+</script>
+<script>
+    function PodgotovkaKVozvratu(ItemId)
+    {
+        var Dropdown = $('#Dvigenie');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchDvigeniesFromKomplektovka", "POOrderEntries")?ItemId=" + ItemId;
+
+        $.post(url,
+            function (data) {
+                $.each(data, function (key, value) {
+                    Dropdown.append($('<option>', { value: value }).text(value));
+                });
+                $('#SelectDvigenieID').modal('show');
+
+            }
+        );
+
+
+    }
+</script>
+
+<script>
+    function PoiskQTY() {
+        var Dvigenie = $("#Dvigenie").val();
+        var DvigenieQTY = $("#DvigenieQTY").val();
+        var url2 = "@Url.Action("AutocompleteSearchDvigeniesQTYFromKomplektovka", "POOrderEntries")?QRData=" + Dvigenie ;
+        $.post
+            (url2, function (data)
+            {
+             //   alert(data);
+                $("#DvigenieQTY").val(data);
+            }
+
+            );
+    }
+</script>
+
+<script>
+    function VozvratNZP()
+    {
+        // int DvigenieId, decimal QTY, int NZPId
+        var QRData = $("#Dvigenie").val();
+        var DvigenieQTY = $("#DvigenieQTY").val();
+        var NZPId = $("#NZPId").val();
+        var url2 = "@Url.Action("VozvratNZP", "POOrderEntries")?QRData=" + QRData + "&QTY=" + DvigenieQTY ;
+        $.post
+            (url2, function (data)
+        {
+                var S = data.split(';');
+
+                if (S[0] == "Ok")
+                {
+                    alert("@Resources.Resource.Ok");
+                    location.reload();
+
+
+                }
+                else
+                {
+                    alert(data);
+
+                  //  location.reload();
+                }
+        }
+
+            );
+    }
+</script>

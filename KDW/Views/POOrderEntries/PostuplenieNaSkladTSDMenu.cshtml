@@ -1,0 +1,227 @@
+﻿
+
+
+
+<table width="100%">
+    <tr width="100%">
+        <td>
+            <center>
+                <h2>@Resources.Resource.PostuplenieNaSklad </h2>
+
+            </center>
+
+        </td>
+    </tr>
+    <tr>
+
+        <td>
+
+            <input placeholder="@Resources.Resource.Postavshik" id="Postavshik" class="btn btn-default btn-block" onkeyup="SearchPostavshik()" autofocus />
+
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input placeholder="@Resources.Resource.ZakazPostavshiku" id="POORDER" class="btn btn-default btn-block" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="NPartNumber"   onkeyup="SearchItem()" class="btn btn-default btn-block" />
+        </td>
+    </tr>
+    <tr>
+
+        <td>
+            <button onclick="LoadNomenklaturs()" class="btn btn-success btn-block">Ok</button>
+        </td>
+    </tr>
+
+    <tr style="align-content:center;text-align:center">
+        <th>
+            <input class="btn btn-block btn-default" id="StockFilter" placeholder="@Resources.Resource.PoiskSklada" onkeyup="FilterStock()" />
+        </th>
+    </tr>
+    <tr>
+        <th>
+            @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()" })
+        </th>
+    </tr>
+    <tr>
+        <th>
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning" })
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <input id="Mesto" placeholder="@Resources.Resource.ScanMesto" class="form-control btn btn-warning btn-block" />
+        </th>
+    </tr>
+
+</table>
+
+
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#NPartNumber').val().toString();
+        var Postavshik = $('#Postavshik').val();
+        var POORDER = $('#POORDER').val();
+        var URL = '@Url.Action("PostuplenieNaSkladTSDTable", "POOrderEntries")';
+        URL = URL + '?Postavshik=' + Postavshik + '&Name=' + Num + '&POORD=' + POORDER;
+      //  alert(URL);
+        $("#NTable").load(URL);
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>
+<script>
+    function SearchPostavshik() {
+        $("#Postavshik").autocomplete(
+                {
+                source: '@Url.Action("AutocompleteFindPostavshiks", "POOrderEntries")',
+                minLength: 0,
+
+                select: function (event, ui) {
+
+                    $("#Postavshik").val(ui.item.label);
+
+
+
+                }
+            });
+
+
+            }
+
+</script>
+<script>
+
+        function SearchItem() {
+            $("#NPartNumber").autocomplete(
+                {
+                source: '@Url.Action("AutocompleteSearchItem", "POOrderEntries")',
+                minLength: 0,
+
+                select: function (event, ui) {
+
+                    $("#NPartNumber").val(ui.item.label);
+
+
+
+                }
+            });
+
+
+            }
+
+</script>
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>
+
+<script>
+
+    function SearchStorage() {
+        alert('go');
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                   alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>
+
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOL", "POOrderEntries")',
+                    minLength: 1
+
+            });
+
+        };
+</script>
+
+<script>
+    function FilterStock()
+    {
+        var Filter = $('#StockFilter').val();
+        var Dropdown = $('#StockID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorage", "POOrderEntries")?term=" + Filter;
+
+            $.post(url,
+                function (data)
+                {
+                   // alert(data);
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+
+
+                }
+        );
+
+    }
+</script>
+
+<script>
+    function FindYacheika() {
+        var StockId = $('#StockID').val();
+          $.post('@Url.Action("AutocompleteYacheikaRazmesheniya", "POOrderEntries")', {
+              StockId: StockId
+            }, function (data) {
+                $('#Mesto').val(data);
+            }
+
+            );
+
+    }
+</script>
+

@@ -1,0 +1,69 @@
+﻿@model  IEnumerable<KDW.Models.YZWorks>
+
+
+<h1> @Resources.Resource.YZStartWork</h1>
+
+<table class="table table-bordered table-striped">
+    @if (Model.Count() > 0)
+    {
+        foreach (var W in Model)
+        {
+        <tr>
+            <td>
+                @W.t_Department.FName
+            </td>
+            <td>
+               @W.Name
+            </td>
+            <td>
+                <button class="btn btn-success btn-block gasim" onclick="AddWork(@W.Id)" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.YZStartWork  </button>
+            </td>
+           
+        </tr>
+        }
+    }
+
+    </table>
+<p>
+    <button class="btn btn-default btn-block" onclick="location.href='/POOrderEntries/YZ'" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.VGlavnoeMenu &raquo;  </button>
+</p>
+
+<script>
+    function AddWork(Id)
+    {
+
+
+        var url = "@Url.Action("YZAddActiveWork", "POOrderEntries")?WorkId=" + Id;
+        var url2 = "@Url.Action("YZ", "POOrderEntries")";
+        var Gasim = $('.gasim');
+            $.post(url,
+                function (data)
+                {
+                    if (data == 'LOGIN') {
+                       // alert(data);
+                        alert('Зайдите в приложение снова. 登录应用程序');
+                        window.location.replace(url2);
+                    }
+                    if (data == 'WORKS')
+                    {
+                        alert('У вас уже есть работа. 您已经有了一份工作');
+                        window.location.replace(url2);
+                    }
+
+                    if (data =='OK')
+                    {
+                        alert('Работа назначена. 您已成功分配工作');
+                        window.location.replace(url2);
+                        Gasim.each
+                            (
+                                function () {
+                                    $(this).hide();
+                                }
+                            );
+                    }
+
+                }
+        );
+
+    }
+</script>

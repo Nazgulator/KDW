@@ -1,0 +1,140 @@
+﻿@model IEnumerable<KDW.Models.SmenaHour>
+
+
+
+<body>
+    <center>
+        @Resources.Resource.Date
+        <h3>@ViewBag.Date</h3>
+
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                @foreach (var Item in Model)
+                {
+                    string ID = Item.ChasSmeni + "_" + Item.DateSmeni.ToString("dd.MM.yy");
+                    string TIME = Item.Opisanie;
+                    <td style="text-align:center">
+                        @TIME
+                    </td>
+
+                }
+
+            </tr>
+            <tr>
+                @foreach (var Item in Model)
+                {
+                    string ID = Item.ChasSmeni + "_" + Item.DateSmeni.ToString("dd.MM.yy");
+
+                    <td>
+                        <input class="btn btn-default total" style="width:50px;font-size:14px" value="@Item.QTYPlan" id="@Item.ChasSmeni" onkeyup="SetSmena(@Item.ChasSmeni, '@Item.DateSmeni.ToString("yyyy-MM-dd")')" />
+                    </td>
+
+                }
+            </tr>
+           
+
+        </table>
+
+        <p>
+            <button class="btn btn-success" OnClick="SetDate()"> Ok</button>
+        </p>
+
+        <h3>@ViewBag.Summa 小时班次计划</h3>
+        @Html.DropDownList("PlanshetId", new SelectList(ViewBag.Planshets, "Id", "Name", ViewBag.PlanshetId), htmlAttributes: new { @class = "form-control", @Style = "width:300px", OnChange = "SetPlanshet()" })
+    <p>
+        @Html.DropDownList("Dates", new SelectList(ViewBag.Dates, ViewBag.Date), htmlAttributes: new { @class = "form-control", @Style = "width:300px", OnChange = "SetDate()" })
+        <button class="btn btn-success" OnClick="SetDate()"> Ok</button>
+    </p>
+      
+    <p>
+      @Resources.Resource.SummQTYFact  <input id="result" class="btn btn-default" readonly value="@ViewBag.Summa" />
+    </p>
+      
+        <p>
+            <button class="btn btn-success btn-block" onclick="SetAutoSmena(8)">@Resources.Resource.SetAutoSmena8 &raquo;</button>
+        </p>
+        <p>
+            <button class="btn btn-success btn-block" onclick="SetAutoSmena(10)">@Resources.Resource.SetAutoSmena10 &raquo;</button>
+        </p>
+
+        <p>
+            <a href="/POOrderEntries/SpisokStarWork" class="btn btn-success btn-block">@Resources.Resource.ZadanieNaTochku &raquo;</a>
+        </p>
+    </center>
+</body>
+
+
+<script>
+    function SetPlanshet()
+    {
+        var Planshet = $("#PlanshetId").val();
+        var url = "@Url.Action("SetPlanshet", "POOrderEntries")?PlanshetId="+Planshet;
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.reload();
+
+                }
+        );
+    }
+</script>
+<script>
+    function SetAutoSmena(Hours)
+    {
+        var Planshet = $("#PlanshetId").val();
+        var Date = $("#Dates").val();
+        var url = "@Url.Action("SetAutoSmena", "POOrderEntries")?SmenaHours=" + Hours+"&D="+Date;
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.reload();
+
+                }
+        );
+    }
+</script>
+
+<script>
+    function SetDate()
+    {
+        var Date = $("#Dates").val();
+        var url = "@Url.Action("SmenaToPlanshet", "POOrderEntries")?Date=" + Date;
+                    window.location.replace(url); 
+    }
+</script>
+
+<script>
+    function SetSmena(Chas,Date)
+    {
+        var QTY = $("#" + Chas).val();
+        var QTYMax = @ViewBag.Summa;
+        var BTN = $("#" + Chas);
+       // var $total = $('#result');
+       // $('.total').each(function () {
+       //     $total.val(parseInt($total.val()) + parseInt($(this).val()));
+       // });
+       // var Sum = $('#result').val();
+       // if (Sum <= parseInt(@ViewBag.Summa)) {
+
+            var url = "@Url.Action("SetSmenaPlan", "POOrderEntries")?Chas=" + Chas + "&Date=" + Date + "&QTY=" + QTY;
+
+            $.post(url,
+                function (data) {
+                    BTN.removeClass("btn btn-default");
+                    BTN.addClass("btn btn-success");
+                    
+
+                }
+            );
+    //    }
+    //    else
+    //    {
+     //       alert(Sum +">"+ parseInt(@ViewBag.Summa)+"!");
+     //   }
+    }
+</script>
+
+

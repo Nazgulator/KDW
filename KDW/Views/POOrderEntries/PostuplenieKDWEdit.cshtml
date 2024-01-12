@@ -1,0 +1,307 @@
+﻿@model IEnumerable<KDW.Models.PostuplenieNaSklad>
+
+<h3>@Resources.Resource.EditQR</h3>
+<table id="EDIT" class="table table-bordered table-striped">
+
+    @{ int OldItemId = 0;
+        if (Model.Count() > 0)
+        {
+            OldItemId = Model.First().ItemId;
+
+        }
+        int counter = 0;
+        int RowSpan = 0;
+        int StartRow = 0;
+    }
+
+    @if (ViewBag.CurrentWIN != "")
+    {
+        <tr>
+            <td colspan="5">
+                <button class="btn btn-default btn-block" id="WIN"> @ViewBag.CurrentWIN </button>
+            </td>
+        </tr>
+
+    }
+
+    @foreach (var i in Model.OrderBy(x => x.ItemId))
+    {
+        string ID = i.ZakazId + "_" + i.ZakazEntryId;
+
+        counter++;
+        RowSpan++;
+        StartRow = Model.Where(x => x.ItemId == i.ItemId).Count();
+
+
+
+        if (OldItemId != i.ItemId)
+        {
+            decimal Summa = Model.Where(x => x.ItemId == OldItemId).Sum(x => x.Qty);
+            string SummaID = "SUMMA_" + i.ItemId;
+            <tr style="text-align:right">
+                <td colspan="4">@Resources.Resource.SummQTYFact <input class="btn btn-default" id="@SummaID" readonly value="@Summa.ToString()" /> </td>
+
+
+
+
+            </tr>
+            OldItemId = i.ItemId;
+
+            RowSpan = 1;
+        }
+
+
+
+        <tr>
+            <td>
+                @i.ZakazNumber
+            </td>
+
+
+            <td>
+                @i.t_Item.FNumber
+            </td>
+
+
+
+
+            <td>
+                <input class="btn btn-warning" value="@Math.Round(i.Qty,3).ToString()" id="VALUE_@ID" style="width:100px" />
+                <button class="btn btn-success " onclick="ChangeEntry(@i.ZakazId,@i.ZakazEntryId, '@i.ZakazNumber', @i.Id, @i.PostuplenieEntryId)" >Ok</button>
+            </td>
+            <td>
+                @if (i.QRId == 0)
+                {
+                    <button class="btn btn-danger" onclick="RemoveEntry(@i.ZakazId,@i.ZakazEntryId,@i.ItemId)">-</button>
+                }
+            </td>
+            @if (RowSpan == 1)
+            { // Генерация QR кода
+                StartRow++;
+                <td rowspan="@StartRow">
+                    @if (ViewBag.CurrentWIN != "")
+                    {
+                        if (i.QRId == 0)
+                        {
+                            <button class="btn btn-block btn-success" onclick="GenerateQR(@i.ItemId, 'Button_@ID')" id="Button_@ID"> QR </button>
+                        }
+                        else
+                        {
+                            <img src="@Url.Action("GenerateQrCode", new { QRText = i.DvigenieNEW.QRString, QTY = i.QTYInStock})" alt="qr code" id="ImageQR" name="ImageToPrint" width="50" height="50" title="@i.DvigenieNEW.QRString" />
+                            <button class="btn-info btn btn-block" onclick="ShowModal(@i.QRId)" style="width:100px">@Resources.Resource.PrintQR</button>
+                        }
+
+                    }
+                </td>
+            }
+        </tr>
+
+        if (counter == Model.Count())
+        {
+            decimal Summa = Model.Where(x => x.ItemId == OldItemId).Sum(x => x.Qty);
+            string SummaID = "SUMMA_" + i.ItemId;
+            <tr style="text-align:right">
+                <td colspan="4">@Resources.Resource.SummQTYFact <input class="btn btn-default" id="@SummaID" readonly value="@Summa.ToString()" /></td>
+            </tr>
+        }
+
+    }
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ShowModal(QRID) {
+    
+        var printurl = "@Url.Action("PrintToPrinterNew", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+
+<script>
+    function RemoveEntry(POOrder, POOrderEntry,ItemId )
+    {
+
+        var URL = '@Url.Action("RemoveEntryPostuplenieJson", "POOrderEntries")';
+        URL = URL + '?POOrder=' + POOrder + '&POOrderEntry=' + POOrderEntry + '&ItemId=' + ItemId ;
+
+
+        var URL2 =  '@Url.Action("PostuplenieKDWSobrano", "POOrderEntries")';
+
+        $.post(URL, function (data)
+        {
+             if (data == 'True')
+             {
+                 $("#SOBRANO").load(URL2);
+                 var BUTTON = $('#BUTTON_' + POOrder + '_' + POOrderEntry);
+                 BUTTON.removeClass('btn-info');
+                 BUTTON.addClass('btn-success');
+                 var TR = $('#TR_' + POOrder + '_' + POOrderEntry);
+                 TR.show();
+             }
+             else
+             {
+                 alert(data);
+             }
+         }
+        );
+
+    }
+</script>
+
+<script>
+    function ChangeEntry(POOrder, POOrderEntry, FBillNo, DvigenieId, EntryDoka )
+    {
+        var QTY = parseFloat($('#VALUE_' + POOrder + '_' + POOrderEntry).val().replace(',', '.'));
+        var URL = '@Url.Action("ChangeEntryPostuplenieFactJson", "POOrderEntries")';
+        URL = URL + '?POOrder=' + POOrder + '&POOrderEntry=' + POOrderEntry + '&QTY=' + QTY + '&FBillNo=' + FBillNo + '&DvigenieId=' + DvigenieId + '&StrokaDoka=' + EntryDoka;
+
+
+        var URL2 = '@Url.Action("PostuplenieKDWEdit", "POOrderEntries")?CurrentBillNo=@ViewBag.CurrentNo';
+
+        $.post(URL, function (data)
+        {
+             if (data == "True")
+             {
+                 window.location.replace(URL2);
+             
+
+             }
+             else
+             {
+                 alert(data);
+                 window.location.replace(URL2);
+             }
+         }
+        );
+
+    }
+</script>
+
+<script>
+    function NewPostuplenie( )
+    {
+        var Postavshik = $('#SupplierId').val();
+        var Manager = $('#ManagerID').val();
+        var StockId = $('#StockId').val();
+        var PostB = $('#SupplierId');
+        var ManB = $('#ManagerID');
+        var StockB = $('#StockId');
+        var PostT = $('#PostT');
+        var OkB = $('#Ok');
+        var URL = '@Url.Action("NewWINJson", "POOrderEntries")';
+        URL = URL + '?PostavshikId=' + Postavshik + '&Manager=' + Manager + '&StockID=' + StockId;
+
+        var URL2 =  '@Url.Action("PostuplenieKDWSobrano", "POOrderEntries")';
+
+        $.post(URL, function (data)
+        {
+             if (data != 'False')
+             {
+                 $("#SOBRANO").load(URL2);
+                 PostB.hide();
+                 ManB.hide();
+                 StockB.hide();
+                 OkB.hide();
+                 PostT.hide();
+                 LoadEntries();
+             }
+             else
+             {
+                 alert(data);
+             }
+         }
+        );
+
+    }
+</script>
+
+<script>
+    function EndPostuplenie( )
+    {
+
+        var URL = '@Url.Action("EndWINJson", "POOrderEntries")';
+
+
+
+        var URL2 = '@Url.Action("PostuplenieKDWSobrano", "POOrderEntries")';
+        var URLNEW =  '@Url.Action("PostuplenieKDW", "POOrderEntries")';
+
+        $.post(URL, function (data)
+        {
+
+                 $("#SOBRANO").load(URL2);
+            var PostB = $('#SupplierId');
+            var ManB = $('#ManagerID');
+            var StockB = $('#StockId');
+            var OkB = $('#Ok');
+            var PostT = $('#PostT');
+            PostB.show();
+            ManB.show();
+            StockB.show();
+            OkB.show();
+            PostT.show();
+            window.location.replace(URLNEW);
+         }
+        );
+
+    }
+</script>
+
+
+<script>
+    function GenerateQR( ItemId , ButtonId)
+    {
+
+        $('#' + ButtonId).hide();
+
+      //  var StockId = $('#StockId').val();
+
+        var URL = '@Url.Action("NewWINEntriesJson", "POOrderEntries")';
+        URL = URL + '?ItemId=' + ItemId + '&StockId=@ViewBag.CurrentStock' ;
+
+        var URL2 =  '@Url.Action("PostuplenieKDWSobrano", "POOrderEntries")';
+
+        $.post(URL, function (data)
+        {
+             if (data != 'False')
+             {
+                 $("#SOBRANO").load(URL2);
+
+             }
+             else
+             {
+                 alert(data);
+             }
+         }
+        );
+
+    }
+</script>

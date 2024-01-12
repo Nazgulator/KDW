@@ -1,0 +1,281 @@
+﻿@model KDW.Models.ZakazPostavshiku
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<Center>
+    <p style="font-size:30px">
+        <img src="~/Content/Icons/Postuplenir.png" height="25" width="25" />  @Resources.Resource.PostuplenieNaSklad
+
+    </p>
+    <h4>@Resources.Resource.ZapolniteYellow</h4>
+</Center>
+
+
+
+
+
+
+<table class="table table-bordered table-striped ">
+    <tr style="align-content:center;text-align:center">
+
+        <th align="center">
+            @Resources.Resource.Stock
+       </th>
+        <th>
+         <input  class="btn btn-block btn-default" id="StockFilter" placeholder="@Resources.Resource.PoiskSklada" onkeyup="FilterStock()"/>   @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()" })
+        </th>
+        </tr>
+    <tr>
+        <th>
+            @Resources.Resource.MOL
+        </th>
+        <th>
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning" })
+        </th>
+    </tr>
+    <tr>
+        <th>
+            @Resources.Resource.ScanMestoRazmesheniya
+        </th>
+        <th>
+            <input id="Mesto" class="form-control btn btn-warning btn-block" />
+        </th>
+    </tr>
+
+   
+
+    @foreach (var item in Model.Entries)
+    {
+        string QR = item.ItemName + ";" + item.ItemNumber + ";" + item.FCommitQty;
+        var OststokVZakaze = Math.Round(item.FQtyMust - item.FCommitQty, 3);
+
+        @Html.Hidden("FInterID", item.FInterId);
+        @Html.Hidden("FEntryID", item.FEntryId);
+        @Html.Hidden("Tip", Model.Tip);
+
+        <tr>
+
+            <th colspan="2">
+
+                @Resources.Resource.ZakazPostavshiku  @Model.FBillNo  @Model.SupplierName
+            </th>
+        </tr>
+        <tr>
+
+
+            <th colspan="2">
+                @item.ItemNumber  @Resources.Resource.Nomenklatura  @item.ItemName
+            </th>
+        </tr>
+
+        <tr>
+
+            <th style="text-align:center">
+                @Resources.Resource.QTYVZakaze
+            </th>
+            <th style="text-align:center">
+
+                @Resources.Resource.QTYPostupilo
+
+
+            </th>
+        </tr>
+        <tr>
+
+            <th>
+                <input class="btn btn-default btn-block" id="FQty" value="@OststokVZakaze" readonly />
+            </th>
+            <th>
+
+                <input class="btn btn-warning btn-block" id="FCommitQty" value="@OststokVZakaze.ToString().Replace(",",".")" type="number" step="0.001" autofocus required />
+
+
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2">
+                <button class="btn btn-block btn-success" id="PeremestitB" onclick="SavePostuplenie()">@Resources.Resource.Save</button>
+            </th>
+
+
+
+        </tr>
+
+
+
+    }
+
+</table>
+
+<p><a href="/Home/Index" class="btn btn-default btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function FilterStock()
+    {
+        var Filter = $('#StockFilter').val();
+        var Dropdown = $('#StockID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorage", "POOrderEntries")?term=" + Filter;
+
+            $.post(url,
+                function (data)
+                {
+                   // alert(data);
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+
+
+                }
+        );
+
+    }
+</script>
+
+<script>
+    function FindYacheika() {
+        var StockId = $('#StockID').val();
+          $.post('@Url.Action("AutocompleteYacheikaRazmesheniya", "POOrderEntries")', {
+              StockId: StockId
+            }, function (data) {
+                $('#Mesto').val(data);
+            }
+
+            );
+
+    }
+</script>
+
+<script>
+    function SavePostuplenie() {
+        $('#PeremestitB').hide();
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+
+        var Mesto = $('#Mesto').val();
+        var Tip = $('#Tip').val();
+        var InterID = $('#FInterID').val();
+        var EntryID = $('#FEntryID').val();
+        var FCommitQty = parseFloat($('#FCommitQty').val().replace(',', '.'));
+        var FQty = parseFloat($('#FQty').val().replace(',', '.'));
+        var Go = true;
+       // FCommitQty= FCommitQty.replace(',', '.');
+        //     alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+        if (FQty < FCommitQty) {
+            alert('@Resources.Resource.QTYVZakaze < @Resources.Resource.QTYKPeremesheniu');
+            Go = false;
+        }
+        if (FCommitQty == 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu = 0');
+            Go = false;
+        }
+             if (FCommitQty < 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu < 0');
+            Go = false;
+        }
+        if ( Go==true)
+        {
+            $.post('@Url.Action("SavePostJson", "POOrderEntries")', {
+                Stock: Stock, Manager: Manager, InterID: InterID, EntryID: EntryID, FCommitQty: FCommitQty, Tip:Tip, Mesto: Mesto
+            }, function (data) {
+                var S = data.split(';');
+                if (S[0] == 'Ok')
+                {
+                    QRID = parseInt(S[1]);
+                    console.log('GoToPrint');
+                    var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                    window.location.replace(url);
+
+
+                }
+                else
+                {
+                    alert(data);
+                    $('#PeremestitB').show();
+                    //location.reload();
+                }
+
+
+
+
+            }
+
+            );
+        }
+
+    }
+</script>
+
+
+
+
+
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOL", "POOrderEntries")',
+                    minLength: 1
+               
+            });
+
+        };
+</script>
+
+<script>
+
+    function SearchStorage() {
+        alert('go');
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                   alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+                          
+                       }
+
+                });
+            });
+        };
+</script>
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>

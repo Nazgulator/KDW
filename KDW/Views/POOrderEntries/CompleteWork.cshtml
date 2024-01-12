@@ -1,0 +1,275 @@
+﻿@model KDW.Models.ICMO
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--
+<h2>@Resources.Resource.ZakazPostavshiku</h2>
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<!-- Modal -->
+<!--
+<div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+
+                    <div id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <center>
+                        <label id="nadpis">@Resources.Resource.ZagruzkaDannih...</label>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table class="table table-bordered table-striped ">
+    <tr style="align-content:center;text-align:center">
+        <th align="center">
+            @Resources.Resource.Department
+        </th>
+        <th align="center">
+            @Resources.Resource.Stock
+        </th>
+        <th align="center">
+            @Resources.Resource.MOL
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-block btn-outline-success">@Model.t_Department.FName</button>
+        </td>
+
+        <td>
+            @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "PoiskMOL()" })
+        </td>
+        <td>
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </td>
+
+
+    </tr>
+
+</table>
+<table class="table table-bordered table-striped">
+    <tr>
+
+        <th align="center">
+            @Resources.Resource.ZadanieNaProizvodstvo
+        </th>
+        <th align="center">
+            @Resources.Resource.Nomenklatura
+        </th>
+        <th align="center">
+            @Resources.Resource.PartNumber
+        </th>
+
+
+
+
+
+
+    </tr>
+
+    @{
+        string QR = Model.t_Item.FName + ";" + Model.t_Item.FNumber + ";" + Model.FCommitQty;
+        var OststokVZakaze = Math.Round(ViewBag.MaxVipusk, 0);//Model.FQty - Model.FCommitQty;
+    }
+
+    @Html.Hidden("FInterID", Model.FInterID)
+
+
+    <tr>
+
+        <th style="font-size:20px">
+
+            @Model.FBillNo
+        </th>
+
+        <th>
+            @Html.DisplayFor(ModelItem => Model.t_Item.FName)
+        </th>
+        <th>
+            @Html.DisplayFor(ModelItem => Model.t_Item.FNumber)
+        </th>
+    </tr>
+    <tr>
+        <th>
+            <input class="btn btn-default" id="FQty" value="@OststokVZakaze" readonly />
+        </th>
+        <th>
+
+            <input class="btn btn-warning btn-block" id="FCommitQty" value="@OststokVZakaze.ToString().Replace(",",".")" type="number" step="1" autofocus required />
+
+
+        </th>
+
+        <th>
+            <button class="btn btn-block btn-success" id="Save" onclick="SaveCompleteWork()">@Resources.Resource.Save</button>
+        </th>
+
+
+
+    </tr>
+
+
+
+
+
+
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<p>
+    @Resources.Resource.TochkaVipuska = @ViewBag.ZadanieNaTochkuEst /  @ViewBag.ZadanieNaTochkuNugno
+</p>
+<p>
+    @Resources.Resource.ZadanieNaProizvodstvo =  @Math.Round(Model.FCommitQty, 3) / @Math.Round(Model.FQty, 3)
+</p>
+
+
+<script>
+    function SaveCompleteWork() {
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+        $("#Download").modal('show');
+        $('#Save').removeClass("btn-success").addClass("btn-default");
+
+        var InterID = $('#FInterID').val();
+        var EntryID = $('#FEntryID').val();
+        var FCommitQty = $('#FCommitQty').val();
+        FCommitQty = FCommitQty.replace(',', '.');
+
+        //var url2 = "@Url.Action("CINfromCompleteWorkNEW", "POOrderEntries")?Stock=" + Stock + "&Manager=" + Manager + "&InterID=" + InterID + "&FCommitQty=" + FCommitQty + "&StarWorkId=" +@ViewBag.SW.Id;
+
+        var url2 = "@Url.Action("CINfromCompleteWork", "POOrderEntries")?Stock=" + Stock + "&Manager=" + Manager + "&InterID=" + InterID + "&FCommitQty=" + FCommitQty ;
+
+     //    string ToWork, string Manager, decimal QTY, string Liniya, string ToStock
+      //  SOUTplusCIN
+
+      //  alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+        if (FCommitQty != '' && FCommitQty != 0) {
+            if (confirm("@Resources.Resource.Podtverdit " + FCommitQty + "?"))
+            {
+                $.post(url2, function (data) {
+                    var S = data.split(';');
+                    if (S[0] == 'Ok') {
+                        QRID = parseInt(S[1]);
+                        console.log('GoToPrint');
+                        var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        window.location.replace(url);
+
+
+                    }
+                    else {
+                        alert(data);
+                        $('#Save').removeClass("btn-default").addClass("btn-success");
+                        //  location.reload();
+                    }
+
+                    $("#Download").modal('hide');
+
+
+                }
+
+                );
+            }
+        }
+        else
+        {
+            alert('@Resources.Resource.NomenklaturiNedostatochno');
+            $('#Save').removeClass("btn-default").addClass("btn-success");
+        }
+    }
+</script>
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOLByStock", "POOrderEntries")',
+                    minLength: 1
+
+            });
+        };
+</script>
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+
+
+
+    }
+</script>
+
+<script>
+
+        function SearchStorage () {
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                 //  alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>
+
+    -->

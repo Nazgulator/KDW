@@ -1,0 +1,66 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <h2>Остатки на складах в разрезе ОТК </h2>
+        </td>
+    </tr>
+    <tr>
+        <td width="80%">
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="Nomenklatura" value="" onkeyup="SearchItem()" autofocus required class="btn btn-warning btn-block" />
+        </td>
+        <td width="20%">
+            <button onclick="LoadNomenklaturs()" class="btn btn-success btn-block">Ok</button>
+        </td>
+    </tr>
+
+</table>
+
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#Nomenklatura').val();
+      
+        var URL = '@Url.Action("OstatkiInQRTable", "POOrderEntries")';
+        URL = URL + '?Name=' + Num;
+      //  alert(URL);
+        $("#NTable").load(URL);
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>
+
+<script>
+
+        function SearchItem() {
+            $("#Nomenklatura").autocomplete(
+                {
+                source: '@Url.Action("AutocompleteSearchItem", "POOrderEntries")',
+                minLength: 0,
+
+                select: function (event, ui) {
+
+                    $("#Nomenklatura").val(ui.item.label);
+
+
+
+                }
+            });
+
+
+            }
+
+</script>

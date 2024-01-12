@@ -1,0 +1,90 @@
+﻿@model KDW.Models.DepartmentToStocks
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   <div class="container">
+       <div class="form-horizontal">
+           <hr />
+           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           @Html.HiddenFor(model => model.Id)
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.DepartmentId, "DepartmentId", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.PlanshetId, "PlanshetId", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("PlanshetId", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.PlanshetId, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.StockId, "StockId", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("StockId", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.StockId, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-12">
+                   @Html.LabelFor(model => model.Main, "Main", htmlAttributes: new { @class = "control-label" })
+
+               </div>
+               <div class="col-md-12">
+                   @Html.EditorFor(model => model.Main, new { @class = "form-control" });
+                   @Html.ValidationMessageFor(model => model.Main, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.MolId, "MolId", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("MolId", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.MolId, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+
+           <div class=" col-md-6  ">
+               @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-outline-success btn-block" })
+           </div>
+           <div class=" col-md-6  ">
+               <input type="submit" value="Изменить" class="btn btn-success btn-block" />
+           </div>
+
+       </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

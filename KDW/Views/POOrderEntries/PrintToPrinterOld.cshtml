@@ -1,0 +1,87 @@
+﻿@model KDW.Models.QRTable
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<Center>
+    <h2>
+        @Resources.Resource.Uspeshno
+    </h2>
+    <h3>
+        @Resources.Resource.TeperRaspechataiteQR
+    </h3>
+</Center>
+<p>
+    <center>
+        <img src="@Url.Action("GenerateQrCode", new { QRText = Model.QRstring})" alt="qr code" id="ImageQR" />
+    </center>
+</p>
+<p>
+    <button class="btn btn-block btn-success glyphicon glyphicon-qrcode" onclick="PrintImage('@Url.Action("GenerateQrCode", new { QRText = Model.QRstring})'); return false;">@Resources.Resource.PrintQR</button>
+</p>
+
+
+<script>
+    function PI() {
+        popup = window.open();
+        var Img = $('#ImageQR').get(0).outerHTML;
+        alert(Img);
+        popup.document.write(Img);
+        popup.
+        popup.focus(); //required for IE
+        popup.print();
+    }
+</script>
+
+<script>
+
+    function ImagetoPrint(source) {
+
+        var X = '@Model.QRstring';
+        var XX = X.split(";");
+        var Nom = '@Resources.Resource.PartNumber';
+        var Name = '@Resources.Resource.Nomenklatura';
+        var QTY = ' @Resources.Resource.KolichestvoNomenklaturi';
+        var Date = '@Resources.Resource.Date';
+        var W = "200px"
+         return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description { width: "+W+"; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+             "<img width ='"+W+"' height = '"+W+"' src='" + source + "' /><br><font size= '5px'>" + XX[0] + " | " + XX[2] + "</font><br><div class='description' lang='zh'>" + XX[1] + " " + XX[3] +"</div></body></html>";
+    }
+
+    function PrintImage(source) {
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+
+<script>
+    function PrintImage2() {
+
+        var Img = $('#ImageQR').prop('src');
+
+        var wImage = $('#ImageQR').prop('width');
+        var hImage = $('#ImageQR').prop('height');
+        alert(wImage + " " + hImage + " " + Img)
+        var wind = open(Img, 'Печатаем картинку', 'width=' + wImage + ',height=' + hImage + ',status=no,toolbar=no,menubar=no,location=no,scrollbar=0,resizable=yes');
+        wind.document.writeln('');
+        wind.document.close();
+        wind.focus();
+        wind.print();
+        wind.close();
+
+
+    }
+</script>
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

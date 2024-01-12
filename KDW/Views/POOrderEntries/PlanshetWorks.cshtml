@@ -1,0 +1,565 @@
+﻿@model KDW.Models.WorkView
+
+
+<center>
+    <h2>@Resources.Resource.TochkaVipuska @Model.Planshet.Name</h2>
+
+</center>
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" onclick="Window.location.Reload()">X</button>
+
+             
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="T" class="table table-bordered table-striped">
+
+
+
+    @{int Procent = Convert.ToInt32(Math.Round((100 * Model.StarWork.QTYFact) / Model.StarWork.QTY, 0));
+        int VsegoProcent = Convert.ToInt32(Math.Round((100 * Model.WORK.FCommitQty) / Model.WORK.FQty, 0));
+    }
+    <tr>
+        <th colspan="6" style="font-size:40px">
+            <center>
+                @try
+                {
+                @Model.WORK.FBillNo (@Model.StarWork.QTYFact / @Model.StarWork.QTY)
+                }
+                catch
+            {
+
+            }
+
+            </center>
+
+        </th>
+
+
+
+
+
+
+    </tr>
+    <tr>
+        <th colspan="6" style="font-size:20px">
+            @try
+            {
+                <center>
+                    <p>
+                        @Model.StarWork.DateStart.Value.ToString("yyyy.MM.dd")
+                    </p>
+                </center>
+            }
+            catch
+            {
+
+            }
+        </th>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-success" role="progressbar" aria-valuenow=" @Procent" style="width: @Procent%" aria-valuemin="0" aria-valuemax="100">    @Resources.Resource.QTYPoProizvodstvennomuZadaniu   @Math.Round(Model.StarWork.QTYFact) / @Math.Round(Model.StarWork.QTY)</div>
+            </div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-info" role="progressbar" aria-valuenow=" @VsegoProcent" style="width: @VsegoProcent%" aria-valuemin="0" aria-valuemax="100">    @Resources.Resource.ZadanieNaProizvodstvo   @Math.Round(Model.WORK.FCommitQty, 0) / @Math.Round(Model.WORK.FQty, 0)</div>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+
+        <th data-field="ZakazPostavshiku" style="width:300px">
+            @Resources.Resource.ZadanieNaProizvodstvo
+        </th>
+
+        <th data-field="PartNumber" style="width:300px">
+            @Resources.Resource.PartNumber
+        </th>
+        <th data-field="Nomenklatura" colspan="3">
+            @Resources.Resource.Nomenklatura
+        </th>
+
+        <th data-field="Date">
+            @Resources.Resource.Date
+        </th>
+
+    </tr>
+
+
+    @try
+    {
+    <tr>
+
+        <th>
+            <p> @Model.WORK.FBillNo</p>
+            <p> @Model.WORK.t_Department.FName</p>
+        </th>
+        <th>
+            @Model.WORK.t_Item.FNumber
+        </th>
+        <th colspan="3">
+            @Model.WORK.t_Item.FName
+        </th>
+
+        <th>
+            @Model.StarWork.WorkDate.Value.ToString("yyyy.MM.dd")
+        </th>
+
+    </tr>
+    }
+    catch
+            {
+
+            }
+    <tr>
+
+        <th>
+            @Resources.Resource.Stock
+        </th>
+        <th style="width:300px">
+            @Resources.Resource.MOL
+        </th>
+
+        <th>
+            @Resources.Resource.QTYPoProizvodstvennomuZadaniu
+        </th>
+        <th colspan="3">
+            @Resources.Resource.QTYPeremestit
+        </th>
+
+
+
+
+
+
+    </tr>
+    @try
+    {
+    <tr>
+
+        <td>
+            @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "PoiskMOL()" })
+        </td>
+        <td style="width:300px">
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </td>
+
+        <th>
+            <input class="btn btn-default" id="FQty" value="@Model.MaxVipusk" readonly />
+        </th>
+        <th colspan="3">
+
+            <input class="btn btn-warning " id="FCommitQty" value="@Model.MaxVipusk.ToString().Replace(",", ".")" type="number" step="1" autofocus required />
+
+
+        </th>
+
+
+
+
+
+    </tr>
+    }
+    catch
+            {
+
+            }
+
+    <tr>
+        <th colspan="4">
+            @{
+                try
+                {
+                    if (Model.StarWork.QTYFact < Model.StarWork.QTY)
+                    {
+
+
+
+                        if (Model.MaxVipusk >= 1)
+                        {
+                        <p>
+                            <button class="btn btn-block btn-success" id="Save" style="height:100px;text-align:center;vertical-align:central;font-size:24px" id="Save" onclick="SaveCompleteWork()">@Resources.Resource.Save</button>
+                        </p>
+
+                        }
+                        else
+                        {
+                        <p>
+                            <button class="btn btn-warning btn-block " style="height:100px;text-align:center;vertical-align:central;font-size:24px">
+                                @Resources.Resource.NedostatochnoKomplekta
+                            </button>
+                        </p>
+                        }
+                    }
+                    else
+                    {
+                    <p>
+                        <button onclick="SkipWork(@Model.StarWork.Id)" class="btn btn-success btn-block">@Resources.Resource.VipuskZavershen </button>
+                    </p>
+                    }
+                }
+                catch
+            {
+
+            }
+
+
+            }
+
+        </th>
+        <th colspan="2">
+            <p>
+                <button onclick="SkipWork(@Model.StarWork.Id)" style="height:100px;vertical-align:central;font-size:24px" class="btn btn-danger btn-block">@Resources.Resource.Propusk </button>
+            </p>
+        </th>
+
+
+
+
+    </tr>
+    <tr>
+        <th colspan="6">
+            <h4>
+                @Model.OgranichenieVipuskaPrichina
+            </h4>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="6">
+            <h3> @Resources.Resource.Nomenklatura</h3>
+        </th>
+    </tr>
+    @try
+    {
+    foreach (var x in Model.BOMEntrys)
+    {
+
+        string color = "success";
+        decimal Sum = 0;
+        decimal NZPQty = 0;
+        if (x.QTYScrap == 0)
+        {
+            x.QTYScrap = 1;
+        }
+        decimal OstalosPrinesti = x.QTYOstalosToday; //Math.Round(x.FQtyMust - (item.FCommitQty * x.FQtyScrap), 3);
+
+        decimal MaxPoNomenklature = x.MognoVipustit;
+        try
+        {
+            //  NZPQty=  item.NZP.Where(y => y.Active && y.ItemId == x.FItemID).Sum(y => y.QTY);
+            NZPQty = Math.Round(x.NZPQty, 0);//Math.Round(x.FWIPQTY.Value, 3);
+            if (OstalosPrinesti <= 0)
+            {
+                color = "success";
+            }
+            else
+            {
+                if (NZPQty > 0)
+                {
+                    color = "warning";
+                }
+                else
+                {
+                    color = "";
+                }
+
+            }
+        }
+        catch
+        {
+
+        }
+
+        <tr class="@color">
+            <th colspan="4">
+                @x.Item.FName
+            </th>
+            <th colspan="1">
+                @x.Item.FNumber
+            </th>
+            <th colspan="1">
+                @NZPQty  / @x.NugnoVipustitSegodnya
+            </th>
+
+        </tr>
+        <tr class="@color">
+            <th colspan="4">
+                @Resources.Resource.Rashod = @Math.Round(x.QTYScrap, 3)
+            </th>
+            <th colspan="2">
+                Max = @MaxPoNomenklature
+            </th>
+        </tr>
+        try
+        {
+            foreach (var y in x.NZPOld)
+            {
+                <tr class="@color">
+                    <th colspan="4">
+                        @y.Dvigenie.ZakazPostavshiku
+                    </th>
+                    <th colspan="1">
+                        <img src="@Url.Action("GenerateQrCode", new { QRText = y.Dvigenie.QRTable.QRstring })" width="50" height="50" alt="qr code" id="ImageQR" name="ImageToPrint" title="@ViewBag.QR" />
+
+                    </th>
+                    <th colspan="1">
+                        @y.QTY
+                    </th>
+
+                </tr>
+            }
+        }
+        catch
+        {
+
+        }
+
+        try
+        {
+            foreach (var y in x.NZPs)
+            {
+                <tr class="@color">
+                    <th colspan="4">
+                        @y.QRString
+                    </th>
+                    <th colspan="1">
+                        <img src="@Url.Action("GenerateQrCode", new { QRText = y.QRString })" width="50" height="50" alt="qr code" id="ImageQR" name="ImageToPrint" title="@ViewBag.QR" />
+
+                    </th>
+                    <th colspan="1">
+                        @y.QTYFact
+                    </th>
+
+                </tr>
+            }
+        }
+        catch
+        {
+
+        }
+    }
+    }
+    catch
+            {
+
+            }
+    <tr>
+        <td colspan="6">
+            <h3>@Resources.Resource.Vipolneno</h3>
+        </td>
+    </tr>
+    @try
+    {
+    foreach (string s in Model.Vipusheno)
+    {
+        <tr>
+
+            <td colspan="6" class="success">
+                @s
+            </td>
+
+        </tr>
+    }
+    }
+    catch
+            {
+
+            }
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<script>
+    function SkipWork(id)
+    {
+        var Count = @ViewBag.WorksCount;
+        if (Count > 1) {
+            var url2 = "@Url.Action("SkipWorkJson", "POOrderEntries")?Id=" + id;
+
+            $.post
+                (url2, function (data) {
+                    var S = data.split(';');
+
+                    if (S[0] == "Ok") {
+                        alert("@Resources.Resource.Ok");
+                        location.reload();
+
+
+                    }
+                    else {
+                        alert(data);
+
+                        //  location.reload();
+                    }
+
+
+
+
+
+                }
+
+                );
+        }
+        else {
+            alert('@Resources.Resource.NoWorks');
+        }
+
+
+    }
+
+
+</script>
+<script>
+    function SaveCompleteWork() {
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+        $("#Download").modal('show');
+        $('#Save').hide();
+
+        var InterID = $('#FInterID').val();
+        var EntryID = $('#FEntryID').val();
+        var FCommitQty = $('#FCommitQty').val();
+        FCommitQty = FCommitQty.replace(',', '.');
+
+      //  var url2 = "@Url.Action("CINfromCompleteWorkNEW", "POOrderEntries")?Stock=" + Stock + "&Manager=" + Manager + "&InterID=" + @Model.WORK.FInterID + "&FCommitQty=" + FCommitQty + "&StarWorkId=" +@Model.StarWork.Id;
+
+        var url2 = "@Url.Action("CINfromCompleteWork", "POOrderEntries")?Stock=" + Stock + "&Manager=" + Manager + "&InterID=" + @Model.WORK.FInterID + "&FCommitQty=" + FCommitQty + "&StarWorkId=" +@Model.StarWork.Id ;
+
+     //    string ToWork, string Manager, decimal QTY, string Liniya, string ToStock
+      //  SOUTplusCIN
+
+      //  alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+        if (FCommitQty != '' && FCommitQty != 0) {
+            if (confirm("@Resources.Resource.Podtverdit " + FCommitQty + "?"))
+            {
+                $.post(url2, function (data) {
+                    var S = data.split(';');
+                    if (S[0] == 'Ok') {
+                        QRID = parseInt(S[1]);
+                        console.log('GoToPrint');
+                        var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        ShowModal(QRID);
+
+
+
+                    }
+                    else {
+                        alert(data);
+                        $('#Save').removeClass("btn-default").addClass("btn-success");
+                        //  location.reload();
+                    }
+
+                    $("#Download").modal('hide');
+
+
+                }
+
+                );
+            }
+        }
+        else
+        {
+            alert('@Resources.Resource.NomenklaturiNedostatochno');
+            $('#Save').show();
+        }
+    }
+</script>
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOLByStock", "POOrderEntries")',
+                    minLength: 1
+
+            });
+        };
+</script>
+<script>
+    function ShowModal(QRID) {
+
+        var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+
+
+
+    }
+</script>
+
+<script>
+
+        function SearchStorage () {
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                 //  alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>

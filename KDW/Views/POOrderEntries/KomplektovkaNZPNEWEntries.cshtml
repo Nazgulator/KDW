@@ -1,0 +1,424 @@
+﻿@model IEnumerable < KDW.Models.WorkView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+<style>
+    .description {
+        width: 200px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="QRsForPrint" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block close hide" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="QRs">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table id="T" class="table table-bordered table-striped">
+    @if (Model != null)
+    {
+
+
+
+
+        <thead>
+            <tr>
+                <td style="font-size:12px">
+                    @Resources.Resource.ZadanieNaProizvodstvo
+                </td>
+                <td style="font-size:12px">
+                    @Resources.Resource.PartNumber
+                </td>
+                <td style="font-size:12px" class="TRIN" hidden>
+                    @Resources.Resource.Nomenklatura
+                </td>
+
+                <td style="font-size:12px">
+                    @Resources.Resource.QTYPeremestit
+                </td>
+
+
+            </tr>
+        </thead>
+        foreach (var item in Model)
+        {
+
+            string Cvet = "";
+
+
+            string BtnText = Resources.Resource.PostuplenieNaSklad;
+            string BtnCvet = "btn btn-success";
+            string StockName = "";
+            string StockFromName = "";
+
+
+
+
+
+
+            foreach (var i in item.BOMEntrys)
+            {
+                Guid G = Guid.NewGuid();
+                decimal MaxQtyNeed = 0;
+                //   MaxQtyNeed = i.QTYOstalosToday;
+                MaxQtyNeed = i.QTYNEED;
+               // if (MaxQtyNeed> i.QTYOstalosWork)
+               // {
+               //     MaxQtyNeed = i.QTYOstalosWork;
+               // }
+                if (MaxQtyNeed <= 0)
+                {
+                    Cvet = "success";
+                    MaxQtyNeed =0;
+                }
+
+            <tr class="@Cvet ">
+
+                <td class="TRIN" style="font-size:12px">
+                    @item.WORK.FBillNo
+                </td>
+                <td style="font-size:12px">
+                    <a onclick="ShowTR('@G',@item.WORK.FInterID,@item.Item.FItemID)">@i.Item.FNumber</a>
+
+                </td>
+                <td class="TRIN" style="font-size:12px" hidden>
+                    @i.Item.FName
+                </td>
+
+                <td id="OTKLONENIE_@G" style="font-size:12px" >
+                 <input class="btn btn-warning " style="width:100px" value="@MaxQtyNeed.ToString().Replace(",",".")"  id="QTY_@G" />   
+                </td>
+                <td>
+               @if (ViewBag.QR.Id >0)
+               {
+                    <button  onclick="PeremestitNaProizvodstvo('@G', '@item.WORK.FBillNo')" class="btn btn-success">-></button>
+               }
+                </td>
+
+
+
+
+            </tr>
+           
+            }
+
+        }
+    }
+
+</table>
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function ochistka(GUID) {
+
+        $("MESTO_" + GUID).val('');
+    }
+</script>
+
+<script>
+    function ShowTR(GUID, Id, ItemId) {
+        var TR = $('#DOP_' + GUID);
+        if ($('#DOP_' + GUID + ':hidden')) {
+
+            TR.show();
+            QRsModal(GUID, Id, ItemId);
+        }
+        else {
+            TR.hide();
+
+        }
+    }
+</script>
+<script>
+    function QRsModal(GUID, WorkId,ItemId)
+    {
+        var Modal = $("#QRsForPrint");
+        var QRs = $("#QRRRS_" + GUID);
+        var STOCKID = $('#StockID').val();
+        QRs.load('@Url.Action("PredNZPQRs", "POOrderEntries")?WorkId=' + WorkId + '&ItemId=' + ItemId);
+       // $("#QRsForPrint").modal('show');;
+
+    }
+</script>
+
+<script>
+    function SearchZakaz(GUID,ItemId)
+    {
+        var Text = $("#ZAKAZ_" + GUID).val();
+       // alert(Text);
+           $("#ZAKAZ_"+GUID).autocomplete
+        (
+            {
+                source: '@Url.Action("AutocompleteSearchZakazPostavshiku", "POOrderEntries")?Text=' + Text + '&ItemId=' + ItemId,
+                minLength: 3,
+                    select: function (event, ui)
+                    {
+                        //  $.post('@Url.Action("SetWork", "Home")', { User: ui.item.label });
+                        //   }
+
+                    }
+                }
+
+        );
+    }
+</script>
+
+<script>
+    function CHGtoSTOCK(Id, DvigenieID)
+    {
+        var Button = $('#Button_' + Id);
+        var Input = $('#' + Id);
+        var QTY = $('#' + Id).val();
+        Button.hide();
+        alert("StockWorkEntryId = " + Id + " & DvigenieId=" + DvigenieID + " & QTY=" + QTY);
+        var url = "@Url.Action("CHGJsonStockWork", "POOrderEntries")?StockWorkEntryId=" + Id + "&DvigenieId=" + DvigenieID + "&QTY=" + QTY ;
+        $.post(url, function (data) {
+            var S = data.split(';');
+            if (S[0] == 'Ok')
+        {
+        QRID = parseInt(S[1]);
+        alert('@Resources.Resource.PeremeshenieUspeshno');
+          //  var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+
+            var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+            Button.text(S[6]);
+                Button.attr('onclick', 'OpenModal("' + QRID + '")');
+         Button.removeClass("btn-success").addClass("btn-info");
+                Button.show();
+                OpenModal(QRID);
+             //   PrintImage(url);
+             //   window.location.(url);
+      //  window.location.replace(url);
+        }
+        else
+        {
+                alert(data);
+                Button.show();
+        //location.reload();
+
+        }
+
+        });
+    }
+</script>
+<script>
+    function FindNumber() {
+        var Number = $('#FindPartNumber').val();
+        $.each($(".table").find("tr"), function () {
+
+            if ($(this).text().toLowerCase().replace(/\s+/g, '').indexOf(Number.replace(/\s+/g, '').toLowerCase()) == -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+
+    }
+</script>
+<script>
+    function OpenModal(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+    }
+</script>
+<script>
+
+    function ImagetoPrint(source) {
+
+
+        var W = "200px"
+        return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description { width: " + W + "; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";
+    }
+
+    function PrintImage(source) {
+
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+
+<script>
+    function PoiskQR()
+    {
+        var Num = $('#NPartNumber').val();
+          var url2 = "@Url.Action("SkladskieWorks", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                window.location.replace(url2);
+
+
+            }
+
+        );
+    }
+</script>
+<script>
+    function QTYVQR()
+    {
+        var Num = $('#NPartNumber').val();
+        var QR = Num.split(';');
+        var PartNumber = QR[0];
+        alert(PartNumber);
+       // var TR = $('#TRQTYINQR');
+      //  TR.hide();
+          var url2 = "@Url.Action("QTYinQRJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                alert(data);
+                $("#SkolkoVQR").val(data);
+               // TR.show('slow');
+                $('table tr').each(function () {
+                    $(this).hide();
+                });
+                $('#udalit').each(function () {
+                    $(this).remove();
+                });
+                var All = $('[name = "' + PartNumber +'"]');
+
+                All.each(function () {
+                    var Val = $(this).attr('qty');
+                    var Id = $(this).uniqueId();
+                    var Peremestit = $(this).val();
+                    alert(Val);
+                    if (data >= Val)
+                    {
+                        data = Val;
+                    }
+                    $(this).append('<tr id="udalit"><td><input class="btn btn-warning" value = ' + data + ' type="number" step="0.001"></td><td><button class="btn btn-success btn-block">@Resources.Resource.PeremestitNaDrugoiSklad</button></td></tr>')
+                    $(this).show();
+                });
+            }
+
+        );
+    }
+</script>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function PeremestitNaProizvodstvo(GUID, WorkId) {
+        var QTY = $("#QTY_" + GUID).val();
+       // alert(QTY);
+        var SkolkoPeremestit = parseFloat($("#QTY_" + GUID).val());
+        var Buttons = $('#Buttons');
+        var go = false;
+
+//Если введены верные значения
+      //  if (go) {
+        if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?"))
+        {
+                Buttons.hide();//скрываем кнопки
+
+                var ADDURL = '@Url.Action("AddNZPNEW", "POOrderEntries")?QTYFact=' + SkolkoPeremestit + '&WorkNumber=' + WorkId;
+              //  alert(ADDURL);
+                $.post(ADDURL, function (data) {
+                    Buttons.show();
+                 //  SkolkoVernut();
+
+                     var S = data.split(';');
+                    if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+
+                    }
+                    else
+                    {
+                        alert(data);
+                        window.location.reload();
+                      //  LoadVedomost();
+                    }
+                });
+            }
+            else
+            {
+
+            }
+    }
+</script>
+
+<script>
+    function OpenModal(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+        $("#PrintQR").load(printurl);
+      //  $("#QRsForPrint").modal('hode');
+                        $("#PrintQRModal").modal('show');
+    }
+</script>

@@ -1,0 +1,83 @@
+﻿@model KDW.Models.StocksMOL
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StocksMOL</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CEH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CEH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MOL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MOL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_Stock.FBrNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_Stock.FBrNO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_Item.FNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_Item.FNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_Item1.FNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_Item1.FNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

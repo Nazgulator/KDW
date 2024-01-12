@@ -1,0 +1,56 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.Resource.Header</h2>
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+@using (Html.BeginForm("UploadWorksExcel", "POOrderEntries", FormMethod.Post, new { enctype = "multipart/form-data", @placeholder = "Загрузите файл заданий на производство" }))
+{<div class="container" id="main">
+
+    <div class=" row justify-content-center">
+        <div class="col-4">
+            <label>Выберите файл для загрузки</label>
+            <input type="file" name="upload" class="form-control" /><br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <input class="btn btn-default form-control"  name="Prichina" placeholder="上传原因 (Причина загрузки)" />
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            从俄罗斯装载? (Загружаем из России?) Y / N
+            <input class="btn btn-default form-control"  name="Rus"  />
+
+        </div>
+    </div>
+
+    <div class=" row">
+        <div class="col-12">
+            <a id="cancel" href="/Home/Index" class="btn btn-outline-success" style="width: 180Px">退回 (назад)</a>
+            <input id="download" type="submit" value="上传 (загрузить)" class="btn btn-success" style="width: 180Px" />
+        </div>
+    </div>
+</div>
+
+}
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

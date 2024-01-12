@@ -1,0 +1,20 @@
+﻿@model IEnumerable<KDW.Models.ICStockBill>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <button class="btn btn-success btn-block">  @item.FBillNo  </button> 
+            </td>
+            <td>
+                @item.FDate
+            </td>
+            <td>
+                @Html.ActionLink("Редактировать", "Index", "ICStockBillEntries", new { id = item.FInterID }, new { @class="btn btn-warning"})
+
+            </td>
+
+        </tr>
+    }
+</table>

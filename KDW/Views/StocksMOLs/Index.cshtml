@@ -1,0 +1,103 @@
+﻿@model IEnumerable<KDW.Models.StocksMOL>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Главная</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create", null, new {@class = "btn btn-success btn-block"})
+</p>
+<table id="T" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CEH)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RU)
+        </th>
+        <th>
+            MOL EN
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MOL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FNumber)
+        </th>
+        <th>
+            Stock
+        </th>
+
+        <th>
+            MOL
+        </th>
+        <th>
+            Actual
+        </th>
+        <th>
+            SkladBraka
+        </th>
+        <th>
+            SkladUchastka
+        </th>
+        <th>
+            YacheikaPriem
+        </th>
+        <th>
+            YacheikaBufer
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.CEH)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RU)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ZH)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.MOL)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.t_Stock.FName)
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.t_Item1.FName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Actual)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SkladBraka)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.SkladUchastka)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.YacheikaPriem)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.YacheikaBufer)
+    </td>
+    
+    <td>
+        @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+    </td>
+</tr>
+}
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">В главное меню &raquo;</a> </p>

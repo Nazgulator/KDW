@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<Center>
+    <p style="font-size:30px">
+        <img src="~/Content/Icons/Postuplenir.png" height="25" width="25" />  @Resources.Resource.PostuplenieNaSklad
+
+    </p>
+    <h4>@Resources.Resource.ZapolniteYellow</h4>
+</Center>
+
+
+
+
+
+
+<table class="table table-bordered table-striped ">
+    <tr style="align-content:center;text-align:center">
+
+        <th align="center">
+            @Resources.Resource.Stock
+        </th>
+        <th>
+            @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()" })
+        </th>
+    </tr>
+    <tr>
+        <th>
+            @Resources.Resource.MOL
+        </th>
+        <th>
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Managers), htmlAttributes: new { @class = "form-control btn btn-warning" })
+        </th>
+    </tr>
+    <tr>
+        <th>
+            @Resources.Resource.ScanMestoRazmesheniya
+        </th>
+        <th>
+            <input id="Mesto" class="form-control btn btn-warning btn-block" />
+        </th>
+    </tr>
+
+    <tr>
+        <th>
+            @Resources.Resource.Nomenklatura
+        </th>
+        <th colspan="1">
+            
+
+            <input class="btn btn-warning btn-block" id="Nomenklatura" value="" onkeyup="SearchItem()" autofocus required />
+
+
+        </th>
+    </tr>
+
+    <tr>
+        <th>
+            @Resources.Resource.QTYPostupilo
+        </th>
+        <th colspan="1">
+
+            <input class="btn btn-warning btn-block" id="FCommitQty" value="0" type="number" step="0.001"  required />
+
+
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <button class="btn btn-block btn-success" id="PeremestitB" onclick="SavePostuplenie()">@Resources.Resource.Save</button>
+        </th>
+
+
+
+    </tr>
+
+
+
+    }
+
+</table>
+
+<p><a href="/Home/Index" class="btn btn-default btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+
+        function SearchItem() {
+            $("#Nomenklatura").autocomplete(
+                {
+                source: '@Url.Action("AutocompleteSearchItem", "POOrderEntries")',
+                minLength: 0,
+
+                select: function (event, ui) {
+
+                    $("#Nomenklatura").val(ui.item.label);
+
+
+
+                }
+            });
+
+
+            }
+
+</script>
+
+<script>
+    function FindYacheika() {
+        var StockId = $('#StockID').val();
+          $.post('@Url.Action("AutocompleteYacheikaRazmesheniya", "POOrderEntries")', {
+              StockId: StockId
+            }, function (data) {
+                $('#Mesto').val(data);
+            }
+
+            );
+
+    }
+</script>
+
+<script>
+    function SavePostuplenie() {
+        $('#PeremestitB').hide();
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+
+        var Mesto = $('#Mesto').val();
+        var FCommitQty = parseFloat($('#FCommitQty').val().replace(',', '.'));
+        var Nomenklatura = $("#Nomenklatura").val();
+
+        var Go = true;
+       // FCommitQty= FCommitQty.replace(',', '.');
+        //     alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+      
+        if (FCommitQty == 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu = 0');
+            Go = false;
+        }
+             if (FCommitQty < 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu < 0');
+            Go = false;
+        }
+        if ( Go==true)
+        {
+            alert("S="+Stock+" M="+Manager+" N="+Nomenklatura+" QTY="+ FCommitQty+" M="+ Mesto)
+            $.post('@Url.Action("SaveQINJson", "POOrderEntries")', {
+                Stock: Stock, Manager: Manager, Nomenklatura: Nomenklatura, FCommitQty: FCommitQty, Mesto: Mesto
+            }, function (data) {
+                var S = data.split(';');
+                if (S[0] == 'Ok')
+                {
+                    QRID = parseInt(S[1]);
+                    console.log('GoToPrint');
+                    var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                    window.location.replace(url);
+
+
+                }
+                else
+                {
+                    alert(data);
+                    $('#PeremestitB').show();
+                    //location.reload();
+                }
+
+
+
+
+            }
+
+            );
+        }
+
+    }
+</script>
+
+
+
+
+
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOL", "POOrderEntries")',
+                    minLength: 1
+
+            });
+
+        };
+</script>
+
+<script>
+
+    function SearchStorage() {
+        alert('go');
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                   alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>

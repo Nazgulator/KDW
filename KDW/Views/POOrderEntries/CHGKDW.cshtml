@@ -1,0 +1,20 @@
+﻿
+    <div id="Menu">
+        @Html.Action("CHGKDWMenu")
+    </div>
+    <div id="Sobrano">
+        @try 
+        { 
+        <div>
+            @Html.Action("CHGKDWSobrano")
+        </div>
+
+        }
+        catch
+        {
+        }
+    </div>
+    <div id="Today">
+        @Html.Action("DocumentsToday",new { DocType="CHG"})
+    </div>
+

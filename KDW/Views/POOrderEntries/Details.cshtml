@@ -1,0 +1,803 @@
+﻿@model KDW.Models.POOrderEntry
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>POOrderEntry</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FBrNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBrNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCommitQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCommitQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTaxRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTaxRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTaxAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTaxAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FUnitID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FUnitID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxCommitQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxCommitQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSourceEntryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSourceEntryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCess)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCess)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FStockQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FStockQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxStockQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxStockQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMapNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMapNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMapName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMapName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAllAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAllAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxPropID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxPropID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxPriceDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxPriceDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPriceDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPriceDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FQtyInvoice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FQtyInvoice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FQtyInvoiceBase)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FQtyInvoiceBase)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxTaxPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxTaxPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTaxPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTaxPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiveAmountFor_Commit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiveAmountFor_Commit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiveAmount_Commit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiveAmount_Commit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecCoefficient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecCoefficient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecCommitQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecCommitQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSourceTranType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSourceTranType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSourceInterId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSourceInterId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSourceBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSourceBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FContractInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FContractInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FContractEntryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FContractEntryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FContractBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FContractBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMRPLockFlag)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMRPLockFlag)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxQtyInvoice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxQtyInvoice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMrpClosed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMrpClosed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMapID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMapID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSProducingAreaID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSProducingAreaID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAmtDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAmtDiscount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCheckAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCheckAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMrpAutoClosed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMrpAutoClosed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPayApplyAmountFor_Commit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPayApplyAmountFor_Commit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPayApplyAmount_Commit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPayApplyAmount_Commit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecStockQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecStockQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecInvoiceQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecInvoiceQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPlanMode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPlanMode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMTONo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMTONo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDescount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDescount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConfirm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConfirm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConMem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConMem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConFetchDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConFetchDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupConfirmor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupConfirmor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FQualityRptBillID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FQualityRptBillID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FLockByAlter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FLockByAlter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDeliveryQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDeliveryQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxDeliveryQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxDeliveryQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSecDeliveryQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSecDeliveryQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRejectRefuseNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRejectRefuseNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRefuseNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRefuseNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FLockBySupplier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FLockBySupplier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntryAccessoryCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntryAccessoryCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPRInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPRInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPREntryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPREntryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxReceiptQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxReceiptQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiptQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiptQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAuxReturnQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAuxReturnQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReturnQty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReturnQty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCheckMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCheckMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FIsCheck)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FIsCheck)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAmountExceptDisCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAmountExceptDisCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAllAmountExceptDisCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAllAmountExceptDisCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntryDisCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntryDisCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCommitAmt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCommitAmt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCommitAmtTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCommitAmtTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCommitTax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCommitTax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPayReqPayAmountFor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPayReqPayAmountFor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntrySelfP0266)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntrySelfP0266)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntrySelfP0268)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntrySelfP0268)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntrySelfP0269)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntrySelfP0269)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEntrySelfP0270)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEntrySelfP0270)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCloseEntryUser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCloseEntryUser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCloseEntryDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCloseEntryDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCloseEntryCauses)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCloseEntryCauses)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOutSourceInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOutSourceInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOutSourceEntryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOutSourceEntryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOutSourceTranType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOutSourceTranType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBatchNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBatchNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.POOrder.FBrNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.POOrder.FBrNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_Item.FNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_Item.FNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FDetailID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,44 @@
+﻿
+<Center>
+    <h1>@Resources.Resource.Ok</h1>
+
+    <h3> Всего заданий добавлено: @ViewBag.Zagrugeno.Count</h3> 
+
+    @if (ViewBag.Zagrugeno.Count > 0)
+    {
+        <table>
+
+            @foreach (string u in ViewBag.Zagrugeno)
+            {
+
+
+                <tr class="success">
+                    <td>
+                        <button class="btn btn-success">@u</button>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    @if (ViewBag.Errors.Count > 0)
+    {
+        <table>
+
+            @foreach (string u in ViewBag.Errors)
+            {
+
+
+                <tr class="success">
+                    <td>
+                        <button class="btn btn-danger">@u</button>  
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+</Center>
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

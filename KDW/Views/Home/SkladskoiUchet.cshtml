@@ -1,0 +1,200 @@
+﻿
+
+<table class="table table-bordered table-striped">
+    @foreach (var X in ViewBag.Dvigs)
+    {
+        <tr class="@X.StatusOTK.Colour">
+
+            <td>
+                <p>
+                    @X.Dvigenie.FBillNo
+                </p>
+                @try
+                {
+                    <p>
+                        @X.Dvigenie.UsersKDW.Name
+                    </p>
+                }
+                catch
+                {
+
+                }
+            </td>
+
+            <td>
+                <p>
+                    @if (X.Dvigenie.Item != null)
+                    {
+                        @X.Dvigenie.Item.FNumber
+                    }
+                </p>
+                <p>
+                    @Math.Round(X.Dvigenie.QTYFact, 3)
+                </p>
+            </td>
+            <td>
+                <p>
+                    @X.StatusOTK.NameZh
+                </p>
+                <p>
+                    @X.Dat.ToString("MM-dd HH:mm")
+                </p>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="6">
+            <a href="~/Home/LastStatuses" class="btn btn-block btn-success">  @Resources.Resource.ActualStatusOTK</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6">
+            <button type="button" class="btn btn-block btn-success glyphicon glyphicon-qrcode" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("MyDvigenies", "POOrderEntries")'"> @Resources.Resource.MyDocs</button>
+            <!--  <a href="~/POOrderEntries/MyStatuses" class="btn btn-block btn-success"> @Resources.Resource.MyDocs</a>-->
+        </td>
+    </tr>
+</table>
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>@Resources.Resource.SkladskoiUchet</h1>
+            </div>
+        </div>
+
+        <p>
+            <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.ScanNomenklaturs</a>
+        </p>
+
+        <!--   <p>
+        <a href="~/POOrderEntries/PostuplenieTSD" class="btn btn-block btn-success glyphicon glyphicon-import">@Resources.Resource.PostuplenieNaSklad</a>
+    </p>
+    <p>
+        <a href="~/POOrderEntries/PostuplenieNaSkladTSD" class="btn btn-block btn-success glyphicon glyphicon-bell">@Resources.Resource.PostuplenieNaSklad New </a>
+    </p>
+
+     <p>
+         <a href="~/POOrderEntries/SkladskieWorks" class="btn btn-block btn-success glyphicon glyphicon-triangle-bottom"> @Resources.Resource.ZadanieNaSklad </a>
+     </p>
+     <p>
+         <a href="~/POOrderEntries/KomplektovkaNZP" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.Komplektovka new </a>
+     </p>
+
+        <p>
+            <a href="~/POOrderEntries/InvVedomost?Prohod=1" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.SlichitelnayaVedomost 1 </a>
+        </p>
+        <p>
+            <a href="~/POOrderEntries/InvVedomost?Prohod=2" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.SlichitelnayaVedomost 2 </a>
+        </p>
+        <p>
+            <a href="~/POOrderEntries/InvVedomost?Prohod=3" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.SlichitelnayaVedomost 3 </a>
+        </p>
+            -->
+        <p>
+            <a href="~/POOrderEntries/NewQUIN" class="btn btn-block btn-success glyphicon glyphicon-chevron-right">@Resources.Resource.QIN</a>
+        </p>
+        <p>
+            <a href="~/POOrderEntries/VosstanovitTSD" class="btn btn-block btn-success glyphicon glyphicon-new-window">@Resources.Resource.GenerateQR</a>
+        </p>
+
+        <p>
+            <a href="~/POOrderEntries/AddBigQRView" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.GenerateBIGQR</a>
+        </p>
+        @if (ViewBag.Roles.Contains("Кладовщик") || ViewBag.Roles.Contains("Старший кладовщик") || ViewBag.Roles.Contains("Администратор"))
+        {
+            <p>
+                <a href="~/POOrderEntries/PostuplenieKDW" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.PostuplenieNaSkladMass</a>
+            </p>
+            <p>
+                <a href="~/POOrderEntries/LastDvigeniesNew" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.MyPostuplenies</a>
+            </p>
+            <p>
+                <a href="~/POOrderEntries/CHGKDW" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.CHGMass</a>
+            </p>
+
+
+            <p>
+                <a href="~/POOrderEntries/KomplektovkaNZPNEW" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.KomplektovanieNew</a>
+            </p>
+
+
+
+        }
+
+        @if (ViewBag.Roles.Contains("Старший кладовщик") || ViewBag.Roles.Contains("Администратор"))
+        {
+            <p>
+                <a href="~/POOrderEntries/ICStockBill" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.EditDoc</a>
+            </p>
+        }
+
+
+
+        <p>
+            <a href="~/POOrderEntries/Nomenklaturs" class="btn btn-block btn-success glyphicon glyphicon-menu-hamburger">@Resources.Resource.OstatkiNomenklaturi</a>
+        </p>
+        <p>
+            <a href="~/POOrderEntries/OstatkiInWork" class="btn btn-block btn-success glyphicon glyphicon-lock">@Resources.Resource.OstatkiInWork</a>
+
+        </p>
+        <p>
+            <a href="@Url.Action("PlanogrammaPrint", "POOrderEntries")" class="btn btn-block btn-success glyphicon glyphicon-map-marker">@Resources.Resource.Planogramma</a>
+
+        </p>
+
+
+
+
+
+
+
+        <p>
+            <a href="~/POOrderEntries/Postuplenies" class="btn btn-block btn-success glyphicon glyphicon-book">@Resources.Resource.PostuplenieWINOtchet  </a>
+        </p>
+        <p>
+            <a href="/Home/Index" class="btn  btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+        </p>
+
+
+        @if (ViewBag.Roles.Contains("Администратор"))
+        {
+            <p>
+                <a href="~/POOrderEntries/MinusNaSkladah" class="btn btn-block btn-warning glyphicon glyphicon-book">Схлопнуть строки на складах</a>
+            </p>
+            <p>
+                <a href="~/POOrderEntries/OstatkiVBOM" class="btn btn-block btn-success glyphicon glyphicon-book">@Resources.Resource.OstatkiVWorks </a>
+            </p>
+            <p>
+                <a href="~/POOrderEntries/OstatkiInQR" class="btn btn-block btn-success glyphicon glyphicon-book"> @Resources.Resource.OstatkiVRazrezeOTK</a>
+            </p>
+            <p>
+                <a href="@Url.Action("PlanogrammaView", "POOrderEntries")" class="btn btn-block btn-success glyphicon glyphicon-map-marker">@Resources.Resource.PlanogrammaSearch</a>
+
+            </p>
+            <p>
+                <a href="~/POOrderEntries/VozvratIsNZPNEW" class="btn btn-block btn-warning glyphicon glyphicon-book">@Resources.Resource.OstatkiVWorks </a>
+            </p>
+        }
+
+
+
+    </div>
+
+</div>
+@Html.Action("UserNow", "POOrderEntries")
+@ViewBag.IPAdress
+@ViewBag.CompName
+
+
+
+
+
+

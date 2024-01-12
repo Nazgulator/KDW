@@ -1,0 +1,79 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+  
+}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<h1> </h1>
+
+<div class="container">
+    <div class="table">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <center>
+                    <label>  @Resources.Resource.OtskaniruiteNomenklaturu</label>
+                    <p>
+                        <img src="~/Content/Icons/qr.png" width="70" height="70" /><input class="btn btn-default" id="QRScan" style="height:70px;font-size:30px;width:500px" onchange="FindNomenklaturaByQR()" autofocus /> <button class="btn btn-success" onclick="FindNomenklaturaByQR()" style="height:70px;font-size:30px">Ok</button>
+
+                    </p>
+                   
+                </center>
+
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 ">
+
+                <p><a href="/Home/Index" class="btn btn-default btn-block form-control">@Resources.Resource.VGlavnoeMenu &raquo;</a></p>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function FindNomenklaturaByQR() {
+        var QRData = $('#QRScan').val();
+        var characters = QRData.split(";");
+        if (characters.length > 1) {
+           // alert('QRData=' + QRData)
+            if (QRData != '' && QRData != 0) {
+                if (characters[0] == 'KOMPLEKTOVKA')
+                {
+                        var url = "@Url.Action("Komplektovka", "POOrderEntries")?QRData=" + QRData;
+                    window.location.replace(url);
+                }
+                else
+                {
+                    if (characters[0] == 'BIGQR') {
+                        var url = "@Url.Action("BIGQRScan", "POOrderEntries")?QRData=" + QRData;
+                        window.location.replace(url);
+                    }
+                    else
+                    {
+                        var url = "@Url.Action("ScanirovanieQR", "POOrderEntries")?QRData=" + QRData;
+                        window.location.replace(url);
+                    }
+                }
+
+
+
+            }
+            else {
+                alert('@Resources.Resource.OtskaniruiteNomenklaturu');
+            }
+        }
+        else
+        {
+            alert("Неверный QR код!");
+        }
+    }
+
+</script>

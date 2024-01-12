@@ -1,0 +1,104 @@
+﻿@model KDW.Models.ICStockBillEntry
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Редактировать</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   <div class="container">
+    <div class="form-horizontal">
+        <hr />
+       
+
+        @Html.HiddenFor(model => model.FInterID)
+
+        @Html.HiddenFor(model => model.FEntryID)
+
+      
+       
+
+
+       
+
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="col-md-6">
+           @Resources.Resource.QTYFact
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQty, "", new { @class = "text-danger" })
+            </div>
+         </div>
+       
+       
+
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="col-md-6">
+          @Resources.Resource.YZComment
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FNote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FNote, "", new { @class = "text-danger" })
+            </div>
+         </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="col-md-6">
+           KING DEE WEB
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FMapNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMapNumber, "", new { @class = "text-danger" })
+            </div>
+         </div>
+
+   
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="col-md-6">
+           @Resources.Resource.StockTo
+            </div>
+            <div class="col-md-6">
+
+                @Html.DropDownListFor(model => model.FDCStockID, ViewBag.FDCStockID as SelectList, new { @class="form-control btn btn-warning"})
+              
+                @Html.ValidationMessageFor(model => model.FDCStockID, "", new { @class = "text-danger" })
+            </div>
+         </div>
+       
+
+        <div class="row col-md-6 col-md-offset-3">
+            <div class="col-md-6">
+                @Resources.Resource.StockFrom
+            </div>
+            <div class="col-md-6">
+                @Html.EditorFor(model => model.FEntrySelfB0458, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FEntrySelfB0458, "", new { @class = "text-danger" })
+            </div>
+         </div>
+       
+
+      
+       
+
+
+                <div class=" col-md-6  ">
+                    @Html.ActionLink("Назад", "Index", new { id= Model.FInterID }, new { @class = "btn btn-outline-success btn-block" })
+                </div>
+                <div class=" col-md-6  ">
+                    <input type="submit" value="Изменить" class="btn btn-success btn-block" />
+                </div>
+
+    </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

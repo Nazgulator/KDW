@@ -1,0 +1,157 @@
+﻿@model KDW.Models.StocksMOL
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактировать</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+   <div class="container">
+       <div class="form-horizontal">
+           <hr />
+           @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.CEH, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.CEH, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.CEH, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.RU, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.RU, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.RU, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.ZH, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.ZH, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.ZH, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.MOL, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.MOL, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.MOL, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           @Html.HiddenFor(model => model.Id)
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.FInterID, "FInterID", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("FInterID", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.FInterID, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.MOLID, "MOLID", htmlAttributes: new { @class = "control-label col-md-2" })
+               </div>
+               <div class="col-md-6">
+                   @Html.DropDownList("MOLID", null, htmlAttributes: new { @class = "form-control" })
+                   @Html.ValidationMessageFor(model => model.MOLID, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.FNumber, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.FNumber, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.FNumber, "", new { @class = "text-danger" })
+               </div>
+           </div>
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.Actual, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.Actual, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.Actual, "", new { @class = "text-danger" })
+               </div>
+           </div>
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.SkladBraka, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.SkladBraka, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.SkladBraka, "", new { @class = "text-danger" })
+               </div>
+           </div>
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.SkladUchastka, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.SkladUchastka, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.SkladUchastka, "", new { @class = "text-danger" })
+               </div>
+           </div>
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.YacheikaBufer, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.YacheikaBufer, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.YacheikaBufer, "", new { @class = "text-danger" })
+               </div>
+           </div>
+           <div class="row col-md-6 col-md-offset-3">
+               <div class="col-md-6">
+                   @Html.LabelFor(model => model.YacheikaPriem, htmlAttributes: new { @class = "control-label" })
+               </div>
+               <div class="col-md-6">
+                   @Html.EditorFor(model => model.YacheikaPriem, new { htmlAttributes = new { @class = "form-control" } })
+                   @Html.ValidationMessageFor(model => model.YacheikaPriem, "", new { @class = "text-danger" })
+               </div>
+           </div>
+
+
+
+           <div class=" col-md-6  ">
+               @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-outline-success btn-block" })
+           </div>
+           <div class=" col-md-6  ">
+               <input type="submit" value="Изменить" class="btn btn-success btn-block" />
+           </div>
+
+       </div>
+</div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

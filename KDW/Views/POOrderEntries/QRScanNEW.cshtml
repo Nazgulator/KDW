@@ -1,0 +1,435 @@
+﻿@model IEnumerable<KDW.Models.DvigeniesView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<Center>
+    <h2>@Resources.Resource.Info</h2>
+</Center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<style>
+    .description {
+        width: 280px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+
+    .allwidth {
+        min-width: 280px;
+    }
+</style>
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="CINREsult" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" role="document" width="100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>Результат выполнения</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="CINR">
+
+
+
+
+            </div>
+            <button class="btn btn-success btn-block" onclick="ReloadPage()">Ok</button>
+        </div>
+    </div>
+</div>
+
+@if (Model != null)
+{
+
+
+
+
+    <table class="table table-bordered" style="text-align:center">
+        <tr>
+            <td colspan="3">
+                @ViewBag.Start.Dvig.Postavshik
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @ViewBag.Start.Dvig.StartFBillNo
+            </td>
+            <td>
+                @ViewBag.Start.Dvig.t_Item.FNumber
+            </td>
+        </tr>
+        <tr class="success">
+            <td>
+                @Resources.Resource.QTYFact
+            </td>
+            <td>@ViewBag.End.Dvig.QTYFact</td>
+        </tr>
+        <tr>
+            <td>
+                @Resources.Resource.Stock
+            </td>
+            <td>@ViewBag.End.Dvig.StockName</td>
+        </tr>
+        @if (ViewBag.Start.ProverkaOTK.Status > 0 && ViewBag.Start.ProverkaOTK.Id > 0)
+        {
+            <tr class="@ViewBag.Start.ProverkaOTK.StatusOTK.Colour">
+                <td>
+                    @Resources.Resource.StatusOTK
+                </td>
+                <td>
+                    @ViewBag.Start.ProverkaOTK.StatusOTK.NameZh
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="2">
+                @ViewBag.Start.Dvig.t_Item.FName
+            </td>
+
+        </tr>
+
+    </table>
+
+    <p style="text-align:center">
+        @Resources.Resource.Dvigeniya
+    </p>
+    <table id="T" class="table table-bordered table-striped">
+        <tr>
+            <th>
+                @Resources.Resource.MyDocs
+            </th>
+            <th>
+                @Resources.Resource.QTYFact
+            </th>
+        </tr>
+        @if (Model.First().Parent.Id > 0)
+        {
+            <tr class="info">
+                <th>
+                    @Model.First().Parent.CurrentFBillNo @Model.First().Parent.StockName
+                </th>
+                <th>
+                    @Model.First().Parent.QTYFact / @Model.First().Parent.QTY  <button class="btn-info" onclick="GoToChild('@Model.First().Parent.QRString')" style="height:25px"> <- </button>
+                </th>
+            </tr>
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>
+                    @item.Dvig.CurrentFBillNo @item.Dvig.StockName
+                </th>
+                <th>
+                    @item.Dvig.QTYFact / @item.Dvig.QTY
+                </th>
+            </tr>
+            if (item.Childrens.Count() > 0)
+            {
+
+                foreach (var ch in item.Childrens)
+                {
+                    <tr class="info">
+                        <th>
+                            @ch.CurrentFBillNo  @ch.StockName
+                        </th>
+                        <th>
+                            @ch.QTYFact / @ch.QTY <button class="btn-info" onclick="GoToChild('@ch.QRString')" style="height:25px">-></button>
+                        </th>
+                    </tr>
+                }
+            }
+        }
+
+
+
+
+
+    </table>
+    <table class="table">
+        <tr>
+            <td>
+                <button onclick="PrintQR()" class="btn btn-block btn-success glyphicon glyphicon-print">@Resources.Resource.PrintQR</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+            </td>
+        </tr>
+        @if (ViewBag.Roles.Contains("ОТК") || ViewBag.Roles.Contains("Администратор"))
+        {
+            <tr>
+                <td>
+                    <button onclick="ShowStatusOTK()" class="btn btn-block btn-success glyphicon glyphicon-flash">@Resources.Resource.OTK</button>
+                </td>
+            </tr>
+        }
+        @if (ViewBag.Start.ProverkaOTK.Id > 0)
+        {
+            if (ViewBag.Start.ProverkaOTK.Status > 0 && ViewBag.Start.ProverkaOTK.Id > 0 && ViewBag.Start.ProverkaOTK.StatusOTK.Colour.Equals("success"))
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("PeremeshenieSoSkladaNaSkladNEW", "POOrderEntries", new { DvigenieId = ViewBag.End.Dvig.Id })" class="btn  btn-success btn-block allwidth">@Resources.Resource.PeremestitNaDrugoiSklad</a>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td>
+                        <a href="@Url.Action("PeremeshenieSoSkladaNaSkladNEW", "POOrderEntries", new { DvigenieId = ViewBag.End.Dvig.Id, brak = true })" class="btn  btn-success btn-block allwidth">@Resources.Resource.PeremestitNaDrugoiSklad</a>
+                    </td>
+                </tr>
+            }
+        }
+        @if ((((ViewBag.Roles.Contains("Кладовщик") && @ViewBag.End.Dvig.Date >= DateTime.Now.AddDays(-1)) || ViewBag.Roles.Contains("Начальник склада"))) || ViewBag.Roles.Contains("Администратор"))
+        {
+            <tr>
+                <td>
+                    <button onclick="OtmenaProvedeniya()" class="btn  btn-danger btn-block allwidth">@Resources.Resource.OtmenaProvedeniya</button>
+
+                </td>
+            </tr>
+        }
+        @if ((ViewBag.End.Dvig.CurrentFBillNo.Contains("CHG") || ViewBag.End.Dvig.CurrentFBillNo.Contains("WIN") || ViewBag.End.Dvig.CurrentFBillNo.Contains("JIN"))&& @ViewBag.End.Dvig.QTYFact >0)
+        {
+            
+    <tr>
+        <td>
+
+            @Html.DropDownList("ZakazNumber", new SelectList(ViewBag.AllZakazes), htmlAttributes: new { @class = "form-control btn btn-warning" })
+ 
+        
+       <!-- <input value="@ViewBag.Start.Zakaz.FBillNo" id="ZakazNumber" class="btn btn-warning" /> -->
+        <input value="@ViewBag.End.Dvig.QTYFact" id="StornoQTY" class="btn btn-warning" />
+        <button onclick="StornoPostupleniya()" class="btn  btn-danger ">@Resources.Resource.Storno</button>
+
+        </td>
+    </tr>
+        }
+        <tr>
+            <td>
+                <a href="/Home/Index" class="btn btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+            </td>
+        </tr>
+    </table>
+
+}
+
+
+
+<p>QR=@ViewBag.QRData </p>
+
+
+<!-- Modal -->
+<div class="modal fade" id="OTK" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" role="document" width="100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.IzmenitStatusOTK...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @Html.DropDownList("OTKStatus", new SelectList(ViewBag.StatusesOTK, "Id", "NameRu"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+
+                </p>
+                <p>
+                    <button class="btn btn-success btn-block" onclick="SaveStatusOTK()">@Resources.Resource.Save</button>
+                </p>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+
+    function StornoPostupleniya() {
+        var QTY = $('#StornoQTY').val().replace(',','.');
+        var Zakaz = $('#ZakazNumber').val();
+        var url2 = '@Url.Action("StornoPostupleniyaNEW", "POOrderEntries")?DvigenieNEWId=@ViewBag.End.Dvig.Id&QTY=' + QTY + '&ZakazNumber=' + Zakaz;
+
+            // alert(url2);
+            if (confirm('@Resources.Resource.Uvereni')) {
+                console.log('ok');
+
+
+               $.post(url2,
+                    function (data)
+                    {
+                         var S = data.split(';');
+                                    if (S[0] == 'Ok')
+                                    {
+                                        alert('@Resources.Resource.Uspeshno');
+                                       // alert(data);
+                                        location.reload();
+
+                                    }
+                                    else
+                                    {
+                                        alert(data);
+
+                                    }
+
+                    }
+                );
+
+
+
+            //    window.location.replace(url2);
+            } else {
+                console.log('cancel')
+            }
+
+
+
+
+
+        }
+
+</script>
+<script>
+
+
+        function OtmenaProvedeniya() {
+            var QTY = $('#QTY').val();
+           var url2 = '@Url.Action("OtmenaProvedeniyaNEW", "POOrderEntries", new { DvigenieNEWId = ViewBag.End.Dvig.Id })';
+
+            // alert(url2);
+            if (confirm('@Resources.Resource.Uvereni')) {
+                console.log('ok');
+
+
+               $.post(url2,
+                    function (data)
+                    {
+                         var S = data.split(';');
+                                    if (S[0] == 'Ok')
+                                    {
+                                        alert('@Resources.Resource.Uspeshno');
+                                       // alert(data);
+                                        location.reload();
+
+                                    }
+                                    else
+                                    {
+                                        alert(data);
+
+                                    }
+
+                    }
+                );
+
+
+
+            //    window.location.replace(url2);
+            } else {
+                console.log('cancel')
+            }
+
+
+
+
+
+        }
+
+</script>
+
+<script>
+    function ShowStatusOTK() {
+
+        $("#OTK").modal('show');
+
+    }
+</script>
+
+<script>
+        function GoToChild(QRData)
+        {
+              var ReloadURL = '@Url.Action("ScanirovanieQR", "POOrderEntries")?QRData=' +QRData ;
+              window.location.replace(ReloadURL);
+        }
+</script>
+
+<script>
+        function PrintQR()
+        {
+            var QRID = @ViewBag.End.Dvig.Id;
+            var url = "@Url.Action("PrintToPrinterNew", "POOrderEntries")?QRID=" + QRID;
+            window.location.replace(url);
+        }
+</script>
+<script>
+        function SaveStatusOTK()
+        {
+            var statusOTK = $("#OTKStatus").val();
+           // alert(statusOTK);
+            if (statusOTK != "" && statusOTK != null)
+            {
+
+
+                if (confirm('@Resources.Resource.IzmenitStatusOTK')) {
+                    console.log('ok');
+                    var url = '@Url.Action("AddProverkaOTK", "POOrderEntries")?QRData=' +'@ViewBag.QRData'+'&Status=' + statusOTK ;
+                    var ReloadURL = '@Url.Action("ScanirovanieQR", "POOrderEntries")?QRData=' +'@ViewBag.QRData.ToString()' ;
+                 //   alert(ReloadURL);
+                    $.post(url,
+                        function (data)
+                        {
+                            $("#OTK").modal('hide');
+                           window.location.replace(ReloadURL);
+
+
+
+                            }
+
+
+
+                    );
+
+
+
+                    //    window.location.replace(url2);
+                } else {
+                    console.log('cancel')
+                }
+            }
+        }
+</script>

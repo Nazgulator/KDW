@@ -1,0 +1,516 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+<style>
+    .description {
+        width: 200px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="QRShowModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div>
+                    <p>
+                        @Resources.Resource.FaktQTY
+                    </p>
+                    <p>
+                        <input id="QRQTY" class="btn btn-warning btn-block" />
+                    </p>
+                    <p>
+                        <button class="btn btn-success btn-block" onclick="ScanQRCode()" id="Ok">Ok</button>
+                    </p>
+                    <p>
+                        <button class="btn btn-danger btn-block" onclick="ScanQRCodeKomissia()">@Resources.Resource.UtverditKomisionno</button>
+                    </p>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<center>
+    <h3>
+        @Resources.Resource.Komplektovka
+    </h3>
+</center>
+
+@Html.DropDownList("DepartmentID", new SelectList(ViewBag.Departments, "Key", "Value", ViewBag.DefaultDepartmentId), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "SetDepartment()" })
+@Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", ViewBag.DefaultStockId), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "SetStock()" })
+
+
+<p>
+    <input class="btn btn-default" placeholder="@Resources.Resource.Nomenklatura" id="FindPartNumber" />
+
+    <button class="btn btn-success" onclick="LoadVedomost()">Ok</button>
+
+    <input class="btn btn-default" placeholder="@Resources.Resource.OtskaniruiteNomenklaturu" id="ScanQR1" onkeyup="QTYVKODE()"/>
+    <input class="btn btn-default" placeholder="@Resources.Resource.QTYQR" id="QTYinQR" />
+
+
+    <button class="btn btn-success" onclick="QTYVKODE()">@Resources.Resource.Find</button>
+
+    <button class="btn btn-default" onclick="SetCount(50)">50</button><button class="btn btn-default" onclick="SetCount(0)">ALL</button>
+
+    <!--
+    <button class="btn btn-info" onclick="ExportToExcel()">EXCEL</button>
+          -->
+
+</p>
+<p>
+<input class="btn btn-default" id="FindWorkNumber" placeholder="@Resources.Resource.ZadanieNaProizvodstvo" /><button onclick="LoadVedomost()" class="btn btn-success">@Resources.Resource.Find</button>
+
+</p>
+<div id="Load">
+
+
+</div>
+<div id="Vedomost">
+
+</div>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.table2excel.js"></script>
+<script src="~/Scripts/excelexportjs.js"></script>
+
+
+<script>
+    function QTYVKODE()
+    {
+        var Num = $('#ScanQR1').val();
+        var QRInput = $('#QTYinQR');
+        var Number = $('#FindPartNumber');
+        var TR = $('#QRShowModal');
+      //  TR.modal('show');
+      //  alert(Num);
+          var url2 = "@Url.Action("QRNEWtoSession", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+
+
+                var S = data.split(';');
+                if (S[0] != null) {
+                    QRInput.val(S[0]);
+                    Number.val(S[1]);
+                    LoadVedomost();
+
+                //    alert(S[0]+" "+S[1]);
+                //    $('#Ok').html(S[1]);
+                  //  TR.modal('show');
+                }
+
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function ScanQRCode()
+    {
+        var ScanQR = $("#ScanQR1").val();
+        var QTYVQR = $("#QRQTY").val();
+        var PartNumber = $("#FindPartNumber");
+        var StockId = $('#StockID').val();
+        var url2 = "@Url.Action("AddQR", "POOrderEntries")?QRData=" + ScanQR + "&StockId=" + StockId + "&QTY=" + QTYVQR + "&Prohod=" +@ViewBag.Prohod;
+        $.post
+            (url2, function (data)
+            {
+                var S = data.split(';');
+                if (S[0] != null)
+                {
+                    //window.location.replace(url2);
+                    PartNumber.val(S[0]);
+                    $("#ScanQR1").val("");
+                    $("#StockID").val(parseInt(S[1]));
+                    $('#QRShowModal').modal('hide');
+                }
+
+                LoadVedomost();
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function ScanQRCodeKomissia()
+    {
+        var ScanQR = $("#ScanQR1").val();
+        var QTYVQR = $("#QRQTY").val();
+        var PartNumber = $("#FindPartNumber");
+        var StockId = $('#StockID').val();
+        if (confirm("@Resources.Resource.UtverditKomisionno?"))
+        {
+            var url2 = "@Url.Action("AddQR", "POOrderEntries")?QRData=" + ScanQR + "&StockId=" + StockId + "&QTY=" + QTYVQR + "&Prohod=" +@ViewBag.Prohod+"&EditQR=1";
+            $.post
+                (url2, function (data) {
+                    var S = data.split(';');
+                    if (S[0] != null) {
+                        //window.location.replace(url2);
+                        PartNumber.val(S[0]);
+                        $("#ScanQR1").val("");
+                        $("#StockID").val(parseInt(S[1]));
+                        $('#QRShowModal').modal('hide');
+                    }
+
+                    LoadVedomost();
+                }
+
+                );
+        }
+    }
+</script>
+
+<script>
+    function SetDepartment()
+    {
+        var DeptId = $('#DepartmentID').val();
+        var url2 = "@Url.Action("SetKomplektovkaDepartment", "POOrderEntries")?DepartmentId=" + DeptId ;
+        $.post
+            (url2, function (data)
+            {
+                //window.location.replace(url2);
+
+                LoadVedomost();
+            }
+
+        );
+    }
+</script>
+
+
+<script>
+    function SetStock()
+    {
+        var StockId = $('#StockID').val();
+        var url2 = "@Url.Action("SetKomplektovkaStock", "POOrderEntries")?StockId=" + StockId ;
+        $.post
+            (url2, function (data)
+            {
+                //window.location.replace(url2);
+
+                LoadVedomost();
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function SetPart(Part)
+    {
+       
+        var url2 = "@Url.Action("SetStockWorkPart", "POOrderEntries")?Part=" + Part ;
+        $.post
+            (url2, function (data)
+            {
+                //window.location.replace(url2);
+
+                LoadVedomost();
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function SetCount(count)
+    {
+         // var Num = $('#Count').val();
+          var url2 = "@Url.Action("SetCount", "POOrderEntries")?Count=" + count ;
+        $.post
+            (url2, function (data)
+            {
+                //window.location.replace(url2);
+
+                LoadVedomost();
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function ExportToExcel() {
+
+        $(".TREM").remove();
+        $(".TRIN").show();
+
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('T'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+        {
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        }
+        LoadVedomost();
+
+        return (sa);
+
+
+
+
+        /*  $("#T").table2excel({
+              exclude: ".excludeThisClass",
+              name: "Worksheet Name",
+              filename: "Vedomost.xls", // do include extension
+              preserveColors: false // set to true if you want background colors and font colors preserved
+          });
+       */
+
+        /*    var images = $("img");
+            for (var i = 0; i < images.length; i++) {
+                var Alt = images[i].getAttribute("alt");
+                images[i].replaceWith(Alt);
+
+            };
+
+            var inputs = $("input");
+            for (var i = 0; i < inputs.length; i++) {
+                var Inp = inputs[i].value;
+                inputs[i].replaceWith(Inp);
+            }
+            $("#T").excelexportjs(
+                {
+                    containerid: "T",
+                    datatype: 'table'
+                }
+            );
+            */
+        //   window.location.replace('/Poligons/Index?PoiskKontr=' + PK + '&Poisk=' + P + '&result=' + R + '&Vesi=' + V + '&Avtosort=' + AS + '&TekDate=' + D + '&Date2=' + D2);
+
+
+
+
+        //   var url = 'data:application/vnd.ms-excel,' + encodeURIComponent($('#T').html())
+        //  location.href = url
+
+        // return false
+    }
+
+</script>
+
+<script>
+    $(document).ready(function () {
+       LoadVedomost();
+    });
+</script>
+
+<script>
+    function LoadVedomost()
+    {
+        var StockId = $('#StockID').val();
+        var T = $('#T tbody');
+        var L = $('#Load');
+        var PN = $('#FindPartNumber').val();
+        var WN = $('#FindWorkNumber').val();
+        L.html(' <center> <img src="/Content/Icons/Loading.gif" height = "150" width = "200" /> </center>');
+       // T.remove();
+        $('#T').hide();
+        $('#Load').show();
+        var url2 = "@Url.Action("KomplektovkaNZPEntries", "POOrderEntries")?PartNumber=" + PN+"&WorkNumber="+WN;
+        $.post
+            (url2, function (data)
+            {
+                $("#Vedomost").load(url2, function (data) {
+                    $('#Load').hide();
+                });
+
+            }
+        );
+    }
+</script>
+
+
+<script>
+    function FindNumber() {
+        var Number = $('#FindPartNumber').val();
+        $.each($(".table").find("tr"), function () {
+
+            if ($(this).text().toLowerCase().replace(/\s+/g, '').indexOf(Number.replace(/\s+/g, '').toLowerCase()) == -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+
+    }
+</script>
+
+
+
+<script>
+    function OpenModal(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+    }
+</script>
+<script>
+
+    function ImagetoPrint(source) {
+
+
+        var W = "200px"
+        return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description {width: " + W + "; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+            "<img width='" + W + "' height='" + W + "' src='" + source + "' /></body></html>";
+    }
+
+    function PrintImage(source) {
+
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+
+<script>
+    function PoiskQR()
+    {
+        var Num = $('#NPartNumber').val();
+          var url2 = "@Url.Action("SkladskieWorks", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                window.location.replace(url2);
+
+
+            }
+
+        );
+    }
+</script>
+<script>
+    function QTYVQR()
+    {
+        var Num = $('#NPartNumber').val();
+        var QR = Num.split(';');
+        var PartNumber = QR[0];
+        alert(PartNumber);
+       // var TR = $('#TRQTYINQR');
+      //  TR.hide();
+          var url2 = "@Url.Action("QTYinQRJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                alert(data);
+                $("#SkolkoVQR").val(data);
+               // TR.show('slow');
+                $('table tr').each(function () {
+                    $(this).hide();
+                });
+                $('#udalit').each(function () {
+                    $(this).remove();
+                });
+                var All = $('[name = "' + PartNumber +'"]');
+
+                All.each(function () {
+                    var Val = $(this).attr('qty');
+                    var Id = $(this).uniqueId();
+                    var Peremestit = $(this).val();
+                    alert(Val);
+                    if (data >= Val)
+                    {
+                        data = Val;
+                    }
+                    $(this).append('<tr id="udalit"><td><input class="btn btn-warning" value = ' + data + ' type="number" step="0.001"></td><td><button class="btn btn-success btn-block">@Resources.Resource.PeremestitNaDrugoiSklad</button></td></tr>')
+                    $(this).show();
+                });
+            }
+
+        );
+    }
+</script>

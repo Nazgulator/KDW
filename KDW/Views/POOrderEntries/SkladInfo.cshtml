@@ -1,0 +1,34 @@
+﻿@model  IEnumerable<KDW.Models.SkladLog>
+
+
+<h1>Последние перемещения</h1>
+
+<table class="table table-bordered table-striped">
+    @if (Model.Count() > 0)
+    {
+        foreach (var W in Model)
+        {
+            string Minus = "";
+            if (W.QTYStalo<0)
+            {
+                Minus = "danger";
+            }
+    <tr class="@Minus">
+        <td>
+            @W.FBillNo @W.DocId
+        </td>
+        <td>
+            @W.FromStockName @W.FromStockId ->  @W.ToId
+        </td>
+        <td>
+           @W.ItemNumber  @W.ItemId 
+        </td>
+        <td>
+            @W.QTYBilo  -> @W.QTYKPeremesheniu -> @W.QTYStalo
+        </td>
+
+    </tr>
+        }
+    }
+
+    </table>

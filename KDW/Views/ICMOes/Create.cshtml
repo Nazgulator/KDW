@@ -1,0 +1,1715 @@
+﻿@model KDW.Models.ICMO
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Создать</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="container">
+ <div class="form-horizontal">
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FBrNo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FBrNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FBrNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FBillNo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FBillNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FBillNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FTranType, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FTranType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FTranType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStatus, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMRP, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMRP, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMRP, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FType, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FWorkShop, "FWorkShop", htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.DropDownList("FWorkShop", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.FWorkShop, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FItemID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FItemID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FItemID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCommitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCommitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCommitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanCommitDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanCommitDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanCommitDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanFinishDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanFinishDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanFinishDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FConveyerID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FConveyerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FConveyerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCommitDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCommitDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCommitDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCheckerID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCheckerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCheckerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCheckDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCheckDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCheckDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FRequesterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FRequesterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FRequesterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FBillerID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FBillerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FBillerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSourceEntryID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSourceEntryID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSourceEntryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FClosed, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FClosed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FClosed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FNote, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FNote, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FNote, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FUnitID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FUnitID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FUnitID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxCommitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxCommitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxCommitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FOrderInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FOrderInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FOrderInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPPOrderInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPPOrderInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPPOrderInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FParentInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FParentInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FParentInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCancellation, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.FCancellation)
+                    @Html.ValidationMessageFor(model => model.FCancellation, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSupplyID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSupplyID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSupplyID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyFinish, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyFinish, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyFinish, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyScrap, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyScrap, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyScrap, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyForItem, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyForItem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyForItem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyLost, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyLost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyLost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanIssueDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanIssueDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanIssueDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FRoutingID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FRoutingID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FRoutingID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStartDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStartDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFinishDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFinishDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFinishDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyFinish, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyFinish, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyFinish, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyScrap, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyScrap, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyScrap, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyForItem, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyForItem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyForItem, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyLost, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyLost, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyLost, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMrpClosed, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMrpClosed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMrpClosed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FBomInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FBomInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FBomInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyPass, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyPass, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyPass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyPass, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyPass, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyPass, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FQtyBack, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FQtyBack, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FQtyBack, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxQtyBack, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxQtyBack, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxQtyBack, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFinishTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFinishTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFinishTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FReadyTIme, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FReadyTIme, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FReadyTIme, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPowerCutTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPowerCutTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPowerCutTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFixTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFixTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFixTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FWaitItemTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FWaitItemTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FWaitItemTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FWaitToolTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FWaitToolTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FWaitToolTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FTaskID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FTaskID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FTaskID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FWorkTypeID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FWorkTypeID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FWorkTypeID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCostObjID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCostObjID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCostObjID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStockQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStockQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStockQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxStockQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxStockQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxStockQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSuspend, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.FSuspend)
+                    @Html.ValidationMessageFor(model => model.FSuspend, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FProjectNO, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FProjectNO, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FProjectNO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FProductionLineID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FProductionLineID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FProductionLineID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FReleasedQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FReleasedQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FReleasedQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FReleasedAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FReleasedAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FReleasedAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FUnScheduledQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FUnScheduledQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FUnScheduledQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FUnScheduledAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FUnScheduledAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FUnScheduledAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSubEntryID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSubEntryID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSubEntryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FScheduleID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FScheduleID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FScheduleID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanOrderInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanOrderInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanOrderInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FProcessPrice, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FProcessPrice, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FProcessPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FProcessFee, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FProcessFee, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FProcessFee, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FGMPBatchNo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FGMPBatchNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FGMPBatchNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FGMPCollectRate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FGMPCollectRate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FGMPCollectRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FGMPItemBalance, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FGMPItemBalance, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FGMPItemBalance, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FGMPBulkQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FGMPBulkQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FGMPBulkQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCustID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCustID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCustID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel1, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel2, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel3, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel4, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel5, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel5, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel5, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckLevel6, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckLevel6, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckLevel6, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate1, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate2, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate3, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate4, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate4, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate4, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate5, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate5, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate5, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMultiCheckDate6, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMultiCheckDate6, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMultiCheckDate6, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCurCheckLevel, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCurCheckLevel, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCurCheckLevel, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMRPLockFlag, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMRPLockFlag, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMRPLockFlag, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FHandworkClose, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FHandworkClose, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FHandworkClose, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FConfirmerID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FConfirmerID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FConfirmerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FConfirmDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FConfirmDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FConfirmDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FInHighLimit, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FInHighLimit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FInHighLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FInHighLimitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FInHighLimitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FInHighLimitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxInHighLimitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxInHighLimitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxInHighLimitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FInLowLimit, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FInLowLimit, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FInLowLimit, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FInLowLimitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FInLowLimitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FInLowLimitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxInLowLimitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxInLowLimitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxInLowLimitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FChangeTimes, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FChangeTimes, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FChangeTimes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCheckCommitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCheckCommitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCheckCommitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxCheckCommitQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxCheckCommitQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxCheckCommitQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCloseDate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCloseDate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCloseDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanConfirmed, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanConfirmed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanConfirmed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanMode, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanMode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanMode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FMTONo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FMTONo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FMTONo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPrintCount, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPrintCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPrintCount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFinClosed, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFinClosed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFinClosed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFinCloseer, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFinCloseer, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFinCloseer, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFinClosedate, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFinClosedate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFinClosedate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStockFlag, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStockFlag, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStockFlag, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStartFlag, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStartFlag, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStartFlag, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FVchBillNo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FVchBillNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FVchBillNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FVchInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FVchInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FVchInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FCardClosed, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FCardClosed, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FCardClosed, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FHRReadyTime, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FHRReadyTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FHRReadyTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FPlanCategory, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FPlanCategory, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FPlanCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FBomCategory, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FBomCategory, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FBomCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSourceTranType, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSourceTranType, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSourceTranType, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSourceInterId, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSourceInterId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSourceInterId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSourceBillNo, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSourceBillNo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSourceBillNo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FReprocessedAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FReprocessedAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FReprocessedAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FReprocessedQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FReprocessedQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FReprocessedQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSelDiscardStockInAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSelDiscardStockInAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSelDiscardStockInAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSelDiscardStockInQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSelDiscardStockInQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSelDiscardStockInQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FDiscardStockInAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FDiscardStockInAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FDiscardStockInAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FDiscardStockInQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FDiscardStockInQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FDiscardStockInQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSampleBreakAuxQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSampleBreakAuxQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSampleBreakAuxQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FSampleBreakQty, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FSampleBreakQty, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FSampleBreakQty, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FResourceID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FResourceID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FResourceID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAddInterID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAddInterID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAddInterID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAPSImported, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAPSImported, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAPSImported, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAPSLastStatus, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAPSLastStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAPSLastStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FAuxPropID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FAuxPropID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FAuxPropID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FOrderBOMEntryID, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FOrderBOMEntryID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FOrderBOMEntryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FStartTimePDA, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FStartTimePDA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FStartTimePDA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FIsMakeLowerBill, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.FIsMakeLowerBill)
+                    @Html.ValidationMessageFor(model => model.FIsMakeLowerBill, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FFlowCardStatus, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FFlowCardStatus, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FFlowCardStatus, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row col-md-6 col-md-offset-3">
+		  <div class="col-md-12">
+            @Html.LabelFor(model => model.FIsMesStartWork, htmlAttributes: new { @class = "control-label" })
+        
+            </div>
+            <div class="col-md-12">
+                @Html.EditorFor(model => model.FIsMesStartWork, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FIsMesStartWork, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        
+<div class="row col-md-12">
+<p> </p>
+</div>
+
+
+            
+                <div class=" col-md-6  ">
+                    @Html.ActionLink("Назад", "Index", null, new { @class = "btn btn-outline-success btn-block" })
+                </div>
+                <div class=" col-md-6  ">
+                    <input type="submit" value="Готово" class="btn btn-success btn-block" />
+                </div>
+
+            
+
+   </div>
+ </div>
+ }
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

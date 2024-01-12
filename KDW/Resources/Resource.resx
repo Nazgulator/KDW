@@ -1,0 +1,864 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActualStatusOTK" xml:space="preserve">
+    <value>Актуальный статус ОТК 100 последних документов</value>
+  </data>
+  <data name="AddStellag" xml:space="preserve">
+    <value>Добавить новый стеллаж</value>
+  </data>
+  <data name="AddStreet" xml:space="preserve">
+    <value>Добавить улицу</value>
+  </data>
+  <data name="Admins" xml:space="preserve">
+    <value>Администрирование</value>
+  </data>
+  <data name="AllWorks" xml:space="preserve">
+    <value>Посмотреть все задания</value>
+  </data>
+  <data name="CHGMass" xml:space="preserve">
+    <value>Перемещение нескольких номенклатур между складами</value>
+  </data>
+  <data name="Childs" xml:space="preserve">
+    <value>Дочерние объекты</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="CloseBigCode" xml:space="preserve">
+    <value>Закрыть BIG код</value>
+  </data>
+  <data name="CorrectCIN" xml:space="preserve">
+    <value>Корректировка CIN</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="DateEnd" xml:space="preserve">
+    <value>Дата окончания</value>
+  </data>
+  <data name="DateStart" xml:space="preserve">
+    <value>Дата начала</value>
+  </data>
+  <data name="DayResult" xml:space="preserve">
+    <value>Дневные результаты</value>
+  </data>
+  <data name="DayResultDate" xml:space="preserve">
+    <value>Дневные результаты на дату</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="DepartmentWorks" xml:space="preserve">
+    <value>Посмотреть задания подразделения</value>
+  </data>
+  <data name="DocksToday" xml:space="preserve">
+    <value>Ваши перемещения сегодня</value>
+  </data>
+  <data name="Dvigeniya" xml:space="preserve">
+    <value>Движения</value>
+  </data>
+  <data name="Edinic" xml:space="preserve">
+    <value>единиц</value>
+  </data>
+  <data name="EditDoc" xml:space="preserve">
+    <value>Корректировка документов</value>
+  </data>
+  <data name="EditQR" xml:space="preserve">
+    <value>Изменить количество в QR</value>
+  </data>
+  <data name="EndPeremeshenie" xml:space="preserve">
+    <value>Завершить перемещение</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="ErrorCeloeChislo" xml:space="preserve">
+    <value>Минимальное кол-во выпуска - 1 шт. Кол-во выпуска должно быть указано целым числом.</value>
+  </data>
+  <data name="ErrorMnogo" xml:space="preserve">
+    <value>Количество превышает максимально допустимое значение.</value>
+  </data>
+  <data name="ErrorNeNaidenBOM" xml:space="preserve">
+    <value>Не найден BOM</value>
+  </data>
+  <data name="ErrorNeNaidenStarWork" xml:space="preserve">
+    <value>Не найдено задание, выданное старшим мастером</value>
+  </data>
+  <data name="ErrorNeNaidenWork" xml:space="preserve">
+    <value>Не найден WORK</value>
+  </data>
+  <data name="ErrorNeOpredelenMOL" xml:space="preserve">
+    <value>Не определен МОЛ склада, выберите вручную</value>
+  </data>
+  <data name="ErrorNeOpredelenPolzovatel" xml:space="preserve">
+    <value>Не определен пользователь, перезайдите в программу</value>
+  </data>
+  <data name="ErrorNeOpredelenSklad" xml:space="preserve">
+    <value>Не определен склад выпуска</value>
+  </data>
+  <data name="ErrorNeTrebuetsa" xml:space="preserve">
+    <value>Этой номенклатуры не требуется</value>
+  </data>
+  <data name="ErrorNetVQR" xml:space="preserve">
+    <value>Такого количества нет в QR коде</value>
+  </data>
+  <data name="ErrorOTKNeProiden" xml:space="preserve">
+    <value>ОТК не пройден или брак! Данный QR код нельзя переместить в НЗП</value>
+  </data>
+  <data name="ErrorSchitivaniiMesta" xml:space="preserve">
+    <value>Ошибка считывания места!</value>
+  </data>
+  <data name="ErrorVipuskBolsheMax" xml:space="preserve">
+    <value>Невозможно выпустить это кол-во.Максимальное кол-во выпуска=</value>
+  </data>
+  <data name="ErrorZapros" xml:space="preserve">
+    <value>При обработке запроса произошла ошибка.</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>Выйти из программы</value>
+  </data>
+  <data name="FaktQTY" xml:space="preserve">
+    <value>Фактическое количество</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="GenerateBIGQR" xml:space="preserve">
+    <value>Создать BIG QR</value>
+  </data>
+  <data name="GenerateQR" xml:space="preserve">
+    <value>Генерация / восстановление QR</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>Выберите заказ поставщику</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Информация о номенклатуре</value>
+  </data>
+  <data name="Inventarizacia" xml:space="preserve">
+    <value>Инвентаризация</value>
+  </data>
+  <data name="InvVedomost" xml:space="preserve">
+    <value>Инвентаризационная ведомость</value>
+  </data>
+  <data name="IzmeneniyaVnesPlanovi" xml:space="preserve">
+    <value>Изменения внес плановый отдел</value>
+  </data>
+  <data name="IzmenitFactOstatok" xml:space="preserve">
+    <value>Изменить фактический остаток</value>
+  </data>
+  <data name="IzmenitStatusOTK" xml:space="preserve">
+    <value>Подтверждаете изменение статуса ОТК?</value>
+  </data>
+  <data name="KolichestvoNomenklaturi" xml:space="preserve">
+    <value>Количество номенклатуры</value>
+  </data>
+  <data name="KolichestvoPostupivshee" xml:space="preserve">
+    <value>Поступившее количество</value>
+  </data>
+  <data name="KolichestvoVZakazePostavshiku" xml:space="preserve">
+    <value>Количество в заказе поставщику</value>
+  </data>
+  <data name="KomplektovanieNew" xml:space="preserve">
+    <value>Комплектование WORK по новым QR</value>
+  </data>
+  <data name="Komplektovka" xml:space="preserve">
+    <value>Комплектация задания на производство</value>
+  </data>
+  <data name="KomplektWORK" xml:space="preserve">
+    <value>Комплектация WORK</value>
+  </data>
+  <data name="LastDvig" xml:space="preserve">
+    <value>Последние движения</value>
+  </data>
+  <data name="LiniyaSborki" xml:space="preserve">
+    <value>Линия сборки</value>
+  </data>
+  <data name="LoadFile" xml:space="preserve">
+    <value>Загрузка файла</value>
+  </data>
+  <data name="LoadFileVipuska" xml:space="preserve">
+    <value>Загрузка трёхдневного плана производства</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Главное меню</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>Менеджер</value>
+  </data>
+  <data name="MinusovieOstatki" xml:space="preserve">
+    <value>MinusovieOstatki</value>
+  </data>
+  <data name="MognoPeremestitNaProizvodstvo" xml:space="preserve">
+    <value>Можно переместить на пр-во</value>
+  </data>
+  <data name="MognoPeremestitNeBolee" xml:space="preserve">
+    <value>Можно переместить не более</value>
+  </data>
+  <data name="MognoProizvesti" xml:space="preserve">
+    <value>Можно произвести</value>
+  </data>
+  <data name="MOL" xml:space="preserve">
+    <value>Материально ответственное лицо</value>
+  </data>
+  <data name="MOL2" xml:space="preserve">
+    <value>МОЛ</value>
+  </data>
+  <data name="MyDocs" xml:space="preserve">
+    <value>Мои документы</value>
+  </data>
+  <data name="MyPostuplenies" xml:space="preserve">
+    <value>Мои поступления на склад</value>
+  </data>
+  <data name="NahoditsaNaSklade" xml:space="preserve">
+    <value>Находится на складе</value>
+  </data>
+  <data name="NaimenovanieIPartNomer" xml:space="preserve">
+    <value>Наименование и парт. номер</value>
+  </data>
+  <data name="NaznachenieDepartment" xml:space="preserve">
+    <value>Назначение подразделения</value>
+  </data>
+  <data name="NaznachenieRoli" xml:space="preserve">
+    <value>Назначие роли</value>
+  </data>
+  <data name="NaznachitSmenu" xml:space="preserve">
+    <value>Назначить смену</value>
+  </data>
+  <data name="NaznachitZadaniyaVPlan" xml:space="preserve">
+    <value>Назначить задания в план</value>
+  </data>
+  <data name="NedostatochnoKomplekta" xml:space="preserve">
+    <value>Недостаточно комплектующих</value>
+  </data>
+  <data name="NedostatochnoVNZP" xml:space="preserve">
+    <value>Возврат невозможен, недостаточно количества номенклатуры в НЗП</value>
+  </data>
+  <data name="NelzaUdalitWork" xml:space="preserve">
+    <value>Невозможно удалить работу в процессе производства. Воспользуйтесь кнопкой Пропуск на точке выпуска!</value>
+  </data>
+  <data name="NeNaznacheno" xml:space="preserve">
+    <value>Не назначено</value>
+  </data>
+  <data name="NeProizvoditsa" xml:space="preserve">
+    <value>Не производится</value>
+  </data>
+  <data name="NetNaSklade" xml:space="preserve">
+    <value>Данной номенклатуры нет на складе</value>
+  </data>
+  <data name="NevernyParol" xml:space="preserve">
+    <value>Ошибка в логине или пароле</value>
+  </data>
+  <data name="NeVibrano" xml:space="preserve">
+    <value>Не выбрано</value>
+  </data>
+  <data name="Nomenklatura" xml:space="preserve">
+    <value>Номенклатура</value>
+  </data>
+  <data name="NomenklaturiNedostatochno" xml:space="preserve">
+    <value>Номенклатуры недостаточно!</value>
+  </data>
+  <data name="NomerDvigeniya" xml:space="preserve">
+    <value>Номер движения</value>
+  </data>
+  <data name="NoWorks" xml:space="preserve">
+    <value>На данной точке выпуска больше нет заданий на производство</value>
+  </data>
+  <data name="NugnoProizvestiZavtra" xml:space="preserve">
+    <value>Нужно произвести завтра</value>
+  </data>
+  <data name="ObnovleniePlanaRabot" xml:space="preserve">
+    <value>Обновление плана работ</value>
+  </data>
+  <data name="OgranichenieDay" xml:space="preserve">
+    <value>Нет ограничений для выпуска. Выпуск согласно дневному плану.</value>
+  </data>
+  <data name="OgranichenieNomenklatura" xml:space="preserve">
+    <value>Укомплектуйте номенклатуру</value>
+  </data>
+  <data name="OgranicheniePlan" xml:space="preserve">
+    <value>Трехдневный план ограничивает выпуск</value>
+  </data>
+  <data name="OgranichenieWORK" xml:space="preserve">
+    <value>Нет ограничений на выпуск</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OstalosUkomplektovat" xml:space="preserve">
+    <value>Осталось укомплектовать</value>
+  </data>
+  <data name="OstatkiInWork" xml:space="preserve">
+    <value>Остатки НЗП</value>
+  </data>
+  <data name="OstatkiNomenklaturi" xml:space="preserve">
+    <value>Остатки номенклатуры на складах</value>
+  </data>
+  <data name="OstatkiVRazrezeOTK" xml:space="preserve">
+    <value>Остатки в QR кодах в разрезе статусов ОТК</value>
+  </data>
+  <data name="OstatkiVWorks" xml:space="preserve">
+    <value>Остатки НЗП в заданиях на производство</value>
+  </data>
+  <data name="OtchetKomplekt" xml:space="preserve">
+    <value>Отчет комплектование заданий на производство</value>
+  </data>
+  <data name="OTK" xml:space="preserve">
+    <value>ОТК</value>
+  </data>
+  <data name="Otklonenie" xml:space="preserve">
+    <value>Отклонение</value>
+  </data>
+  <data name="OtmenaProvedeniya" xml:space="preserve">
+    <value>Отмена проведения</value>
+  </data>
+  <data name="OtmenaScanQR" xml:space="preserve">
+    <value>Очистить поиск по QR коду</value>
+  </data>
+  <data name="OtskaniruiteNomenklaturu" xml:space="preserve">
+    <value>Отсканируйте номенклатуру</value>
+  </data>
+  <data name="Parent" xml:space="preserve">
+    <value>Родитель</value>
+  </data>
+  <data name="PartNumber" xml:space="preserve">
+    <value>Парт. номер</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Peredano" xml:space="preserve">
+    <value>Необходимое количество номенклатуры уже передано</value>
+  </data>
+  <data name="PeremeshaemNaPrVo" xml:space="preserve">
+    <value>Перемещаем на производство</value>
+  </data>
+  <data name="PeremeshenieNaProizvodstvo" xml:space="preserve">
+    <value>Перемещение на производство</value>
+  </data>
+  <data name="PeremeshenieNaSklad" xml:space="preserve">
+    <value>Перемещение на склад</value>
+  </data>
+  <data name="PeremeshenieSoSklada" xml:space="preserve">
+    <value>Перемещение со склада</value>
+  </data>
+  <data name="PeremeshenieUspeshno" xml:space="preserve">
+    <value>Перемещение успешно</value>
+  </data>
+  <data name="PeremestitNaDrugoiSklad" xml:space="preserve">
+    <value>Переместить на другой склад</value>
+  </data>
+  <data name="PeremestitNaProizvodstvo" xml:space="preserve">
+    <value>Переместить на производство</value>
+  </data>
+  <data name="PeremestitSProizvodstva" xml:space="preserve">
+    <value>Выпуск ДСЕ и ГП</value>
+  </data>
+  <data name="Plan3Days" xml:space="preserve">
+    <value>Трехдневный план заданий на производство (отчёт)</value>
+  </data>
+  <data name="Planogramma" xml:space="preserve">
+    <value>Планограмма склада</value>
+  </data>
+  <data name="PlanogrammaSearch" xml:space="preserve">
+    <value>Планограмма поиск номенклатуры</value>
+  </data>
+  <data name="Planovi" xml:space="preserve">
+    <value>Плановый отдел</value>
+  </data>
+  <data name="Podrazdelenie" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="Podtverdit" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="PodtverditDvigenie" xml:space="preserve">
+    <value>Подтвердить перемещение</value>
+  </data>
+  <data name="PodtverditPeremeshenie" xml:space="preserve">
+    <value>Подтвердить перемещение</value>
+  </data>
+  <data name="PodtverditPeremeshenieSoSklada" xml:space="preserve">
+    <value>Подтвердить перемещение</value>
+  </data>
+  <data name="PoiskSklada" xml:space="preserve">
+    <value>Поиск по номеру или имени склада</value>
+  </data>
+  <data name="Polka" xml:space="preserve">
+    <value>Полка</value>
+  </data>
+  <data name="PologitNaPolku" xml:space="preserve">
+    <value>Назначить новое место размещения</value>
+  </data>
+  <data name="Postavshik" xml:space="preserve">
+    <value>Поставщик</value>
+  </data>
+  <data name="PostuplenieNaSklad" xml:space="preserve">
+    <value>Поступление на склад WIN</value>
+  </data>
+  <data name="PostuplenieNaSkladMass" xml:space="preserve">
+    <value>Поступление на склад (новый QR)</value>
+  </data>
+  <data name="PostuplenieSohraneno" xml:space="preserve">
+    <value>Поступление на склад успешно сохранено!</value>
+  </data>
+  <data name="PostuplenieWINOtchet" xml:space="preserve">
+    <value>Поступление на склад отчет</value>
+  </data>
+  <data name="PoZaprosuNeNaideno" xml:space="preserve">
+    <value>По вашему запросу ничего не найдено</value>
+  </data>
+  <data name="PrintQR" xml:space="preserve">
+    <value>Напечатать QR код</value>
+  </data>
+  <data name="Procent" xml:space="preserve">
+    <value>Процент</value>
+  </data>
+  <data name="ProcessKomplektovaniya" xml:space="preserve">
+    <value>Процесс комплектования</value>
+  </data>
+  <data name="Proizvedeno" xml:space="preserve">
+    <value>Произведено</value>
+  </data>
+  <data name="Proizvesti" xml:space="preserve">
+    <value>Необходимо произвести</value>
+  </data>
+  <data name="Proizvodstvo" xml:space="preserve">
+    <value>Производство</value>
+  </data>
+  <data name="Propusk" xml:space="preserve">
+    <value>Пропустить</value>
+  </data>
+  <data name="ProverteStatusOTK" xml:space="preserve">
+    <value>Проверьте статус ОТК</value>
+  </data>
+  <data name="QIN" xml:space="preserve">
+    <value>Прочее поступление QIN</value>
+  </data>
+  <data name="QTYFact" xml:space="preserve">
+    <value>Фактический остаток</value>
+  </data>
+  <data name="QTYKPeremesheniu" xml:space="preserve">
+    <value>Количество к перемещению</value>
+  </data>
+  <data name="QTYKPeremesheniyu" xml:space="preserve">
+    <value>Кол-во отпуска</value>
+  </data>
+  <data name="QTYMustNZP" xml:space="preserve">
+    <value>Нужно в НЗП</value>
+  </data>
+  <data name="QTYNaSklade" xml:space="preserve">
+    <value>Количество на складе</value>
+  </data>
+  <data name="QTYNaSkladeNedostatochno" xml:space="preserve">
+    <value>На данном складе недостаточно номенклатуры</value>
+  </data>
+  <data name="QTYNZP" xml:space="preserve">
+    <value>Количество в НЗП</value>
+  </data>
+  <data name="QTYPeremestit" xml:space="preserve">
+    <value>Количество к перемещению</value>
+  </data>
+  <data name="QTYPoProizvodstvennomuZadaniu" xml:space="preserve">
+    <value>Кол-во по заданию</value>
+  </data>
+  <data name="QTYPostupilo" xml:space="preserve">
+    <value>Количество поступило</value>
+  </data>
+  <data name="QTYPostupleniya" xml:space="preserve">
+    <value>Количество поступления (в данном QR коде, объекте)</value>
+  </data>
+  <data name="QTYQR" xml:space="preserve">
+    <value>Количество в QR</value>
+  </data>
+  <data name="QTYVDannoiPartii" xml:space="preserve">
+    <value>Количество в данной партии</value>
+  </data>
+  <data name="QTYVipushennogoPF" xml:space="preserve">
+    <value>Количество выпущенного ПФ и ГП на текущую дату</value>
+  </data>
+  <data name="QTYVZadaniiQTYVsego" xml:space="preserve">
+    <value>Произведено по заданию всего / Количество в задании на производство</value>
+  </data>
+  <data name="QTYVZakaze" xml:space="preserve">
+    <value>Количество в заказе</value>
+  </data>
+  <data name="Rashod" xml:space="preserve">
+    <value>Расход на 1 ед.</value>
+  </data>
+  <data name="Raznica" xml:space="preserve">
+    <value>Разница</value>
+  </data>
+  <data name="ReloadBOM" xml:space="preserve">
+    <value>Перезагрузить BOM</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Роли</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="ScanGP" xml:space="preserve">
+    <value>Сканирование ГП</value>
+  </data>
+  <data name="ScanMesto" xml:space="preserve">
+    <value>Отсканируйте место размещения</value>
+  </data>
+  <data name="ScanMestoRazmesheniya" xml:space="preserve">
+    <value>Отсканируйте место размещения</value>
+  </data>
+  <data name="ScanNomenklaturs" xml:space="preserve">
+    <value>Сканирование QR кода</value>
+  </data>
+  <data name="SetAutoSmena10" xml:space="preserve">
+    <value>Заполнить автоматически смена 10ч</value>
+  </data>
+  <data name="SetAutoSmena8" xml:space="preserve">
+    <value>Заполнить автоматически смена 8ч</value>
+  </data>
+  <data name="ShlopnutStroki" xml:space="preserve">
+    <value>Схлопнуть строки на выбранном складе</value>
+  </data>
+  <data name="ShowAllZadanies" xml:space="preserve">
+    <value>Показать все задания</value>
+  </data>
+  <data name="SkladOtpravitel" xml:space="preserve">
+    <value>Перемещение со склада</value>
+  </data>
+  <data name="SkladskoiUchet" xml:space="preserve">
+    <value>Складской учет</value>
+  </data>
+  <data name="SlichitelnayaVedomost" xml:space="preserve">
+    <value>Сличительная ведомость</value>
+  </data>
+  <data name="SmenitPolzovatelya" xml:space="preserve">
+    <value>Сменить пользователя</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="StatusOTK" xml:space="preserve">
+    <value>Статус ОТК</value>
+  </data>
+  <data name="Stellag" xml:space="preserve">
+    <value>Стеллаж</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Склад</value>
+  </data>
+  <data name="StockFrom" xml:space="preserve">
+    <value>Перемещение из склада</value>
+  </data>
+  <data name="StockTo" xml:space="preserve">
+    <value>Перемещение на склад</value>
+  </data>
+  <data name="Storno" xml:space="preserve">
+    <value>Сторно</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>Улица</value>
+  </data>
+  <data name="SummOtkloneniya" xml:space="preserve">
+    <value>СуммаОткл</value>
+  </data>
+  <data name="SummQTYFact" xml:space="preserve">
+    <value>СуммаФакт</value>
+  </data>
+  <data name="SummUchetOstatok" xml:space="preserve">
+    <value>СуммаУчет</value>
+  </data>
+  <data name="TeperRaspechataiteQR" xml:space="preserve">
+    <value>Теперь распечатайте и наклейте QR код</value>
+  </data>
+  <data name="TochkaVipuska" xml:space="preserve">
+    <value>Точка выпуска</value>
+  </data>
+  <data name="TypeDvigeniya" xml:space="preserve">
+    <value>Тип движения</value>
+  </data>
+  <data name="UchetniOstatok" xml:space="preserve">
+    <value>Учетный остаток</value>
+  </data>
+  <data name="Ulica" xml:space="preserve">
+    <value>Улица</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Израсходовано</value>
+  </data>
+  <data name="Uspeshno" xml:space="preserve">
+    <value>Успешно!</value>
+  </data>
+  <data name="UtverditKomisionno" xml:space="preserve">
+    <value>Утвердить комисионно</value>
+  </data>
+  <data name="Uvereni" xml:space="preserve">
+    <value>Вы уверены?</value>
+  </data>
+  <data name="VernutIsNZP" xml:space="preserve">
+    <value>Вернуть из НЗП</value>
+  </data>
+  <data name="VGlavnoeMenu" xml:space="preserve">
+    <value>Вернуться в главное меню</value>
+  </data>
+  <data name="ViberitePolzovatelya" xml:space="preserve">
+    <value>Выберите текущего пользователя программы</value>
+  </data>
+  <data name="ViberitePolzovatelyaProgrammi" xml:space="preserve">
+    <value>Выберите текущего пользователя программы</value>
+  </data>
+  <data name="Vipolneno" xml:space="preserve">
+    <value>Выполнено</value>
+  </data>
+  <data name="VipuskEnd" xml:space="preserve">
+    <value>Выпуск по производственному заданию завершен</value>
+  </data>
+  <data name="VipuskNeNachat" xml:space="preserve">
+    <value>Выпуск по производственному заданию еще не начался</value>
+  </data>
+  <data name="VipuskVProcesse" xml:space="preserve">
+    <value>Начат выпуск по производственному заданию</value>
+  </data>
+  <data name="VipuskZavershen" xml:space="preserve">
+    <value>Выпуск завершен! Перейти к следующему &gt;</value>
+  </data>
+  <data name="VoiditeVProgrammu" xml:space="preserve">
+    <value>Войдите в программу</value>
+  </data>
+  <data name="VoitiVProgrammu" xml:space="preserve">
+    <value>Войти в программу</value>
+  </data>
+  <data name="VosmognieDeistviya" xml:space="preserve">
+    <value>Возможные действия:</value>
+  </data>
+  <data name="VosstanovitQR" xml:space="preserve">
+    <value>Восстановить QR код</value>
+  </data>
+  <data name="VosstanovlenniQR" xml:space="preserve">
+    <value>Восстановленный QR</value>
+  </data>
+  <data name="Vozvrashaem" xml:space="preserve">
+    <value>Возвращаем</value>
+  </data>
+  <data name="VRabote" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="VvediteDepartment" xml:space="preserve">
+    <value>Выберите ваше подразделение</value>
+  </data>
+  <data name="VvediteLogin" xml:space="preserve">
+    <value>Введите ваш логин</value>
+  </data>
+  <data name="VveditePartNumber" xml:space="preserve">
+    <value>Введите парт номер</value>
+  </data>
+  <data name="VveditePassword" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="VveliBolsheChemVZakaze" xml:space="preserve">
+    <value>Вы ввели количество номенклатуры больше чем в заказе поставщику! Введите другое количество, другой заказ или обратитесь в отдел поставок для корректировки заказа.</value>
+  </data>
+  <data name="VyberiteDepartment" xml:space="preserve">
+    <value>Выберите подразделение</value>
+  </data>
+  <data name="VyberiteMOLaSami" xml:space="preserve">
+    <value>Выберите МОЛа самостоятельно</value>
+  </data>
+  <data name="VyberiteStock" xml:space="preserve">
+    <value>Выберите склад</value>
+  </data>
+  <data name="VyberiteZakazNaProizvodstvo" xml:space="preserve">
+    <value>Статус задания на производство</value>
+  </data>
+  <data name="WorkInfo" xml:space="preserve">
+    <value>Информация о WORK</value>
+  </data>
+  <data name="WorkInPlan" xml:space="preserve">
+    <value>Работа из плана </value>
+  </data>
+  <data name="Yacheika" xml:space="preserve">
+    <value>Ячейка</value>
+  </data>
+  <data name="YZComment" xml:space="preserve">
+    <value>Комментарии к работе</value>
+  </data>
+  <data name="YZDateEnd" xml:space="preserve">
+    <value>Время завершения</value>
+  </data>
+  <data name="YZDateStart" xml:space="preserve">
+    <value>Время начала</value>
+  </data>
+  <data name="YZEndWork" xml:space="preserve">
+    <value>Завершить работу</value>
+  </data>
+  <data name="YZRoles" xml:space="preserve">
+    <value>Справочник Роли</value>
+  </data>
+  <data name="YZStartWork" xml:space="preserve">
+    <value>Начать новую работу</value>
+  </data>
+  <data name="YZTime" xml:space="preserve">
+    <value>Затраченное время</value>
+  </data>
+  <data name="YZUserDepartment" xml:space="preserve">
+    <value>Соответствие Пользователь - Подразделение</value>
+  </data>
+  <data name="YZUserRole" xml:space="preserve">
+    <value>Соответствие пользователь - Роль</value>
+  </data>
+  <data name="YZUsers" xml:space="preserve">
+    <value>Справочник Сотрудники</value>
+  </data>
+  <data name="YZWorkName" xml:space="preserve">
+    <value>Наименование работы</value>
+  </data>
+  <data name="YZWorkRole" xml:space="preserve">
+    <value>Соответствие Работа-Роль</value>
+  </data>
+  <data name="YZWorks" xml:space="preserve">
+    <value>Справочник Работы</value>
+  </data>
+  <data name="ZadanieNaKomplektovku" xml:space="preserve">
+    <value>Задания на комплектовку</value>
+  </data>
+  <data name="ZadanieNaProizvodstvo" xml:space="preserve">
+    <value>Задание на пр-во</value>
+  </data>
+  <data name="ZadanieNaSklad" xml:space="preserve">
+    <value>Задание на перемещение</value>
+  </data>
+  <data name="ZadanieNaTochku" xml:space="preserve">
+    <value>Назначение задания на рабочий центр</value>
+  </data>
+  <data name="ZagruzkaDannih" xml:space="preserve">
+    <value>Загрузка данных пожалуйста подождите...</value>
+  </data>
+  <data name="ZakaziPostavshikam" xml:space="preserve">
+    <value>Заказы поставщикам</value>
+  </data>
+  <data name="ZakazNeizvesten" xml:space="preserve">
+    <value>Заказ поставщику неизвестен</value>
+  </data>
+  <data name="ZakazPostavshiku" xml:space="preserve">
+    <value>Заказ поставщику</value>
+  </data>
+  <data name="ZapolniteYellow" xml:space="preserve">
+    <value>Заполните все желтые ячейки</value>
+  </data>
+</root>

@@ -1,0 +1,791 @@
+﻿@model IEnumerable<KDW.Models.ICStockBill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Главная</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create", null, new {@class = "btn btn-success btn-block"})
+</p>
+<table id="T" class="table table-bordered table-striped">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.FDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FDCStockID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSCStockID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FDeptID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FEmpID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSupplyID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPosterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCheckerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FFManagerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSManagerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FReturnBillInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSCBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHookInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FVchInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPosted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCheckSelect)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCurrencyID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSaleStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FAcctID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FROB)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FRSCBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FUpStockWhenSave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCancellation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOrgBillInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPOStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCurCheckLevel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FTaskID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FResourceID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBackFlushed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FWBInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FTranStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FZPBillInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FRelateBrID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPurposeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FUUID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FRelateInvoiceID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOperDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FImport)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSystemType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMarketingStyle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPayBillID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCheckDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FExplanation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FFetchAdd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FFetchDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FManagerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FRefType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSelTranType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FChildren)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHookStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FActPriceVchTplID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPlanPriceVchTplID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FProcID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FActualVchTplID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPlanVchTplID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBrID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FVIPCardID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FVIPScore)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHolisticDiscountRate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPOSName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FWorkShiftId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCussentAcctID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FZanGuCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPOOrdBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FLSSrcInterID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSettleDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FManageType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FOrderAffirm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FAutoCreType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConsignee)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FDrpRelateTranType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPrintCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPOMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FInventoryType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FObjectItem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConfirmStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConfirmMem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConfirmDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConfirmer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FAutoCreatePeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FYearPeriod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FPayCondition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FsourceType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FReceiver)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0154)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0143)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0435)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0537)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0836)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfA9738)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0939)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfD0134)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfC0131)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfC0231)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0230)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0837)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0436)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FInvoiceStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FSendStatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FEnterpriseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillReviewer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillReviewDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCod)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FReceiveMan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FConsigneeAdd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FISUpLoad)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FReceiverMobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FAccessoryCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0233)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBrNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FTranType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FUse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDCStockID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSCStockID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDeptID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEmpID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSupplyID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPosterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCheckerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FFManagerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSManagerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FReturnBillInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSCBillNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHookInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FVchInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPosted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCheckSelect)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCurrencyID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSaleStyle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FAcctID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FROB)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FRSCBillNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FUpStockWhenSave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCancellation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOrgBillInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPOStyle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckLevel6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMultiCheckDate6)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCurCheckLevel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FTaskID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FResourceID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBackFlushed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FWBInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FTranStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FZPBillInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FRelateBrID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPurposeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FUUID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FRelateInvoiceID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOperDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FImport)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSystemType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMarketingStyle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPayBillID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCheckDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FExplanation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FFetchAdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FFetchDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FManagerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FRefType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSelTranType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FChildren)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHookStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FActPriceVchTplID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPlanPriceVchTplID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FProcID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FActualVchTplID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPlanVchTplID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBrID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FVIPCardID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FVIPScore)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHolisticDiscountRate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPOSName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FWorkShiftId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCussentAcctID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FZanGuCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPOOrdBillNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FLSSrcInterID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSettleDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FManageType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FOrderAffirm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FAutoCreType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConsignee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDrpRelateTranType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPrintCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPOMode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FInventoryType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FObjectItem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConfirmStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConfirmMem)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConfirmDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConfirmer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FAutoCreatePeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FYearPeriod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FPayCondition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FsourceType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FReceiver)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0154)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfA0143)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0435)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfA0537)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0836)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfA9738)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0939)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfD0134)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfC0131)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfC0231)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfA0230)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0837)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfB0436)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FInvoiceStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FSendStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEnterpriseID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillReviewer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillReviewDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCod)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FReceiveMan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FConsigneeAdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FISUpLoad)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FReceiverMobile)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FAccessoryCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FHeadSelfA0233)
+        </td>
+        <td>
+            @Html.ActionLink("Редактировать", "Edit", new { id=item.FInterID }) |
+            @Html.ActionLink("Удалить", "Delete", new { id=item.FInterID })
+        </td>
+    </tr>
+}
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">В главное меню &raquo;</a> </p>

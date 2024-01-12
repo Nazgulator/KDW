@@ -1,0 +1,104 @@
+﻿@model IEnumerable<KDW.Models.InfoWorks>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h3>Лог по заданию</h3>
+</center>
+<table id="X" class="table table-bordered table-striped">
+
+    <tr>
+
+        <th>
+            Документ
+        </th>
+        <th>
+            Номенклатура
+        </th>
+        <th>
+            Количество в документе
+        </th>
+        <th>
+            FQTYMust
+        </th>
+        <th>
+            FQTY
+        </th>
+        <td>
+            FWIPQTY
+        </td>
+        <td>
+            FSTOCKQTY
+        </td>
+        <td>
+            FQTYSUPPLY
+        </td>
+        <td>
+            FQTYPICK
+        </td>
+        <td>
+            Дата
+        </td>
+        <td>
+            Пользователь
+        </td>
+
+
+    </tr>
+
+    @if (Model != null && Model.Count() > 0)
+    {
+
+        foreach (var be in Model.OrderBy(x => x.ItemId).ThenBy(x => x.StartDate).ToList())
+        {
+
+
+
+
+            <tr>
+                <td>
+                    @be.FBillNo
+                </td>
+                <td>
+                    @be.ItemId @be.ItemNumber
+                </td>
+                <td>
+                    @be.QTY
+                </td>
+                <td>
+                    @be.FQtyMust
+                </td>
+                <td>
+                    @be.FQty
+                </td>
+                <td>
+                    @be.FWipQty
+                </td>
+                <td>
+                    @be.FStockQty
+                </td>
+                <td>
+                    @be.FQtySupply
+                </td>
+                <td>
+                    @be.FQtyPick
+                </td>
+                <td>
+                    @be.StartDate
+                </td>
+                <td>
+                    @be.WebUserId @be.WebUserName
+                </td>
+
+            </tr>
+
+
+        }
+    }
+
+</table>
+
+
+

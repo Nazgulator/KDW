@@ -1,0 +1,60 @@
+﻿@model IEnumerable<KDW.Models.BomEntry>
+
+
+<table id="SS" class="table table-bordered table-striped">
+    <tr>
+        <td>
+            @Resources.Resource.Nomenklatura
+        </td>
+        <td>
+            @Resources.Resource.QTYKPeremesheniyu
+        </td>
+        <td>
+            @Resources.Resource.QTYQR
+        </td>
+
+       
+    </tr>
+
+    @foreach (var i in Model)
+    {
+        string Ready = "";
+        decimal Peremestit = Math.Round(i.QTYNEED,3) ;
+        decimal Est = Math.Round(i.ESTVQR,3);
+        if (Peremestit < 0) { Peremestit = 0; }
+        if (Peremestit<=Est||Peremestit<=0)
+        {
+            Ready = "info";
+        }
+        string EstClass = "";
+        if (Est>0)
+        {
+            EstClass = "success";
+        }
+        //   if (i.Otmena == true)
+        //   {
+        //      Ready = "success";
+        //   }
+
+    <tr style="text-align:right" class="@Ready">
+        <td>
+            @i.Item.FNumber
+        </td>
+        <td>
+          @Peremestit
+        </td>
+        <td class="@EstClass">
+           @Est
+        </td>
+ 
+
+
+    </tr>
+
+    }
+   
+
+</table>
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+

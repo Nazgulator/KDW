@@ -1,0 +1,92 @@
+﻿
+
+
+
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>@Resources.Resource.Main</h1>
+            </div>
+        </div>
+    
+        @if (ViewBag.Roles.Contains("Администратор") && ViewBag.ObnovitPOOrder)
+        {
+            <center>
+                <p>
+                    <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-warning-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ZalivkaPOOrder", "POOrderEntries")'">Нужно обновить заказы поставщику!</button>
+                </p>
+            </center>
+        }
+        @if (ViewBag.Roles.Contains("Администратор") && ViewBag.ObnovitICMO)
+        {
+            <center>
+                <p>
+                    <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-warning-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ZalivkaWORKS", "POOrderEntries")'">Нужно обновить задания на производство!</button>
+                </p>
+            </center>
+        }
+        <p>
+            <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+        </p>
+        @if (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Плановый отдел"))
+        {
+            <p>
+                <a href="~/Home/Planovi" class="btn btn-block btn-success glyphicon glyphicon-bitcoin">@Resources.Resource.Planovi</a>
+            </p>
+
+        }
+        @if (ViewBag.Roles.Contains("Кладовщик") || ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Плановый отдел"))
+        {
+            <p>
+                <a href="~/Home/SkladskoiUchet" class="btn btn-block btn-success glyphicon glyphicon-star">@Resources.Resource.SkladskoiUchet</a>
+            </p>
+
+        }
+        @if (ViewBag.Roles.Contains("Старший мастер") || ViewBag.Roles.Contains("Мастер") || ViewBag.Roles.Contains("Комплектовщик") || ViewBag.Roles.Contains("Плановый отдел") || ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Директор производства"))
+        {
+            <p>
+                <a href="~/Home/Proizvodstvo" class="btn btn-block btn-success glyphicon glyphicon-modal-window">@Resources.Resource.Proizvodstvo</a>
+            </p>
+        }
+        @if (ViewBag.Roles.Contains("Администратор"))
+        {
+            <p>
+                <a href="~/Home/Admins" class="btn btn-block btn-success glyphicon glyphicon-modal-window">@Resources.Resource.Admins</a>
+            </p>
+        }
+
+        @if (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Директор производства"))
+        {
+            <p>
+                <a href="~/Home/YZ" class="btn btn-block btn-success glyphicon glyphicon-modal-window">YZ МОДУЛЬ Я занят</a>
+            </p>
+        }
+        <p>
+            <a href="~/Home/Login" class="btn btn-block btn-success glyphicon glyphicon-lock">@Resources.Resource.SmenitPolzovatelya</a>
+        </p>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+

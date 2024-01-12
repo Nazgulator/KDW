@@ -1,0 +1,32 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>Введите WORK для проверки</h2>
+
+</center>
+
+
+<input id="WorkNumber" class="btn btn-warning btn-block"/>
+<button class="btn btn-success btn-block" onclick="FindWork()" > Ok</button>
+<div id="NTable">
+
+</div>
+<div id="WorkLog">
+
+</div>
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<script>
+    function FindWork() {
+        var WorkNum = $("#WorkNumber").val();
+        var URL = '@Url.Action("WorkInOut", "POOrderEntries")?WorkNumber=' + WorkNum;
+        $("#NTable").load(URL);
+         var URL2 = '@Url.Action("WorkLog", "POOrderEntries")?WorkNumber=' + WorkNum;
+        $("#WorkLog").load(URL2);
+
+    }
+</script>

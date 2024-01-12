@@ -1,0 +1,83 @@
+﻿@model IEnumerable<KDW.Models.ICStockBillEntry>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Главная</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create", null, new {@class = "btn btn-success btn-block"})
+</p>
+<table id="T" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.t_Item.FNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ICStockBill.FBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FQtyMust)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FNote)
+        </th>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.FMapNumber)
+        </th>
+<!--
+        <th>
+            @Html.DisplayNameFor(model => model.POOrder.FBillNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.t_StockTo.FName)
+        </th>
+    -->
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.t_Item.FNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ICStockBill.FBillNo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FQtyMust)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FQty)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FNote)
+    </td>
+    <th>
+        @Html.DisplayFor(modelItem => item.FMapNumber)
+    </th>
+
+
+    <!--
+
+     <td>
+           @Html.DisplayFor(modelItem => item.POOrder.FBrNo)
+       </td>
+       <td>
+           @Html.DisplayFor(modelItem => item.t_StockTo.FBrNO)
+       </td>
+        -->
+    <td>
+        @Html.ActionLink("Редактировать", "Edit", new {  id=item.FInterID, entryId=item.FEntryID }) |
+      <!--  @Html.ActionLink("Удалить", "Delete", new { /* id=item.PrimaryKey */ }) -->
+    </td>
+</tr>
+}
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">В главное меню &raquo;</a> </p>

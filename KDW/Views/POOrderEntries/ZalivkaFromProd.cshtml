@@ -1,0 +1,28 @@
+﻿
+<button type="button" class="btn btn-block btn-success glyphicon glyphicon-warning-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ZalivkaPOOrder", "POOrderEntries")'">Залить новые данные из прода</button>
+
+<div id="Suda">
+
+</div>
+
+
+<script>
+    function ZalivkaFromProd()
+    {
+
+        var url = "@Url.Action("ZalivkaPOOrder", "POOrderEntries")";
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (value) {
+
+                        $("#Suda").append("<p><button class='btn btn-block btn-default'>"+value+"</button></p>");
+                      //  Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+    }
+</script>

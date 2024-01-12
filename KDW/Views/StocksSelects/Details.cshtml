@@ -1,0 +1,106 @@
+﻿@model KDW.Models.StocksSelect
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StocksSelect</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StockNameZH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockNameZH)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StockNameRU)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StockNameRU)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPriemki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPriemki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBraka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBraka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBrakaUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBrakaUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladVozvrataNZP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladVozvrataNZP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBuferZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPeremesheniyaBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPeremesheniyaBuferZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_Stock.FBrNO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_Stock.FBrNO)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

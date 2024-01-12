@@ -1,0 +1,153 @@
+﻿@model IEnumerable<KDW.Models.ICStockBillEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+<style>
+    .description {
+        width: 200px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+</style>
+
+@if (ViewBag.I != null)
+        {
+<p>
+    @ViewBag.I.FNumber
+</p>
+<p class="description">
+    @ViewBag.I.FName
+</p>
+        }
+
+<table id="T" class="table table-bordered table-striped"
+       data-toggle="table"
+       data-filter-control="true">
+    @if (Model != null)
+    {
+        <thead>
+            <tr>
+
+                <th data-field="Nomenklatura" data-filter-control="input" data-sortable="true">
+                    <p>
+                        @Resources.Resource.Nomenklatura
+                    </p>
+
+
+
+                </th>
+
+
+
+
+
+            </tr>
+
+
+        </thead>
+
+
+        foreach (var item in Model)
+        {
+            bool Vosstanovit = false;
+            string Cvet = "";
+            string BtnText = Resources.Resource.GenerateQR;
+            string BtnCvet = "btn btn-success";
+
+            if (item.FQty <= 0)
+            {
+                Cvet = "danger";
+                Vosstanovit = true;
+                BtnCvet = "btn btn-danger";
+                BtnText = Resources.Resource.NetNaSklade;
+            }
+            <tr class="@Cvet ">
+
+                <td>
+
+                    <p>
+                        @item.t_Item.FNumber
+                    </p>
+
+                    <p title="@Resources.Resource.Date">
+                        @item.ICStockBill.FDate.Value.ToString("yyyy-MM-dd")
+                    </p>
+                    <p>
+                        @item.ICStockBill.FBillNo
+                    </p>
+                    <p>
+                        <input id="QTYNEW_@item.FInterID" value="@Math.Round(item.FQty,0)" />
+                    </p>
+                    <p>
+                       <button onclick="AddNEWQR(@item.FInterID,@item.FEntryID,@item.FItemID,@Math.Round(item.FQty,0), '@item.ICStockBill.FBillNo',@item.FDCStockID, '@item.FPrice', @item.ICStockBill.FSupplyID)" class="@BtnCvet btn-block">@BtnText</button>
+                    </p>
+
+
+
+
+
+                </td>
+
+            </tr>
+
+        }
+    }
+
+
+
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function AddNEWQR(FInterId, FEntryId, FItemId, QTY, WIN, StockID,Price,PostavshikId)
+    {
+
+
+
+
+        if (confirm("@Resources.Resource.GenerateQR " + QTY + " @Resources.Resource.Edinic ?"))
+        {
+            var ADDURL = '@Url.Action("GenerateMnimiQRNEW", "POOrderEntries")?ItemNum=' + FItemId + '&QTY=' + QTY + '&ToStock=' + StockID + '&Mesto=' + Mesto + '&WIN=' + WIN+'&Price=' + Price + '&PostavshikId=' + PostavshikId;
+
+            $.post(ADDURL, function (data)
+            {
+
+                var S = data.split(';');
+                if (S[0] == 'True')
+                {
+                    alert('@Resources.Resource.PeremeshenieUspeshno');
+
+
+                    var QRID = S[1];
+
+                    var printurl = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+
+
+                }
+                else
+                {
+                    alert(data);
+                }
+
+                // alert(data);
+            });
+
+        }
+
+
+
+    }
+</script>

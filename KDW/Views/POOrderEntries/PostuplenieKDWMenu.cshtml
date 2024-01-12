@@ -1,0 +1,132 @@
+﻿
+
+
+@if (ViewBag.CurrentWIN == "")
+{
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <Center>
+                <h3>@Resources.Resource.PostuplenieNaSklad</h3>
+            </Center>
+
+        </td>
+    </tr>
+    <tr>
+
+        <td width="100%">
+
+            <input placeholder="@Resources.Resource.Postavshik"  id="SupplierId" class="btn btn-warning btn-block" style="height:70px;font-size:30px" onkeyup="SearchPostavshik()" autofocus />
+    
+        </td>
+      
+    </tr>
+    <tr>
+        <td width="100%">
+            <button onclick="LoadEntries()" id="Ok" style="height:70px;font-size:30px" class="btn btn-success btn-block">Ok</button>
+        </td>
+    </tr>
+    <tr>
+        <td width="100%">
+            @Html.DropDownList("StockId", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()", @style="height:70px;font-size:30px" })
+        </td>
+        
+
+    </tr>
+    <tr>
+        <td width="100%">
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Mols), htmlAttributes: new { @class = "form-control btn btn-warning", @style = "height:70px;font-size:30px" })
+        </td>
+    </tr>
+
+</table>
+}
+
+
+    <script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadPostavshiks() {
+        var Num = $('#NPostavshik').val().toString();
+
+        var URL = '@Url.Action("PostuplenieKDWMenu", "POOrderEntries")';
+        URL = URL + '?Postavshik=' + Num;
+      //  alert(URL);
+        //window.location.replace(URL);
+        $("#Menu").load(URL);
+
+                        }
+    </script>
+    <script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadEntries() {
+        var Num = $('#SupplierId').val().toString();
+        //alert(Num);
+        var SUPURL = '@Url.Action("SetSupplierJson", "POOrderEntries")';
+        SUPURL = SUPURL + '?Supplier=' + Num;
+
+        $.post(SUPURL);
+
+
+        var URL = '@Url.Action("PostuplenieKDWTable", "POOrderEntries")';
+       
+      //  alert(URL);
+       // window.location.replace(URL);
+        $("#NTable").load(URL);
+
+       var URL2 =  '@Url.Action("PostuplenieKDWSobrano", "POOrderEntries")';
+                 $("#SOBRANO").load(URL2);
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+    }
+
+    </script>
+    <script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockId").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+    </script>
+    <script>
+    function SearchPostavshik() {
+        $("#SupplierId").autocomplete(
+                {
+                source: '@Url.Action("AutocompleteFindPostavshiksPostuplenie", "POOrderEntries")',
+                minLength: 0,
+
+                select: function (event, ui) {
+
+                    $("#SupplierId").val(ui.item.label);
+
+
+
+                }
+            });
+
+
+            }
+
+    </script>

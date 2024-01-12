@@ -1,0 +1,388 @@
+﻿
+
+
+<center>
+
+    <div>
+        @if (ViewBag.CurrentWorkId == 0)
+        {
+            <img src="~/Content/Icons/Proizvodstvo.png" width="40" height="40" /> <input class="btn btn-default" id="FindWork" /><button class="btn btn-default" onclick="FindWORK()">Ok</button>
+            @Html.DropDownList("WorkId", new SelectList(ViewBag.Works, "Key", "Value", ViewBag.CurrentWorkId), htmlAttributes: new { @class = "form-control btn btn-warning" })
+
+        }
+        else
+        {
+            <button class="btn btn-default btn-block" id="WorkId" value="@ViewBag.CurrentWorkId">  @ViewBag.CurrentWork </button>
+        }
+
+
+    </div>
+    @if (ViewBag.CurrentWorkId != 0)
+    {
+        <div id="QR">
+            @Html.Action("AddBigQRViewScan")
+        </div>
+
+        <div id="INBIGQR">
+            @Html.Action("InBigQR")
+        </div>
+
+    }
+
+</center>
+<table class="table table-bordered table-striped">
+    <tr>
+        @if (ViewBag.CurrentWorkId == 0)
+        {
+            <td>
+               @Resources.Resource.KomplektWORK
+            </td>
+        }
+        else
+
+        {
+
+            <td>
+                @Resources.Resource.PeremeshenieNaSklad
+            </td>
+            <td>
+                @Resources.Resource.MOL
+            </td>
+        }
+    </tr>
+    <tr>
+
+
+        @if (ViewBag.CurrentWorkId == 0)
+        {
+            <td>
+                <button class="btn btn-success btn-block" onclick="NewBIG()" id="NewBigButton"> @Resources.Resource.GenerateBIGQR </button> <input id="StockId" hidden value="0" />
+            </td>
+
+        }
+        else
+        {
+
+            <td>
+                @Html.DropDownList("StockId", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()" })
+
+            </td>
+            <td>
+                @Html.DropDownList("ManagerID", new SelectList(ViewBag.Mols), htmlAttributes: new { @class = "form-control btn btn-warning" })
+            </td>
+        }
+
+
+    </tr>
+</table>
+@if (ViewBag.CurrentWorkId != 0)
+{
+
+    <div>
+        <button class="btn btn-success btn-block"  onclick="CHGBIG()" id="CHGBigButton"> @Resources.Resource.PeremestitNaDrugoiSklad </button>
+    </div>
+    <div>
+        <button class="btn btn-success btn-block"  onclick="SOUT()" id="SOUTBigButton"> @Resources.Resource.PeremeshenieNaProizvodstvo </button>
+    </div>
+
+    <div>
+        <center>
+            <img src="@Url.Action("GenerateQrCode", new { QRText = ViewBag.QRString, QTY = 0})" alt="qr code" id="ImageQR" name="ImageToPrint" title="@ViewBag.QRString" />
+            <button onclick="PrintToEdge('@Url.Action("GenerateQrCode", new { QRText = ViewBag.QRString, QTY = 0})')" style="height:100px" class="btn btn-success glyphicon glyphicon-sign ">@Resources.Resource.PrintQR</button>
+            <button onclick="sendToQuickPrinterChrome()" style="height:100px" class="btn btn-warning glyphicon glyphicon-exclamation-print"> 扫码打印 </button>
+        </center>
+
+    </div>
+
+
+
+    <div>
+        <button class="btn btn-danger btn-block" onclick="NewBIG()" id="NewBigButton"> @Resources.Resource.CloseBigCode </button>
+    </div>
+
+    <div>
+        <button class="btn btn-success btn-block" onclick="ReloadBOM()">@Resources.Resource.ReloadBOM</button>
+    </div>
+}
+
+
+
+<script>
+    function ReloadBOM()
+    {
+        var WorkId = $("#WorkId").val();
+
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+        $("#Loading").show("slow");
+        $("#Sobrano").hide("slow");
+        $.post(Tableurl,
+            function (data) {
+
+                $("#Loading").hide("slow");
+                $("#Sobrano").load(Tableurl);
+                $("#Sobrano").show("slow");
+
+            }
+        );
+    }
+</script>
+
+<script>
+    function SOUT()
+    {
+
+        var WorkId = $("#WorkId").val();
+        var StockId = $("#StockId").val();
+       // var DropDown = $("#WorkId");
+       // var NewBigButton = $("#NewBigButton");
+
+        var url = "@Url.Action("MassovoeSOUTBIG", "POOrderEntries")?Manager=" + WorkId + "&FromStock=" + StockId;
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+
+        $("#Loading").show("slow");
+        $("#Sobrano").hide("slow");
+        $("#SOUTBigButton").hide("slow");
+
+        $.post(url,
+            function (data) {
+                $("#Menu").load(Reloadurl);
+                //$("#Sobrano").load(Tableurl);
+                ReloadBOM();
+                $("#SOUTBigButton").show("slow");
+            }
+        );
+
+    }
+
+</script>
+
+
+<script>
+    function FindWORK()
+    {
+        var WorkId = $("#WorkId").val();
+        var StockId = $("#StockId").val();
+        var Find = $("#FindWork").val();
+       // var DropDown = $("#WorkId");
+       // var NewBigButton = $("#NewBigButton");
+
+
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")?WorkNumber=" + Find;
+
+
+
+
+                $("#Menu").load(Reloadurl);
+
+
+
+    }
+</script>
+
+<script>
+    function NewBIG()
+    {
+        var WorkId = $("#WorkId").val();
+        var StockId = $("#StockId").val();
+       // var DropDown = $("#WorkId");
+       // var NewBigButton = $("#NewBigButton");
+
+        var url = "@Url.Action("NewEndBigQR", "POOrderEntries")?WorkId=" + WorkId + "&StockId=" + StockId;
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+
+        $.post(url,
+            function (data) {
+                $("#Menu").load(Reloadurl);
+                $("#Sobrano").load(Tableurl);
+
+            }
+        );
+    }
+</script>
+
+<script>
+    function CHGBIG()
+    {
+        var WorkId = $("#WorkId").val();
+        var StockId = $("#StockId").val();
+        var MOLId = $("#ManagerID").val();
+       // var DropDown = $("#WorkId");
+       // var NewBigButton = $("#NewBigButton");
+     //   $("#Loading").show("slow");
+        $("#INBIGQR").hide("slow");
+      //  $("#CHGBigButton").hide("slow");
+
+        var url = "@Url.Action("MassovoeCHGBIG", "POOrderEntries")?Manager=" + WorkId + "&StockTo=" + StockId;
+        var Reloadurl = "@Url.Action("InBigQR", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+
+        $.post(url,
+            function (data) {
+                alert(data);
+                $("#INBIGQR").load(Reloadurl);
+                $("#INBIGQR").show("slow");
+               // $("#Sobrano").load(Tableurl);
+              //  ReloadBOM();
+              //  $("#CHGBigButton").show("slow");
+            }
+        );
+    }
+</script>
+
+
+<script>
+    function ShowModal(QRID)
+    {
+
+        var printurl = "@Url.Action("ScanirovanieQR", "POOrderEntries")?QRData=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+
+
+
+
+
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockId").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>
+
+<script>
+    function PI() {
+        popup = window.open();
+        var Img = $('#ImageQR').get(0).outerHTML;
+        alert(Img);
+        popup.document.write(Img);
+        popup.
+            popup.focus(); //required for IE
+        popup.print();
+    }
+</script>
+
+<script>
+    function PrintEvgeny() {
+        $(".invis").hide();
+        window.print();
+        return false;
+
+
+    }
+</script>
+
+<script>
+
+    function ImagetoPrint(source) {
+
+        var X = '@ViewBag.QRString';
+        var XX = X.split(";");
+        var Nom = '@Resources.Resource.PartNumber';
+        var Name = '@Resources.Resource.Nomenklatura';
+        var QTY = ' @Resources.Resource.KolichestvoNomenklaturi';
+        var Date = '@Resources.Resource.Date';
+        var W = "160px"
+        var H = "128px"
+
+
+         return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt>"+
+			"<style>@@media print { @@page {padding: 0; margin: 0;}}</style>"+
+			"</head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + H + "' src='" + source + "' /></body></html>";
+     /*   return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";*/
+
+     }
+
+    function PrintImage(source) {
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+<script>
+    function PrintToEdge(source) {
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+
+
+
+        if (isAndroid) {
+            var Pagelink = "about:blank";
+            var pwa = window.open(Pagelink, "_new");
+            pwa.document.open();
+            pwa.document.write(ImagetoPrint(source));
+        }
+        else {
+
+            PrintImage(source);
+
+        }
+
+    }
+</script>
+<script>
+    function PrintImage2() {
+
+        var Img = $('#ImageQR').prop('src');
+
+        var wImage = $('#ImageQR').prop('width');
+        var hImage = $('#ImageQR').prop('height');
+        alert(wImage + " " + hImage + " " + Img)
+        var wind = open(Img, 'Печатаем картинку', 'width=' + wImage + ',height=' + hImage + ',status=no,toolbar=no,menubar=no,location=no,scrollbar=0,resizable=yes');
+        wind.document.writeln('');
+        wind.document.close();
+        wind.focus();
+        wind.print();
+        wind.close();
+
+
+    }
+</script>
+
+@if (ViewBag.CurrentWorkId != 0)
+{
+    <script>
+function sendToQuickPrinterChrome(){
+    var text = "<IMAGE370x296>"+"http://192.168.110.9"+"@Url.Action("GenerateQrCode", new { QRText = ViewBag.QRString, QTY = 0 })"+"<BR>";
+    text=text.replace("amp;","");
+    window.location.href="intent://"+text+"#Intent;scheme=quickprinter;package=pe.diegoveloper.printerserverapp;end;";
+
+
+    }
+    </script>
+}

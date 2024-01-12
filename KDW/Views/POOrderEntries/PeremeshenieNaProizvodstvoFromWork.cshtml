@@ -1,0 +1,131 @@
+﻿@model IEnumerable<KDW.Models.t_Item>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>@Resources.Resource.PeremeshenieNaProizvodstvo</h2>
+    <h3 class="btn btn-block btn-success">@ViewBag.Work</h3>
+    <h4>
+        @ViewBag.Item
+    </h4>
+</center>
+
+
+
+
+
+
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Resources.Resource.PartNumber
+        </th>
+        <th>
+            @Resources.Resource.Nomenklatura
+        </th>
+        <th>
+            @Resources.Resource.StockFrom
+        </th>
+        <th>
+            @Resources.Resource.Manager
+        </th>
+        <th>
+            @Resources.Resource.QTYPostupilo
+        </th>
+        <th>
+            @Resources.Resource.QTYKPeremesheniu
+        </th>
+        <th>
+            @Resources.Resource.VosmognieDeistviya
+        </th>
+
+   
+    </tr>
+    @foreach (var item in Model)
+    {
+
+        @Html.Action("PeremestitNomenklaturuStroka", new { ItemID = item.FItemID, WorkID = ViewBag.WorkID })
+
+
+    }
+
+</table>
+
+
+<script>
+ function PeremestitNaProizvodstvo(btn)
+ {
+     var ID = btn;
+     var StockFrom = $('#Stock_' + ID).val();
+     var MGR = $('#MGR_' + ID).val();
+     var Button = $('#B_' + ID);
+     var TR = $('#TR_' + ID);
+     Button.removeClass("btn-success").addClass("btn-default");
+     Button.attr('onclick', '');
+        $('#PeremestitB').removeClass("btn-success").addClass("btn-default");
+        var QTY = $('#QTY_' + ID).val();
+
+  //   alert("S" + StockFrom + "QTY" + QTY + "WorkID" +"@ViewBag.Work"+"Manager" + MGR);
+
+
+     var url = "@Url.Action("PeremeshenieNaProizvodstvoJson", "POOrderEntries")?ItemID=" + ID + "&StockFrom=" + StockFrom  +"&Manager=" + MGR + "&ToWork=" + "@ViewBag.Work" + "&QTY=" + QTY;
+
+        $.post(url,
+        function (data)
+        {
+        var S = data.split(';');
+        if (S[0] == 'Ok')
+        {
+        QRID = parseInt(S[1]);
+        alert('@Resources.Resource.PeremeshenieUspeshno');
+          //  var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+            var QRString = S[2] + ";" + S[3] + ";" + S[4] + ";" + S[5] 
+            var url = '@Url.Action("GenerateQrCode")?QRText=' + QRString;
+            Button.text(S[6]);
+            Button.attr('onclick', 'PrintImage("' + url + '")');
+            Button.removeClass("btn-default").addClass("btn-success");
+            PrintImage(url);
+            TR.addClass('table-success');
+      //  window.location.replace(url);
+        }
+        else
+        {
+        alert(data);
+        //location.reload();
+
+        }
+
+
+        }
+        );
+
+
+        }
+</script>
+<script>
+
+    function ImagetoPrint(source) {
+
+     
+        var W = "200px"
+         return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description { width: "+W+"; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+             "<img width ='"+W+"' height = '"+W+"' src='" + source + "' /></body></html>";
+    }
+
+    function PrintImage(source) {
+      
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>

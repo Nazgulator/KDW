@@ -1,0 +1,888 @@
+﻿
+
+@{
+
+
+}
+
+
+
+<table width="100%" class="table-bordered table-stripped">
+    <tr width="100%">
+        <td colspan="2">
+            <a href="/POOrderEntries/Komplektovka" class="btn btn-default btn-block">@Resources.Resource.Komplektovka </a>
+        </td>
+    </tr>
+    <tr>
+        <td width="60%">
+            <input placeholder="@Resources.Resource.OtskaniruiteNomenklaturu" id="NPartNumber" class="btn btn-warning btn-block">
+        </td>
+        <td width="40%">
+            <button onclick="FindAllQTY()" class="btn btn-success btn-block">Ok</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <input class="btn btn-block" id="NomenklatureNumber">
+        </td>
+        <td>
+            <input class="btn btn-block" id="Stock">
+
+        </td>
+    </tr>
+    <tr id="TRStatusOTK">
+        <td>
+            @Resources.Resource.StatusOTK
+        </td>
+        <td>
+            <input class="btn btn-block" id="StatusOTK" readonly>
+        </td>
+    </tr>
+    <tr id="TRQTYINNZP">
+        <td>
+            @Resources.Resource.QTYNZP
+        </td>
+        <td>
+            <input class="btn btn-block" id="SkolkoVNZP" readonly>
+        </td>
+    </tr>
+    <tr id="TRNEEDTODAY">
+        <td>
+            @Resources.Resource.QTYMustNZP
+        </td>
+        <td>
+            <input class="btn btn-block" id="NeedToday" readonly>
+        </td>
+    </tr>
+    <tr id="TRNEEDTOMORROW">
+        <td>
+            @Resources.Resource.NugnoProizvestiZavtra
+        </td>
+        <td>
+            <input class="btn btn-block" id="NeedTomorrow" readonly>
+        </td>
+    </tr>
+    <tr id="TRCINTODAY">
+        <td>
+            @Resources.Resource.Proizvedeno
+        </td>
+        <td>
+            <input class="btn btn-block" id="CINToday" readonly>
+        </td>
+    </tr>
+    <tr id="TRQTYINQR">
+        <td>
+            @Resources.Resource.QTYQR
+        </td>
+        <td>
+            <input class="btn btn-block" id="SkolkoVQR" readonly>
+
+        </td>
+    </tr>
+    <tr id="TRQTYINSTOCK">
+        <td>
+            @Resources.Resource.QTYNaSklade
+        </td>
+        <td>
+            <input class="btn btn-block" id="QTYINStock" readonly>
+
+        </td>
+    </tr>
+    <tr hidden>
+        <td>
+            Максимум в QR коде
+        </td>
+        <td>
+            <input class="btn btn-block" id="MaxVQR">
+        </td>
+    </tr>
+    <tr>
+        <td>@Resources.Resource.Storno</td>
+        <td>
+
+            <input type="checkbox"
+                   id="StornoCHK"
+                   value="false"
+                   onchange="ChangeStorno()" class="form-control btn btn-danger" />
+        </td>
+    </tr>
+    <tr id="TRPEREMESTIT">
+        <td>
+            @Resources.Resource.QTYKPeremesheniyu
+
+        </td>
+        <td>
+
+            <input class="btn btn-warning btn-block" style="width:100%" id="QTYPeremestit" type="number" step="0.001" oninput="FindQTYPeremestit()" />
+
+        </td>
+    </tr>
+    @if (ViewBag.Roles.Contains("Администратор"))
+    {
+        <tr id="Buttons">
+            <td colspan="2">
+
+                <button class="btn btn-success btn-block" onclick="PeremestitNaProizvodstvo()">@Resources.Resource.PeremeshenieNaProizvodstvo</button>
+              
+            </td>
+            
+        </tr>
+
+
+        <tr id="ButtonsStorno">
+
+            <td colspan="2">
+                <button class="btn btn-danger btn-block">@Resources.Resource.Storno</button>
+            </td>
+            <!--onclick="VozvratNZPNorm()"-->
+        </tr>
+    }
+
+    </table>
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="StornoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.Resource.QTYPeremestit</p>
+               <input class="btn btn-block btn-warning" id="StornoQTY" type="number" step="0.001" onchange="ProverkaVosvrata()" />
+                <button class="btn btn-success btn-block" onclick="VozvratNZPNorm()">Ok</button>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function ChangeStorno()
+        {
+        var Storno = $('#StornoCHK').is(":checked");
+        if (Storno) {
+            $('#ButtonsStorno').show('slow');
+        }
+        else
+        {
+            $('#ButtonsStorno').hide('slow');
+        }
+
+    }
+</script>
+
+<script>
+    function ProverkaZnacheniya() {
+        var Num = $('#NPartNumber').val().toString();
+        var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val().replace(',', '.'));
+        var MaxVNZP = parseFloat($("#MaxVNZP").val().replace(',', '.'));
+        var FQtyFact = parseFloat($("#SkolkoVQR").val().replace(',', '.'));
+        var FQtyMax = parseFloat($("#MaxVQR").val().replace(',', '.'));
+        var SkolkoPeremestit = parseFloat($("#QTYPeremestit").val().replace(',', '.'));
+        var NugnoVNZP = parseFloat(MaxVNZP - SkolkoVNZP);
+        //  alert(MaxVNZP + " " + SkolkoVNZP + " " + NugnoVNZP);
+        var go = false;
+        if (NugnoVNZP > 0) {
+            if (NugnoVNZP < SkolkoPeremestit) {
+                SkolkoPeremestit = NugnoVNZP;
+             //   alert("@Resources.Resource.MognoPeremestitNeBolee " + NugnoVNZP);
+            }
+        }
+        $("#QTYPeremestit").val(SkolkoPeremestit);
+
+    }
+</script>
+<script>
+    function StornoModalShow()
+    {
+        var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val().replace(',', '.'));
+      //  $('#StornoQTY').val(SkolkoVNZP);
+      //  ProverkaVosvrata();
+        $('#StornoModal').modal('show');
+    }
+</script>
+<script>
+    function ProverkaVosvrata() {
+     
+        var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val().replace(',', '.'));
+        var MaxVNZP = parseFloat($("#MaxVNZP").val().replace(',', '.'));
+        var FQtyFact = parseFloat($("#SkolkoVQR").val().replace(',', '.'));
+        var FQtyMax = parseFloat($("#MaxVQR").val().replace(',', '.'));
+        var SkolkoPeremestit = parseFloat($("#StornoQTY").val().replace(',', '.'));
+        var NugnoVNZP = parseFloat(MaxVNZP - SkolkoVNZP);
+        var NugnoVQR = parseFloat(FQtyMax - FQtyFact);
+      //  alert(MaxVNZP + " " + SkolkoVNZP + " " + NugnoVNZP + " " + FQtyFact + " " + FQtyMax);
+        var go = false;
+        var warning = false;
+        if (NugnoVNZP < SkolkoPeremestit)
+        {
+            SkolkoPeremestit = NugnoVNZP;
+            warning = true;
+        }
+        if (NugnoVQR > 0) {
+            if (NugnoVQR < SkolkoPeremestit) {
+                SkolkoPeremestit = NugnoVQR;
+                warning = true;
+               
+            }
+        }
+        if (warning)
+        {
+            alert("@Resources.Resource.MognoPeremestitNeBolee " + SkolkoPeremestit);
+        }
+        $("#StornoQTY").val(SkolkoPeremestit);
+
+    }
+</script>
+
+<script>
+    function FindAllQTY()
+    {
+        var Buttons = $('#Buttons');
+        var ButtonsStorno = $('#ButtonsStorno');
+        Buttons.hide();
+        ButtonsStorno.hide();
+        StatusOTK();
+    
+
+        //FindQTYPeremestit();
+    }
+</script>
+
+<script>
+
+    function FindQTYPeremestit()
+    {
+        var Buttons = $('#Buttons');
+        var ButtonsStorno = $('#ButtonsStorno');
+        var Per = $("#QTYPeremestit").val().toString().replace(',','.');
+       // var last = number.toString().slice(-1);
+      
+        var Peremestit = parseFloat(Per);
+        var VQR = parseFloat($("#SkolkoVQR").val());
+        var VNZP = parseFloat($("#SkolkoVNZP").val());
+        var NeedToday = parseFloat($("#NeedToday").val());
+        var NeedTomorrow = parseFloat($("#NeedTomorrow").val());
+        var CINToday = parseFloat($("#CinToday").val());
+        var QTY = NeedToday + NeedTomorrow;
+        var Stock = parseFloat($("#QTYINStock").val());
+        var Storno = $('#StornoCHK').is(":checked");
+        var BTNStorno = $('#ButtonsStorno');
+        if ($('#StornoCHK').is(":checked")) {
+            BTNStorno.show('slow');
+        }
+      
+      // alert(Storno);
+        if (!Storno) {
+          
+                //Peremestit = VQR;
+               
+
+            if (Peremestit > VQR) {
+                Peremestit = VQR;
+                $("#QTYPeremestit").val(Peremestit)
+            }
+            if (Peremestit > Stock) {
+                Peremestit = Stock;
+                $("#QTYPeremestit").val(Peremestit)
+            }
+
+       
+
+
+
+            if (Peremestit > 0) {
+                Buttons.show('slow');
+                ButtonsStorno.hide('slow');
+            }
+        }
+        else
+    {
+        if (Peremestit > VNZP)
+        {
+            Peremestit = VNZP;
+            $("#QTYPeremestit").val(Peremestit)
+            
+
+        }
+
+           
+            if (Peremestit > 0) {
+                ButtonsStorno.show();
+                Buttons.hide('slow');
+             
+            }
+        
+          
+        }
+
+        if (Peremestit < 0) {
+            Peremestit = 0;
+            $("#QTYPeremestit").val(Peremestit)
+        }
+
+      //  if (last != ',') {
+            //  Per = Per + "0";
+          
+      //  }
+      
+    
+    }
+</script> 
+
+<script>
+    function TRHIDE()
+    {
+        var OTK = $('#TRStatusOTK');
+        var Stock = $('#TRQTYINSTOCK');
+        var QR = $('#TRQTYINQR');
+        var NZP = $('#TRQTYINNZP');
+        var Today = $('#TRNEEDTODAY');
+        var Tomorrow = $('#TRNEEDTOMORROW');
+        var CIN = $('#TRCINTODAY');
+        var Peremestit = $('#TRPEREMESTIT');
+   
+        OTK.hide('slow');
+        Stock.hide('slow');
+        QR.hide('slow');
+        NZP.hide('slow');
+        Today.hide('slow');
+        Tomorrow.hide('slow');
+        CIN.hide('slow');
+        Peremestit.hide('slow');
+
+    }
+</script>
+
+<script>
+        function StatusOTK()
+    {
+        var Num = $('#NPartNumber').val();
+            var TR = $('#TRStatusOTK');
+            var Peremestit = $('#TRPEREMESTIT');
+            var Storno = $('#StornoCHK').is(":checked");
+            var BTNStorno = $('#ButtonsStorno');
+            var Buttons = $('#Buttons');
+         TRHIDE();
+          var url2 = "@Url.Action("FindLastStatusOTKJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                var S = data.split(';');
+               
+                if (S[0] =='TRUE')
+                {
+                    $("#StatusOTK").addClass('btn-success');
+                    $("#StatusOTK").removeClass('btn-danger');
+                    $("#StatusOTK").val(S[1]);
+                    QTYVQR();
+                    QTYVNZP();
+                    QTYNeedToday();
+                    QTYNeedTomorrow();
+                    QTYCINToday();
+                    QTYINStock();
+                    FindQTYPeremestit();
+                    $("#StatusOTK").val(S[1]);
+                }
+                else
+                {
+                    $("#StatusOTK").addClass('btn-danger');
+                    $("#StatusOTK").removeClass('btn-success');
+                    $("#StatusOTK").val(S[1]);
+                   // $("#StatusOTK").html('Можно нельзя переместить в НЗП');
+                }
+                if ($('#StornoCHK').is(":checked")) {
+                    BTNStorno.show('slow');
+                }
+                // alert(Storno);
+                Peremestit.show('slow');
+                if (!Storno) {
+
+                    Buttons.show('slow');
+                    BTNStorno.hide('slow');
+                }
+                else
+                {
+                    Buttons.hide('slow');
+                    BTNStorno.show('slow');
+                }
+                TR.show('slow');
+            }
+
+        );
+    }
+ 
+</script>
+
+<script>
+    function QTYINStock()
+    {
+        var Num = $('#NPartNumber').val();
+        var TR = $('#TRQTYINSTOCK');
+        TR.hide();
+          var url2 = "@Url.Action("QTYinStockJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                $("#QTYINStock").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function QTYVQR()
+    {
+        var Num = $('#NPartNumber').val();
+        var TR = $('#TRQTYINQR');
+        TR.hide();
+          var url2 = "@Url.Action("QTYinQRJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                $("#SkolkoVQR").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+
+<script>
+    function QTYVNZP()
+    {
+        var Num = $('#NPartNumber').val();
+        var KQR = '@ViewBag.QRData';
+        var TR = $('#TRQTYINNZP');
+        TR.hide();
+        var url2 = "@Url.Action("QTYinNZPJSON", "POOrderEntries")?QRData=" + Num +"&KomplektovkaQR="+KQR ;
+        $.post
+            (url2, function (data)
+            {
+                $("#SkolkoVNZP").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function QTYNeedToday()
+    {
+        var Num = $('#NPartNumber').val();
+          var KQR = '@ViewBag.QRData';
+        var url2 = "@Url.Action("QTYNeedTodayJson", "POOrderEntries")?QRData=" + Num + "&KomplektovkaQR=" + KQR;
+        var TR = $('#TRNEEDTODAY');
+        TR.hide();
+        $.post
+            (url2, function (data)
+            {
+                $("#NeedToday").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function QTYNeedTomorrow()
+    {
+        var Num = $('#NPartNumber').val();
+        var KQR = '@ViewBag.QRData';
+        var TR = $('#TRNEEDTOMORROW');
+        TR.hide();
+        var url2 = "@Url.Action("QTYNeedTomorrowJson", "POOrderEntries")?QRData=" + Num +"&KomplektovkaQR="+KQR ;
+        $.post
+            (url2, function (data)
+            {
+                //var NeedToday = parseFloat($("#NeedToday").val());
+               // var NeedTomorrow = parseFloat(data) + NeedToday;
+
+                $("#NeedTomorrow").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+<script>
+    function QTYCINToday()
+    {
+        var Num = $('#NPartNumber').val();
+        var KQR = '@ViewBag.QRData';
+        var TR = $('#TRCINTODAY');
+        TR.hide();
+        var url2 = "@Url.Action("QTYCINTodayJson", "POOrderEntries")?QRData=" + Num + "&KomplektovkaQR=" + KQR ;
+        $.post
+            (url2, function (data)
+            {
+                $("#CINToday").val(data);
+                TR.show('slow');
+            }
+
+        );
+    }
+</script>
+
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function PeremestitNaProizvodstvo() {
+        var Num = $('#NPartNumber').val().toString();
+        var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val());
+        var MaxVNZP = parseFloat($("#MaxVNZP").val());
+        var FQtyFact = parseFloat($("#SkolkoVQR").val());
+        var FQtyMax = parseFloat($("#MaxVQR").val());
+        var SkolkoPeremestit = parseFloat($("#QTYPeremestit").val());
+        var NugnoVNZP = MaxVNZP - SkolkoVNZP;
+        var Buttons = $('#Buttons');
+        var go = false;
+        if (NugnoVNZP > 0)
+        {
+            if (NugnoVNZP < SkolkoPeremestit)
+            {
+                SkolkoPeremestit = NugnoVNZP;
+            }
+
+
+            if (SkolkoPeremestit > 0 && MaxVNZP > 0) {
+                if (FQtyFact >= SkolkoPeremestit) {
+                    go = true;
+                }
+                else {
+                    if (FQtyFact < SkolkoPeremestit) {
+                        $("#QTYPeremestit").val(FQtyFact);
+                        SkolkoPeremestit = FQtyFact;
+
+                        go = true;
+                    }
+                }
+            }
+            
+            else {
+                alert("@Resources.Resource.NomenklaturiNedostatochno");
+            }
+        }
+    
+//Если введены верные значения
+      //  if (go) {
+            if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?")) {
+                Buttons.hide();//скрываем кнопки
+                var ADDURL = '@Url.Action("AddNZP", "POOrderEntries")?QRData=' + Num + '&QTYFact=' + SkolkoPeremestit;
+
+                $.post(ADDURL, function (data) {
+                    Buttons.show();
+                    SkolkoVernut();
+
+                     var S = data.split(';');
+                    if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+                        // alert(data);
+
+                        var QRID = S[1];
+
+                        var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+                        // window.location.replace(printurl);
+
+                    }
+                    else
+                    {
+                        alert(data);
+                    }
+
+                    // alert(data);
+ var URL = '@Url.Action("KomplektovkaTable", "POOrderEntries")';
+                URL = URL + '?Number=' + Num;
+                //  alert(URL);
+                    $("#NTable").load(URL);
+                    FindAllQTY();
+
+                });
+
+
+
+
+
+            }
+            else {
+
+            }
+    }
+
+      //  else
+      //  {
+      //      alert("@Resources.Resource.Error");
+      //  }
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        
+</script>
+
+
+
+
+<script>
+    function SkolkoVernut() {
+        var Dvigenie = $("#Dvigenie").val();
+        var SkolkoPeremestit = $("#SkolkoVNZP").val();
+        var QR = $("#NPartNumber").val();
+
+        var url2 = "@Url.Action("AutocompleteSearchDvigeniesQTYFromKomplektovka", "POOrderEntries")?QRData=" + QR ;
+        $.post
+            (url2, function (data)
+            {
+                var S = data.split(';');
+            //    NZPQTY + ";" + BOM.FQty + ";" + BOM.FQtyMust + ";" + BOM.FStockQty
+                $("#SkolkoVNZP").val(S[0]);
+                $("#MaxVNZP").val(S[2]);
+              //  alert(parseFloat(S[4]));
+                $("#StornoQTY").val(parseFloat(S[4]));
+               // SkolkoVQR();
+            }
+
+        );
+
+    }
+
+      function SkolkoVQR2() {
+
+        var FNumber = $("#NomenklatureNumber");
+        var FQtyFact = $("#SkolkoVQR");
+          var FQtyMax = $("#MaxVQR");
+          var Stock = $("#Stock");
+          var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val());
+          var MaxVNZP = parseFloat($("#MaxVNZP").val().replace(",", "."));
+          var QR = $("#NPartNumber").val();
+
+        var url2 = "@Url.Action("AutocompleteSearchQTYByQR", "POOrderEntries")?QRData=" + QR ;
+        $.post
+            (url2, function (data)
+            {
+                var S = data.split(';');
+                FNumber.val(S[0]);
+                FQtyFact.val(S[1]);
+                FQtyMax.val(S[2]);
+                Stock.val(S[3]);
+             //   alert(data);
+                // $("#SkolkoPeremestit").val(data);
+                var Peremestit = 0;
+                var QTYFactQR = parseFloat(S[1].replace(",", "."));
+               
+                if (MaxVNZP != 0 && (MaxVNZP - SkolkoVNZP) < QTYFactQR) {
+                    Peremestit = MaxVNZP - SkolkoVNZP;
+                }
+                else
+                {
+                    Peremestit = QTYFactQR;
+                }
+               
+                $("#QTYPeremestit").val(Peremestit);
+            }
+
+            );
+    }
+
+      function SkolkoVQRStorno() {
+
+        var FNumber = $("#NomenklatureNumber");
+        var FQtyFact = $("#SkolkoVQR");
+          var FQtyMax = $("#MaxVQR");
+          var Stock = $("#Stock");
+          var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val());
+          var MaxVNZP = parseFloat($("#MaxVNZP").val().replace(",", "."));
+          var QR = $("#NPartNumber").val();
+
+        var url2 = "@Url.Action("AutocompleteSearchQTYStornoByQR", "POOrderEntries")?QRData=" + QR ;
+        $.post
+            (url2, function (data)
+            {
+                var S = data.split(';');
+                FNumber.val(S[0]);
+                FQtyFact.val(S[1]);
+                FQtyMax.val(S[2]);
+                Stock.val(S[3]);
+             //   alert(data);
+                // $("#SkolkoPeremestit").val(data);
+                var QTYFactQR = parseFloat(S[1].replace(",","."));
+                var Peremestit = QTYFactQR;
+                if (MaxVNZP != 0 && MaxVNZP < QTYFactQR)
+                {
+                    Peremestit = MaxVNZP;
+                }
+                $("#QTYPeremestit").val(Peremestit);
+            }
+
+            );
+    }
+</script>
+<script>
+    function VozvratNZPNorm()
+    {
+      //  ProverkaVosvrata();
+        // int DvigenieId, decimal QTY, int NZPId
+ 
+        var QRData = $("#NPartNumber").val();
+        var SkolkoPeremestit = parseFloat($("#QTYPeremestit").val());
+      /*  if (MaxVNZP > MognoVernutVQR) {
+           QTYVosvrat = MognoVernutVQR;
+        }
+       else
+        {
+            QTYVosvrat = MaxVNZP;
+      }
+      */
+        if (confirm("@Resources.Resource.Vozvrashaem " + SkolkoPeremestit + "?"))
+        {
+           
+            var url2 = "@Url.Action("VozvratNZP", "POOrderEntries")?QRData=" + QRData + "&QTY=" + SkolkoPeremestit;
+            $.post
+                (url2, function (data) {
+                    var S = data.split(';');
+
+                    if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+                        // alert(data);
+
+                            var QRID = S[1];
+
+                        var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+                        // window.location.replace(printurl);
+
+                    }
+                    else {
+                        if (S[0] == 'False')
+                        {
+                            alert('@Resources.Resource.PeremeshenieUspeshno');
+                             var URLZ = '@Url.Action("KomplektovkaTable", "POOrderEntries")';
+                URLZ = URLZ + '?Number=' + Num;
+                //  alert(URL);
+                    $("#NTable").load(URLZ);
+
+                        }
+                             else
+                             {
+                                 alert(data);
+                             }
+                        //  location.reload();
+                    }
+                    FindAllQTY();
+                }
+
+                );
+        }
+    }
+</script>
+<script>
+    function VozvratNZP()
+    {
+      //  ProverkaVosvrata();
+        // int DvigenieId, decimal QTY, int NZPId
+        var Num = $('#NPartNumber').val().toString();
+        var QRData = $("#NPartNumber").val();
+        var SkolkoVQR = parseFloat($("#SkolkoVQR").val().replace(",", "."));
+        var MaxVQR = parseFloat($("#MaxVQR").val().replace(",", "."));
+        var MognoVernutVQR = MaxVQR - SkolkoVQR;
+        var MaxVNZP = parseFloat($("#MaxVNZP").val().replace(",", "."));
+        var QTYVosvrat = parseFloat($("#StornoQTY").val().replace(",", "."));
+      /*  if (MaxVNZP > MognoVernutVQR) {
+           QTYVosvrat = MognoVernutVQR;
+        }
+       else
+        {
+            QTYVosvrat = MaxVNZP;
+      }
+      */
+        if (confirm("@Resources.Resource.Vozvrashaem " + QTYVosvrat + "?"))
+        {
+            var NZPId = $("#NZPId").val();
+            var url2 = "@Url.Action("VozvratNZP", "POOrderEntries")?QRData=" + QRData + "&QTY=" + QTYVosvrat;
+            $.post
+                (url2, function (data) {
+                    var S = data.split(';');
+
+                    if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+                        // alert(data);
+
+                            var QRID = S[1];
+
+                        var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+                        // window.location.replace(printurl);
+
+                    }
+                    else {
+                        if (S[0] == 'False')
+                        {
+                            alert('@Resources.Resource.PeremeshenieUspeshno');
+                             var URLZ = '@Url.Action("KomplektovkaTable", "POOrderEntries")';
+                URLZ = URLZ + '?Number=' + Num;
+                //  alert(URL);
+                    $("#NTable").load(URLZ);
+
+                        }
+                             else
+                             {
+                                 alert(data);
+                             }
+                        //  location.reload();
+                    }
+                }
+
+                );
+        }
+    }
+</script>

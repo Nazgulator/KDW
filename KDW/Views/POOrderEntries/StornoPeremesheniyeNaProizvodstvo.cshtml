@@ -1,0 +1,214 @@
+﻿@model KDW.Models.ItemView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>@Resources.Resource.Storno</h2>
+</center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+    <style>
+        .description {
+            width: 280px;
+            word-wrap: break-word;
+            word-break: break-all;
+            font-size: 10px
+        }
+
+        .allwidth {
+            min-width: 280px;
+        }
+    </style>
+    @{
+ //       decimal QTYSklad = Math.Round(ViewBag.QTYNaSklade, 2);
+    }
+
+
+
+
+
+<table id="T" class="table table-bordered table-striped">
+
+
+    <tr>
+        <th>
+            @Resources.Resource.NaimenovanieIPartNomer
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <div class=" btn btn-block btn-default btn-block">@Model.Item.FNumber  </div>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <Center>
+                <div class=" description">@Model.Item.FNumber  @Model.Item.FName</div>
+            </Center>
+        </td>
+
+    </tr>
+    <tr>
+
+
+
+
+
+        <th>
+            @Resources.Resource.StockFrom
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="btn btn-success btn-block allwidth">@Model.StockOrDep.FName</div>
+        </td>
+
+
+
+    </tr>
+
+
+    <tr>
+        <th>
+            @Resources.Resource.MOL
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DropDownList("Manager", new SelectList(ViewBag.Users), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.DropDownList("Stock", new SelectList(ViewBag.Stocks), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </td>
+    </tr>
+    <tr>
+
+        <th>
+            @Resources.Resource.QTYKPeremesheniu
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input value="@Model.QTY" id="QTY" class="form-control btn btn-warning btn-block" />
+        </td>
+
+
+
+    </tr>
+
+
+    <tr>
+        <td colspan="1">
+            <button class="btn btn-block btn-success  allwidth" id="PeremestitB" onclick="Storno()">@Resources.Resource.PodtverditDvigenie</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="/Home/Index" class="btn  btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+        </td>
+    </tr>
+</table>
+
+
+<script>
+
+    function Storno()
+    {
+        $('#PeremestitB').removeClass("btn-success").addClass("btn-default");
+        var QTY = $('#QTY').val();
+        QTY = QTY.replace(',', '.');
+        var Manager = $('#Manager').val();
+        var StockFrom = '@Model.Stock.FName';
+        var ItemID = @Model.Item.FItemID;
+        var StockTo = $('#Stock').val();
+        var url = "@Url.Action("StornoPeremensheniyaNaProizvodstvoJson", "POOrderEntries")?Manager=" + Manager + "&QTY=" + QTY + "&Stock="+StockTo+"&DvigenieId=" +@Model.LastDvig.Id;
+      
+            $.post(url,
+                function (data)
+                {
+                   
+                     var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                    if (S[2].indexOf("True") >= 0)
+                                    {
+                                        QRID = parseInt(S[1]);
+                                     var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                                     window.location.replace(url);
+                                    }
+                                     alert('@Resources.Resource.PeremeshenieUspeshno');
+
+                                }
+                                else
+                                {
+                                    alert(data);
+                                   // location.reload();
+
+                                }
+
+
+                }
+            );
+        
+
+    }
+</script>
+<script>
+
+
+    function Peremestit() {
+        var QTY = $('#QTY').val();
+        var ToStock = $('#ToStockID').val();
+
+        if (ToStock != null) {
+            $.post('@Url.Action("PeremeshenieNaSkladJSON", "POOrderEntries")', { ItemID:@Model.Item.FItemID, QTY: QTY, StockID:@Model.Stock.FItemID, plus: false },
+                function (data)
+                {
+                    if (data == true) {
+                        $.post('@Url.Action("PeremeshenieNaSkladJSON", "POOrderEntries")', { ItemID:@Model.Item.FItemID, QTY: QTY, StockID: ToStock, plus: true },
+                            function (data) {
+                                var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                     QRID = parseInt(S[1]);
+                                     alert('@Resources.Resource.PeremeshenieUspeshno');
+                                     var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                                     window.location.replace(url);
+                                }
+                                else
+                                {
+                                    alert(data);
+                                    location.reload();
+
+                                }
+                            });
+                    }
+                    else
+                    {
+                        alert(data);
+                    }
+
+
+                }
+            );
+        }
+    }
+
+</script>

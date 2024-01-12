@@ -1,0 +1,19 @@
+﻿
+    <div id="Menu">
+        @Html.Action("PostuplenieKDWMenu")
+    </div>
+    <div id="Sobrano">
+        @try 
+        { 
+        <div>
+            @Html.Action("PostuplenieKDWSobrano")
+        </div>
+
+        }
+        catch
+        {
+        }
+    </div>
+    <div id="NTable">
+        @Html.Action("PostuplenieKDWTable")
+    </div>

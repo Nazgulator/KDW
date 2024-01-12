@@ -1,0 +1,388 @@
+﻿@model KDW.Models.KomplektovkaView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<h3>@Model.WorkNumber</h3>
+
+<table id="T" class="table table-bordered table-striped"
+
+       data-toggle="table"
+       data-search="true"
+       data-filter-control="true">
+    <thead>
+        <tr>
+
+
+
+
+
+
+
+            <th data-field="PartNumber" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.PartNumber
+            </th>
+
+
+        </tr>
+
+
+    </thead>
+
+    @foreach (var item in Model.BOMs)
+    {
+        string CvetToday = "";
+        string CvetTomorrow = "";
+
+        decimal Nugno = Math.Round(item.FQtyMust, 3);
+        decimal NugnoZavtra = Math.Round(item.FAuxQtyMust, 3);
+        decimal VsegoNugno = Nugno + NugnoZavtra;
+        decimal Est = Math.Round(item.FWIPQTY.Value, 3);
+        decimal UseToday = Math.Round(item.FQtyPick, 3);
+        decimal EstVsego = Math.Round(UseToday + Est, 3);
+        decimal Ostalos = Math.Round(Nugno - UseToday - Est, 3);
+        decimal OstalosNaZavtra = Math.Round(Nugno + NugnoZavtra - UseToday - Est, 3);
+        int ProcentToday = 0;
+        try
+        {
+            if (Nugno==0)
+            {
+                ProcentToday = 100;
+            }
+            else
+            {
+
+            }
+            ProcentToday = Convert.ToInt32(Math.Round(((EstVsego * 100) / Nugno), 0));
+        }
+        catch
+        {
+
+        }
+
+
+
+        int ProcentZavtra = 0;
+
+        try
+        {
+            ProcentZavtra = Convert.ToInt32(Math.Round(((EstVsego * 100) / VsegoNugno), 0));
+        }
+        catch
+        {
+
+        }
+        if (Ostalos <= 0 && (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Комплектовщик")))
+        {
+            CvetToday = "success";
+        }
+        if (OstalosNaZavtra <= 0 && (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Кладовщик")))
+        {
+            CvetToday = "success";
+        }
+        if (Ostalos < 0)
+        {
+            Ostalos = 0;
+        }
+        if (OstalosNaZavtra < 0)
+        {
+            OstalosNaZavtra = 0;
+        }
+        if (ProcentToday > 100)
+        {
+            ProcentToday = 100;
+        }
+        if (ProcentZavtra > 100)
+        {
+            ProcentZavtra = 100;
+        }
+        <tr class="@CvetToday">
+
+
+            <th>
+
+
+                @if (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Комплектовщик"))
+                {
+                    <p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow=" @EstVsego" style="width: @ProcentToday%" aria-valuemin="0" aria-valuemax="100"> @Resources.Resource.ProcessKomplektovaniya @EstVsego / @Nugno</div>
+                        </div>
+                    </p>
+                    <p>
+                        @Html.DisplayFor(ModelItem => item.t_Item.FNumber)  | @Resources.Resource.OstalosUkomplektovat @Ostalos
+                    </p>
+
+
+                }
+                @{ /*
+                    if (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Кладовщик"))
+                    {
+                    <p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow=" @Math.Round(EstVsego, 0)" style="width: @ProcentZavtra%" aria-valuemin="0" aria-valuemax="100"> @Resources.Resource.ProcessKomplektovaniya @EstVsego / @VsegoNugno</div>
+                        </div>
+                    </p>
+                    <p>
+                        @Html.DisplayFor(ModelItem => item.t_Item.FNumber)  | @Resources.Resource.OstalosUkomplektovat @OstalosNaZavtra
+                    </p>
+
+
+                        }
+                   */
+                    }
+
+                <p>
+                    @Html.DisplayFor(ModelItem => item.t_Item.FName)
+                </p>
+                @foreach (var a in Model.NZPs.Where(x => x.ItemId == item.FItemID))
+                {
+
+                }
+                <p><button class="btn btn-success btn-block" onclick="ShowPlanogramma('@item.t_Item.FNumber')">@Resources.Resource.Find</button></p>
+
+
+
+            </th>
+
+
+
+
+
+
+        </tr>
+    }
+
+</table>
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="SelectDvigenieID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" role="document" width="100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <input id="Dvigenie" class="btn btn-warning" title="@Resources.Resource.OtskaniruiteNomenklaturu" autofocus onchange="PoiskQTY()" placeholder="@Resources.Resource.OtskaniruiteNomenklaturu" />
+                </p>
+                <p>
+                    <input id="DvigenieQTY" class="btn btn-warning" title="@Resources.Resource.QTYKPeremesheniu" />
+                </p>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="PlanogrammaView" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div id="StocksToFind">
+                    <select id="StocksDropdown" class="form-control btn btn-warning" onchange="ObnovitPlanogramma()" >
+
+                    </select>
+                   <button class="btn btn-success btn-block" onclick="SaveStock()" >Ok</button>
+                </div>
+                <div id="Planogramma">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function ObnovitPlanogramma()
+    {
+           
+    }
+</script>
+
+<script>
+    function SaveStock()
+    {
+        var StockId = $("#StocksDropdown").val();
+          var URL = '@Url.Action("SavePlanogrammaStock", "POOrderEntries")';
+        URL = URL + '?StockId=' + StockId;
+      //  alert(URL);
+
+        $.post(URL, function (data)
+        {
+            var URL2 = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+            $("#Planogramma").load(URL2);
+        }
+
+        );
+    }
+</script>
+
+<script>
+    function ShowPlanogramma(Num)
+    {
+
+           // ShowStocks();
+
+        var URL2 = '@Url.Action("SavePlanogrammaSearch", "POOrderEntries")';
+        URL2 = URL2 + '?Item=' + Num;
+      //  alert(URL);
+
+        $.post(URL2, function (data) {
+           
+        }
+
+        );
+
+        var Dropdown = $('#StocksDropdown');
+        Dropdown.empty();
+        var url = "@Url.Action("FindWhereItemPlace", "POOrderEntries")" ;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(key));
+                    });
+                    $("#PlanogrammaView").modal('show');
+
+
+
+                }
+        );
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+    }
+     function ShowStocks()
+    {
+       // alert("Поиск мола");
+
+
+
+
+
+    }
+</script>
+
+<script>
+    function SkipWork(id)
+    {
+             var url2 = "@Url.Action("SkipWorkJson", "POOrderEntries")?Id=" + id ;
+
+        $.post
+            (url2, function (data)
+        {
+                var S = data.split(';');
+
+                if (S[0] == "Ok")
+                {
+                    alert("@Resources.Resource.Ok");
+                    location.reload();
+
+
+                }
+                else
+                {
+                    alert(data);
+
+                  //  location.reload();
+                }
+
+
+
+
+
+        }
+
+            );
+
+    }
+</script>
+<script>
+    function PodgotovkaKVozvratu(ItemId)
+    {
+        var Dropdown = $('#Dvigenie');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchDvigeniesFromKomplektovka", "POOrderEntries")?ItemId=" + ItemId;
+
+        $.post(url,
+            function (data) {
+                $.each(data, function (key, value) {
+                    Dropdown.append($('<option>', { value: value }).text(value));
+                });
+                $('#SelectDvigenieID').modal('show');
+
+            }
+        );
+
+
+    }
+</script>
+
+<script>
+    function PoiskQTY() {
+        var Dvigenie = $("#Dvigenie").val();
+        var DvigenieQTY = $("#DvigenieQTY").val();
+        var url2 = "@Url.Action("AutocompleteSearchDvigeniesQTYFromKomplektovka", "POOrderEntries")?QRData=" + Dvigenie ;
+        $.post
+            (url2, function (data)
+            {
+             //   alert(data);
+                $("#DvigenieQTY").val(data);
+            }
+
+            );
+    }
+</script>
+

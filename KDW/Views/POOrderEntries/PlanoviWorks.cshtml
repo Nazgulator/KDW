@@ -1,0 +1,184 @@
+﻿@model IEnumerable<KDW.Models.PlanoviView>
+
+@{
+    ViewBag.Title = "Index";
+
+}
+
+<h2>@Resources.Resource.Plan3Days</h2>
+
+
+
+
+
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+
+
+<table id="T" class="table table-bordered table-striped" style="position:relative" width="100%"
+       data-toggle="table"
+       data-search="true"
+       data-filter-control="true">
+
+   
+    <thead>
+
+        <tr>
+
+
+
+
+
+            <th data-field="Date" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.Date
+            </th>
+            <th data-field="WORK" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.ZadanieNaProizvodstvo
+            </th>
+            <th data-field="DEPARTMENT" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.Department
+            </th>
+            <th data-field="PARTNUMBER" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.PartNumber
+            </th>
+            <th data-field="QTYWORK" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.QTYVZadaniiQTYVsego
+            </th>
+            <th data-field="QTYPLAN" data-filter-control="input" data-sortable="true" width="10%" style="width:10%">
+                @Resources.Resource.Proizvesti
+            </th>
+            <th data-field="QTYFACTSW" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.QTYVipushennogoPF
+            </th>
+            <th data-field="Raznica" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.Raznica
+            </th>
+            <th data-field="Procent" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.Procent
+            </th>
+            <th data-field="Status" data-filter-control="input" data-sortable="true"width="10%" style="width:10%">
+                @Resources.Resource.Status
+            </th>
+
+
+
+        </tr>
+
+
+    </thead>
+    @{ DateTime D = DateTime.Now.Date;}
+    @foreach (var x in Model)
+    {
+
+        string Nesootvetstvie = "";
+        decimal Raznica = 0;
+        string Err = "";
+        string Vipolneno = "";
+        string status = Resources.Resource.NeNaznacheno;
+        string VipushenoPoZadaniu = "";
+        if (x.PW.ICMO.FCommitQty - x.PW.ICMO.FQty >= 0)
+        {
+            VipushenoPoZadaniu = "success";
+        }
+
+        string Vipustit = x.PW.QTY.ToString();
+
+        if (x.SW != null && x.SW.QTY != 0)
+        {
+            Raznica = x.PW.QTY - x.SW.QTY;
+
+            if (Raznica != 0)
+            {
+                Nesootvetstvie = "danger";
+                Err = " По 3х дневному плану нужно выпустить " + x.PW.QTY + ", по заданию старшего мастера нужно выпустить " + x.SW.QTY;
+                Vipustit = x.PW.QTY.ToString() + " / " + x.SW.QTY;
+            }
+            if (x.SW.QTY == x.SW.QTYFact)
+            {
+                Vipolneno = "success";
+                status = Resources.Resource.Vipolneno;
+            }
+            if (x.SW.QTY < x.SW.QTYFact)
+            {
+                Vipolneno = "info";
+                status = Resources.Resource.VRabote;
+            }
+        }
+        if (D != x.PW.Date)
+        {
+            D = x.PW.Date.Value;
+            <tr>
+                <td colspan="10">
+                    <center>
+                        <h3>
+                            @D.ToString("dd.MM.yyyy")
+                        </h3>
+                    </center>
+
+
+
+                </td>
+            </tr>
+
+
+        }
+
+        <tr class="@Vipolneno">
+
+
+            <th>
+                @x.PW.Date.Value.ToString("dd.MM.yyyy")
+            </th>
+            <th>
+                @x.PW.ICMO.FBillNo
+            </th>
+
+            <th>
+                @x.PW.ICMO.t_Department.FName
+            </th>
+
+            <th>
+                @x.PW.ICMO.t_Item.FNumber
+            </th>
+            <th class="@VipushenoPoZadaniu">
+                @Math.Round(x.PW.ICMO.FCommitQty, 0) / @Math.Round(x.PW.ICMO.FQty, 0)
+            </th>
+            <th class="@Nesootvetstvie" title="@Err">
+                @Vipustit
+            </th>
+            @if (x.SW != null && x.SW.QTY > 0)
+            {
+                decimal r = Math.Round(x.SW.QTY - x.SW.QTYFact, 3);
+                decimal proc = Math.Round((x.SW.QTYFact * 100) / x.SW.QTY, 3);
+
+                <th>
+                    @x.SW.QTYFact
+                </th>
+                <th>
+                    @r
+                </th>
+                <th>
+                    @proc%
+                </th>
+                <th>
+                    @status
+                </th>
+            }
+            else
+            {
+                <th colspan="4" style="text-align:center">
+                    @status
+                </th>
+            }
+
+
+
+
+        </tr>
+    }
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

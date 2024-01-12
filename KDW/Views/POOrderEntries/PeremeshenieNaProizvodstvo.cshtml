@@ -1,0 +1,218 @@
+﻿@model KDW.Models.ItemView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>@Resources.Resource.PeremeshenieNaProizvodstvo</h2>
+</center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+    <style>
+        .description {
+            width: 280px;
+            word-wrap: break-word;
+            word-break: break-all;
+            font-size: 10px
+        }
+
+        .allwidth {
+            min-width: 280px;
+        }
+    </style>
+    @{
+        decimal QTYSklad = Math.Round(ViewBag.QTYNaSklade, 2);
+    }
+
+<table id="T" class="table table-bordered table-striped">
+
+
+    <tr>
+        <th>
+            @Resources.Resource.NaimenovanieIPartNomer
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <div class=" btn btn-block btn-default btn-block">@Model.Item.FNumber  </div>
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <Center>
+                <div class=" description">@Model.Item.FNumber  @Model.Item.FName</div>
+            </Center>
+        </td>
+
+    </tr>
+    <tr>
+
+
+
+
+
+        <th>
+            @Resources.Resource.StockFrom
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            <div class="btn btn-success btn-block allwidth">@Model.Stock.FName</div>
+        </td>
+
+
+
+    </tr>
+    <tr>
+
+        <th>
+            @Resources.Resource.QTYNaSklade
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-success btn-block allwidth">  @QTYSklad </button>
+        </td>
+
+
+
+    </tr>
+
+
+
+
+    <tr>
+
+        <th>
+            @Resources.Resource.ZadanieNaProizvodstvo
+        </th>
+    </tr>
+    <tr>
+        <td>
+          <input id="Work" placeholder="@Resources.Resource.ZadanieNaProizvodstvo" onkeyup="SearchWork()" class="btn btn-warning btn-block"  />
+        </td>
+
+
+
+    </tr>
+
+    <tr>
+        <th>
+            @Resources.Resource.MOL
+        </th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DropDownList("Manager", new SelectList(ViewBag.Users), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </td>
+    </tr>
+
+    <tr>
+
+        <th>
+            @Resources.Resource.QTYKPeremesheniu
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <input value="@Model.QTY" id="QTY" class="form-control btn btn-warning btn-block" oninput="this.value=this.value.replace(',', '.')" />
+        </td>
+
+
+
+    </tr>
+
+
+    <tr>
+        <td colspan="1">
+            <button class="btn btn-block btn-success  allwidth" id="PeremestitB" onclick="PeremestitNaSklad()">@Resources.Resource.PodtverditPeremeshenie</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a href="/Home/Index" class="btn  btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+        </td>
+    </tr>
+</table>
+
+
+<script>
+
+    function PeremestitNaSklad()
+    {
+        $('#PeremestitB').removeClass("btn-success").addClass("btn-default");
+        var QTY = $('#QTY').val();
+        var ToWork = $('#Work').val();
+        var Manager = $('#Manager').val();
+  
+        var StockFrom = '@Model.Stock.FName';
+        var ItemID = @Model.Item.FItemID;
+
+        var url = "@Url.Action("PeremeshenieNaProizvodstvoJson", "POOrderEntries")?ItemID=" + ItemID + "&StockFrom=" + StockFrom  +"&Manager=" + Manager + "&ToWork=" + ToWork + "&QTY=" + QTY;
+        if (ToWork != null)
+        {
+            $.post(url,
+                function (data)
+                {
+                     var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                     QRID = parseInt(S[1]);
+                                     alert('@Resources.Resource.PeremeshenieUspeshno');
+                                     var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                                     window.location.replace(url);
+                                }
+                                else
+                                {
+                                    alert(data);
+                                    //location.reload();
+
+                                }
+
+
+                }
+            );
+        }
+
+    }
+</script>
+<script>
+
+    function SearchWork() {
+        $("#Work").autocomplete
+        (
+                {
+                source: '@Url.Action("AutocompleteSearchWork", "POOrderEntries")',
+                minLength: 3,
+                    select: function (event, ui)
+                    {
+                        //  $.post('@Url.Action("SetWork", "Home")', { User: ui.item.label });
+                        //   }
+
+                    }
+                }
+
+        );
+
+    }
+
+
+
+    
+
+
+</script>

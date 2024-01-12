@@ -1,0 +1,226 @@
+﻿@model KDW.Models.WorkView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>Информация о @Model.WORK.FBillNo</h2>
+
+
+    <p>
+        @Model.WORK.FCheckDate.Value.ToString("dd.MM.yyyy")
+    </p>
+
+    <p>
+        @Math.Round(Model.WORK.FCommitQty, 0) / @Math.Round(Model.WORK.FQty, 0)
+    </p>
+</center>
+
+<table id="T" class="table table-bordered table-striped">
+
+    <tr>
+
+        <th>
+            Номенклатура
+        </th>
+        <th>
+            Расход
+        </th>
+        <th>
+            Нужно в НЗП
+        </th>
+        <th>
+            Реальное кол-во в НЗП FWIPQTY
+        </th>
+        <th>
+            Расчетное кол-во в НЗП
+        </th>
+        <th>
+            Разница
+        </th>
+        <th>
+            Переместили в НЗП SOUT+
+        </th>
+        <th>
+            Вернули из НЗП SOUT-
+        </th>
+        <th>
+            Израсходовали на производство CIN
+        </th>
+
+
+    </tr>
+
+    @foreach (var be in Model.BE)
+    {
+        string COL = "";
+
+        decimal SummaSOUTPlus = Math.Round(Model.SOUTS.Where(x => x.FItemID == be.FItemID && x.ICStockBill.FROB > 0).Sum(x => x.FQty), 3);
+        decimal SummaSOUTMinus = Math.Round(Model.SOUTS.Where(x => x.FItemID == be.FItemID && x.ICStockBill.FROB < 0).Sum(x => x.FQty), 3);
+        decimal CIN = Math.Round(Model.CINs.Sum(x => x.FQty), 3);
+        decimal Raschet = Math.Round(SummaSOUTPlus + SummaSOUTMinus - be.FQtyScrap * CIN, 3);
+        decimal Raznica = Math.Round(be.FWIPQTY.Value - Raschet, 3);
+        decimal Rashod = Math.Round(be.FQtyScrap, 3);
+        decimal NZP = Math.Round(be.FWIPQTY.Value, 3);
+        decimal Izrashodovano = Math.Round(be.FQtyScrap * CIN, 3);
+        if (Math.Abs(Raznica) > 1)
+        {
+            COL = "warning";
+        }
+        if (Math.Abs(Raznica) > 10)
+        {
+            COL = "danger";
+        }
+
+
+<tr class="@COL">
+    <td>
+        @be.t_Item.FNumber
+    </td>
+    <td>
+        @Rashod
+    </td>
+    <td>
+        @be.FQtyMust
+    </td>
+    <td>
+        @NZP
+    </td>
+    <td>
+        @Raschet
+    </td>
+    <td>
+        @Raznica
+    </td>
+    <td>
+        @SummaSOUTPlus
+    </td>
+    <td>
+        @SummaSOUTMinus
+    </td>
+    <td>
+        @Izrashodovano
+    </td>
+
+</tr>
+
+
+    }
+
+</table>
+<center>
+    <h3>Документы перемещения в производство</h3>
+</center>
+
+<table class="table table-bordered table-striped">
+    @foreach (var be in Model.BE)
+    {
+        decimal SUM = 0;
+        <tr>
+            <td colspan="5">
+                <h4>@be.t_Item.FNumber</h4>   
+            </td>
+        </tr>
+        <tr >
+            <td>
+               Номер
+            </td>
+            <td>
+                Количество
+            </td>
+            <td>
+                Дата документа
+            </td>
+            <td>
+                Накопительная сумма
+            </td>
+            <td>
+                Пользователь CheckerId
+            </td>
+        </tr>
+        foreach (var s in Model.SOUTS.Where(x => x.FItemID == be.FItemID))
+        {
+            string CL = "";
+            SUM += Math.Round(s.FQty, 3);
+            if (s.ICStockBill.FROB < 0)
+            {
+                CL = "danger";
+            }
+            <tr class="@CL">
+                <td>
+                    @s.ICStockBill.FBillNo
+                </td>
+                <td>
+                    @Math.Round(s.FQty,3)
+                </td>
+                <td>
+                    @s.ICStockBill.FDate.Value.ToString("dd.MM.yyyy")
+                </td>
+                <td>
+                    @SUM
+                </td>
+                <td>
+                    @s.ICStockBill.FCheckerID
+                </td>
+            </tr>
+        }
+
+
+    }
+</table>
+
+<center>
+    <h3>Документы выпуска</h3>
+    </center>
+<table class="table table-bordered table-striped">
+
+    @{decimal SUMM = 0; }
+    <tr>
+        <td>
+            Номер
+        </td>
+        <td>
+            Количество
+        </td>
+        <td>
+            Дата документа
+        </td>
+        <td>
+            Накопительная сумма
+        </td>
+        <td>
+            Пользователь CheckerId
+        </td>
+    </tr>
+    @foreach (var s in Model.CINs)
+    {
+        string CL = "";
+        if (s.ICStockBill.FROB < 0)
+        {
+            CL = "danger";
+        }
+        SUMM += Math.Round(s.FQty, 0);
+        <tr class="@CL">
+            <td>
+                @s.ICStockBill.FBillNo
+            </td>
+            <td>
+                @Math.Round(s.FQty,0)
+            </td>
+            <td>
+                @s.ICStockBill.FDate.Value.ToString("dd.MM.yyyy")
+            </td>
+            <td>
+                @SUMM
+            </td>
+            <td>
+                @s.ICStockBill.FCheckerID
+            </td>
+        </tr>
+    }
+
+
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

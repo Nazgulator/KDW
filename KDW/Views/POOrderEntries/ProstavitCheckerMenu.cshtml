@@ -1,0 +1,235 @@
+﻿
+
+
+<center>
+
+    <div>
+
+        <img src="~/Content/Icons/Proizvodstvo.png" width="40" height="40" /> <input class="btn btn-default" id="FindDock" /><button class="btn btn-default" onclick="FindDock()">Ok</button>
+        @Html.DropDownList("DockId", new SelectList(ViewBag.Works, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning" })
+
+
+
+
+
+    </div>
+    <div>
+        <button class="btn btn-success btn-block" onclick="ReloadDock()">@Resources.Resource.ReloadBOM</button>
+    </div>
+    <div id="Loading" hidden>
+        <center>
+            <img src="~/Content/Icons/Loading.gif" width="350" height="200" />
+        </center>
+
+    </div>
+    <div id="Sobrano">
+
+    </div>
+</center>
+
+
+
+
+
+
+
+<script>
+    function ReloadDock()
+    {
+        var WorkId = $("#WorkId").val();
+
+        var Tableurl = "@Url.Action("ProstavitChecker", "POOrderEntries")?DockId=" + DockId;
+        $("#Loading").show("slow");
+        $("#Sobrano").hide("slow");
+        $.post(Tableurl,
+            function (data) {
+
+                $("#Loading").hide("slow");
+                $("#Sobrano").load(Tableurl);
+                $("#Sobrano").show("slow");
+
+            }
+        );
+    }
+</script>
+
+<script>
+    function SOUT()
+    {
+
+        var WorkId = $("#WorkId").val();
+        var StockId = $("#StockId").val();
+       // var DropDown = $("#WorkId");
+       // var NewBigButton = $("#NewBigButton");
+
+        var url = "@Url.Action("MassovoeSOUTBIG", "POOrderEntries")?Manager=" + WorkId + "&FromStock=" + StockId;
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+
+        $.post(url,
+            function (data) {
+                $("#Menu").load(Reloadurl);
+                $("#Sobrano").load(Tableurl);
+
+            }
+        );
+
+    }
+
+</script>
+
+
+<script>
+    function FindDock()
+    {
+        var WorkId = $("#DockId").val();
+        var StockId = $("#StockId").val();
+        var Find = $("#FindDock").val();
+
+        var Reloadurl = "@Url.Action("ProstavitCheckerMenu", "POOrderEntries")?FBillNo=" + Find;
+        window.location.replace(Reloadurl);
+
+    }
+</script>
+
+
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockId").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>
+
+<script>
+    function PI() {
+        popup = window.open();
+        var Img = $('#ImageQR').get(0).outerHTML;
+        alert(Img);
+        popup.document.write(Img);
+        popup.
+            popup.focus(); //required for IE
+        popup.print();
+    }
+</script>
+
+<script>
+    function PrintEvgeny() {
+        $(".invis").hide();
+        window.print();
+        return false;
+
+
+    }
+</script>
+
+<script>
+
+    function ImagetoPrint(source) {
+
+        var X = '@ViewBag.QRString';
+        var XX = X.split(";");
+        var Nom = '@Resources.Resource.PartNumber';
+        var Name = '@Resources.Resource.Nomenklatura';
+        var QTY = ' @Resources.Resource.KolichestvoNomenklaturi';
+        var Date = '@Resources.Resource.Date';
+        var W = "160px"
+        var H = "128px"
+
+
+         return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt>"+
+			"<style>@@media print { @@page {padding: 0; margin: 0;}}</style>"+
+			"</head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + H + "' src='" + source + "' /></body></html>";
+     /*   return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";*/
+
+     }
+
+    function PrintImage(source) {
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+<script>
+    function PrintToEdge(source) {
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+
+
+
+        if (isAndroid) {
+            var Pagelink = "about:blank";
+            var pwa = window.open(Pagelink, "_new");
+            pwa.document.open();
+            pwa.document.write(ImagetoPrint(source));
+        }
+        else {
+
+            PrintImage(source);
+
+        }
+
+    }
+</script>
+<script>
+    function PrintImage2() {
+
+        var Img = $('#ImageQR').prop('src');
+
+        var wImage = $('#ImageQR').prop('width');
+        var hImage = $('#ImageQR').prop('height');
+        alert(wImage + " " + hImage + " " + Img)
+        var wind = open(Img, 'Печатаем картинку', 'width=' + wImage + ',height=' + hImage + ',status=no,toolbar=no,menubar=no,location=no,scrollbar=0,resizable=yes');
+        wind.document.writeln('');
+        wind.document.close();
+        wind.focus();
+        wind.print();
+        wind.close();
+
+
+    }
+</script>
+
+@if (ViewBag.CurrentWorkId != 0)
+{
+    <script>
+function sendToQuickPrinterChrome(){
+    var text = "<IMAGE370x296>"+"http://192.168.110.9"+"@Url.Action("GenerateQrCode", new { QRText = ViewBag.QRString, QTY = 0 })"+"<BR>";
+    text=text.replace("amp;","");
+    window.location.href="intent://"+text+"#Intent;scheme=quickprinter;package=pe.diegoveloper.printerserverapp;end;";
+
+
+    }
+    </script>
+}

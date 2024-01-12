@@ -1,0 +1,76 @@
+﻿
+
+
+
+@model IEnumerable<KDW.Models.NomenklaturaPlace>
+
+<h4>@Resources.Resource.Stellag @Model.First().Stellag.Num </h4>
+<div>
+    <table id="T" class="table table-bordered table-striped " style="width:700px">
+
+        <tr>
+
+            <th>
+                @Resources.Resource.PartNumber
+            </th>
+            <th>
+                @Resources.Resource.Nomenklatura
+            </th>
+
+            <th>
+                @Resources.Resource.Yacheika
+            </th>
+
+
+            <th>
+                @Resources.Resource.QTYNaSklade
+            </th>
+
+
+
+        </tr>
+        @{ int Polka = 0;}
+
+        @foreach (var item in Model)
+        {
+            string Color = "";
+            if (ViewBag.SearchId == item.ItemId)
+            {
+                Color = "danger";
+            }
+
+
+            if (Polka != item.PolkaId.Value)
+            {
+                Polka = item.PolkaId.Value;
+                <tr class="success">
+                    <td colspan="4">
+                        @Resources.Resource.Polka  @Polka
+                    </td>
+                </tr>
+            }
+            <tr class="@Color">
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.FNumber)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Item.FName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Yacheika.Num)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dvigenie.QTYFact)
+                </td>
+
+
+
+            </tr>
+
+        }
+
+    </table>
+</div>

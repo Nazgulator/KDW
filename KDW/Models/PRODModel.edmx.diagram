@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3ac3d13887c74d7890433000fe4fef97" Name="Diagram1">
+        <EntityTypeShape EntityType="AIS20141015154903Model.ICMaxNumPROD" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.ICSubContractPROD" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.ICSubContractEntryPROD" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.POOrderPROD" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.POOrderEntryPROD" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.PPBOMPROD" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.PPBOMEntryPROD" Width="1.5" PointX="10.875" PointY="10" IsExpanded="true" />
+        <AssociationConnector Association="AIS20141015154903Model.ICSubContractPRODICSubContractEntryPROD" />
+        <AssociationConnector Association="AIS20141015154903Model.POOrderPRODPOOrderEntryPROD" />
+        <AssociationConnector Association="AIS20141015154903Model.PPBOMPRODPPBOMEntryPROD" />
+        <EntityTypeShape EntityType="AIS20141015154903Model.ICMOPROD" Width="1.5" PointX="0.75" PointY="10.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

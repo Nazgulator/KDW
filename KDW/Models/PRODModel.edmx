@@ -1,0 +1,1889 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище AIS20141015154903Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ICMaxNum">
+          <Key>
+            <PropertyRef Name="FTableName" />
+          </Key>
+          <Property Name="FTableName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FMaxNum" Type="int" />
+        </EntityType>
+        <EntityType Name="ICMO">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FBillNo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FTranType" Type="smallint" Nullable="false" />
+          <Property Name="FStatus" Type="smallint" Nullable="false" />
+          <Property Name="FMRP" Type="smallint" Nullable="false" />
+          <Property Name="FType" Type="smallint" />
+          <Property Name="FWorkShop" Type="int" />
+          <Property Name="FItemID" Type="int" Nullable="false" />
+          <Property Name="FQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FPlanCommitDate" Type="datetime" />
+          <Property Name="FPlanFinishDate" Type="datetime" />
+          <Property Name="FConveyerID" Type="int" />
+          <Property Name="FCommitDate" Type="datetime" />
+          <Property Name="FCheckerID" Type="int" />
+          <Property Name="FCheckDate" Type="datetime" />
+          <Property Name="FRequesterID" Type="int" />
+          <Property Name="FBillerID" Type="int" />
+          <Property Name="FSourceEntryID" Type="smallint" Nullable="false" />
+          <Property Name="FClosed" Type="smallint" Nullable="false" />
+          <Property Name="FNote" Type="varchar" MaxLength="255" />
+          <Property Name="FUnitID" Type="int" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FOrderInterID" Type="int" />
+          <Property Name="FPPOrderInterID" Type="int" />
+          <Property Name="FParentInterID" Type="int" />
+          <Property Name="FCancellation" Type="bit" Nullable="false" />
+          <Property Name="FSupplyID" Type="int" />
+          <Property Name="FQtyFinish" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyScrap" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyForItem" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FQtyLost" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FPlanIssueDate" Type="datetime" />
+          <Property Name="FRoutingID" Type="int" />
+          <Property Name="FStartDate" Type="datetime" />
+          <Property Name="FFinishDate" Type="datetime" />
+          <Property Name="FAuxQtyFinish" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyScrap" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyForItem" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyLost" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMrpClosed" Type="int" Nullable="false" />
+          <Property Name="FBomInterID" Type="int" Nullable="false" />
+          <Property Name="FQtyPass" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyPass" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyBack" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyBack" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FFinishTime" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FReadyTIme" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FPowerCutTime" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FFixTime" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FWaitItemTime" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FWaitToolTime" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTaskID" Type="int" Nullable="false" />
+          <Property Name="FWorkTypeID" Type="int" Nullable="false" />
+          <Property Name="FCostObjID" Type="int" Nullable="false" />
+          <Property Name="FStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSuspend" Type="bit" Nullable="false" />
+          <Property Name="FProjectNO" Type="int" />
+          <Property Name="FProductionLineID" Type="int" />
+          <Property Name="FReleasedQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FReleasedAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FUnScheduledQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FUnScheduledAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSubEntryID" Type="int" Nullable="false" />
+          <Property Name="FScheduleID" Type="int" Nullable="false" />
+          <Property Name="FPlanOrderInterID" Type="int" Nullable="false" />
+          <Property Name="FProcessPrice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FProcessFee" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FGMPBatchNo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="FGMPCollectRate" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FGMPItemBalance" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FGMPBulkQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCustID" Type="int" Nullable="false" />
+          <Property Name="FMultiCheckLevel1" Type="int" />
+          <Property Name="FMultiCheckLevel2" Type="int" />
+          <Property Name="FMultiCheckLevel3" Type="int" />
+          <Property Name="FMultiCheckLevel4" Type="int" />
+          <Property Name="FMultiCheckLevel5" Type="int" />
+          <Property Name="FMultiCheckLevel6" Type="int" />
+          <Property Name="FMultiCheckDate1" Type="datetime" />
+          <Property Name="FMultiCheckDate2" Type="datetime" />
+          <Property Name="FMultiCheckDate3" Type="datetime" />
+          <Property Name="FMultiCheckDate4" Type="datetime" />
+          <Property Name="FMultiCheckDate5" Type="datetime" />
+          <Property Name="FMultiCheckDate6" Type="datetime" />
+          <Property Name="FCurCheckLevel" Type="int" />
+          <Property Name="FMRPLockFlag" Type="int" Nullable="false" />
+          <Property Name="FHandworkClose" Type="int" Nullable="false" />
+          <Property Name="FConfirmerID" Type="int" />
+          <Property Name="FConfirmDate" Type="datetime" />
+          <Property Name="FInHighLimit" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FInHighLimitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxInHighLimitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimit" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxInLowLimitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FChangeTimes" Type="int" Nullable="false" />
+          <Property Name="FCheckCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxCheckCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCloseDate" Type="datetime" />
+          <Property Name="FPlanConfirmed" Type="int" Nullable="false" />
+          <Property Name="FPlanMode" Type="int" Nullable="false" />
+          <Property Name="FMTONo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FPrintCount" Type="int" Nullable="false" />
+          <Property Name="FFinClosed" Type="int" Nullable="false" />
+          <Property Name="FFinCloseer" Type="int" />
+          <Property Name="FFinClosedate" Type="datetime" />
+          <Property Name="FStockFlag" Type="int" Nullable="false" />
+          <Property Name="FStartFlag" Type="int" Nullable="false" />
+          <Property Name="FVchBillNo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FVchInterID" Type="int" Nullable="false" />
+          <Property Name="FCardClosed" Type="int" Nullable="false" />
+          <Property Name="FHRReadyTime" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPlanCategory" Type="int" Nullable="false" />
+          <Property Name="FBomCategory" Type="int" Nullable="false" />
+          <Property Name="FSourceTranType" Type="int" Nullable="false" />
+          <Property Name="FSourceInterId" Type="int" Nullable="false" />
+          <Property Name="FSourceBillNo" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="FReprocessedAuxQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FReprocessedQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInAuxQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDiscardStockInAuxQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDiscardStockInQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSampleBreakAuxQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSampleBreakQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FResourceID" Type="bigint" Nullable="false" />
+          <Property Name="FAddInterID" Type="int" Nullable="false" />
+          <Property Name="FAPSImported" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FAPSLastStatus" Type="int" Nullable="false" />
+          <Property Name="FAuxPropID" Type="int" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="int" Nullable="false" />
+          <Property Name="FStartTimePDA" Type="datetime" />
+          <Property Name="FIsMakeLowerBill" Type="bit" Nullable="false" />
+          <Property Name="FFlowCardStatus" Type="int" Nullable="false" />
+          <Property Name="FIsMesStartWork" Type="int" />
+        </EntityType>
+        <EntityType Name="ICSubContract">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FSupplyID" Type="int" Nullable="false" />
+          <Property Name="FDate" Type="datetime" />
+          <Property Name="FBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FInvStyle" Type="int" Nullable="false" />
+          <Property Name="FSettleStyle" Type="int" Nullable="false" />
+          <Property Name="FCurrencyID" Type="int" Nullable="false" />
+          <Property Name="FDepartment" Type="int" Nullable="false" />
+          <Property Name="FSettleDate" Type="datetime" />
+          <Property Name="FExchangeRate" Type="float" Nullable="false" />
+          <Property Name="FEmployee" Type="int" Nullable="false" />
+          <Property Name="FMangerID" Type="int" Nullable="false" />
+          <Property Name="FSummary" Type="nvarchar" MaxLength="510" />
+          <Property Name="FCheckerID" Type="int" Nullable="false" />
+          <Property Name="FCheckDate" Type="datetime" />
+          <Property Name="FBillerID" Type="int" Nullable="false" />
+          <Property Name="FCancellation" Type="tinyint" Nullable="false" />
+          <Property Name="FClosed" Type="tinyint" Nullable="false" />
+          <Property Name="FStatus" Type="tinyint" Nullable="false" />
+          <Property Name="FTranStatus" Type="tinyint" Nullable="false" />
+          <Property Name="FModifyTime" Type="timestamp" StoreGeneratedPattern="Computed" />
+          <Property Name="FClassTypeID" Type="int" Nullable="false" />
+          <Property Name="FRelateBrID" Type="int" Nullable="false" />
+          <Property Name="FBrID" Type="int" Nullable="false" />
+          <Property Name="FPOOrdBillNo" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="FOrderRefuse" Type="tinyint" Nullable="false" />
+          <Property Name="FPrintCount" Type="smallint" Nullable="false" />
+          <Property Name="FExchangeRateType" Type="int" Nullable="false" />
+          <Property Name="FClosedDate" Type="datetime" />
+          <Property Name="FPlanCategory" Type="int" Nullable="false" />
+          <Property Name="FDeliveryPlace" Type="int" Nullable="false" />
+          <Property Name="FAccessoryCount" Type="int" Nullable="false" />
+          <Property Name="FCloserID" Type="int" Nullable="false" />
+          <Property Name="FVersionNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FExeStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="FText" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FHeadSelfP0253" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FConnectFlag" Type="smallint" Nullable="false" />
+          <Property Name="FConcernStatus" Type="int" />
+          <Property Name="FSendStatus" Type="int" Nullable="false" />
+          <Property Name="FEnterpriseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ICSubContractEntry">
+          <Key>
+            <PropertyRef Name="FDetailID" />
+          </Key>
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FEntryID" Type="int" Nullable="false" />
+          <Property Name="FIndex" Type="int" Nullable="false" />
+          <Property Name="FDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FItemID" Type="int" Nullable="false" />
+          <Property Name="FMapID" Type="int" Nullable="false" />
+          <Property Name="FMapName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FAuxPropID" Type="int" Nullable="false" />
+          <Property Name="FSecQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecCoefficient" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FUnitID" Type="int" Nullable="false" />
+          <Property Name="FAuxQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxPrice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxTaxPrice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAmount" Type="decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FDiscountRate" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxPriceDiscount" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAmtDiscount" Type="decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FTaxRate" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FTaxAmount" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAllAmount" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FStdAllAmount" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPayShipDate" Type="datetime" />
+          <Property Name="FFetchDate" Type="datetime" Nullable="false" />
+          <Property Name="FBOMInterID" Type="int" Nullable="false" />
+          <Property Name="FInHighLimit" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimit" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FNote" Type="nvarchar" MaxLength="3500" />
+          <Property Name="FMrpAutoClosed" Type="tinyint" Nullable="false" />
+          <Property Name="FMrpClosed" Type="tinyint" Nullable="false" />
+          <Property Name="FMRPLockFlag" Type="tinyint" Nullable="false" />
+          <Property Name="FClassTypeID_SRC" Type="int" Nullable="false" />
+          <Property Name="FEntryID_SRC" Type="int" Nullable="false" />
+          <Property Name="FInterID_SRC" Type="int" Nullable="false" />
+          <Property Name="FBillNo_SRC" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FInterIDOrder_SRC" Type="int" Nullable="false" />
+          <Property Name="FEntryIDOrder_SRC" Type="int" Nullable="false" />
+          <Property Name="FOrderNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FInHighLimitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FStockQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyInvoice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FReceiveAmountFor_Commit" Type="decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FPlanMode" Type="int" Nullable="false" />
+          <Property Name="FMTONo" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FMrpTrackFlag" Type="tinyint" Nullable="false" />
+          <Property Name="FPORInterID" Type="int" Nullable="false" />
+          <Property Name="FPORNumber" Type="nvarchar" MaxLength="510" Nullable="false" />
+          <Property Name="FBCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxBCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecQtyInvoice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecBCommitQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecStockQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FBOMCategory" Type="int" Nullable="false" />
+          <Property Name="FSupConfirm" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FSupConDate" Type="datetime" />
+          <Property Name="FSupConQty" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FSupConMem" Type="nvarchar" MaxLength="1020" />
+          <Property Name="FSupConFetchDate" Type="datetime" />
+          <Property Name="FSupConfirmor" Type="int" />
+          <Property Name="FRejectRefuseNote" Type="nvarchar" MaxLength="1020" />
+          <Property Name="FRefuseNote" Type="nvarchar" MaxLength="1020" />
+          <Property Name="FEntryAccessoryCount" Type="int" Nullable="false" />
+          <Property Name="FAuxDeliveryQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDeliveryQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQualityRptBillID" Type="int" Nullable="false" />
+          <Property Name="FAuxReceiptQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FReceiptQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxReturnQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FReturnQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FCheckMethod" Type="int" Nullable="false" />
+          <Property Name="FIsCheck" Type="int" Nullable="false" />
+          <Property Name="FPayApplyAmountFor_Commit" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FCommitAmt" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitAmtTax" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitStdAmtInTax" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitTax" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FStockQtyOnlyForShow" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FPayReqPayAmountFor" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="FPrice" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="int" Nullable="false" />
+          <Property Name="FOutSourceInterID" Type="int" Nullable="false" />
+          <Property Name="FOutSourceEntryID" Type="int" Nullable="false" />
+          <Property Name="FOutSourceTranType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POOrder">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FTranType" Type="int" Nullable="false" />
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FSupplyID" Type="int" />
+          <Property Name="FDate" Type="datetime" />
+          <Property Name="FEmpID" Type="int" />
+          <Property Name="FDeptID" Type="int" />
+          <Property Name="FCurrencyID" Type="int" />
+          <Property Name="FCheckerID" Type="int" />
+          <Property Name="FBillerID" Type="int" />
+          <Property Name="FMangerID" Type="int" />
+          <Property Name="FClosed" Type="smallint" Nullable="false" />
+          <Property Name="FTranStatus" Type="int" Nullable="false" />
+          <Property Name="FExchangeRate" Type="float" />
+          <Property Name="FStatus" Type="smallint" Nullable="false" />
+          <Property Name="FCancellation" Type="bit" Nullable="false" />
+          <Property Name="FPOStyle" Type="int" />
+          <Property Name="FMultiCheckLevel1" Type="int" />
+          <Property Name="FMultiCheckLevel2" Type="int" />
+          <Property Name="FMultiCheckLevel3" Type="int" />
+          <Property Name="FMultiCheckLevel4" Type="int" />
+          <Property Name="FMultiCheckLevel5" Type="int" />
+          <Property Name="FMultiCheckLevel6" Type="int" />
+          <Property Name="FMultiCheckDate1" Type="datetime" />
+          <Property Name="FMultiCheckDate2" Type="datetime" />
+          <Property Name="FMultiCheckDate3" Type="datetime" />
+          <Property Name="FMultiCheckDate4" Type="datetime" />
+          <Property Name="FMultiCheckDate5" Type="datetime" />
+          <Property Name="FMultiCheckDate6" Type="datetime" />
+          <Property Name="FCurCheckLevel" Type="int" />
+          <Property Name="FRelateBrID" Type="int" />
+          <Property Name="FOrderAffirm" Type="int" />
+          <Property Name="FCashDiscount" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FCheckDate" Type="datetime" />
+          <Property Name="FExplanation" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FFetchAdd" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FSettleDate" Type="datetime" />
+          <Property Name="FSettleID" Type="int" Nullable="false" />
+          <Property Name="FSelTranType" Type="int" Nullable="false" />
+          <Property Name="FChildren" Type="int" Nullable="false" />
+          <Property Name="FBrID" Type="int" />
+          <Property Name="FPOOrdBillNo" Type="nvarchar" MaxLength="510" />
+          <Property Name="FAreaPS" Type="int" Nullable="false" />
+          <Property Name="FClassTypeID" Type="int" Nullable="false" />
+          <Property Name="FTotalCostFor" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FlastModyDate" Type="datetime" />
+          <Property Name="FOperDate" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="FManageType" Type="int" />
+          <Property Name="FSysStatus" Type="smallint" Nullable="false" />
+          <Property Name="FVersionNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FChangeDate" Type="datetime" />
+          <Property Name="FChangeCauses" Type="nvarchar" MaxLength="255" />
+          <Property Name="FChangeMark" Type="int" Nullable="false" />
+          <Property Name="FChangeUser" Type="int" Nullable="false" />
+          <Property Name="FValidaterName" Type="varchar" MaxLength="255" />
+          <Property Name="FConsignee" Type="nvarchar" MaxLength="255" />
+          <Property Name="FPrintCount" Type="smallint" Nullable="false" />
+          <Property Name="FExchangeRateType" Type="int" Nullable="false" />
+          <Property Name="FDeliveryPlace" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FAccessoryCount" Type="int" />
+          <Property Name="FPOMode" Type="int" />
+          <Property Name="FPlanCategory" Type="int" Nullable="false" />
+          <Property Name="FLastAlterBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FHeadSelfP0252" Type="varchar" MaxLength="255" />
+          <Property Name="FMultiCheckStatus" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FHeadSelfP0253" Type="varchar" MaxLength="255" />
+          <Property Name="FCloseUser" Type="int" Nullable="false" />
+          <Property Name="FCloseDate" Type="datetime" />
+          <Property Name="FCloseCauses" Type="nvarchar" MaxLength="255" />
+          <Property Name="FSendStatus" Type="int" Nullable="false" />
+          <Property Name="FEnterpriseID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="POOrderEntry">
+          <Key>
+            <PropertyRef Name="FDetailID" />
+          </Key>
+          <Property Name="FBrNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FEntryID" Type="int" Nullable="false" />
+          <Property Name="FItemID" Type="int" Nullable="false" />
+          <Property Name="FQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDate" Type="datetime" />
+          <Property Name="FPrice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAmount" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="FTaxRate" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FTax" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="FTaxAmount" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="FNote" Type="varchar" MaxLength="255" />
+          <Property Name="FUnitID" Type="int" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxPrice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSourceEntryID" Type="int" Nullable="false" />
+          <Property Name="FCess" Type="decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="FStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMapNumber" Type="varchar" MaxLength="80" Nullable="false" />
+          <Property Name="FMapName" Type="nvarchar" MaxLength="256" />
+          <Property Name="FAllAmount" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FAuxPropID" Type="int" Nullable="false" />
+          <Property Name="FAuxPriceDiscount" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FPriceDiscount" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoiceBase" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxTaxPrice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTaxPrice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FReceiveAmountFor_Commit" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FReceiveAmount_Commit" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FSecCoefficient" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSecQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSecCommitQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSourceTranType" Type="int" Nullable="false" />
+          <Property Name="FSourceInterId" Type="int" Nullable="false" />
+          <Property Name="FSourceBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FContractInterID" Type="int" Nullable="false" />
+          <Property Name="FContractEntryID" Type="int" Nullable="false" />
+          <Property Name="FContractBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FMRPLockFlag" Type="int" Nullable="false" />
+          <Property Name="FAuxQtyInvoice" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMrpClosed" Type="int" Nullable="false" />
+          <Property Name="FDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FMapID" Type="int" Nullable="false" />
+          <Property Name="FSProducingAreaID" Type="int" Nullable="false" />
+          <Property Name="FAmtDiscount" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCheckAmount" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FMrpAutoClosed" Type="int" />
+          <Property Name="FPayApplyAmountFor_Commit" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FPayApplyAmount_Commit" Type="decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FSecStockQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecInvoiceQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPlanMode" Type="int" Nullable="false" />
+          <Property Name="FMTONo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FDescount" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSupConfirm" Type="nvarchar" MaxLength="10" />
+          <Property Name="FSupConDate" Type="datetime" />
+          <Property Name="FSupConQty" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FSupConMem" Type="nvarchar" MaxLength="255" />
+          <Property Name="FSupConFetchDate" Type="datetime" />
+          <Property Name="FSupConfirmor" Type="int" />
+          <Property Name="FQualityRptBillID" Type="int" Nullable="false" />
+          <Property Name="FLockByAlter" Type="int" Nullable="false" />
+          <Property Name="FDeliveryQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxDeliveryQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecDeliveryQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FRejectRefuseNote" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FRefuseNote" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FLockBySupplier" Type="tinyint" Nullable="false" />
+          <Property Name="FEntryAccessoryCount" Type="int" />
+          <Property Name="FPRInterID" Type="int" Nullable="false" />
+          <Property Name="FPREntryID" Type="int" Nullable="false" />
+          <Property Name="FAuxReceiptQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FReceiptQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxReturnQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FReturnQty" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FCheckMethod" Type="int" Nullable="false" />
+          <Property Name="FIsCheck" Type="int" Nullable="false" />
+          <Property Name="FAmountExceptDisCount" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FAllAmountExceptDisCount" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FEntryDisCount" Type="decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FCommitAmt" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitAmtTax" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitTax" Type="decimal" Precision="23" Scale="10" />
+          <Property Name="FPayReqPayAmountFor" Type="decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="FEntrySelfP0266" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FEntrySelfP0268" Type="varchar" MaxLength="255" />
+          <Property Name="FEntrySelfP0269" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FEntrySelfP0270" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FCloseEntryUser" Type="int" Nullable="false" />
+          <Property Name="FCloseEntryDate" Type="datetime" />
+          <Property Name="FCloseEntryCauses" Type="nvarchar" MaxLength="255" />
+          <Property Name="FOutSourceInterID" Type="int" Nullable="false" />
+          <Property Name="FOutSourceEntryID" Type="int" Nullable="false" />
+          <Property Name="FOutSourceTranType" Type="int" Nullable="false" />
+          <Property Name="FBatchNo" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PPBOM">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FBillNo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FTranType" Type="int" Nullable="false" />
+          <Property Name="FDate" Type="datetime" />
+          <Property Name="FBillerID" Type="int" />
+          <Property Name="FCheckerID" Type="int" />
+          <Property Name="FCheckDate" Type="datetime" />
+          <Property Name="FStatus" Type="smallint" Nullable="false" />
+          <Property Name="FICMOInterID" Type="int" />
+          <Property Name="FCancellation" Type="bit" Nullable="false" />
+          <Property Name="FItemID" Type="int" Nullable="false" />
+          <Property Name="FUnitID" Type="int" Nullable="false" />
+          <Property Name="FAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FType" Type="int" />
+          <Property Name="FStockType" Type="smallint" Nullable="false" />
+          <Property Name="FWorkSHop" Type="int" />
+          <Property Name="FOrderInterID" Type="int" Nullable="false" />
+          <Property Name="FOrderBillNo" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="FChangeTimes" Type="int" Nullable="false" />
+          <Property Name="FOrderEntryID" Type="int" Nullable="false" />
+          <Property Name="FPrintCount" Type="int" Nullable="false" />
+          <Property Name="FSelTranType" Type="int" Nullable="false" />
+          <Property Name="FAuxPropID" Type="int" Nullable="false" />
+          <Property Name="FMultiCheckStatus" Type="int" Nullable="false" />
+          <Property Name="FICMOBillNo" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FHeadSelfY0227" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="PPBOMEntry">
+          <Key>
+            <PropertyRef Name="FInterID" />
+            <PropertyRef Name="FEntryID" />
+          </Key>
+          <Property Name="FBrNo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="FInterID" Type="int" Nullable="false" />
+          <Property Name="FEntryID" Type="int" Nullable="false" />
+          <Property Name="FItemID" Type="int" Nullable="false" />
+          <Property Name="FBatchNo" Type="varchar" MaxLength="200" />
+          <Property Name="FUnitID" Type="int" Nullable="false" />
+          <Property Name="FQtyMust" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyMust" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMachinePos" Type="varchar" MaxLength="1000" />
+          <Property Name="FSequenceID" Type="varchar" MaxLength="30" />
+          <Property Name="FStockID" Type="int" />
+          <Property Name="FNote" Type="varchar" MaxLength="255" />
+          <Property Name="FSourceEntryID" Type="int" Nullable="false" />
+          <Property Name="FQtyScrap" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyScrap" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FScrap" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSendItemDate" Type="datetime" />
+          <Property Name="FQtyPick" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyPick" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSPID" Type="int" Nullable="false" />
+          <Property Name="FMaterielType" Type="int" Nullable="false" />
+          <Property Name="FOperID" Type="int" Nullable="false" />
+          <Property Name="FBackFlush" Type="int" Nullable="false" />
+          <Property Name="FMarshalType" Type="int" Nullable="false" />
+          <Property Name="FStockType" Type="bit" Nullable="false" />
+          <Property Name="FQtyBackFlush" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyLoss" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FQtyLoss" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FBOMInPutQTY" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FWIPQTY" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FWIPAuxQTY" Type="decimal" Precision="28" Scale="10" />
+          <Property Name="FLockFlag" Type="smallint" Nullable="false" />
+          <Property Name="FSelDiscardQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDiscardQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDiscardAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FBomInputAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FICItemReplaceID" Type="int" Nullable="false" />
+          <Property Name="FQtySupply" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtySupply" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FOperSN" Type="int" Nullable="false" />
+          <Property Name="FBomInterID" Type="int" Nullable="false" />
+          <Property Name="FSelTransLateAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelTransLateQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTransLateAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTransLateQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FICMOInterID" Type="int" Nullable="false" />
+          <Property Name="FChangeTimes" Type="int" Nullable="false" />
+          <Property Name="FPositionNo" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="FItemSize" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FItemSuite" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FNote1" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FNote2" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FNote3" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FPlanMode" Type="int" Nullable="false" />
+          <Property Name="FMTONo" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FOrderEntryID" Type="int" Nullable="false" />
+          <Property Name="FQtyConsume" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyConsume" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FItemConvertType" Type="int" Nullable="false" />
+          <Property Name="FSubsBillEntryID" Type="int" Nullable="false" />
+          <Property Name="FBomDetailID" Type="uniqueidentifier" />
+          <Property Name="FICSubsID" Type="int" Nullable="false" />
+          <Property Name="FICSubsEntryID" Type="int" Nullable="false" />
+          <Property Name="FIsKeyItem" Type="smallint" Nullable="false" />
+          <Property Name="FPriorityID" Type="int" Nullable="false" />
+          <Property Name="FAuxPropID" Type="int" Nullable="false" />
+          <Property Name="FOrderBOMInterID" Type="int" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="int" Nullable="false" />
+          <Property Name="FPlanQtyReq" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPTLQty" Type="decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInAuxQty" Type="decimal" Precision="28" Scale="10" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Хранилище AIS20141015154903ModelContainer">
+          <EntitySet Name="ICMaxNum" EntityType="Self.ICMaxNum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ICMO" EntityType="Self.ICMO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ICSubContract" EntityType="Self.ICSubContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ICSubContractEntry" EntityType="Self.ICSubContractEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POOrder" EntityType="Self.POOrder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="POOrderEntry" EntityType="Self.POOrderEntry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PPBOM" EntityType="Self.PPBOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PPBOMEntry" EntityType="Self.PPBOMEntry" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AIS20141015154903Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ICMaxNumPROD">
+          <Key>
+            <PropertyRef Name="FTableName" />
+          </Key>
+          <Property Name="FTableName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FMaxNum" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ICSubContractPROD">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FSupplyID" Type="Int32" Nullable="false" />
+          <Property Name="FDate" Type="DateTime" Precision="3" />
+          <Property Name="FBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FInvStyle" Type="Int32" Nullable="false" />
+          <Property Name="FSettleStyle" Type="Int32" Nullable="false" />
+          <Property Name="FCurrencyID" Type="Int32" Nullable="false" />
+          <Property Name="FDepartment" Type="Int32" Nullable="false" />
+          <Property Name="FSettleDate" Type="DateTime" Precision="3" />
+          <Property Name="FExchangeRate" Type="Double" Nullable="false" />
+          <Property Name="FEmployee" Type="Int32" Nullable="false" />
+          <Property Name="FMangerID" Type="Int32" Nullable="false" />
+          <Property Name="FSummary" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="FCheckerID" Type="Int32" Nullable="false" />
+          <Property Name="FCheckDate" Type="DateTime" Precision="3" />
+          <Property Name="FBillerID" Type="Int32" Nullable="false" />
+          <Property Name="FCancellation" Type="Byte" Nullable="false" />
+          <Property Name="FClosed" Type="Byte" Nullable="false" />
+          <Property Name="FStatus" Type="Byte" Nullable="false" />
+          <Property Name="FTranStatus" Type="Byte" Nullable="false" />
+          <Property Name="FModifyTime" Type="Binary" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FClassTypeID" Type="Int32" Nullable="false" />
+          <Property Name="FRelateBrID" Type="Int32" Nullable="false" />
+          <Property Name="FBrID" Type="Int32" Nullable="false" />
+          <Property Name="FPOOrdBillNo" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOrderRefuse" Type="Byte" Nullable="false" />
+          <Property Name="FPrintCount" Type="Int16" Nullable="false" />
+          <Property Name="FExchangeRateType" Type="Int32" Nullable="false" />
+          <Property Name="FClosedDate" Type="DateTime" Precision="3" />
+          <Property Name="FPlanCategory" Type="Int32" Nullable="false" />
+          <Property Name="FDeliveryPlace" Type="Int32" Nullable="false" />
+          <Property Name="FAccessoryCount" Type="Int32" Nullable="false" />
+          <Property Name="FCloserID" Type="Int32" Nullable="false" />
+          <Property Name="FVersionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FExeStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FHeadSelfP0253" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FConnectFlag" Type="Int16" Nullable="false" />
+          <Property Name="FConcernStatus" Type="Int32" />
+          <Property Name="FSendStatus" Type="Int32" Nullable="false" />
+          <Property Name="FEnterpriseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ICSubContractEntryPROD" Relationship="AIS20141015154903Model.ICSubContractPRODICSubContractEntryPROD" FromRole="ICSubContractPROD" ToRole="ICSubContractEntryPROD" />
+        </EntityType>
+        <EntityType Name="ICSubContractEntryPROD">
+          <Key>
+            <PropertyRef Name="FDetailID" />
+          </Key>
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FIndex" Type="Int32" Nullable="false" />
+          <Property Name="FDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FItemID" Type="Int32" Nullable="false" />
+          <Property Name="FMapID" Type="Int32" Nullable="false" />
+          <Property Name="FMapName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FAuxPropID" Type="Int32" Nullable="false" />
+          <Property Name="FSecQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecCoefficient" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FUnitID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxPrice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxTaxPrice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAmount" Type="Decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FDiscountRate" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxPriceDiscount" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAmtDiscount" Type="Decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FTaxRate" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FTaxAmount" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAllAmount" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FStdAllAmount" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPayShipDate" Type="DateTime" Precision="3" />
+          <Property Name="FFetchDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FBOMInterID" Type="Int32" Nullable="false" />
+          <Property Name="FInHighLimit" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimit" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FNote" Type="String" MaxLength="3500" FixedLength="false" Unicode="true" />
+          <Property Name="FMrpAutoClosed" Type="Byte" Nullable="false" />
+          <Property Name="FMrpClosed" Type="Byte" Nullable="false" />
+          <Property Name="FMRPLockFlag" Type="Byte" Nullable="false" />
+          <Property Name="FClassTypeID_SRC" Type="Int32" Nullable="false" />
+          <Property Name="FEntryID_SRC" Type="Int32" Nullable="false" />
+          <Property Name="FInterID_SRC" Type="Int32" Nullable="false" />
+          <Property Name="FBillNo_SRC" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FInterIDOrder_SRC" Type="Int32" Nullable="false" />
+          <Property Name="FEntryIDOrder_SRC" Type="Int32" Nullable="false" />
+          <Property Name="FOrderNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FInHighLimitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FInLowLimitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FStockQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyInvoice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FReceiveAmountFor_Commit" Type="Decimal" Precision="23" Scale="4" Nullable="false" />
+          <Property Name="FPlanMode" Type="Int32" Nullable="false" />
+          <Property Name="FMTONo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FMrpTrackFlag" Type="Byte" Nullable="false" />
+          <Property Name="FPORInterID" Type="Int32" Nullable="false" />
+          <Property Name="FPORNumber" Type="String" MaxLength="510" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FBCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxBCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecQtyInvoice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecBCommitQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecStockQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FBOMCategory" Type="Int32" Nullable="false" />
+          <Property Name="FSupConfirm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FSupConDate" Type="DateTime" Precision="3" />
+          <Property Name="FSupConQty" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FSupConMem" Type="String" MaxLength="1020" FixedLength="false" Unicode="true" />
+          <Property Name="FSupConFetchDate" Type="DateTime" Precision="3" />
+          <Property Name="FSupConfirmor" Type="Int32" />
+          <Property Name="FRejectRefuseNote" Type="String" MaxLength="1020" FixedLength="false" Unicode="true" />
+          <Property Name="FRefuseNote" Type="String" MaxLength="1020" FixedLength="false" Unicode="true" />
+          <Property Name="FEntryAccessoryCount" Type="Int32" Nullable="false" />
+          <Property Name="FAuxDeliveryQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDeliveryQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FQualityRptBillID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxReceiptQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FReceiptQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxReturnQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FReturnQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FCheckMethod" Type="Int32" Nullable="false" />
+          <Property Name="FIsCheck" Type="Int32" Nullable="false" />
+          <Property Name="FPayApplyAmountFor_Commit" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FCommitAmt" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitAmtTax" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitStdAmtInTax" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitTax" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FStockQtyOnlyForShow" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FPayReqPayAmountFor" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="FPrice" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FOutSourceInterID" Type="Int32" Nullable="false" />
+          <Property Name="FOutSourceEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FOutSourceTranType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ICSubContractPROD" Relationship="AIS20141015154903Model.ICSubContractPRODICSubContractEntryPROD" FromRole="ICSubContractEntryPROD" ToRole="ICSubContractPROD" />
+        </EntityType>
+        <EntityType Name="POOrderPROD">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FTranType" Type="Int32" Nullable="false" />
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FSupplyID" Type="Int32" />
+          <Property Name="FDate" Type="DateTime" Precision="3" />
+          <Property Name="FEmpID" Type="Int32" />
+          <Property Name="FDeptID" Type="Int32" />
+          <Property Name="FCurrencyID" Type="Int32" />
+          <Property Name="FCheckerID" Type="Int32" />
+          <Property Name="FBillerID" Type="Int32" />
+          <Property Name="FMangerID" Type="Int32" />
+          <Property Name="FClosed" Type="Int16" Nullable="false" />
+          <Property Name="FTranStatus" Type="Int32" Nullable="false" />
+          <Property Name="FExchangeRate" Type="Double" />
+          <Property Name="FStatus" Type="Int16" Nullable="false" />
+          <Property Name="FCancellation" Type="Boolean" Nullable="false" />
+          <Property Name="FPOStyle" Type="Int32" />
+          <Property Name="FMultiCheckLevel1" Type="Int32" />
+          <Property Name="FMultiCheckLevel2" Type="Int32" />
+          <Property Name="FMultiCheckLevel3" Type="Int32" />
+          <Property Name="FMultiCheckLevel4" Type="Int32" />
+          <Property Name="FMultiCheckLevel5" Type="Int32" />
+          <Property Name="FMultiCheckLevel6" Type="Int32" />
+          <Property Name="FMultiCheckDate1" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate2" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate3" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate4" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate5" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate6" Type="DateTime" Precision="3" />
+          <Property Name="FCurCheckLevel" Type="Int32" />
+          <Property Name="FRelateBrID" Type="Int32" />
+          <Property Name="FOrderAffirm" Type="Int32" />
+          <Property Name="FCashDiscount" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FCheckDate" Type="DateTime" Precision="3" />
+          <Property Name="FExplanation" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FFetchAdd" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FSettleDate" Type="DateTime" Precision="3" />
+          <Property Name="FSettleID" Type="Int32" Nullable="false" />
+          <Property Name="FSelTranType" Type="Int32" Nullable="false" />
+          <Property Name="FChildren" Type="Int32" Nullable="false" />
+          <Property Name="FBrID" Type="Int32" />
+          <Property Name="FPOOrdBillNo" Type="String" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="FAreaPS" Type="Int32" Nullable="false" />
+          <Property Name="FClassTypeID" Type="Int32" Nullable="false" />
+          <Property Name="FTotalCostFor" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FlastModyDate" Type="DateTime" Precision="3" />
+          <Property Name="FOperDate" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FManageType" Type="Int32" />
+          <Property Name="FSysStatus" Type="Int16" Nullable="false" />
+          <Property Name="FVersionNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="FChangeCauses" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FChangeMark" Type="Int32" Nullable="false" />
+          <Property Name="FChangeUser" Type="Int32" Nullable="false" />
+          <Property Name="FValidaterName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FConsignee" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FPrintCount" Type="Int16" Nullable="false" />
+          <Property Name="FExchangeRateType" Type="Int32" Nullable="false" />
+          <Property Name="FDeliveryPlace" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FAccessoryCount" Type="Int32" />
+          <Property Name="FPOMode" Type="Int32" />
+          <Property Name="FPlanCategory" Type="Int32" Nullable="false" />
+          <Property Name="FLastAlterBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FHeadSelfP0252" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FMultiCheckStatus" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FHeadSelfP0253" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FCloseUser" Type="Int32" Nullable="false" />
+          <Property Name="FCloseDate" Type="DateTime" Precision="3" />
+          <Property Name="FCloseCauses" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FSendStatus" Type="Int32" Nullable="false" />
+          <Property Name="FEnterpriseID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="POOrderEntryPROD" Relationship="AIS20141015154903Model.POOrderPRODPOOrderEntryPROD" FromRole="POOrderPROD" ToRole="POOrderEntryPROD" />
+        </EntityType>
+        <EntityType Name="POOrderEntryPROD">
+          <Key>
+            <PropertyRef Name="FDetailID" />
+          </Key>
+          <Property Name="FBrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FItemID" Type="Int32" Nullable="false" />
+          <Property Name="FQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCommitQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDate" Type="DateTime" Precision="3" />
+          <Property Name="FPrice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAmount" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="FTaxRate" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FTax" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="FTaxAmount" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="FNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FUnitID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxPrice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSourceEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FCess" Type="Decimal" Precision="20" Scale="2" Nullable="false" />
+          <Property Name="FStockQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMapNumber" Type="String" MaxLength="80" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FMapName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FAllAmount" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FAuxPropID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxPriceDiscount" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FPriceDiscount" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQtyInvoiceBase" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxTaxPrice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTaxPrice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FReceiveAmountFor_Commit" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FReceiveAmount_Commit" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FSecCoefficient" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSecQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSecCommitQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSourceTranType" Type="Int32" Nullable="false" />
+          <Property Name="FSourceInterId" Type="Int32" Nullable="false" />
+          <Property Name="FSourceBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FContractInterID" Type="Int32" Nullable="false" />
+          <Property Name="FContractEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FContractBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FMRPLockFlag" Type="Int32" Nullable="false" />
+          <Property Name="FAuxQtyInvoice" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMrpClosed" Type="Int32" Nullable="false" />
+          <Property Name="FDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FMapID" Type="Int32" Nullable="false" />
+          <Property Name="FSProducingAreaID" Type="Int32" Nullable="false" />
+          <Property Name="FAmtDiscount" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FCheckAmount" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FMrpAutoClosed" Type="Int32" />
+          <Property Name="FPayApplyAmountFor_Commit" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FPayApplyAmount_Commit" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="FSecStockQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecInvoiceQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPlanMode" Type="Int32" Nullable="false" />
+          <Property Name="FMTONo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FDescount" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSupConfirm" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FSupConDate" Type="DateTime" Precision="3" />
+          <Property Name="FSupConQty" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FSupConMem" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FSupConFetchDate" Type="DateTime" Precision="3" />
+          <Property Name="FSupConfirmor" Type="Int32" />
+          <Property Name="FQualityRptBillID" Type="Int32" Nullable="false" />
+          <Property Name="FLockByAlter" Type="Int32" Nullable="false" />
+          <Property Name="FDeliveryQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxDeliveryQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSecDeliveryQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FRejectRefuseNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FRefuseNote" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FLockBySupplier" Type="Byte" Nullable="false" />
+          <Property Name="FEntryAccessoryCount" Type="Int32" />
+          <Property Name="FPRInterID" Type="Int32" Nullable="false" />
+          <Property Name="FPREntryID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxReceiptQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FReceiptQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxReturnQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FReturnQty" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FCheckMethod" Type="Int32" Nullable="false" />
+          <Property Name="FIsCheck" Type="Int32" Nullable="false" />
+          <Property Name="FAmountExceptDisCount" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FAllAmountExceptDisCount" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FEntryDisCount" Type="Decimal" Precision="28" Scale="4" Nullable="false" />
+          <Property Name="FCommitAmt" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitAmtTax" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FCommitTax" Type="Decimal" Precision="23" Scale="10" />
+          <Property Name="FPayReqPayAmountFor" Type="Decimal" Precision="28" Scale="2" Nullable="false" />
+          <Property Name="FEntrySelfP0266" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FEntrySelfP0268" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FEntrySelfP0269" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FEntrySelfP0270" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FCloseEntryUser" Type="Int32" Nullable="false" />
+          <Property Name="FCloseEntryDate" Type="DateTime" Precision="3" />
+          <Property Name="FCloseEntryCauses" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FOutSourceInterID" Type="Int32" Nullable="false" />
+          <Property Name="FOutSourceEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FOutSourceTranType" Type="Int32" Nullable="false" />
+          <Property Name="FBatchNo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="POOrderPROD" Relationship="AIS20141015154903Model.POOrderPRODPOOrderEntryPROD" FromRole="POOrderEntryPROD" ToRole="POOrderPROD" />
+        </EntityType>
+        <EntityType Name="PPBOMPROD">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FTranType" Type="Int32" Nullable="false" />
+          <Property Name="FDate" Type="DateTime" Precision="3" />
+          <Property Name="FBillerID" Type="Int32" />
+          <Property Name="FCheckerID" Type="Int32" />
+          <Property Name="FCheckDate" Type="DateTime" Precision="3" />
+          <Property Name="FStatus" Type="Int16" Nullable="false" />
+          <Property Name="FICMOInterID" Type="Int32" />
+          <Property Name="FCancellation" Type="Boolean" Nullable="false" />
+          <Property Name="FItemID" Type="Int32" Nullable="false" />
+          <Property Name="FUnitID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FType" Type="Int32" />
+          <Property Name="FStockType" Type="Int16" Nullable="false" />
+          <Property Name="FWorkSHop" Type="Int32" />
+          <Property Name="FOrderInterID" Type="Int32" Nullable="false" />
+          <Property Name="FOrderBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FChangeTimes" Type="Int32" Nullable="false" />
+          <Property Name="FOrderEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FPrintCount" Type="Int32" Nullable="false" />
+          <Property Name="FSelTranType" Type="Int32" Nullable="false" />
+          <Property Name="FAuxPropID" Type="Int32" Nullable="false" />
+          <Property Name="FMultiCheckStatus" Type="Int32" Nullable="false" />
+          <Property Name="FICMOBillNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FHeadSelfY0227" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PPBOMEntryPROD" Relationship="AIS20141015154903Model.PPBOMPRODPPBOMEntryPROD" FromRole="PPBOMPROD" ToRole="PPBOMEntryPROD" />
+        </EntityType>
+        <EntityType Name="PPBOMEntryPROD">
+          <Key>
+            <PropertyRef Name="FInterID" />
+            <PropertyRef Name="FEntryID" />
+          </Key>
+          <Property Name="FBrNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FItemID" Type="Int32" Nullable="false" />
+          <Property Name="FBatchNo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FUnitID" Type="Int32" Nullable="false" />
+          <Property Name="FQtyMust" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyMust" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FMachinePos" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="FSequenceID" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="FStockID" Type="Int32" />
+          <Property Name="FNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FSourceEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FQtyScrap" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyScrap" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FScrap" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSendItemDate" Type="DateTime" Precision="3" />
+          <Property Name="FQtyPick" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyPick" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSPID" Type="Int32" Nullable="false" />
+          <Property Name="FMaterielType" Type="Int32" Nullable="false" />
+          <Property Name="FOperID" Type="Int32" Nullable="false" />
+          <Property Name="FBackFlush" Type="Int32" Nullable="false" />
+          <Property Name="FMarshalType" Type="Int32" Nullable="false" />
+          <Property Name="FStockType" Type="Boolean" Nullable="false" />
+          <Property Name="FQtyBackFlush" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FStockQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxStockQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyLoss" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FQtyLoss" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FBOMInPutQTY" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FWIPQTY" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FWIPAuxQTY" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FLockFlag" Type="Int16" Nullable="false" />
+          <Property Name="FSelDiscardQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDiscardQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FDiscardAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FBomInputAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FICItemReplaceID" Type="Int32" Nullable="false" />
+          <Property Name="FQtySupply" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtySupply" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FOperSN" Type="Int32" Nullable="false" />
+          <Property Name="FBomInterID" Type="Int32" Nullable="false" />
+          <Property Name="FSelTransLateAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelTransLateQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTransLateAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FTransLateQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FICMOInterID" Type="Int32" Nullable="false" />
+          <Property Name="FChangeTimes" Type="Int32" Nullable="false" />
+          <Property Name="FPositionNo" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FItemSize" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FItemSuite" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FNote1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FNote2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FNote3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FPlanMode" Type="Int32" Nullable="false" />
+          <Property Name="FMTONo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FOrderEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FQtyConsume" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FAuxQtyConsume" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FItemConvertType" Type="Int32" Nullable="false" />
+          <Property Name="FSubsBillEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FBomDetailID" Type="Guid" />
+          <Property Name="FICSubsID" Type="Int32" Nullable="false" />
+          <Property Name="FICSubsEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FIsKeyItem" Type="Int16" Nullable="false" />
+          <Property Name="FPriorityID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxPropID" Type="Int32" Nullable="false" />
+          <Property Name="FOrderBOMInterID" Type="Int32" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FPlanQtyReq" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FPTLQty" Type="Decimal" Precision="23" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <Property Name="FSelDiscardStockInAuxQty" Type="Decimal" Precision="28" Scale="10" Nullable="false" />
+          <NavigationProperty Name="PPBOMPROD" Relationship="AIS20141015154903Model.PPBOMPRODPPBOMEntryPROD" FromRole="PPBOMEntryPROD" ToRole="PPBOMPROD" />
+        </EntityType>
+        <EntityContainer Name="AIS20141015154903Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ICMaxNum" EntityType="AIS20141015154903Model.ICMaxNumPROD" />
+          <EntitySet Name="ICSubContract" EntityType="AIS20141015154903Model.ICSubContractPROD" />
+          <EntitySet Name="ICSubContractEntry" EntityType="AIS20141015154903Model.ICSubContractEntryPROD" />
+          <EntitySet Name="POOrder" EntityType="AIS20141015154903Model.POOrderPROD" />
+          <EntitySet Name="POOrderEntry" EntityType="AIS20141015154903Model.POOrderEntryPROD" />
+          <EntitySet Name="PPBOM" EntityType="AIS20141015154903Model.PPBOMPROD" />
+          <EntitySet Name="PPBOMEntry" EntityType="AIS20141015154903Model.PPBOMEntryPROD" />
+          <AssociationSet Name="ICSubContractPRODICSubContractEntryPROD" Association="AIS20141015154903Model.ICSubContractPRODICSubContractEntryPROD">
+            <End Role="ICSubContractPROD" EntitySet="ICSubContract" />
+            <End Role="ICSubContractEntryPROD" EntitySet="ICSubContractEntry" />
+          </AssociationSet>
+          <AssociationSet Name="POOrderPRODPOOrderEntryPROD" Association="AIS20141015154903Model.POOrderPRODPOOrderEntryPROD">
+            <End Role="POOrderPROD" EntitySet="POOrder" />
+            <End Role="POOrderEntryPROD" EntitySet="POOrderEntry" />
+          </AssociationSet>
+          <AssociationSet Name="PPBOMPRODPPBOMEntryPROD" Association="AIS20141015154903Model.PPBOMPRODPPBOMEntryPROD">
+            <End Role="PPBOMPROD" EntitySet="PPBOM" />
+            <End Role="PPBOMEntryPROD" EntitySet="PPBOMEntry" />
+          </AssociationSet>
+          <EntitySet Name="ICMO" EntityType="AIS20141015154903Model.ICMOPROD" />
+        </EntityContainer>
+        <Association Name="ICSubContractPRODICSubContractEntryPROD">
+          <End Type="AIS20141015154903Model.ICSubContractPROD" Role="ICSubContractPROD" Multiplicity="1" />
+          <End Type="AIS20141015154903Model.ICSubContractEntryPROD" Role="ICSubContractEntryPROD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ICSubContractPROD">
+              <PropertyRef Name="FInterID" />
+            </Principal>
+            <Dependent Role="ICSubContractEntryPROD">
+              <PropertyRef Name="FInterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="POOrderPRODPOOrderEntryPROD">
+          <End Type="AIS20141015154903Model.POOrderPROD" Role="POOrderPROD" Multiplicity="1" />
+          <End Type="AIS20141015154903Model.POOrderEntryPROD" Role="POOrderEntryPROD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="POOrderPROD">
+              <PropertyRef Name="FInterID" />
+            </Principal>
+            <Dependent Role="POOrderEntryPROD">
+              <PropertyRef Name="FInterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PPBOMPRODPPBOMEntryPROD">
+          <End Type="AIS20141015154903Model.PPBOMPROD" Role="PPBOMPROD" Multiplicity="1" />
+          <End Type="AIS20141015154903Model.PPBOMEntryPROD" Role="PPBOMEntryPROD" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PPBOMPROD">
+              <PropertyRef Name="FInterID" />
+            </Principal>
+            <Dependent Role="PPBOMEntryPROD">
+              <PropertyRef Name="FInterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ICMOPROD">
+          <Key>
+            <PropertyRef Name="FInterID" />
+          </Key>
+          <Property Name="FBrNo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FInterID" Type="Int32" Nullable="false" />
+          <Property Name="FBillNo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FTranType" Type="Int16" Nullable="false" />
+          <Property Name="FStatus" Type="Int16" Nullable="false" />
+          <Property Name="FMRP" Type="Int16" Nullable="false" />
+          <Property Name="FType" Type="Int16" />
+          <Property Name="FWorkShop" Type="Int32" />
+          <Property Name="FItemID" Type="Int32" Nullable="false" />
+          <Property Name="FQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FCommitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FPlanCommitDate" Type="DateTime" Precision="3" />
+          <Property Name="FPlanFinishDate" Type="DateTime" Precision="3" />
+          <Property Name="FConveyerID" Type="Int32" />
+          <Property Name="FCommitDate" Type="DateTime" Precision="3" />
+          <Property Name="FCheckerID" Type="Int32" />
+          <Property Name="FCheckDate" Type="DateTime" Precision="3" />
+          <Property Name="FRequesterID" Type="Int32" />
+          <Property Name="FBillerID" Type="Int32" />
+          <Property Name="FSourceEntryID" Type="Int16" Nullable="false" />
+          <Property Name="FClosed" Type="Int16" Nullable="false" />
+          <Property Name="FNote" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FUnitID" Type="Int32" Nullable="false" />
+          <Property Name="FAuxCommitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FOrderInterID" Type="Int32" />
+          <Property Name="FPPOrderInterID" Type="Int32" />
+          <Property Name="FParentInterID" Type="Int32" />
+          <Property Name="FCancellation" Type="Boolean" Nullable="false" />
+          <Property Name="FSupplyID" Type="Int32" />
+          <Property Name="FQtyFinish" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FQtyScrap" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FQtyForItem" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FQtyLost" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FPlanIssueDate" Type="DateTime" Precision="3" />
+          <Property Name="FRoutingID" Type="Int32" />
+          <Property Name="FStartDate" Type="DateTime" Precision="3" />
+          <Property Name="FFinishDate" Type="DateTime" Precision="3" />
+          <Property Name="FAuxQtyFinish" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyScrap" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyForItem" Type="Decimal" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyLost" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FMrpClosed" Type="Int32" Nullable="false" />
+          <Property Name="FBomInterID" Type="Int32" Nullable="false" />
+          <Property Name="FQtyPass" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyPass" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FQtyBack" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxQtyBack" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FFinishTime" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FReadyTIme" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FPowerCutTime" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FFixTime" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FWaitItemTime" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FWaitToolTime" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FTaskID" Type="Int32" Nullable="false" />
+          <Property Name="FWorkTypeID" Type="Int32" Nullable="false" />
+          <Property Name="FCostObjID" Type="Int32" Nullable="false" />
+          <Property Name="FStockQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxStockQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FSuspend" Type="Boolean" Nullable="false" />
+          <Property Name="FProjectNO" Type="Int32" />
+          <Property Name="FProductionLineID" Type="Int32" />
+          <Property Name="FReleasedQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FReleasedAuxQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FUnScheduledQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FUnScheduledAuxQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FSubEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FScheduleID" Type="Int32" Nullable="false" />
+          <Property Name="FPlanOrderInterID" Type="Int32" Nullable="false" />
+          <Property Name="FProcessPrice" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FProcessFee" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FGMPBatchNo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FGMPCollectRate" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FGMPItemBalance" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FGMPBulkQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FCustID" Type="Int32" Nullable="false" />
+          <Property Name="FMultiCheckLevel1" Type="Int32" />
+          <Property Name="FMultiCheckLevel2" Type="Int32" />
+          <Property Name="FMultiCheckLevel3" Type="Int32" />
+          <Property Name="FMultiCheckLevel4" Type="Int32" />
+          <Property Name="FMultiCheckLevel5" Type="Int32" />
+          <Property Name="FMultiCheckLevel6" Type="Int32" />
+          <Property Name="FMultiCheckDate1" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate2" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate3" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate4" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate5" Type="DateTime" Precision="3" />
+          <Property Name="FMultiCheckDate6" Type="DateTime" Precision="3" />
+          <Property Name="FCurCheckLevel" Type="Int32" />
+          <Property Name="FMRPLockFlag" Type="Int32" Nullable="false" />
+          <Property Name="FHandworkClose" Type="Int32" Nullable="false" />
+          <Property Name="FConfirmerID" Type="Int32" />
+          <Property Name="FConfirmDate" Type="DateTime" Precision="3" />
+          <Property Name="FInHighLimit" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FInHighLimitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxInHighLimitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FInLowLimit" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FInLowLimitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxInLowLimitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FChangeTimes" Type="Int32" Nullable="false" />
+          <Property Name="FCheckCommitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FAuxCheckCommitQty" Type="Decimal" Nullable="false" Precision="28" Scale="10" />
+          <Property Name="FCloseDate" Type="DateTime" Precision="3" />
+          <Property Name="FPlanConfirmed" Type="Int32" Nullable="false" />
+          <Property Name="FPlanMode" Type="Int32" Nullable="false" />
+          <Property Name="FMTONo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FPrintCount" Type="Int32" Nullable="false" />
+          <Property Name="FFinClosed" Type="Int32" Nullable="false" />
+          <Property Name="FFinCloseer" Type="Int32" />
+          <Property Name="FFinClosedate" Type="DateTime" Precision="3" />
+          <Property Name="FStockFlag" Type="Int32" Nullable="false" />
+          <Property Name="FStartFlag" Type="Int32" Nullable="false" />
+          <Property Name="FVchBillNo" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FVchInterID" Type="Int32" Nullable="false" />
+          <Property Name="FCardClosed" Type="Int32" Nullable="false" />
+          <Property Name="FHRReadyTime" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FPlanCategory" Type="Int32" Nullable="false" />
+          <Property Name="FBomCategory" Type="Int32" Nullable="false" />
+          <Property Name="FSourceTranType" Type="Int32" Nullable="false" />
+          <Property Name="FSourceInterId" Type="Int32" Nullable="false" />
+          <Property Name="FSourceBillNo" Type="String" Nullable="false" MaxLength="510" FixedLength="false" Unicode="true" />
+          <Property Name="FReprocessedAuxQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FReprocessedQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FSelDiscardStockInAuxQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FSelDiscardStockInQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FDiscardStockInAuxQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FDiscardStockInQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FSampleBreakAuxQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FSampleBreakQty" Type="Decimal" Nullable="false" Precision="23" Scale="10" />
+          <Property Name="FResourceID" Type="Int64" Nullable="false" />
+          <Property Name="FAddInterID" Type="Int32" Nullable="false" />
+          <Property Name="FAPSImported" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FAPSLastStatus" Type="Int32" Nullable="false" />
+          <Property Name="FAuxPropID" Type="Int32" Nullable="false" />
+          <Property Name="FOrderBOMEntryID" Type="Int32" Nullable="false" />
+          <Property Name="FStartTimePDA" Type="DateTime" Precision="3" />
+          <Property Name="FIsMakeLowerBill" Type="Boolean" Nullable="false" />
+          <Property Name="FFlowCardStatus" Type="Int32" Nullable="false" />
+          <Property Name="FIsMesStartWork" Type="Int32" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AIS20141015154903ModelContainer" CdmEntityContainer="AIS20141015154903Entities">
+          <EntitySetMapping Name="ICMaxNum">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.ICMaxNumPROD">
+              <MappingFragment StoreEntitySet="ICMaxNum">
+                <ScalarProperty Name="FTableName" ColumnName="FTableName" />
+                <ScalarProperty Name="FMaxNum" ColumnName="FMaxNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ICSubContract">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.ICSubContractPROD">
+              <MappingFragment StoreEntitySet="ICSubContract">
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FSupplyID" ColumnName="FSupplyID" />
+                <ScalarProperty Name="FDate" ColumnName="FDate" />
+                <ScalarProperty Name="FBillNo" ColumnName="FBillNo" />
+                <ScalarProperty Name="FInvStyle" ColumnName="FInvStyle" />
+                <ScalarProperty Name="FSettleStyle" ColumnName="FSettleStyle" />
+                <ScalarProperty Name="FCurrencyID" ColumnName="FCurrencyID" />
+                <ScalarProperty Name="FDepartment" ColumnName="FDepartment" />
+                <ScalarProperty Name="FSettleDate" ColumnName="FSettleDate" />
+                <ScalarProperty Name="FExchangeRate" ColumnName="FExchangeRate" />
+                <ScalarProperty Name="FEmployee" ColumnName="FEmployee" />
+                <ScalarProperty Name="FMangerID" ColumnName="FMangerID" />
+                <ScalarProperty Name="FSummary" ColumnName="FSummary" />
+                <ScalarProperty Name="FCheckerID" ColumnName="FCheckerID" />
+                <ScalarProperty Name="FCheckDate" ColumnName="FCheckDate" />
+                <ScalarProperty Name="FBillerID" ColumnName="FBillerID" />
+                <ScalarProperty Name="FCancellation" ColumnName="FCancellation" />
+                <ScalarProperty Name="FClosed" ColumnName="FClosed" />
+                <ScalarProperty Name="FStatus" ColumnName="FStatus" />
+                <ScalarProperty Name="FTranStatus" ColumnName="FTranStatus" />
+                <ScalarProperty Name="FModifyTime" ColumnName="FModifyTime" />
+                <ScalarProperty Name="FClassTypeID" ColumnName="FClassTypeID" />
+                <ScalarProperty Name="FRelateBrID" ColumnName="FRelateBrID" />
+                <ScalarProperty Name="FBrID" ColumnName="FBrID" />
+                <ScalarProperty Name="FPOOrdBillNo" ColumnName="FPOOrdBillNo" />
+                <ScalarProperty Name="FOrderRefuse" ColumnName="FOrderRefuse" />
+                <ScalarProperty Name="FPrintCount" ColumnName="FPrintCount" />
+                <ScalarProperty Name="FExchangeRateType" ColumnName="FExchangeRateType" />
+                <ScalarProperty Name="FClosedDate" ColumnName="FClosedDate" />
+                <ScalarProperty Name="FPlanCategory" ColumnName="FPlanCategory" />
+                <ScalarProperty Name="FDeliveryPlace" ColumnName="FDeliveryPlace" />
+                <ScalarProperty Name="FAccessoryCount" ColumnName="FAccessoryCount" />
+                <ScalarProperty Name="FCloserID" ColumnName="FCloserID" />
+                <ScalarProperty Name="FVersionNo" ColumnName="FVersionNo" />
+                <ScalarProperty Name="FExeStatus" ColumnName="FExeStatus" />
+                <ScalarProperty Name="FText" ColumnName="FText" />
+                <ScalarProperty Name="FHeadSelfP0253" ColumnName="FHeadSelfP0253" />
+                <ScalarProperty Name="FConnectFlag" ColumnName="FConnectFlag" />
+                <ScalarProperty Name="FConcernStatus" ColumnName="FConcernStatus" />
+                <ScalarProperty Name="FSendStatus" ColumnName="FSendStatus" />
+                <ScalarProperty Name="FEnterpriseID" ColumnName="FEnterpriseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ICSubContractEntry">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.ICSubContractEntryPROD">
+              <MappingFragment StoreEntitySet="ICSubContractEntry">
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FEntryID" ColumnName="FEntryID" />
+                <ScalarProperty Name="FIndex" ColumnName="FIndex" />
+                <ScalarProperty Name="FDetailID" ColumnName="FDetailID" />
+                <ScalarProperty Name="FItemID" ColumnName="FItemID" />
+                <ScalarProperty Name="FMapID" ColumnName="FMapID" />
+                <ScalarProperty Name="FMapName" ColumnName="FMapName" />
+                <ScalarProperty Name="FAuxPropID" ColumnName="FAuxPropID" />
+                <ScalarProperty Name="FSecQty" ColumnName="FSecQty" />
+                <ScalarProperty Name="FSecCommitQty" ColumnName="FSecCommitQty" />
+                <ScalarProperty Name="FSecCoefficient" ColumnName="FSecCoefficient" />
+                <ScalarProperty Name="FUnitID" ColumnName="FUnitID" />
+                <ScalarProperty Name="FAuxQty" ColumnName="FAuxQty" />
+                <ScalarProperty Name="FQty" ColumnName="FQty" />
+                <ScalarProperty Name="FAuxPrice" ColumnName="FAuxPrice" />
+                <ScalarProperty Name="FAuxTaxPrice" ColumnName="FAuxTaxPrice" />
+                <ScalarProperty Name="FAmount" ColumnName="FAmount" />
+                <ScalarProperty Name="FDiscountRate" ColumnName="FDiscountRate" />
+                <ScalarProperty Name="FAuxPriceDiscount" ColumnName="FAuxPriceDiscount" />
+                <ScalarProperty Name="FAmtDiscount" ColumnName="FAmtDiscount" />
+                <ScalarProperty Name="FTaxRate" ColumnName="FTaxRate" />
+                <ScalarProperty Name="FTaxAmount" ColumnName="FTaxAmount" />
+                <ScalarProperty Name="FAllAmount" ColumnName="FAllAmount" />
+                <ScalarProperty Name="FStdAllAmount" ColumnName="FStdAllAmount" />
+                <ScalarProperty Name="FPayShipDate" ColumnName="FPayShipDate" />
+                <ScalarProperty Name="FFetchDate" ColumnName="FFetchDate" />
+                <ScalarProperty Name="FBOMInterID" ColumnName="FBOMInterID" />
+                <ScalarProperty Name="FInHighLimit" ColumnName="FInHighLimit" />
+                <ScalarProperty Name="FInLowLimit" ColumnName="FInLowLimit" />
+                <ScalarProperty Name="FNote" ColumnName="FNote" />
+                <ScalarProperty Name="FMrpAutoClosed" ColumnName="FMrpAutoClosed" />
+                <ScalarProperty Name="FMrpClosed" ColumnName="FMrpClosed" />
+                <ScalarProperty Name="FMRPLockFlag" ColumnName="FMRPLockFlag" />
+                <ScalarProperty Name="FClassTypeID_SRC" ColumnName="FClassTypeID_SRC" />
+                <ScalarProperty Name="FEntryID_SRC" ColumnName="FEntryID_SRC" />
+                <ScalarProperty Name="FInterID_SRC" ColumnName="FInterID_SRC" />
+                <ScalarProperty Name="FBillNo_SRC" ColumnName="FBillNo_SRC" />
+                <ScalarProperty Name="FInterIDOrder_SRC" ColumnName="FInterIDOrder_SRC" />
+                <ScalarProperty Name="FEntryIDOrder_SRC" ColumnName="FEntryIDOrder_SRC" />
+                <ScalarProperty Name="FOrderNo" ColumnName="FOrderNo" />
+                <ScalarProperty Name="FInHighLimitQty" ColumnName="FInHighLimitQty" />
+                <ScalarProperty Name="FInLowLimitQty" ColumnName="FInLowLimitQty" />
+                <ScalarProperty Name="FAuxCommitQty" ColumnName="FAuxCommitQty" />
+                <ScalarProperty Name="FCommitQty" ColumnName="FCommitQty" />
+                <ScalarProperty Name="FAuxStockQty" ColumnName="FAuxStockQty" />
+                <ScalarProperty Name="FStockQty" ColumnName="FStockQty" />
+                <ScalarProperty Name="FAuxQtyInvoice" ColumnName="FAuxQtyInvoice" />
+                <ScalarProperty Name="FQtyInvoice" ColumnName="FQtyInvoice" />
+                <ScalarProperty Name="FReceiveAmountFor_Commit" ColumnName="FReceiveAmountFor_Commit" />
+                <ScalarProperty Name="FPlanMode" ColumnName="FPlanMode" />
+                <ScalarProperty Name="FMTONo" ColumnName="FMTONo" />
+                <ScalarProperty Name="FMrpTrackFlag" ColumnName="FMrpTrackFlag" />
+                <ScalarProperty Name="FPORInterID" ColumnName="FPORInterID" />
+                <ScalarProperty Name="FPORNumber" ColumnName="FPORNumber" />
+                <ScalarProperty Name="FBCommitQty" ColumnName="FBCommitQty" />
+                <ScalarProperty Name="FAuxBCommitQty" ColumnName="FAuxBCommitQty" />
+                <ScalarProperty Name="FSecQtyInvoice" ColumnName="FSecQtyInvoice" />
+                <ScalarProperty Name="FSecBCommitQty" ColumnName="FSecBCommitQty" />
+                <ScalarProperty Name="FSecStockQty" ColumnName="FSecStockQty" />
+                <ScalarProperty Name="FBOMCategory" ColumnName="FBOMCategory" />
+                <ScalarProperty Name="FSupConfirm" ColumnName="FSupConfirm" />
+                <ScalarProperty Name="FSupConDate" ColumnName="FSupConDate" />
+                <ScalarProperty Name="FSupConQty" ColumnName="FSupConQty" />
+                <ScalarProperty Name="FSupConMem" ColumnName="FSupConMem" />
+                <ScalarProperty Name="FSupConFetchDate" ColumnName="FSupConFetchDate" />
+                <ScalarProperty Name="FSupConfirmor" ColumnName="FSupConfirmor" />
+                <ScalarProperty Name="FRejectRefuseNote" ColumnName="FRejectRefuseNote" />
+                <ScalarProperty Name="FRefuseNote" ColumnName="FRefuseNote" />
+                <ScalarProperty Name="FEntryAccessoryCount" ColumnName="FEntryAccessoryCount" />
+                <ScalarProperty Name="FAuxDeliveryQty" ColumnName="FAuxDeliveryQty" />
+                <ScalarProperty Name="FDeliveryQty" ColumnName="FDeliveryQty" />
+                <ScalarProperty Name="FQualityRptBillID" ColumnName="FQualityRptBillID" />
+                <ScalarProperty Name="FAuxReceiptQty" ColumnName="FAuxReceiptQty" />
+                <ScalarProperty Name="FReceiptQty" ColumnName="FReceiptQty" />
+                <ScalarProperty Name="FAuxReturnQty" ColumnName="FAuxReturnQty" />
+                <ScalarProperty Name="FReturnQty" ColumnName="FReturnQty" />
+                <ScalarProperty Name="FCheckMethod" ColumnName="FCheckMethod" />
+                <ScalarProperty Name="FIsCheck" ColumnName="FIsCheck" />
+                <ScalarProperty Name="FPayApplyAmountFor_Commit" ColumnName="FPayApplyAmountFor_Commit" />
+                <ScalarProperty Name="FCommitAmt" ColumnName="FCommitAmt" />
+                <ScalarProperty Name="FCommitAmtTax" ColumnName="FCommitAmtTax" />
+                <ScalarProperty Name="FCommitStdAmtInTax" ColumnName="FCommitStdAmtInTax" />
+                <ScalarProperty Name="FCommitTax" ColumnName="FCommitTax" />
+                <ScalarProperty Name="FStockQtyOnlyForShow" ColumnName="FStockQtyOnlyForShow" />
+                <ScalarProperty Name="FPayReqPayAmountFor" ColumnName="FPayReqPayAmountFor" />
+                <ScalarProperty Name="FPrice" ColumnName="FPrice" />
+                <ScalarProperty Name="FOrderBOMEntryID" ColumnName="FOrderBOMEntryID" />
+                <ScalarProperty Name="FOutSourceInterID" ColumnName="FOutSourceInterID" />
+                <ScalarProperty Name="FOutSourceEntryID" ColumnName="FOutSourceEntryID" />
+                <ScalarProperty Name="FOutSourceTranType" ColumnName="FOutSourceTranType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POOrder">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.POOrderPROD">
+              <MappingFragment StoreEntitySet="POOrder">
+                <ScalarProperty Name="FBrNo" ColumnName="FBrNo" />
+                <ScalarProperty Name="FTranType" ColumnName="FTranType" />
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FBillNo" ColumnName="FBillNo" />
+                <ScalarProperty Name="FSupplyID" ColumnName="FSupplyID" />
+                <ScalarProperty Name="FDate" ColumnName="FDate" />
+                <ScalarProperty Name="FEmpID" ColumnName="FEmpID" />
+                <ScalarProperty Name="FDeptID" ColumnName="FDeptID" />
+                <ScalarProperty Name="FCurrencyID" ColumnName="FCurrencyID" />
+                <ScalarProperty Name="FCheckerID" ColumnName="FCheckerID" />
+                <ScalarProperty Name="FBillerID" ColumnName="FBillerID" />
+                <ScalarProperty Name="FMangerID" ColumnName="FMangerID" />
+                <ScalarProperty Name="FClosed" ColumnName="FClosed" />
+                <ScalarProperty Name="FTranStatus" ColumnName="FTranStatus" />
+                <ScalarProperty Name="FExchangeRate" ColumnName="FExchangeRate" />
+                <ScalarProperty Name="FStatus" ColumnName="FStatus" />
+                <ScalarProperty Name="FCancellation" ColumnName="FCancellation" />
+                <ScalarProperty Name="FPOStyle" ColumnName="FPOStyle" />
+                <ScalarProperty Name="FMultiCheckLevel1" ColumnName="FMultiCheckLevel1" />
+                <ScalarProperty Name="FMultiCheckLevel2" ColumnName="FMultiCheckLevel2" />
+                <ScalarProperty Name="FMultiCheckLevel3" ColumnName="FMultiCheckLevel3" />
+                <ScalarProperty Name="FMultiCheckLevel4" ColumnName="FMultiCheckLevel4" />
+                <ScalarProperty Name="FMultiCheckLevel5" ColumnName="FMultiCheckLevel5" />
+                <ScalarProperty Name="FMultiCheckLevel6" ColumnName="FMultiCheckLevel6" />
+                <ScalarProperty Name="FMultiCheckDate1" ColumnName="FMultiCheckDate1" />
+                <ScalarProperty Name="FMultiCheckDate2" ColumnName="FMultiCheckDate2" />
+                <ScalarProperty Name="FMultiCheckDate3" ColumnName="FMultiCheckDate3" />
+                <ScalarProperty Name="FMultiCheckDate4" ColumnName="FMultiCheckDate4" />
+                <ScalarProperty Name="FMultiCheckDate5" ColumnName="FMultiCheckDate5" />
+                <ScalarProperty Name="FMultiCheckDate6" ColumnName="FMultiCheckDate6" />
+                <ScalarProperty Name="FCurCheckLevel" ColumnName="FCurCheckLevel" />
+                <ScalarProperty Name="FRelateBrID" ColumnName="FRelateBrID" />
+                <ScalarProperty Name="FOrderAffirm" ColumnName="FOrderAffirm" />
+                <ScalarProperty Name="FCashDiscount" ColumnName="FCashDiscount" />
+                <ScalarProperty Name="FCheckDate" ColumnName="FCheckDate" />
+                <ScalarProperty Name="FExplanation" ColumnName="FExplanation" />
+                <ScalarProperty Name="FFetchAdd" ColumnName="FFetchAdd" />
+                <ScalarProperty Name="FSettleDate" ColumnName="FSettleDate" />
+                <ScalarProperty Name="FSettleID" ColumnName="FSettleID" />
+                <ScalarProperty Name="FSelTranType" ColumnName="FSelTranType" />
+                <ScalarProperty Name="FChildren" ColumnName="FChildren" />
+                <ScalarProperty Name="FBrID" ColumnName="FBrID" />
+                <ScalarProperty Name="FPOOrdBillNo" ColumnName="FPOOrdBillNo" />
+                <ScalarProperty Name="FAreaPS" ColumnName="FAreaPS" />
+                <ScalarProperty Name="FClassTypeID" ColumnName="FClassTypeID" />
+                <ScalarProperty Name="FTotalCostFor" ColumnName="FTotalCostFor" />
+                <ScalarProperty Name="FlastModyDate" ColumnName="FlastModyDate" />
+                <ScalarProperty Name="FOperDate" ColumnName="FOperDate" />
+                <ScalarProperty Name="FManageType" ColumnName="FManageType" />
+                <ScalarProperty Name="FSysStatus" ColumnName="FSysStatus" />
+                <ScalarProperty Name="FVersionNo" ColumnName="FVersionNo" />
+                <ScalarProperty Name="FChangeDate" ColumnName="FChangeDate" />
+                <ScalarProperty Name="FChangeCauses" ColumnName="FChangeCauses" />
+                <ScalarProperty Name="FChangeMark" ColumnName="FChangeMark" />
+                <ScalarProperty Name="FChangeUser" ColumnName="FChangeUser" />
+                <ScalarProperty Name="FValidaterName" ColumnName="FValidaterName" />
+                <ScalarProperty Name="FConsignee" ColumnName="FConsignee" />
+                <ScalarProperty Name="FPrintCount" ColumnName="FPrintCount" />
+                <ScalarProperty Name="FExchangeRateType" ColumnName="FExchangeRateType" />
+                <ScalarProperty Name="FDeliveryPlace" ColumnName="FDeliveryPlace" />
+                <ScalarProperty Name="FAccessoryCount" ColumnName="FAccessoryCount" />
+                <ScalarProperty Name="FPOMode" ColumnName="FPOMode" />
+                <ScalarProperty Name="FPlanCategory" ColumnName="FPlanCategory" />
+                <ScalarProperty Name="FLastAlterBillNo" ColumnName="FLastAlterBillNo" />
+                <ScalarProperty Name="FHeadSelfP0252" ColumnName="FHeadSelfP0252" />
+                <ScalarProperty Name="FMultiCheckStatus" ColumnName="FMultiCheckStatus" />
+                <ScalarProperty Name="FHeadSelfP0253" ColumnName="FHeadSelfP0253" />
+                <ScalarProperty Name="FCloseUser" ColumnName="FCloseUser" />
+                <ScalarProperty Name="FCloseDate" ColumnName="FCloseDate" />
+                <ScalarProperty Name="FCloseCauses" ColumnName="FCloseCauses" />
+                <ScalarProperty Name="FSendStatus" ColumnName="FSendStatus" />
+                <ScalarProperty Name="FEnterpriseID" ColumnName="FEnterpriseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POOrderEntry">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.POOrderEntryPROD">
+              <MappingFragment StoreEntitySet="POOrderEntry">
+                <ScalarProperty Name="FBrNo" ColumnName="FBrNo" />
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FEntryID" ColumnName="FEntryID" />
+                <ScalarProperty Name="FItemID" ColumnName="FItemID" />
+                <ScalarProperty Name="FQty" ColumnName="FQty" />
+                <ScalarProperty Name="FCommitQty" ColumnName="FCommitQty" />
+                <ScalarProperty Name="FDate" ColumnName="FDate" />
+                <ScalarProperty Name="FPrice" ColumnName="FPrice" />
+                <ScalarProperty Name="FAmount" ColumnName="FAmount" />
+                <ScalarProperty Name="FTaxRate" ColumnName="FTaxRate" />
+                <ScalarProperty Name="FTax" ColumnName="FTax" />
+                <ScalarProperty Name="FTaxAmount" ColumnName="FTaxAmount" />
+                <ScalarProperty Name="FNote" ColumnName="FNote" />
+                <ScalarProperty Name="FUnitID" ColumnName="FUnitID" />
+                <ScalarProperty Name="FAuxCommitQty" ColumnName="FAuxCommitQty" />
+                <ScalarProperty Name="FAuxPrice" ColumnName="FAuxPrice" />
+                <ScalarProperty Name="FAuxQty" ColumnName="FAuxQty" />
+                <ScalarProperty Name="FSourceEntryID" ColumnName="FSourceEntryID" />
+                <ScalarProperty Name="FCess" ColumnName="FCess" />
+                <ScalarProperty Name="FStockQty" ColumnName="FStockQty" />
+                <ScalarProperty Name="FAuxStockQty" ColumnName="FAuxStockQty" />
+                <ScalarProperty Name="FMapNumber" ColumnName="FMapNumber" />
+                <ScalarProperty Name="FMapName" ColumnName="FMapName" />
+                <ScalarProperty Name="FAllAmount" ColumnName="FAllAmount" />
+                <ScalarProperty Name="FAuxPropID" ColumnName="FAuxPropID" />
+                <ScalarProperty Name="FAuxPriceDiscount" ColumnName="FAuxPriceDiscount" />
+                <ScalarProperty Name="FPriceDiscount" ColumnName="FPriceDiscount" />
+                <ScalarProperty Name="FQtyInvoice" ColumnName="FQtyInvoice" />
+                <ScalarProperty Name="FQtyInvoiceBase" ColumnName="FQtyInvoiceBase" />
+                <ScalarProperty Name="FAuxTaxPrice" ColumnName="FAuxTaxPrice" />
+                <ScalarProperty Name="FTaxPrice" ColumnName="FTaxPrice" />
+                <ScalarProperty Name="FReceiveAmountFor_Commit" ColumnName="FReceiveAmountFor_Commit" />
+                <ScalarProperty Name="FReceiveAmount_Commit" ColumnName="FReceiveAmount_Commit" />
+                <ScalarProperty Name="FSecCoefficient" ColumnName="FSecCoefficient" />
+                <ScalarProperty Name="FSecQty" ColumnName="FSecQty" />
+                <ScalarProperty Name="FSecCommitQty" ColumnName="FSecCommitQty" />
+                <ScalarProperty Name="FSourceTranType" ColumnName="FSourceTranType" />
+                <ScalarProperty Name="FSourceInterId" ColumnName="FSourceInterId" />
+                <ScalarProperty Name="FSourceBillNo" ColumnName="FSourceBillNo" />
+                <ScalarProperty Name="FContractInterID" ColumnName="FContractInterID" />
+                <ScalarProperty Name="FContractEntryID" ColumnName="FContractEntryID" />
+                <ScalarProperty Name="FContractBillNo" ColumnName="FContractBillNo" />
+                <ScalarProperty Name="FMRPLockFlag" ColumnName="FMRPLockFlag" />
+                <ScalarProperty Name="FAuxQtyInvoice" ColumnName="FAuxQtyInvoice" />
+                <ScalarProperty Name="FMrpClosed" ColumnName="FMrpClosed" />
+                <ScalarProperty Name="FDetailID" ColumnName="FDetailID" />
+                <ScalarProperty Name="FMapID" ColumnName="FMapID" />
+                <ScalarProperty Name="FSProducingAreaID" ColumnName="FSProducingAreaID" />
+                <ScalarProperty Name="FAmtDiscount" ColumnName="FAmtDiscount" />
+                <ScalarProperty Name="FCheckAmount" ColumnName="FCheckAmount" />
+                <ScalarProperty Name="FMrpAutoClosed" ColumnName="FMrpAutoClosed" />
+                <ScalarProperty Name="FPayApplyAmountFor_Commit" ColumnName="FPayApplyAmountFor_Commit" />
+                <ScalarProperty Name="FPayApplyAmount_Commit" ColumnName="FPayApplyAmount_Commit" />
+                <ScalarProperty Name="FSecStockQty" ColumnName="FSecStockQty" />
+                <ScalarProperty Name="FSecInvoiceQty" ColumnName="FSecInvoiceQty" />
+                <ScalarProperty Name="FPlanMode" ColumnName="FPlanMode" />
+                <ScalarProperty Name="FMTONo" ColumnName="FMTONo" />
+                <ScalarProperty Name="FDescount" ColumnName="FDescount" />
+                <ScalarProperty Name="FSupConfirm" ColumnName="FSupConfirm" />
+                <ScalarProperty Name="FSupConDate" ColumnName="FSupConDate" />
+                <ScalarProperty Name="FSupConQty" ColumnName="FSupConQty" />
+                <ScalarProperty Name="FSupConMem" ColumnName="FSupConMem" />
+                <ScalarProperty Name="FSupConFetchDate" ColumnName="FSupConFetchDate" />
+                <ScalarProperty Name="FSupConfirmor" ColumnName="FSupConfirmor" />
+                <ScalarProperty Name="FQualityRptBillID" ColumnName="FQualityRptBillID" />
+                <ScalarProperty Name="FLockByAlter" ColumnName="FLockByAlter" />
+                <ScalarProperty Name="FDeliveryQty" ColumnName="FDeliveryQty" />
+                <ScalarProperty Name="FAuxDeliveryQty" ColumnName="FAuxDeliveryQty" />
+                <ScalarProperty Name="FSecDeliveryQty" ColumnName="FSecDeliveryQty" />
+                <ScalarProperty Name="FRejectRefuseNote" ColumnName="FRejectRefuseNote" />
+                <ScalarProperty Name="FRefuseNote" ColumnName="FRefuseNote" />
+                <ScalarProperty Name="FLockBySupplier" ColumnName="FLockBySupplier" />
+                <ScalarProperty Name="FEntryAccessoryCount" ColumnName="FEntryAccessoryCount" />
+                <ScalarProperty Name="FPRInterID" ColumnName="FPRInterID" />
+                <ScalarProperty Name="FPREntryID" ColumnName="FPREntryID" />
+                <ScalarProperty Name="FAuxReceiptQty" ColumnName="FAuxReceiptQty" />
+                <ScalarProperty Name="FReceiptQty" ColumnName="FReceiptQty" />
+                <ScalarProperty Name="FAuxReturnQty" ColumnName="FAuxReturnQty" />
+                <ScalarProperty Name="FReturnQty" ColumnName="FReturnQty" />
+                <ScalarProperty Name="FCheckMethod" ColumnName="FCheckMethod" />
+                <ScalarProperty Name="FIsCheck" ColumnName="FIsCheck" />
+                <ScalarProperty Name="FAmountExceptDisCount" ColumnName="FAmountExceptDisCount" />
+                <ScalarProperty Name="FAllAmountExceptDisCount" ColumnName="FAllAmountExceptDisCount" />
+                <ScalarProperty Name="FEntryDisCount" ColumnName="FEntryDisCount" />
+                <ScalarProperty Name="FCommitAmt" ColumnName="FCommitAmt" />
+                <ScalarProperty Name="FCommitAmtTax" ColumnName="FCommitAmtTax" />
+                <ScalarProperty Name="FCommitTax" ColumnName="FCommitTax" />
+                <ScalarProperty Name="FPayReqPayAmountFor" ColumnName="FPayReqPayAmountFor" />
+                <ScalarProperty Name="FEntrySelfP0266" ColumnName="FEntrySelfP0266" />
+                <ScalarProperty Name="FEntrySelfP0268" ColumnName="FEntrySelfP0268" />
+                <ScalarProperty Name="FEntrySelfP0269" ColumnName="FEntrySelfP0269" />
+                <ScalarProperty Name="FEntrySelfP0270" ColumnName="FEntrySelfP0270" />
+                <ScalarProperty Name="FCloseEntryUser" ColumnName="FCloseEntryUser" />
+                <ScalarProperty Name="FCloseEntryDate" ColumnName="FCloseEntryDate" />
+                <ScalarProperty Name="FCloseEntryCauses" ColumnName="FCloseEntryCauses" />
+                <ScalarProperty Name="FOutSourceInterID" ColumnName="FOutSourceInterID" />
+                <ScalarProperty Name="FOutSourceEntryID" ColumnName="FOutSourceEntryID" />
+                <ScalarProperty Name="FOutSourceTranType" ColumnName="FOutSourceTranType" />
+                <ScalarProperty Name="FBatchNo" ColumnName="FBatchNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PPBOM">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.PPBOMPROD">
+              <MappingFragment StoreEntitySet="PPBOM">
+                <ScalarProperty Name="FBrNo" ColumnName="FBrNo" />
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FBillNo" ColumnName="FBillNo" />
+                <ScalarProperty Name="FTranType" ColumnName="FTranType" />
+                <ScalarProperty Name="FDate" ColumnName="FDate" />
+                <ScalarProperty Name="FBillerID" ColumnName="FBillerID" />
+                <ScalarProperty Name="FCheckerID" ColumnName="FCheckerID" />
+                <ScalarProperty Name="FCheckDate" ColumnName="FCheckDate" />
+                <ScalarProperty Name="FStatus" ColumnName="FStatus" />
+                <ScalarProperty Name="FICMOInterID" ColumnName="FICMOInterID" />
+                <ScalarProperty Name="FCancellation" ColumnName="FCancellation" />
+                <ScalarProperty Name="FItemID" ColumnName="FItemID" />
+                <ScalarProperty Name="FUnitID" ColumnName="FUnitID" />
+                <ScalarProperty Name="FAuxQty" ColumnName="FAuxQty" />
+                <ScalarProperty Name="FType" ColumnName="FType" />
+                <ScalarProperty Name="FStockType" ColumnName="FStockType" />
+                <ScalarProperty Name="FWorkSHop" ColumnName="FWorkSHop" />
+                <ScalarProperty Name="FOrderInterID" ColumnName="FOrderInterID" />
+                <ScalarProperty Name="FOrderBillNo" ColumnName="FOrderBillNo" />
+                <ScalarProperty Name="FChangeTimes" ColumnName="FChangeTimes" />
+                <ScalarProperty Name="FOrderEntryID" ColumnName="FOrderEntryID" />
+                <ScalarProperty Name="FPrintCount" ColumnName="FPrintCount" />
+                <ScalarProperty Name="FSelTranType" ColumnName="FSelTranType" />
+                <ScalarProperty Name="FAuxPropID" ColumnName="FAuxPropID" />
+                <ScalarProperty Name="FMultiCheckStatus" ColumnName="FMultiCheckStatus" />
+                <ScalarProperty Name="FICMOBillNo" ColumnName="FICMOBillNo" />
+                <ScalarProperty Name="FHeadSelfY0227" ColumnName="FHeadSelfY0227" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PPBOMEntry">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.PPBOMEntryPROD">
+              <MappingFragment StoreEntitySet="PPBOMEntry">
+                <ScalarProperty Name="FBrNo" ColumnName="FBrNo" />
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FEntryID" ColumnName="FEntryID" />
+                <ScalarProperty Name="FItemID" ColumnName="FItemID" />
+                <ScalarProperty Name="FBatchNo" ColumnName="FBatchNo" />
+                <ScalarProperty Name="FUnitID" ColumnName="FUnitID" />
+                <ScalarProperty Name="FQtyMust" ColumnName="FQtyMust" />
+                <ScalarProperty Name="FAuxQtyMust" ColumnName="FAuxQtyMust" />
+                <ScalarProperty Name="FQty" ColumnName="FQty" />
+                <ScalarProperty Name="FAuxQty" ColumnName="FAuxQty" />
+                <ScalarProperty Name="FMachinePos" ColumnName="FMachinePos" />
+                <ScalarProperty Name="FSequenceID" ColumnName="FSequenceID" />
+                <ScalarProperty Name="FStockID" ColumnName="FStockID" />
+                <ScalarProperty Name="FNote" ColumnName="FNote" />
+                <ScalarProperty Name="FSourceEntryID" ColumnName="FSourceEntryID" />
+                <ScalarProperty Name="FQtyScrap" ColumnName="FQtyScrap" />
+                <ScalarProperty Name="FAuxQtyScrap" ColumnName="FAuxQtyScrap" />
+                <ScalarProperty Name="FScrap" ColumnName="FScrap" />
+                <ScalarProperty Name="FSendItemDate" ColumnName="FSendItemDate" />
+                <ScalarProperty Name="FQtyPick" ColumnName="FQtyPick" />
+                <ScalarProperty Name="FAuxQtyPick" ColumnName="FAuxQtyPick" />
+                <ScalarProperty Name="FSPID" ColumnName="FSPID" />
+                <ScalarProperty Name="FMaterielType" ColumnName="FMaterielType" />
+                <ScalarProperty Name="FOperID" ColumnName="FOperID" />
+                <ScalarProperty Name="FBackFlush" ColumnName="FBackFlush" />
+                <ScalarProperty Name="FMarshalType" ColumnName="FMarshalType" />
+                <ScalarProperty Name="FStockType" ColumnName="FStockType" />
+                <ScalarProperty Name="FQtyBackFlush" ColumnName="FQtyBackFlush" />
+                <ScalarProperty Name="FStockQty" ColumnName="FStockQty" />
+                <ScalarProperty Name="FAuxStockQty" ColumnName="FAuxStockQty" />
+                <ScalarProperty Name="FAuxQtyLoss" ColumnName="FAuxQtyLoss" />
+                <ScalarProperty Name="FQtyLoss" ColumnName="FQtyLoss" />
+                <ScalarProperty Name="FBOMInPutQTY" ColumnName="FBOMInPutQTY" />
+                <ScalarProperty Name="FWIPQTY" ColumnName="FWIPQTY" />
+                <ScalarProperty Name="FWIPAuxQTY" ColumnName="FWIPAuxQTY" />
+                <ScalarProperty Name="FLockFlag" ColumnName="FLockFlag" />
+                <ScalarProperty Name="FSelDiscardQty" ColumnName="FSelDiscardQty" />
+                <ScalarProperty Name="FSelDiscardAuxQty" ColumnName="FSelDiscardAuxQty" />
+                <ScalarProperty Name="FDiscardQty" ColumnName="FDiscardQty" />
+                <ScalarProperty Name="FDiscardAuxQty" ColumnName="FDiscardAuxQty" />
+                <ScalarProperty Name="FBomInputAuxQty" ColumnName="FBomInputAuxQty" />
+                <ScalarProperty Name="FICItemReplaceID" ColumnName="FICItemReplaceID" />
+                <ScalarProperty Name="FQtySupply" ColumnName="FQtySupply" />
+                <ScalarProperty Name="FAuxQtySupply" ColumnName="FAuxQtySupply" />
+                <ScalarProperty Name="FOperSN" ColumnName="FOperSN" />
+                <ScalarProperty Name="FBomInterID" ColumnName="FBomInterID" />
+                <ScalarProperty Name="FSelTransLateAuxQty" ColumnName="FSelTransLateAuxQty" />
+                <ScalarProperty Name="FSelTransLateQty" ColumnName="FSelTransLateQty" />
+                <ScalarProperty Name="FTransLateAuxQty" ColumnName="FTransLateAuxQty" />
+                <ScalarProperty Name="FTransLateQty" ColumnName="FTransLateQty" />
+                <ScalarProperty Name="FICMOInterID" ColumnName="FICMOInterID" />
+                <ScalarProperty Name="FChangeTimes" ColumnName="FChangeTimes" />
+                <ScalarProperty Name="FPositionNo" ColumnName="FPositionNo" />
+                <ScalarProperty Name="FItemSize" ColumnName="FItemSize" />
+                <ScalarProperty Name="FItemSuite" ColumnName="FItemSuite" />
+                <ScalarProperty Name="FNote1" ColumnName="FNote1" />
+                <ScalarProperty Name="FNote2" ColumnName="FNote2" />
+                <ScalarProperty Name="FNote3" ColumnName="FNote3" />
+                <ScalarProperty Name="FPlanMode" ColumnName="FPlanMode" />
+                <ScalarProperty Name="FMTONo" ColumnName="FMTONo" />
+                <ScalarProperty Name="FOrderEntryID" ColumnName="FOrderEntryID" />
+                <ScalarProperty Name="FQtyConsume" ColumnName="FQtyConsume" />
+                <ScalarProperty Name="FAuxQtyConsume" ColumnName="FAuxQtyConsume" />
+                <ScalarProperty Name="FDetailID" ColumnName="FDetailID" />
+                <ScalarProperty Name="FItemConvertType" ColumnName="FItemConvertType" />
+                <ScalarProperty Name="FSubsBillEntryID" ColumnName="FSubsBillEntryID" />
+                <ScalarProperty Name="FBomDetailID" ColumnName="FBomDetailID" />
+                <ScalarProperty Name="FICSubsID" ColumnName="FICSubsID" />
+                <ScalarProperty Name="FICSubsEntryID" ColumnName="FICSubsEntryID" />
+                <ScalarProperty Name="FIsKeyItem" ColumnName="FIsKeyItem" />
+                <ScalarProperty Name="FPriorityID" ColumnName="FPriorityID" />
+                <ScalarProperty Name="FAuxPropID" ColumnName="FAuxPropID" />
+                <ScalarProperty Name="FOrderBOMInterID" ColumnName="FOrderBOMInterID" />
+                <ScalarProperty Name="FOrderBOMEntryID" ColumnName="FOrderBOMEntryID" />
+                <ScalarProperty Name="FPlanQtyReq" ColumnName="FPlanQtyReq" />
+                <ScalarProperty Name="FPTLQty" ColumnName="FPTLQty" />
+                <ScalarProperty Name="FSelDiscardStockInQty" ColumnName="FSelDiscardStockInQty" />
+                <ScalarProperty Name="FSelDiscardStockInAuxQty" ColumnName="FSelDiscardStockInAuxQty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ICMO">
+            <EntityTypeMapping TypeName="AIS20141015154903Model.ICMOPROD">
+              <MappingFragment StoreEntitySet="ICMO">
+                <ScalarProperty Name="FIsMesStartWork" ColumnName="FIsMesStartWork" />
+                <ScalarProperty Name="FFlowCardStatus" ColumnName="FFlowCardStatus" />
+                <ScalarProperty Name="FIsMakeLowerBill" ColumnName="FIsMakeLowerBill" />
+                <ScalarProperty Name="FStartTimePDA" ColumnName="FStartTimePDA" />
+                <ScalarProperty Name="FOrderBOMEntryID" ColumnName="FOrderBOMEntryID" />
+                <ScalarProperty Name="FAuxPropID" ColumnName="FAuxPropID" />
+                <ScalarProperty Name="FAPSLastStatus" ColumnName="FAPSLastStatus" />
+                <ScalarProperty Name="FAPSImported" ColumnName="FAPSImported" />
+                <ScalarProperty Name="FAddInterID" ColumnName="FAddInterID" />
+                <ScalarProperty Name="FResourceID" ColumnName="FResourceID" />
+                <ScalarProperty Name="FSampleBreakQty" ColumnName="FSampleBreakQty" />
+                <ScalarProperty Name="FSampleBreakAuxQty" ColumnName="FSampleBreakAuxQty" />
+                <ScalarProperty Name="FDiscardStockInQty" ColumnName="FDiscardStockInQty" />
+                <ScalarProperty Name="FDiscardStockInAuxQty" ColumnName="FDiscardStockInAuxQty" />
+                <ScalarProperty Name="FSelDiscardStockInQty" ColumnName="FSelDiscardStockInQty" />
+                <ScalarProperty Name="FSelDiscardStockInAuxQty" ColumnName="FSelDiscardStockInAuxQty" />
+                <ScalarProperty Name="FReprocessedQty" ColumnName="FReprocessedQty" />
+                <ScalarProperty Name="FReprocessedAuxQty" ColumnName="FReprocessedAuxQty" />
+                <ScalarProperty Name="FSourceBillNo" ColumnName="FSourceBillNo" />
+                <ScalarProperty Name="FSourceInterId" ColumnName="FSourceInterId" />
+                <ScalarProperty Name="FSourceTranType" ColumnName="FSourceTranType" />
+                <ScalarProperty Name="FBomCategory" ColumnName="FBomCategory" />
+                <ScalarProperty Name="FPlanCategory" ColumnName="FPlanCategory" />
+                <ScalarProperty Name="FHRReadyTime" ColumnName="FHRReadyTime" />
+                <ScalarProperty Name="FCardClosed" ColumnName="FCardClosed" />
+                <ScalarProperty Name="FVchInterID" ColumnName="FVchInterID" />
+                <ScalarProperty Name="FVchBillNo" ColumnName="FVchBillNo" />
+                <ScalarProperty Name="FStartFlag" ColumnName="FStartFlag" />
+                <ScalarProperty Name="FStockFlag" ColumnName="FStockFlag" />
+                <ScalarProperty Name="FFinClosedate" ColumnName="FFinClosedate" />
+                <ScalarProperty Name="FFinCloseer" ColumnName="FFinCloseer" />
+                <ScalarProperty Name="FFinClosed" ColumnName="FFinClosed" />
+                <ScalarProperty Name="FPrintCount" ColumnName="FPrintCount" />
+                <ScalarProperty Name="FMTONo" ColumnName="FMTONo" />
+                <ScalarProperty Name="FPlanMode" ColumnName="FPlanMode" />
+                <ScalarProperty Name="FPlanConfirmed" ColumnName="FPlanConfirmed" />
+                <ScalarProperty Name="FCloseDate" ColumnName="FCloseDate" />
+                <ScalarProperty Name="FAuxCheckCommitQty" ColumnName="FAuxCheckCommitQty" />
+                <ScalarProperty Name="FCheckCommitQty" ColumnName="FCheckCommitQty" />
+                <ScalarProperty Name="FChangeTimes" ColumnName="FChangeTimes" />
+                <ScalarProperty Name="FAuxInLowLimitQty" ColumnName="FAuxInLowLimitQty" />
+                <ScalarProperty Name="FInLowLimitQty" ColumnName="FInLowLimitQty" />
+                <ScalarProperty Name="FInLowLimit" ColumnName="FInLowLimit" />
+                <ScalarProperty Name="FAuxInHighLimitQty" ColumnName="FAuxInHighLimitQty" />
+                <ScalarProperty Name="FInHighLimitQty" ColumnName="FInHighLimitQty" />
+                <ScalarProperty Name="FInHighLimit" ColumnName="FInHighLimit" />
+                <ScalarProperty Name="FConfirmDate" ColumnName="FConfirmDate" />
+                <ScalarProperty Name="FConfirmerID" ColumnName="FConfirmerID" />
+                <ScalarProperty Name="FHandworkClose" ColumnName="FHandworkClose" />
+                <ScalarProperty Name="FMRPLockFlag" ColumnName="FMRPLockFlag" />
+                <ScalarProperty Name="FCurCheckLevel" ColumnName="FCurCheckLevel" />
+                <ScalarProperty Name="FMultiCheckDate6" ColumnName="FMultiCheckDate6" />
+                <ScalarProperty Name="FMultiCheckDate5" ColumnName="FMultiCheckDate5" />
+                <ScalarProperty Name="FMultiCheckDate4" ColumnName="FMultiCheckDate4" />
+                <ScalarProperty Name="FMultiCheckDate3" ColumnName="FMultiCheckDate3" />
+                <ScalarProperty Name="FMultiCheckDate2" ColumnName="FMultiCheckDate2" />
+                <ScalarProperty Name="FMultiCheckDate1" ColumnName="FMultiCheckDate1" />
+                <ScalarProperty Name="FMultiCheckLevel6" ColumnName="FMultiCheckLevel6" />
+                <ScalarProperty Name="FMultiCheckLevel5" ColumnName="FMultiCheckLevel5" />
+                <ScalarProperty Name="FMultiCheckLevel4" ColumnName="FMultiCheckLevel4" />
+                <ScalarProperty Name="FMultiCheckLevel3" ColumnName="FMultiCheckLevel3" />
+                <ScalarProperty Name="FMultiCheckLevel2" ColumnName="FMultiCheckLevel2" />
+                <ScalarProperty Name="FMultiCheckLevel1" ColumnName="FMultiCheckLevel1" />
+                <ScalarProperty Name="FCustID" ColumnName="FCustID" />
+                <ScalarProperty Name="FGMPBulkQty" ColumnName="FGMPBulkQty" />
+                <ScalarProperty Name="FGMPItemBalance" ColumnName="FGMPItemBalance" />
+                <ScalarProperty Name="FGMPCollectRate" ColumnName="FGMPCollectRate" />
+                <ScalarProperty Name="FGMPBatchNo" ColumnName="FGMPBatchNo" />
+                <ScalarProperty Name="FProcessFee" ColumnName="FProcessFee" />
+                <ScalarProperty Name="FProcessPrice" ColumnName="FProcessPrice" />
+                <ScalarProperty Name="FPlanOrderInterID" ColumnName="FPlanOrderInterID" />
+                <ScalarProperty Name="FScheduleID" ColumnName="FScheduleID" />
+                <ScalarProperty Name="FSubEntryID" ColumnName="FSubEntryID" />
+                <ScalarProperty Name="FUnScheduledAuxQty" ColumnName="FUnScheduledAuxQty" />
+                <ScalarProperty Name="FUnScheduledQty" ColumnName="FUnScheduledQty" />
+                <ScalarProperty Name="FReleasedAuxQty" ColumnName="FReleasedAuxQty" />
+                <ScalarProperty Name="FReleasedQty" ColumnName="FReleasedQty" />
+                <ScalarProperty Name="FProductionLineID" ColumnName="FProductionLineID" />
+                <ScalarProperty Name="FProjectNO" ColumnName="FProjectNO" />
+                <ScalarProperty Name="FSuspend" ColumnName="FSuspend" />
+                <ScalarProperty Name="FAuxStockQty" ColumnName="FAuxStockQty" />
+                <ScalarProperty Name="FStockQty" ColumnName="FStockQty" />
+                <ScalarProperty Name="FCostObjID" ColumnName="FCostObjID" />
+                <ScalarProperty Name="FWorkTypeID" ColumnName="FWorkTypeID" />
+                <ScalarProperty Name="FTaskID" ColumnName="FTaskID" />
+                <ScalarProperty Name="FWaitToolTime" ColumnName="FWaitToolTime" />
+                <ScalarProperty Name="FWaitItemTime" ColumnName="FWaitItemTime" />
+                <ScalarProperty Name="FFixTime" ColumnName="FFixTime" />
+                <ScalarProperty Name="FPowerCutTime" ColumnName="FPowerCutTime" />
+                <ScalarProperty Name="FReadyTIme" ColumnName="FReadyTIme" />
+                <ScalarProperty Name="FFinishTime" ColumnName="FFinishTime" />
+                <ScalarProperty Name="FAuxQtyBack" ColumnName="FAuxQtyBack" />
+                <ScalarProperty Name="FQtyBack" ColumnName="FQtyBack" />
+                <ScalarProperty Name="FAuxQtyPass" ColumnName="FAuxQtyPass" />
+                <ScalarProperty Name="FQtyPass" ColumnName="FQtyPass" />
+                <ScalarProperty Name="FBomInterID" ColumnName="FBomInterID" />
+                <ScalarProperty Name="FMrpClosed" ColumnName="FMrpClosed" />
+                <ScalarProperty Name="FAuxQtyLost" ColumnName="FAuxQtyLost" />
+                <ScalarProperty Name="FAuxQtyForItem" ColumnName="FAuxQtyForItem" />
+                <ScalarProperty Name="FAuxQtyScrap" ColumnName="FAuxQtyScrap" />
+                <ScalarProperty Name="FAuxQtyFinish" ColumnName="FAuxQtyFinish" />
+                <ScalarProperty Name="FFinishDate" ColumnName="FFinishDate" />
+                <ScalarProperty Name="FStartDate" ColumnName="FStartDate" />
+                <ScalarProperty Name="FRoutingID" ColumnName="FRoutingID" />
+                <ScalarProperty Name="FPlanIssueDate" ColumnName="FPlanIssueDate" />
+                <ScalarProperty Name="FQtyLost" ColumnName="FQtyLost" />
+                <ScalarProperty Name="FQtyForItem" ColumnName="FQtyForItem" />
+                <ScalarProperty Name="FQtyScrap" ColumnName="FQtyScrap" />
+                <ScalarProperty Name="FQtyFinish" ColumnName="FQtyFinish" />
+                <ScalarProperty Name="FSupplyID" ColumnName="FSupplyID" />
+                <ScalarProperty Name="FCancellation" ColumnName="FCancellation" />
+                <ScalarProperty Name="FParentInterID" ColumnName="FParentInterID" />
+                <ScalarProperty Name="FPPOrderInterID" ColumnName="FPPOrderInterID" />
+                <ScalarProperty Name="FOrderInterID" ColumnName="FOrderInterID" />
+                <ScalarProperty Name="FAuxQty" ColumnName="FAuxQty" />
+                <ScalarProperty Name="FAuxCommitQty" ColumnName="FAuxCommitQty" />
+                <ScalarProperty Name="FUnitID" ColumnName="FUnitID" />
+                <ScalarProperty Name="FNote" ColumnName="FNote" />
+                <ScalarProperty Name="FClosed" ColumnName="FClosed" />
+                <ScalarProperty Name="FSourceEntryID" ColumnName="FSourceEntryID" />
+                <ScalarProperty Name="FBillerID" ColumnName="FBillerID" />
+                <ScalarProperty Name="FRequesterID" ColumnName="FRequesterID" />
+                <ScalarProperty Name="FCheckDate" ColumnName="FCheckDate" />
+                <ScalarProperty Name="FCheckerID" ColumnName="FCheckerID" />
+                <ScalarProperty Name="FCommitDate" ColumnName="FCommitDate" />
+                <ScalarProperty Name="FConveyerID" ColumnName="FConveyerID" />
+                <ScalarProperty Name="FPlanFinishDate" ColumnName="FPlanFinishDate" />
+                <ScalarProperty Name="FPlanCommitDate" ColumnName="FPlanCommitDate" />
+                <ScalarProperty Name="FCommitQty" ColumnName="FCommitQty" />
+                <ScalarProperty Name="FQty" ColumnName="FQty" />
+                <ScalarProperty Name="FItemID" ColumnName="FItemID" />
+                <ScalarProperty Name="FWorkShop" ColumnName="FWorkShop" />
+                <ScalarProperty Name="FType" ColumnName="FType" />
+                <ScalarProperty Name="FMRP" ColumnName="FMRP" />
+                <ScalarProperty Name="FStatus" ColumnName="FStatus" />
+                <ScalarProperty Name="FTranType" ColumnName="FTranType" />
+                <ScalarProperty Name="FBillNo" ColumnName="FBillNo" />
+                <ScalarProperty Name="FInterID" ColumnName="FInterID" />
+                <ScalarProperty Name="FBrNo" ColumnName="FBrNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

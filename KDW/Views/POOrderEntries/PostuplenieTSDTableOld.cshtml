@@ -1,0 +1,142 @@
+﻿@model IEnumerable<KDW.Models.POOrderEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+<link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.3/dist/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.18.3/extensions/filter-control/utils.min.js"></script>
+
+<style>
+    .description {
+        width: 200px;
+        word - wrap: break-word;
+        word -break: break-all;
+        font-size: 10px
+    }
+</style>
+<table id="T" class="table table-bordered table-striped"
+       id="table"
+       data-toggle="table"
+       data-filter-control="true">
+    @if (Model != null)
+    {
+        <thead>
+            <tr>
+
+                <th data-field="Nomenklatura" data-filter-control="input" data-sortable="true">
+                    @Resources.Resource.Nomenklatura
+                </th>
+                <th data-field="QTY" data-filter-control="input" data-sortable="true">
+                    <p>
+                        @Resources.Resource.QTYVZakaze
+                    </p>
+                    <p>
+                        @Resources.Resource.QTYPostupilo
+                    </p>
+                
+                </th>
+                <th data-field="Postavshik" data-filter-control="input" data-sortable="true">
+                    <p>
+                        @Resources.Resource.Postavshik
+                    </p>
+                    <p>
+                        @Resources.Resource.ZakazPostavshiku
+                    </p>
+                      
+                </th>
+
+
+
+
+            </tr>
+
+
+        </thead>
+
+        foreach (var item in Model)
+        {
+            bool Vosstanovit = false;
+            string Cvet = "";
+            string BtnText = Resources.Resource.PostuplenieNaSklad;
+            string BtnCvet = "btn btn-success";
+          
+            if (item.FQty==item.FCommitQty)
+            {
+                Cvet = "success";
+                Vosstanovit = true;
+                BtnCvet = "btn btn-success";
+                BtnText = Resources.Resource.VosstanovitQR;
+            }
+<tr class="@Cvet ">
+
+    <td>
+        <p>
+            @item.t_Item.FNumber
+        </p>
+        <p class="description">
+            @item.t_Item.FName
+        </p>
+
+    </td>
+    <td>
+        <p>
+            @Math.Round(item.FQty, 2)
+        </p>
+        <p>
+            @Math.Round(item.FCommitQty, 2)
+        </p>
+        <p title="Дата поступления">
+            @item.FCloseEntryDate
+        </p>
+    </td>
+    <td>
+        <p>
+            @item.POOrder.t_Supplier.FName
+        </p>
+        <p>
+            @item.POOrder.FBillNo
+        </p>
+
+
+
+        @if (!Vosstanovit)
+        {
+            <p>
+                @Html.ActionLink(BtnText, "NewPostuplenie", new { id = item.FInterID, EntryId = item.FEntryID }, new { @class = "btn btn-success " })
+            </p>
+        }
+        else
+        {
+    <p>
+        @Html.ActionLink(BtnText, "VosstanovitPostuplenie", new { id = item.FInterID, EntryId = item.FEntryID }, new { @class = "btn btn-success " })
+    </p>
+            
+        }
+
+
+       
+    </td>
+
+</tr>
+
+        }
+    }
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

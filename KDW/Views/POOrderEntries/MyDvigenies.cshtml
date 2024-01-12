@@ -1,0 +1,104 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<Center>
+    <h5>@Resources.Resource.LastDvig @ViewBag.U.Name</h5>
+</Center>
+
+
+    @foreach (var X in ViewBag.Dvigs)
+    {
+      
+
+<div class="btn btn-default" style="height:160px;width:200px;font-size:14px" title=" @X.CurrentFBillNo @X.Date.ToString("MM-dd HH:mm")">
+    <div class="btn btn-success" style="position: inherit; overflow: auto; left: 10px; top: 10px; width: 180px; height: 30px; border: thin; font-size: 12px; background-color: powderblue; color: black ">
+        @X.t_Item.FNumber
+    </div>
+    
+    <p>
+        <div class="btn btn-info" style="position: inherit; overflow: auto; left: 20px; top: 70px; width: 90px; height: 30px; border: thin; font-size: 10px; background-color: powderblue; color: black ">
+            @X.CurrentFBillNo
+          
+
+        </div>
+
+        <div class="btn btn-info" style="position: inherit; overflow: auto; left: 20px; top: 70px; width: 80px; height: 30px; border: thin; font-size: 12px; background-color: powderblue;color:black">
+            @Math.Round(X.QTYFact, 0)
+        </div>
+    </p>
+
+    <p>
+       
+        <div class="btn btn-success" style="position: inherit; overflow: auto; width: 170px; height: 27px; border: thin; font-size: 10px; -webkit-appearance: none; " onclick="Print(@X.Id)">
+            QR
+        </div>
+    </p>
+    <p>
+
+             @Html.ActionLink("Edit", "Index", "ICStockBillEntries", new { FBillNo = X.CurrentFBillNo }, new { @class = "btn btn-success ", @style = "width: 170px; height: 27px;font-size=10px;" })
+
+       
+
+    
+    </p>
+    <p>
+
+    </p>
+
+</div>
+
+          
+
+
+       
+    }
+
+
+
+
+<div class="container">
+
+
+
+    <p>
+        <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+    </p>
+    <p>
+        <a href="/Home/SkladskoiUchet" class="btn  btn-success btn-block allwidth">@Resources.Resource.SkladskoiUchet &raquo;</a>
+    </p>
+   
+
+
+
+
+</div>
+
+<script>
+    function ShowModal(QRID) {
+
+        var printurl = "@Url.Action("PrintToPrinterNew", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+
+<script>
+    function Print(QRID)
+    {
+        var url = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID;
+        window.location.replace(url);
+    }
+</script>
+
+
+
+
+
+

@@ -1,0 +1,138 @@
+﻿
+<div id="Menu" style="position: sticky; top: 15px;">
+    <div class="container">
+        <table>
+            <tr style="align-content:center">
+                <td>
+                    <img src="~/Content/Icons/Proizvodstvo.png" width="70" height="70" />
+                </td>
+                <td>
+                    <input class="btn btn-default" id="ZakazPokupatelya" style="height: 100px; font-size: 30px; min-width: 30px;width:300px" value="@ViewBag.ZakazPokupatelya" placeholder="@Resources.Resource.ZakazPostavshiku" />
+                </td>
+                <td>
+                    <button class="btn btn-success" onclick="SetZakazPokupatelya()" style="height:100px;font-size:30px">Ok</button>
+                </td>
+            </tr>
+            <tr style="align-content:center">
+                <td>
+                    <img src="~/Content/Icons/qr.png" width="70" height="70" />
+                </td>
+                <td>
+                    <input class="btn btn-default" id="QRScan" style="height: 100px; font-size: 30px; min-width: 30px; width: 300px" onkeyup="ScanGP()"  placeholder="@Resources.Resource.OtskaniruiteNomenklaturu" autofocus />
+                </td>
+                <td>
+                    <button class="btn btn-success" onclick="ScanGP()" id="OK" style="height:100px;font-size:30px">Ok</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3"> <p><a href="/Home/Index" class="btn btn-default btn-block form-control">@Resources.Resource.VGlavnoeMenu &raquo;</a></p></td>
+            </tr>
+        </table>
+
+
+    </div>
+</div>
+<div id="Sobrano">
+    @try
+    {
+        <div>
+            @Html.Action("ScanGPTable")
+        </div>
+
+    }
+    catch
+    {
+    }
+</div>
+
+
+
+<script>
+        function SetZakazPokupatelya() {
+           var ZakazPokupatelya = $('#ZakazPokupatelya').val();
+            var url2 = '@Url.Action("ZakazToSession", "GPScans")?ZakazNumber=' + ZakazPokupatelya;
+            var url = '@Url.Action("ScanGPTable", "GPScans")?ZakazNumber='+ZakazPokupatelya ;
+               $.post(url2,
+                    function (data)
+                    {
+                        LoadTable();
+                    }
+                );
+
+
+
+        }
+</script>
+
+<script>
+        function LoadTable() {
+            var Table = $('#Sobrano');
+            var QRString = $('#QRScan').val();
+            var url = '@Url.Action("ScanGPTable", "GPScans")?QRString=' + QRString ;
+            Table.load(url);
+
+
+
+
+
+        }
+</script>
+
+<script>
+
+
+   function Scanning() {
+       var $this = $('QRScan');
+        var $delay = 500;
+
+        clearTimeout($this.data('timer'));
+
+        $this.data('timer', setTimeout(function () {
+            $this.removeData('timer');
+            ScanGP();
+        }, $delay));
+
+    }
+
+</script>
+
+<script>
+        function ScanGP() {
+            var Table = $('#Sobrano');
+            var Ok = $('#Sobrano');
+            var Work = $('#ZakazPokupatelya').val();
+            var QRString = $('#QRScan').val();
+            var url = '@Url.Action("ScanGPAdd", "GPScans")?QRString=' + QRString + '&WorkNumber=' + Work ;
+
+            $.post(url, function (data) {
+                LoadTable();
+                Ok.hide();
+                $('#QRScan').val('');
+                $('#QRScan').focus();
+                Ok.show();
+            }
+            );
+
+
+
+
+        }
+</script>
+
+<script>
+ function RemoveString(Id )
+    {
+
+        var URL = '@Url.Action("RemoveString", "GPScans")';
+        URL = URL + '?Id=' + Id;
+
+
+
+        $.post(URL, function (data)
+        {
+            LoadTable();
+         }
+        );
+
+    }
+</script>

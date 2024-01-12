@@ -1,0 +1,858 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActualStatusOTK" xml:space="preserve">
+    <value>品保状态（限最近100张单据）</value>
+  </data>
+  <data name="AddStellag" xml:space="preserve">
+    <value>添加新货架</value>
+  </data>
+  <data name="AddStreet" xml:space="preserve">
+    <value>添加通道</value>
+  </data>
+  <data name="Admins" xml:space="preserve">
+    <value>管理</value>
+  </data>
+  <data name="AllWorks" xml:space="preserve">
+    <value>查看所有生产任务单</value>
+  </data>
+  <data name="CHGMass" xml:space="preserve">
+    <value>调拨</value>
+  </data>
+  <data name="Childs" xml:space="preserve">
+    <value>收发物料</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>切换语言</value>
+  </data>
+  <data name="CloseBigCode" xml:space="preserve">
+    <value>关闭大二维码</value>
+  </data>
+  <data name="CorrectCIN" xml:space="preserve">
+    <value>更改生产入库数量</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DateEnd" xml:space="preserve">
+    <value>开始日期</value>
+  </data>
+  <data name="DateStart" xml:space="preserve">
+    <value>结束日期</value>
+  </data>
+  <data name="DayResult" xml:space="preserve">
+    <value>当日进仓数量</value>
+  </data>
+  <data name="DayResultDate" xml:space="preserve">
+    <value>指定日期进仓数量</value>
+  </data>
+  <data name="Department" xml:space="preserve">
+    <value>部门</value>
+  </data>
+  <data name="DepartmentWorks" xml:space="preserve">
+    <value>查看车间任务单</value>
+  </data>
+  <data name="DocksToday" xml:space="preserve">
+    <value>当天做的调拨单</value>
+  </data>
+  <data name="Dvigeniya" xml:space="preserve">
+    <value>收发单据</value>
+  </data>
+  <data name="Edinic" xml:space="preserve">
+    <value>个</value>
+  </data>
+  <data name="EditDoc" xml:space="preserve">
+    <value>文件更正</value>
+  </data>
+  <data name="EditQR" xml:space="preserve">
+    <value>更改二维码数量</value>
+  </data>
+  <data name="EndPeremeshenie" xml:space="preserve">
+    <value>完成</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="ErrorCeloeChislo" xml:space="preserve">
+    <value>进仓数量不能小于1. 进仓数量应为整数。</value>
+  </data>
+  <data name="ErrorMnogo" xml:space="preserve">
+    <value>数量大于任务单数量</value>
+  </data>
+  <data name="ErrorNeNaidenBOM" xml:space="preserve">
+    <value>无法找到BOM</value>
+  </data>
+  <data name="ErrorNeNaidenStarWork" xml:space="preserve">
+    <value>未找到主管下达的任务单</value>
+  </data>
+  <data name="ErrorNeNaidenWork" xml:space="preserve">
+    <value>无法找到任务单</value>
+  </data>
+  <data name="ErrorNeOpredelenMOL" xml:space="preserve">
+    <value>无法确定仓库负责人，请手动选择</value>
+  </data>
+  <data name="ErrorNeOpredelenPolzovatel" xml:space="preserve">
+    <value>无法识别用户，请重新登录系统</value>
+  </data>
+  <data name="ErrorNeOpredelenSklad" xml:space="preserve">
+    <value>无法确定进仓仓库</value>
+  </data>
+  <data name="ErrorNeTrebuetsa" xml:space="preserve">
+    <value>本任务单不需要该物料</value>
+  </data>
+  <data name="ErrorNetVQR" xml:space="preserve">
+    <value>您输入的数量大于二维码数量</value>
+  </data>
+  <data name="ErrorOTKNeProiden" xml:space="preserve">
+    <value>未通过质检或判为不良</value>
+  </data>
+  <data name="ErrorSchitivaniiMesta" xml:space="preserve">
+    <value>读取存放位置二维码错误</value>
+  </data>
+  <data name="ErrorVipuskBolsheMax" xml:space="preserve">
+    <value>无法进仓该数量、最多可进仓数量</value>
+  </data>
+  <data name="ErrorZapros" xml:space="preserve">
+    <value>处理中出现错误</value>
+  </data>
+  <data name="Exit" xml:space="preserve">
+    <value>退出程序</value>
+  </data>
+  <data name="FaktQTY" xml:space="preserve">
+    <value>实际库存数量</value>
+  </data>
+  <data name="Find" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="GenerateBIGQR" xml:space="preserve">
+    <value>生成大二维码</value>
+  </data>
+  <data name="GenerateQR" xml:space="preserve">
+    <value>生成二维码</value>
+  </data>
+  <data name="Header" xml:space="preserve">
+    <value>选择采购订单</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>物料信息</value>
+  </data>
+  <data name="InvVedomost" xml:space="preserve">
+    <value>盘点表</value>
+  </data>
+  <data name="IzmeneniyaVnesPlanovi" xml:space="preserve">
+    <value>计划部 做了更改</value>
+  </data>
+  <data name="IzmenitFactOstatok" xml:space="preserve">
+    <value>输入实际库存</value>
+  </data>
+  <data name="IzmenitStatusOTK" xml:space="preserve">
+    <value>是否确定更改质检状态?</value>
+  </data>
+  <data name="KolichestvoNomenklaturi" xml:space="preserve">
+    <value>物料数量</value>
+  </data>
+  <data name="KolichestvoPostupivshee" xml:space="preserve">
+    <value>已入库数量</value>
+  </data>
+  <data name="KolichestvoVZakazePostavshiku" xml:space="preserve">
+    <value>采购订单数量</value>
+  </data>
+  <data name="KomplektovanieNew" xml:space="preserve">
+    <value>新二维码备料</value>
+  </data>
+  <data name="Komplektovka" xml:space="preserve">
+    <value>生产备料（旧）</value>
+  </data>
+  <data name="KomplektWORK" xml:space="preserve">
+    <value>任务单备料</value>
+  </data>
+  <data name="LastDvig" xml:space="preserve">
+    <value>最近生成的二维码</value>
+  </data>
+  <data name="LiniyaSborki" xml:space="preserve">
+    <value>组装线</value>
+  </data>
+  <data name="LoadFile" xml:space="preserve">
+    <value>文件导入</value>
+  </data>
+  <data name="LoadFileVipuska" xml:space="preserve">
+    <value>三天计划导入</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>主页</value>
+  </data>
+  <data name="Manager" xml:space="preserve">
+    <value>经理</value>
+  </data>
+  <data name="MinusovieOstatki" xml:space="preserve">
+    <value>核实在制品的负结余</value>
+  </data>
+  <data name="MognoPeremestitNaProizvodstvo" xml:space="preserve">
+    <value>可发料</value>
+  </data>
+  <data name="MognoPeremestitNeBolee" xml:space="preserve">
+    <value>发料数量不大于</value>
+  </data>
+  <data name="MognoProizvesti" xml:space="preserve">
+    <value>您可以生产</value>
+  </data>
+  <data name="MOL" xml:space="preserve">
+    <value>财产保管负责人</value>
+  </data>
+  <data name="MOL2" xml:space="preserve">
+    <value>负责人</value>
+  </data>
+  <data name="MyDocs" xml:space="preserve">
+    <value>我的单据</value>
+  </data>
+  <data name="MyPostuplenies" xml:space="preserve">
+    <value>我的入库单</value>
+  </data>
+  <data name="NahoditsaNaSklade" xml:space="preserve">
+    <value>所在仓库</value>
+  </data>
+  <data name="NaimenovanieIPartNomer" xml:space="preserve">
+    <value>物料名称和编码</value>
+  </data>
+  <data name="NaznachenieDepartment" xml:space="preserve">
+    <value>指定部门</value>
+  </data>
+  <data name="NaznachenieRoli" xml:space="preserve">
+    <value>指定角色</value>
+  </data>
+  <data name="NaznachitSmenu" xml:space="preserve">
+    <value>排产</value>
+  </data>
+  <data name="NaznachitZadaniyaVPlan" xml:space="preserve">
+    <value>下达未完成任务单</value>
+  </data>
+  <data name="NedostatochnoKomplekta" xml:space="preserve">
+    <value>仓库未发料</value>
+  </data>
+  <data name="NedostatochnoVNZP" xml:space="preserve">
+    <value>无法退回物料，在制品数量不够</value>
+  </data>
+  <data name="NelzaUdalitWork" xml:space="preserve">
+    <value>无法删除进行中的生产任务单。 选择跳过任务单！</value>
+  </data>
+  <data name="NeNaznacheno" xml:space="preserve">
+    <value>未选择生产车间</value>
+  </data>
+  <data name="NeProizvoditsa" xml:space="preserve">
+    <value>不进行生产</value>
+  </data>
+  <data name="NetNaSklade" xml:space="preserve">
+    <value>此编码无库存</value>
+  </data>
+  <data name="NevernyParol" xml:space="preserve">
+    <value>用户名或密码错误</value>
+  </data>
+  <data name="NeVibrano" xml:space="preserve">
+    <value>未选择</value>
+  </data>
+  <data name="Nomenklatura" xml:space="preserve">
+    <value>物料名称</value>
+  </data>
+  <data name="NomenklaturiNedostatochno" xml:space="preserve">
+    <value>数量不能为0</value>
+  </data>
+  <data name="NomerDvigeniya" xml:space="preserve">
+    <value>单据编码</value>
+  </data>
+  <data name="NoWorks" xml:space="preserve">
+    <value>此生产地点无其他生产任务单</value>
+  </data>
+  <data name="NugnoProizvestiZavtra" xml:space="preserve">
+    <value>明天发料数量</value>
+  </data>
+  <data name="ObnovleniePlanaRabot" xml:space="preserve">
+    <value>计划更新</value>
+  </data>
+  <data name="OgranichenieDay" xml:space="preserve">
+    <value>无进仓限制 根据计划数进仓</value>
+  </data>
+  <data name="OgranichenieNomenklatura" xml:space="preserve">
+    <value>组件数量不足。需要更多</value>
+  </data>
+  <data name="OgranicheniePlan" xml:space="preserve">
+    <value>无法进仓。进仓数量多于三天计划数量</value>
+  </data>
+  <data name="OgranichenieWORK" xml:space="preserve">
+    <value>无入库限制</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="OstalosUkomplektovat" xml:space="preserve">
+    <value>待备料数量</value>
+  </data>
+  <data name="OstatkiInWork" xml:space="preserve">
+    <value>所有任务单在制品数量</value>
+  </data>
+  <data name="OstatkiNomenklaturi" xml:space="preserve">
+    <value>即时库存</value>
+  </data>
+  <data name="OstatkiVRazrezeOTK" xml:space="preserve">
+    <value>按品保状态过滤二维码库存</value>
+  </data>
+  <data name="OstatkiVWorks" xml:space="preserve">
+    <value>所有任务单在制品数量</value>
+  </data>
+  <data name="OtchetKomplekt" xml:space="preserve">
+    <value>生产任务领料表</value>
+  </data>
+  <data name="OTK" xml:space="preserve">
+    <value>品保部</value>
+  </data>
+  <data name="Otklonenie" xml:space="preserve">
+    <value>数量差异</value>
+  </data>
+  <data name="OtmenaProvedeniya" xml:space="preserve">
+    <value>反审核</value>
+  </data>
+  <data name="OtmenaScanQR" xml:space="preserve">
+    <value>清除二维码搜索结果</value>
+  </data>
+  <data name="OtskaniruiteNomenklaturu" xml:space="preserve">
+    <value>请扫描二维码</value>
+  </data>
+  <data name="Parent" xml:space="preserve">
+    <value>单据根据</value>
+  </data>
+  <data name="PartNumber" xml:space="preserve">
+    <value>金蝶编码</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="Peredano" xml:space="preserve">
+    <value />
+  </data>
+  <data name="PeremeshaemNaPrVo" xml:space="preserve">
+    <value>生产发料</value>
+  </data>
+  <data name="PeremeshenieNaProizvodstvo" xml:space="preserve">
+    <value>生产发料</value>
+  </data>
+  <data name="PeremeshenieNaSklad" xml:space="preserve">
+    <value>仓库之间调拨</value>
+  </data>
+  <data name="PeremeshenieSoSklada" xml:space="preserve">
+    <value>仓库出库</value>
+  </data>
+  <data name="PeremeshenieUspeshno" xml:space="preserve">
+    <value>物料已转移成功</value>
+  </data>
+  <data name="PeremestitNaDrugoiSklad" xml:space="preserve">
+    <value>移到另一个仓库</value>
+  </data>
+  <data name="PeremestitNaProizvodstvo" xml:space="preserve">
+    <value>发给车间</value>
+  </data>
+  <data name="PeremestitSProizvodstva" xml:space="preserve">
+    <value>成品（半成品）入库</value>
+  </data>
+  <data name="Plan3Days" xml:space="preserve">
+    <value>三天生产计划</value>
+  </data>
+  <data name="Planogramma" xml:space="preserve">
+    <value>仓库布局图</value>
+  </data>
+  <data name="PlanogrammaSearch" xml:space="preserve">
+    <value>仓库平面图（编码搜索）</value>
+  </data>
+  <data name="Planovi" xml:space="preserve">
+    <value>计划部</value>
+  </data>
+  <data name="Podrazdelenie" xml:space="preserve">
+    <value>部门</value>
+  </data>
+  <data name="Podtverdit" xml:space="preserve">
+    <value>确认</value>
+  </data>
+  <data name="PodtverditDvigenie" xml:space="preserve">
+    <value>确认发料/入库/调拨</value>
+  </data>
+  <data name="PodtverditPeremeshenie" xml:space="preserve">
+    <value>确认发料/出入库</value>
+  </data>
+  <data name="PodtverditPeremeshenieSoSklada" xml:space="preserve">
+    <value>调拨</value>
+  </data>
+  <data name="PoiskSklada" xml:space="preserve">
+    <value>仓库代码或名称搜索</value>
+  </data>
+  <data name="Polka" xml:space="preserve">
+    <value>层</value>
+  </data>
+  <data name="PologitNaPolku" xml:space="preserve">
+    <value>更改货架位置</value>
+  </data>
+  <data name="Pomeshenie" xml:space="preserve">
+    <value>X</value>
+  </data>
+  <data name="Postavshik" xml:space="preserve">
+    <value>供应商</value>
+  </data>
+  <data name="PostuplenieNaSklad" xml:space="preserve">
+    <value>仓库入库</value>
+  </data>
+  <data name="PostuplenieNaSkladMass" xml:space="preserve">
+    <value>仓库入库（新二维码）</value>
+  </data>
+  <data name="PostuplenieSohraneno" xml:space="preserve">
+    <value>入库单已成功保存</value>
+  </data>
+  <data name="PostuplenieWINOtchet" xml:space="preserve">
+    <value>入库单报告</value>
+  </data>
+  <data name="PoZaprosuNeNaideno" xml:space="preserve">
+    <value>无相应搜索结果</value>
+  </data>
+  <data name="PrintQR" xml:space="preserve">
+    <value>打印二维码</value>
+  </data>
+  <data name="Procent" xml:space="preserve">
+    <value>当天任务单完成率</value>
+  </data>
+  <data name="ProcessKomplektovania" xml:space="preserve">
+    <value>备料进度</value>
+  </data>
+  <data name="ProcessKomplektovaniya" xml:space="preserve">
+    <value>备料进度</value>
+  </data>
+  <data name="Proizvedeno" xml:space="preserve">
+    <value>已生产数量</value>
+  </data>
+  <data name="Proizvesti" xml:space="preserve">
+    <value>生产数量</value>
+  </data>
+  <data name="Proizvodstvo" xml:space="preserve">
+    <value>生产</value>
+  </data>
+  <data name="Propusk" xml:space="preserve">
+    <value>跳过任务单</value>
+  </data>
+  <data name="ProverteStatusOTK" xml:space="preserve">
+    <value>检查品保状态</value>
+  </data>
+  <data name="QIN" xml:space="preserve">
+    <value>其他入库</value>
+  </data>
+  <data name="QTYFact" xml:space="preserve">
+    <value>实际库存数量</value>
+  </data>
+  <data name="QTYKPeremesheniu" xml:space="preserve">
+    <value>收/发数量</value>
+  </data>
+  <data name="QTYKPeremesheniyu" xml:space="preserve">
+    <value>发料数量</value>
+  </data>
+  <data name="QTYMustNZP" xml:space="preserve">
+    <value>未完工需求量</value>
+  </data>
+  <data name="QTYNaSklade" xml:space="preserve">
+    <value>即时库存</value>
+  </data>
+  <data name="QTYNaSkladeNedostatochno" xml:space="preserve">
+    <value>仓库库存数不够</value>
+  </data>
+  <data name="QTYNZP" xml:space="preserve">
+    <value>未完工已发料数量</value>
+  </data>
+  <data name="QTYPeremestit" xml:space="preserve">
+    <value>收/发数量</value>
+  </data>
+  <data name="QTYPoProizvodstvennomuZadaniu" xml:space="preserve">
+    <value>生产任务单数量</value>
+  </data>
+  <data name="QTYPostupilo" xml:space="preserve">
+    <value>入库数量</value>
+  </data>
+  <data name="QTYPostupleniya" xml:space="preserve">
+    <value>入库数量</value>
+  </data>
+  <data name="QTYQR" xml:space="preserve">
+    <value>二维码数量</value>
+  </data>
+  <data name="QTYVDannoiPartii" xml:space="preserve">
+    <value>本批物料数量</value>
+  </data>
+  <data name="QTYVipushennogoPF" xml:space="preserve">
+    <value>当天实际生产半成品/成品数量</value>
+  </data>
+  <data name="QTYVZadaniiQTYVsego" xml:space="preserve">
+    <value>实际生产数量/计划数量</value>
+  </data>
+  <data name="QTYVZakaze" xml:space="preserve">
+    <value>应入库数量</value>
+  </data>
+  <data name="Rashod" xml:space="preserve">
+    <value>一件用量</value>
+  </data>
+  <data name="Raznica" xml:space="preserve">
+    <value>计划与实际生产数量差异</value>
+  </data>
+  <data name="ReloadBOM" xml:space="preserve">
+    <value>更新编码清单</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>角色</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>保存</value>
+  </data>
+  <data name="ScanGP" xml:space="preserve">
+    <value>成品扫描</value>
+  </data>
+  <data name="ScanMestoRazmesheniya" xml:space="preserve">
+    <value>扫描存放位置</value>
+  </data>
+  <data name="ScanNomenklaturs" xml:space="preserve">
+    <value>扫描二维码</value>
+  </data>
+  <data name="SetAutoSmena10" xml:space="preserve">
+    <value>10小时班次计划</value>
+  </data>
+  <data name="SetAutoSmena8" xml:space="preserve">
+    <value>8小时班次计划</value>
+  </data>
+  <data name="ShowAllZadanies" xml:space="preserve">
+    <value>查看所有任务单</value>
+  </data>
+  <data name="Sklad" xml:space="preserve">
+    <value>仓库</value>
+  </data>
+  <data name="SkladOtpravitel" xml:space="preserve">
+    <value>发出仓库</value>
+  </data>
+  <data name="SkladskoiUchet" xml:space="preserve">
+    <value>仓库</value>
+  </data>
+  <data name="SlichitelnayaVedomost" xml:space="preserve">
+    <value>亏盈对照表</value>
+  </data>
+  <data name="SmenitPolzovatelya" xml:space="preserve">
+    <value>切换用户</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>任务单状态</value>
+  </data>
+  <data name="StatusOTK" xml:space="preserve">
+    <value>质检状态</value>
+  </data>
+  <data name="Stellag" xml:space="preserve">
+    <value>通道</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>仓库</value>
+  </data>
+  <data name="StockFrom" xml:space="preserve">
+    <value>发出仓库</value>
+  </data>
+  <data name="StockTo" xml:space="preserve">
+    <value>接收仓库</value>
+  </data>
+  <data name="Storno" xml:space="preserve">
+    <value>红字</value>
+  </data>
+  <data name="Street" xml:space="preserve">
+    <value>通道</value>
+  </data>
+  <data name="SummOtkloneniya" xml:space="preserve">
+    <value>金额差异</value>
+  </data>
+  <data name="SummQTYFact" xml:space="preserve">
+    <value>账上库存金额</value>
+  </data>
+  <data name="SummUchetOstatok" xml:space="preserve">
+    <value>实际库存金额</value>
+  </data>
+  <data name="TeperRaspechataiteQR" xml:space="preserve">
+    <value>请打印并贴上二维码</value>
+  </data>
+  <data name="TochkaVipuska" xml:space="preserve">
+    <value>成品生产点平板电脑</value>
+  </data>
+  <data name="TypeDvigeniya" xml:space="preserve">
+    <value>单据类型</value>
+  </data>
+  <data name="UchetniOstatok" xml:space="preserve">
+    <value>账上库存数量</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>已用用量</value>
+  </data>
+  <data name="Uspeshno" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="UtverditKomisionno" xml:space="preserve">
+    <value>实际数量</value>
+  </data>
+  <data name="Uvereni" xml:space="preserve">
+    <value>是否确定？</value>
+  </data>
+  <data name="VernutIsNZP" xml:space="preserve">
+    <value>在制品退还</value>
+  </data>
+  <data name="VGlavnoeMenu" xml:space="preserve">
+    <value>回到主菜单</value>
+  </data>
+  <data name="ViberitePolzovatelya" xml:space="preserve">
+    <value>请选择程序用户</value>
+  </data>
+  <data name="Vipolneno" xml:space="preserve">
+    <value>已完成</value>
+  </data>
+  <data name="VipuskEnd" xml:space="preserve">
+    <value>成品/半成品入库已完成</value>
+  </data>
+  <data name="VipuskNeNachat" xml:space="preserve">
+    <value>任务单成品/半成品未开始入库</value>
+  </data>
+  <data name="VipuskVProcesse" xml:space="preserve">
+    <value>任务单成品/半成品已开始入库</value>
+  </data>
+  <data name="VipuskZavershen" xml:space="preserve">
+    <value>此任务单已完成！点击这里跳到下一个任务单</value>
+  </data>
+  <data name="VoiditeVProgrammu" xml:space="preserve">
+    <value>请登录程序</value>
+  </data>
+  <data name="VoitiVProgrammu" xml:space="preserve">
+    <value>登录程序</value>
+  </data>
+  <data name="VosmognieDeistviya" xml:space="preserve">
+    <value>可进行操作</value>
+  </data>
+  <data name="VosstanovitQR" xml:space="preserve">
+    <value>生成（恢复）二维码</value>
+  </data>
+  <data name="VosstanovlenniQR" xml:space="preserve">
+    <value>生成（恢复）二维码</value>
+  </data>
+  <data name="Vozvrashaem" xml:space="preserve">
+    <value>是否退回</value>
+  </data>
+  <data name="VRabote" xml:space="preserve">
+    <value>进行中</value>
+  </data>
+  <data name="VvediteDepartment" xml:space="preserve">
+    <value>请输入部门</value>
+  </data>
+  <data name="VvediteLogin" xml:space="preserve">
+    <value>请输入用户名</value>
+  </data>
+  <data name="VveditePartNumber" xml:space="preserve">
+    <value>请输入编码</value>
+  </data>
+  <data name="VveditePassword" xml:space="preserve">
+    <value>请输入密码</value>
+  </data>
+  <data name="VveliBolsheChemVZakaze" xml:space="preserve">
+    <value>您输入的数量大于采购订单数量。请重新输入数量或订单号，或者咨询采购部编辑订单</value>
+  </data>
+  <data name="VyberiteDepartment" xml:space="preserve">
+    <value>请选择部门</value>
+  </data>
+  <data name="VyberiteMOLaSami" xml:space="preserve">
+    <value>请选择财产保管负责人</value>
+  </data>
+  <data name="VyberiteStock" xml:space="preserve">
+    <value>请选择仓库</value>
+  </data>
+  <data name="VyberiteZakazNaProizvodstvo" xml:space="preserve">
+    <value>选择任务单进行成品入库</value>
+  </data>
+  <data name="WorkInfo" xml:space="preserve">
+    <value>任务的信息</value>
+  </data>
+  <data name="WorkInPlan" xml:space="preserve">
+    <value>计划任务单</value>
+  </data>
+  <data name="Yacheika" xml:space="preserve">
+    <value>单元</value>
+  </data>
+  <data name="YZDateEnd" xml:space="preserve">
+    <value>任务结束时间</value>
+  </data>
+  <data name="YZDateStart" xml:space="preserve">
+    <value>任务开始时间</value>
+  </data>
+  <data name="YZEndWork" xml:space="preserve">
+    <value>结束任务</value>
+  </data>
+  <data name="YZRoles" xml:space="preserve">
+    <value>负责人手册</value>
+  </data>
+  <data name="YZStartWork" xml:space="preserve">
+    <value>开始新任务</value>
+  </data>
+  <data name="YZTime" xml:space="preserve">
+    <value>任务用时</value>
+  </data>
+  <data name="YZUserDepartment" xml:space="preserve">
+    <value>”用户 - 部门“ 对应</value>
+  </data>
+  <data name="YZUserRole" xml:space="preserve">
+    <value>”用户 - 负责人“ 对应</value>
+  </data>
+  <data name="YZUsers" xml:space="preserve">
+    <value>用户手册</value>
+  </data>
+  <data name="YZWorkName" xml:space="preserve">
+    <value>任务种类</value>
+  </data>
+  <data name="YZWorkRole" xml:space="preserve">
+    <value>“任务 - 负责人” 对应</value>
+  </data>
+  <data name="YZWorks" xml:space="preserve">
+    <value>任务手册</value>
+  </data>
+  <data name="ZadanieNaKomplektovku" xml:space="preserve">
+    <value>备料任务</value>
+  </data>
+  <data name="ZadanieNaProizvodstvo" xml:space="preserve">
+    <value>生产任务</value>
+  </data>
+  <data name="ZadanieNaSklad" xml:space="preserve">
+    <value>仓库调拨任务</value>
+  </data>
+  <data name="ZadanieNaTochku" xml:space="preserve">
+    <value>任务单下达</value>
+  </data>
+  <data name="ZagruzkaDannih" xml:space="preserve">
+    <value>数据加载，请稍等</value>
+  </data>
+  <data name="ZakaziPostavshikam" xml:space="preserve">
+    <value>供应商采购订单</value>
+  </data>
+  <data name="ZakazNeizvesten" xml:space="preserve">
+    <value>未知采购订单</value>
+  </data>
+  <data name="ZakazPostavshiku" xml:space="preserve">
+    <value>订单号</value>
+  </data>
+  <data name="ZapolniteYellow" xml:space="preserve">
+    <value>请填写所有黄色字段</value>
+  </data>
+  <data name="任务的评论" xml:space="preserve">
+    <value>任务备注</value>
+  </data>
+</root>

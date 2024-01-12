@@ -1,0 +1,200 @@
+﻿@model KDW.Models.DayView
+
+
+
+
+
+<body onload="FindHour()">
+
+    @if (Model.SW.Count() > 0)
+    {
+        <center> <h3>@Model.SW.OrderBy(x => x.Poryadok).First().WorkNumber</h3></center>
+    }
+    <table>
+        <tr style="vertical-align:bottom;text-align:center">
+            <td>
+                <h4>
+                    План
+                </h4>
+            </td>
+            <td>
+                <h4>
+                    Факт
+                </h4>
+
+            </td>
+            <td>
+                <h4>
+                    Датчик
+                </h4>
+
+            </td>
+        </tr>
+
+        <tr style="vertical-align:bottom">
+            <td>
+
+                <div id="Plan">
+
+                </div>
+            </td>
+            <td>
+                <div id="Fact">
+
+                </div>
+            </td>
+            <td>
+                <div id="Datchik">
+
+                </div>
+            </td>
+        </tr>
+    </table>
+    <table class="table table-bordered table-striped">
+
+        <tr>
+            <td>
+                Час
+            </td>
+            @foreach (var i in Model.SH)
+            {
+
+        <td>
+            @i.ChasSmeni - @(i.ChasSmeni+1)
+        </td>
+
+            }
+        </tr>
+        <tr class="info">
+            <td>
+                План
+            </td>
+            @foreach (var i in Model.SH)
+            {
+                <td>
+                    @i.QTYPlan
+                </td>
+            }
+        </tr>
+        <tr>
+
+            <td>
+                Факт
+            </td>
+            @foreach (var i in Model.SH)
+            {
+                string Cl = "danger";
+                decimal Q = Convert.ToDecimal(i.QTYPlan) / 2;
+                if (Q <= i.QTYFact)
+                {
+                    Cl = "warning";
+                }
+                if (i.QTYPlan <= i.QTYFact)
+                {
+                    Cl = "success";
+                }
+
+                <td class="@Cl">
+                    @i.QTYFact
+                </td>
+            }
+        </tr>
+        <tr>
+
+            <td>
+                Датчик
+            </td>
+            @foreach (var i in Model.SH)
+            {
+                <td>
+                    @i.QTYDatchik
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="2">@DateTime.Now.Hour : 00</td>
+        </tr>
+
+    </table>
+    @Html.DropDownList("PlanshetId", new SelectList(ViewBag.Planshets, "Id", "Name"), htmlAttributes: new { @class = "form-control", @Style = "width:300px", OnChange = "SetPlanshet()" })
+    <p>
+        <a href="/POOrderEntries/SmenaToPlanshet" class="btn btn-success btn-block">@Resources.Resource.NaznachitSmenu &raquo;</a>
+    </p>
+    <div id="Info">
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <!-- График --><div id="chart">
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+
+
+
+
+<script>
+    function SetPlanshet()
+    {
+        var Planshet = $("#PlanshetId").val();
+        var url = "@Url.Action("SetPlanshet", "POOrderEntries")?PlanshetId="+Planshet;
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.reload();
+
+                }
+        );
+    }
+</script>
+
+<script>
+    function FindHour()
+    {
+         var url = "@Url.Action("PlansInHour", "POOrderEntries")";
+
+            $.post(url,
+                function (data) {
+                    var S = data.split(';');
+                    var x = Math.random() * S[0];
+                    var hh = x / S[0] * 500;
+                    var h = Math.round(hh, 0);
+                    //alert(S[0]);
+                    $("#Plan").html('<button class="btn btn-info" style="width:300px;height:500px">' + S[0] + '</button>');
+                    $("#Fact").html('<button class="btn btn-success" style="width:300px;height:' + S[2] + 'px">' + S[1] + '</button>');
+                    $("#Datchik").html('<button class="btn btn-warning" style="width:300px;height:' + S[4] + 'px">' + S[3] + '</button>');
+                  //  $("#Datchik").html('<button class="btn btn-warning" style="width:300px;height:' + h + 'px">' + Math.round(x,0) + '</button>');
+
+
+                }
+        );
+    }
+</script>
+<script>
+    setInterval(function () {
+        FindHour();
+
+    }, 3000);
+</script>
+
+<script>
+    setTimeout(function () {
+        window.location.reload();
+
+
+    }, 300000);
+</script>

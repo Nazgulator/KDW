@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7bb9d4451a534fff8c2d0e7b3e31cca4" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="KingDeeModels.IC_Receipt" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_ReceiptEntry" Width="1.5" PointX="4.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_RefundInfo" Width="1.5" PointX="6.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_RefundInfoEntry" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_Refunds" Width="1.5" PointX="8.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_StockMatching" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.IC_StockPlanDetail" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBal" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBillAction" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBillNo" Width="1.5" PointX="7.375" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBOM" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBOMChild" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICBOMGroup" Width="1.5" PointX="14.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInvBal" Width="1.5" PointX="14.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInventory" Width="1.5" PointX="21.5" PointY="56.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInventoryInLogs" Width="1.5" PointX="16.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInvInitial" Width="1.5" PointX="16.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInvLog" Width="1.5" PointX="4.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICInvLogBal" Width="1.5" PointX="6.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMO" Width="1.5" PointX="16.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMOChange" Width="1.5" PointX="18.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMOChangeEntry" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMOConvertBill" Width="1.5" PointX="8.625" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMOConvertBillEntry" Width="1.5" PointX="18.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICStockBill" Width="1.5" PointX="12.25" PointY="53.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICStockBillEntry" Width="1.5" PointX="14.5" PointY="46.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICTemplate" Width="1.5" PointX="2.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICWork" Width="1.5" PointX="4.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POInStock" Width="1.5" PointX="22.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POInvBal" Width="1.5" PointX="0.5" PointY="24.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POInventory" Width="1.5" PointX="4.625" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POOrder" Width="1.5" PointX="10.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POOrderEntry" Width="1.5" PointX="12.75" PointY="24.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PORequest" Width="1.5" PointX="24.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.POStockBillEntry" Width="1.5" PointX="26.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPBOM" Width="1.5" PointX="23.375" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPBomChange" Width="1.5" PointX="18.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPBomChangeEntry" Width="1.5" PointX="20.75" PointY="27.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPBOMEntry" Width="1.5" PointX="25.25" PointY="41" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPOrder" Width="1.5" PointX="28.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.PPOrderEntry" Width="1.5" PointX="28.75" PointY="25.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Base_Emp" Width="1.5" PointX="30.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Department" Width="1.5" PointX="11.375" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Fee" Width="1.5" PointX="30.75" PointY="30.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Item" Width="1.5" PointX="16.75" PointY="48.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Stock" Width="1.5" PointX="19.125" PointY="42.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_StockPlace" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.t_StockPlaceGroup" Width="1.5" PointX="2.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.UserRoles" Width="1.5" PointX="27.625" PointY="36" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ZPStockBillEntry" Width="1.5" PointX="24.75" PointY="32.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="KingDeeModels.ICStock_Inv" Width="1.5" PointX="32.75" PointY="25.75" IsExpanded="true" />
+        <AssociationConnector Association="KingDeeModels.fk_ItemParent" ManuallyRouted="false" />
+        <AssociationConnector Association="KingDeeModels.FK_t_StockPlace_t_StockPlaceGroup" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Supplier" Width="1.5" PointX="6.875" PointY="33.875" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Supply" Width="1.5" PointX="10.75" PointY="41.375" />
+        <EntityTypeShape EntityType="KingDeeModels.t_SupplyEntry" Width="1.5" PointX="9" PointY="40.5" />
+        <AssociationConnector Association="KingDeeModels.POOrdert_Supplier" />
+        <AssociationConnector Association="KingDeeModels.POOrderPOOrderEntry" />
+        <AssociationConnector Association="KingDeeModels.POOrderEntryt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.QRTable" Width="1.5" PointX="14.75" PointY="25.25" />
+        <AssociationConnector Association="KingDeeModels.POOrderEntryQRTable" />
+        <EntityTypeShape EntityType="KingDeeModels.ICMaxNum" Width="1.5" PointX="7.375" PointY="24.75" />
+        <AssociationConnector Association="KingDeeModels.POOrdert_Department" />
+        <AssociationConnector Association="KingDeeModels.ICMOt_Department" />
+        <AssociationConnector Association="KingDeeModels.ICMOt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.NomenklaturaEnterprise" Width="1.5" PointX="19" PointY="51" />
+        <AssociationConnector Association="KingDeeModels.t_ItemNomenklaturaEnterprise" />
+        <EntityTypeShape EntityType="KingDeeModels.StocksMOL" Width="1.5" PointX="21.375" PointY="45.75" />
+        <EntityTypeShape EntityType="KingDeeModels.StocksRusKit" Width="1.5" PointX="21.375" PointY="42.875" />
+        <AssociationConnector Association="KingDeeModels.t_Itemt_Stock" />
+        <AssociationConnector Association="KingDeeModels.t_StockStocksRusKit" />
+        <AssociationConnector Association="KingDeeModels.t_StockStocksMOL" />
+        <AssociationConnector Association="KingDeeModels.t_ItemStocksRusKit" />
+        <AssociationConnector Association="KingDeeModels.t_ItemStocksMOL" />
+        <AssociationConnector Association="KingDeeModels.t_ItemICInventory" />
+        <AssociationConnector Association="KingDeeModels.ICInventoryt_Stock" />
+        <AssociationConnector Association="KingDeeModels.StocksMOLt_Item" />
+        <AssociationConnector Association="KingDeeModels.ICMOPPBOM" />
+        <AssociationConnector Association="KingDeeModels.t_ItemPPBOM" />
+        <AssociationConnector Association="KingDeeModels.PPBOMPPBOMEntry" />
+        <AssociationConnector Association="KingDeeModels.PPBOMEntryt_Item" />
+        <AssociationConnector Association="KingDeeModels.t_ItemICStockBillEntry" />
+        <AssociationConnector Association="KingDeeModels.ICStockBillEntryICStockBill" />
+        <AssociationConnector Association="KingDeeModels.ICStockBillt_Department" />
+        <EntityTypeShape EntityType="KingDeeModels.Dvigenie" Width="1.5" PointX="22.5" PointY="49.875" />
+        <AssociationConnector Association="KingDeeModels.Dvigeniet_Item" />
+        <AssociationConnector Association="KingDeeModels.Dvigeniet_Item1" />
+        <AssociationConnector Association="KingDeeModels.DvigeniePOOrder" />
+        <EntityTypeShape EntityType="KingDeeModels.DepartmentsToUsers" Width="1.5" PointX="8.5" PointY="21.75" />
+        <EntityTypeShape EntityType="KingDeeModels.ICPlan_PMCDetail" Width="1.5" PointX="27.125" PointY="40.875" />
+        <EntityTypeShape EntityType="KingDeeModels.Roles" Width="1.5" PointX="19.75" PointY="22.75" />
+        <AssociationConnector Association="KingDeeModels.ICMOICPlan_PMCDetail" />
+        <EntityTypeShape EntityType="KingDeeModels.KingDeeWebRoles" Width="1.5" PointX="10.75" PointY="22" />
+        <EntityTypeShape EntityType="KingDeeModels.WebRoles" Width="1.5" PointX="10.625" PointY="20" />
+        <AssociationConnector Association="KingDeeModels.KingDeeWebRolesWebRoles" />
+        <AssociationConnector Association="KingDeeModels.DepartmentsToUserst_Item" />
+        <AssociationConnector Association="KingDeeModels.DepartmentsToUserst_Item1" />
+        <EntityTypeShape EntityType="KingDeeModels.ComputerNames" Width="1.5" PointX="8.875" PointY="48" />
+        <EntityTypeShape EntityType="KingDeeModels.PlanoviWorks" Width="1.5" PointX="14.75" PointY="22.25" />
+        <AssociationConnector Association="KingDeeModels.ICMOPlanoviWorks" />
+        <AssociationConnector Association="KingDeeModels.t_DepartmentComputerNames" />
+        <EntityTypeShape EntityType="KingDeeModels.StarMehWorks" Width="1.5" PointX="8.875" PointY="50.875" />
+        <AssociationConnector Association="KingDeeModels.StarMehWorksICMO" />
+        <AssociationConnector Association="KingDeeModels.StarMehWorksComputerNames" />
+        <AssociationConnector Association="KingDeeModels.StarMehWorkst_Item" />
+        <AssociationConnector Association="KingDeeModels.QRTableDvigenie" />
+        <EntityTypeShape EntityType="KingDeeModels.OcheredWorks" Width="1.5" PointX="8.875" PointY="31.875" />
+        <AssociationConnector Association="KingDeeModels.OcheredWorkst_Item" />
+        <AssociationConnector Association="KingDeeModels.OcheredWorkst_Item1" />
+        <AssociationConnector Association="KingDeeModels.OcheredWorksICMO" />
+        <EntityTypeShape EntityType="KingDeeModels.HR_Base_User" Width="1.5" PointX="0.75" PointY="33.875" />
+        <EntityTypeShape EntityType="KingDeeModels.t_Base_User" Width="1.5" PointX="2.875" PointY="33.875" />
+        <EntityTypeShape EntityType="KingDeeModels.UsersKDW" Width="1.5" PointX="4.875" PointY="33.875" />
+        <AssociationConnector Association="KingDeeModels.UsersKDWt_Base_User" />
+        <AssociationConnector Association="KingDeeModels.t_Base_UserHR_Base_User" />
+        <AssociationConnector Association="KingDeeModels.KingDeeWebRolesUsersKDW" />
+        <AssociationConnector Association="KingDeeModels.DepartmentsToUsersUsersKDW" />
+        <EntityTypeShape EntityType="KingDeeModels.DepartmentToLine" Width="1.5" PointX="0.75" PointY="13.75" />
+        <AssociationConnector Association="KingDeeModels.DepartmentToLinet_Item" />
+        <AssociationConnector Association="KingDeeModels.DepartmentToLinet_Item1" />
+        <AssociationConnector Association="KingDeeModels.ICMOPPBOMEntry" />
+        <EntityTypeShape EntityType="KingDeeModels.MolsOfDepartments" Width="1.5" PointX="0.75" PointY="16.75" />
+        <AssociationConnector Association="KingDeeModels.MolsOfDepartmentst_Item" />
+        <AssociationConnector Association="KingDeeModels.MolsOfDepartmentst_Item1" />
+        <EntityTypeShape EntityType="KingDeeModels.NZP" Width="1.5" PointX="19.25" PointY="56.75" />
+        <AssociationConnector Association="KingDeeModels.t_ItemNZP" />
+        <AssociationConnector Association="KingDeeModels.NZPt_Item" />
+        <AssociationConnector Association="KingDeeModels.NZPt_Item1" />
+        <AssociationConnector Association="KingDeeModels.NZPPOOrder" />
+        <AssociationConnector Association="KingDeeModels.NZPDvigenie" />
+        <AssociationConnector Association="KingDeeModels.NZPICMO" />
+        <AssociationConnector Association="KingDeeModels.NZPStarMehWorks" />
+        <EntityTypeShape EntityType="KingDeeModels.Komplekt" Width="1.5" PointX="14.625" PointY="28.75" />
+        <AssociationConnector Association="KingDeeModels.Komplektt_Item" />
+        <AssociationConnector Association="KingDeeModels.KomplektDvigenie" />
+        <AssociationConnector Association="KingDeeModels.KomplektPOOrder" />
+        <EntityTypeShape EntityType="KingDeeModels.Planogramma" Width="1.5" PointX="25.75" PointY="63.125" />
+        <EntityTypeShape EntityType="KingDeeModels.Street" Width="1.5" PointX="23" PointY="67.125" />
+        <EntityTypeShape EntityType="KingDeeModels.Yacheika" Width="1.5" PointX="18.625" PointY="66.5" />
+        <AssociationConnector Association="KingDeeModels.PlanogrammaStreet" />
+        <AssociationConnector Association="KingDeeModels.PlanogrammaYacheika" />
+        <EntityTypeShape EntityType="KingDeeModels.NomenklaturaPlace" Width="2.125" PointX="19.25" PointY="62.25" />
+        <AssociationConnector Association="KingDeeModels.NomenklaturaPlacet_Item" />
+        <AssociationConnector Association="KingDeeModels.NomenklaturaPlaceStreet" />
+        <AssociationConnector Association="KingDeeModels.PlanogrammaNomenklaturaPlace" />
+        <AssociationConnector Association="KingDeeModels.NomenklaturaPlaceYacheika" />
+        <AssociationConnector Association="KingDeeModels.NomenklaturaPlaceDvigenie" />
+        <AssociationConnector Association="KingDeeModels.PlanogrammaNomenklaturaPlace1" />
+        <EntityTypeShape EntityType="KingDeeModels.Control" Width="1.5" PointX="23.375" PointY="56.625" />
+        <AssociationConnector Association="KingDeeModels.DvigenieControl" />
+        <EntityTypeShape EntityType="KingDeeModels.StatusOTK" Width="1.5" PointX="23.375" PointY="59.375" />
+        <AssociationConnector Association="KingDeeModels.ControlStatusOTK" />
+        <EntityTypeShape EntityType="KingDeeModels.ICSubContract" Width="1.5" PointX="30.5" PointY="40.875" />
+        <EntityTypeShape EntityType="KingDeeModels.ICSubContractEntry" Width="1.5" PointX="32.75" PointY="40.875" />
+        <AssociationConnector Association="KingDeeModels.ICSubContractICSubContractEntry" />
+        <AssociationConnector Association="KingDeeModels.ICSubContractEntryt_Item" />
+        <AssociationConnector Association="KingDeeModels.t_ItemICSubContract" />
+        <AssociationConnector Association="KingDeeModels.ICSubContractt_Supplier" />
+        <AssociationConnector Association="KingDeeModels.ICSubContractt_Department" />
+        <EntityTypeShape EntityType="KingDeeModels.DepartmentToStocks" Width="2.5" PointX="35.5" PointY="40.875" />
+        <AssociationConnector Association="KingDeeModels.DepartmentToStockst_Item" />
+        <AssociationConnector Association="KingDeeModels.DepartmentToStockst_Item1" />
+        <AssociationConnector Association="KingDeeModels.t_ItemDepartmentToStocks" />
+        <AssociationConnector Association="KingDeeModels.ComputerNamesDepartmentToStocks" />
+        <AssociationConnector Association="KingDeeModels.DepartmentToStockst_Item2" />
+        <EntityTypeShape EntityType="KingDeeModels.t_User" Width="1.5" PointX="33.375" PointY="28.75" />
+        <AssociationConnector Association="KingDeeModels.t_Itemt_User" />
+        <AssociationConnector Association="KingDeeModels.UsersKDWt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.Buildings" Width="1.5" PointX="23.125" PointY="64.375" />
+        <AssociationConnector Association="KingDeeModels.BuildingsPlanogramma" />
+        <AssociationConnector Association="KingDeeModels.NomenklaturaPlaceBuildings" />
+        <AssociationConnector Association="KingDeeModels.DvigenieUsersKDW" />
+        <EntityTypeShape EntityType="KingDeeModels.StockPriem" Width="1.5" PointX="18.75" PointY="39.625" />
+        <AssociationConnector Association="KingDeeModels.StockPriemt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.t_ICItem" Width="1.5" PointX="39.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KingDeeModels.PlanLog" Width="1.5" PointX="28.625" PointY="63.25" />
+        <EntityTypeShape EntityType="KingDeeModels.StockWorks" Width="1.5" PointX="28.625" PointY="66.25" />
+        <EntityTypeShape EntityType="KingDeeModels.StockWorkEntrys" Width="1.5" PointX="30.75" PointY="66.25" />
+        <AssociationConnector Association="KingDeeModels.StockWorksStockWorkEntrys" />
+        <AssociationConnector Association="KingDeeModels.StockWorksICMO" />
+        <AssociationConnector Association="KingDeeModels.StockWorkEntryst_Item" />
+        <AssociationConnector Association="KingDeeModels.StockWorkEntryst_Item1" />
+        <AssociationConnector Association="KingDeeModels.StockWorkst_Stock" />
+        <AssociationConnector Association="KingDeeModels.StockWorksUsersKDW" />
+        <AssociationConnector Association="KingDeeModels.StockWorkEntrysUsersKDW" />
+        <AssociationConnector Association="KingDeeModels.t_Itemt_ICItem" />
+        <EntityTypeShape EntityType="KingDeeModels.InventQR" Width="1.5" PointX="34.25" PointY="66.125" />
+        <EntityTypeShape EntityType="KingDeeModels.InventVedomost" Width="1.5" PointX="34.25" PointY="62.25" />
+        <AssociationConnector Association="KingDeeModels.InventQRInventVedomost" />
+        <AssociationConnector Association="KingDeeModels.InventQRQRTable" />
+        <AssociationConnector Association="KingDeeModels.UsersKDWInventQR" />
+        <AssociationConnector Association="KingDeeModels.InventVedomostt_Item" />
+        <AssociationConnector Association="KingDeeModels.InventVedomostUsersKDW" />
+        <EntityTypeShape EntityType="KingDeeModels.InventSecondQR" Width="1.5" PointX="36.125" PointY="66.125" />
+        <EntityTypeShape EntityType="KingDeeModels.InventThirdQR" Width="1.5" PointX="38" PointY="66.125" />
+        <EntityTypeShape EntityType="KingDeeModels.t_ICItemMaterial" Width="1.5" PointX="45.375" PointY="7" />
+        <AssociationConnector Association="KingDeeModels.InventSecondQRUsersKDW" />
+        <AssociationConnector Association="KingDeeModels.InventSecondQRQRTable" />
+        <AssociationConnector Association="KingDeeModels.InventThirdQRUsersKDW" />
+        <AssociationConnector Association="KingDeeModels.InventThirdQRQRTable" />
+        <AssociationConnector Association="KingDeeModels.t_ICItemMaterialt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.LastDvigs" Width="1.5" PointX="21.375" PointY="0.75" />
+        <AssociationConnector Association="KingDeeModels.LastDvigst_Item" />
+        <AssociationConnector Association="KingDeeModels.LastDvigst_ICItemMaterial" />
+        <AssociationConnector Association="KingDeeModels.LastDvigsQRTable" />
+        <AssociationConnector Association="KingDeeModels.LastDvigsDvigenie" />
+        <AssociationConnector Association="KingDeeModels.t_ICItemMaterialt_Item1" />
+        <EntityTypeShape EntityType="KingDeeModels.StockBufer" Width="1.5" PointX="21.375" PointY="4.75" />
+        <EntityTypeShape EntityType="KingDeeModels.PeremeshenieWorks" Width="1.5" PointX="21.375" PointY="7.75" />
+        <AssociationConnector Association="KingDeeModels.PeremeshenieWorkst_Item" />
+        <AssociationConnector Association="KingDeeModels.StockBufert_Stock" />
+        <EntityTypeShape EntityType="KingDeeModels.PredNZP" Width="1.5" PointX="23.375" PointY="0.75" />
+        <AssociationConnector Association="KingDeeModels.PredNZPStockWorks" />
+        <EntityTypeShape EntityType="KingDeeModels.DocumentLog" Width="1.5" PointX="23.375" PointY="4.75" />
+        <AssociationConnector Association="KingDeeModels.t_SupplierICStockBill" />
+        <AssociationConnector Association="KingDeeModels.ICStockBillEntryPOOrder" />
+        <AssociationConnector Association="KingDeeModels.ICStockBillEntryt_Stock" />
+        <EntityTypeShape EntityType="KingDeeModels.vw_ic_cbcostobj" Width="1.5" PointX="25.375" PointY="0.75" />
+        <AssociationConnector Association="KingDeeModels.ICBOMChildICBOM" />
+        <AssociationConnector Association="KingDeeModels.ICBOMChildt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.PostuplenieNaSklad" Width="1.5" PointX="25.375" PointY="6.75" />
+        <AssociationConnector Association="KingDeeModels.PostuplenieNaSkladPOOrder" />
+        <AssociationConnector Association="KingDeeModels.PostuplenieNaSkladt_Item" />
+        <EntityTypeShape EntityType="KingDeeModels.QRTableNEW" Width="1.5" PointX="25.375" PointY="12.75" />
+        <EntityTypeShape EntityType="KingDeeModels.DvigenieNEW" Width="1.5" PointX="27.375" PointY="0.75" />
+        <AssociationConnector Association="KingDeeModels.DvigenieNEWICStockBill" />
+        <AssociationConnector Association="KingDeeModels.DvigenieNEWt_Item" />
+        <AssociationConnector Association="KingDeeModels.ICStockBillDvigenieNEW" />
+        <AssociationConnector Association="KingDeeModels.PostuplenieNaSkladDvigenieNEW" />
+        <AssociationConnector Association="KingDeeModels.DvigenieNEWt_Stock" />
+        <EntityTypeShape EntityType="KingDeeModels.ProverkaOTK" Width="1.5" PointX="27.375" PointY="9.75" />
+        <AssociationConnector Association="KingDeeModels.ProverkaOTKStatusOTK" />
+        <EntityTypeShape EntityType="KingDeeModels.NZPNEW" Width="1.5" PointX="27.375" PointY="12.75" />
+        <EntityTypeShape EntityType="KingDeeModels.SmenaHour" Width="1.5" PointX="29.375" PointY="3.75" />
+        <EntityTypeShape EntityType="KingDeeModels.wk_iot" Width="1.5" PointX="29.375" PointY="7.75" />
+        <EntityTypeShape EntityType="KingDeeModels.PrichiniSpisaniya" Width="1.5" PointX="29.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KingDeeModels.t_BillCodeRule" Width="1.5" PointX="31.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KingDeeModels.BigQR" Width="1.5" PointX="31.375" PointY="4.75" />
+        <EntityTypeShape EntityType="KingDeeModels.ChasSmeni" Width="1.5" PointX="31.375" PointY="8" />
+        <EntityTypeShape EntityType="KingDeeModels.MonitorToLine" Width="1.5" PointX="29.25" PointY="10" />
+        <AssociationConnector Association="KingDeeModels.MonitorToLineComputerNames" />
+        <EntityTypeShape EntityType="KingDeeModels.YZActiveWorks" Width="1.5" PointX="37.375" PointY="0.75" />
+        <EntityTypeShape EntityType="KingDeeModels.YZRoles" Width="1.5" PointX="33.875" PointY="3.5" />
+        <EntityTypeShape EntityType="KingDeeModels.YZRoleWorks" Width="1.5" PointX="33.875" PointY="5.875" />
+        <EntityTypeShape EntityType="KingDeeModels.YZUserDepartments" Width="1.5" PointX="35.375" PointY="8.375" />
+        <EntityTypeShape EntityType="KingDeeModels.YZUserRoles" Width="1.5" PointX="35.5" PointY="0.75" />
+        <EntityTypeShape EntityType="KingDeeModels.YZUsers" Width="1.5" PointX="37.375" PointY="6.5" />
+        <EntityTypeShape EntityType="KingDeeModels.YZWorks" Width="1.5" PointX="37.375" PointY="3.75" />
+        <AssociationConnector Association="KingDeeModels.YZUserRolesYZRoles" />
+        <AssociationConnector Association="KingDeeModels.YZUserRolesYZUsers" />
+        <AssociationConnector Association="KingDeeModels.YZRolesYZRoleWorks" />
+        <AssociationConnector Association="KingDeeModels.YZRoleWorksYZWorks" />
+        <AssociationConnector Association="KingDeeModels.YZActiveWorksYZWorks" />
+        <AssociationConnector Association="KingDeeModels.YZActiveWorksYZUsers" />
+        <AssociationConnector Association="KingDeeModels.YZUserDepartmentst_Department" />
+        <AssociationConnector Association="KingDeeModels.YZUserDepartmentsYZUsers" />
+        <AssociationConnector Association="KingDeeModels.YZWorkst_Department" />
+        <EntityTypeShape EntityType="KingDeeModels.EnteryLogs" Width="1.5" PointX="33.375" PointY="11.75" />
+        <EntityTypeShape EntityType="KingDeeModels.StocksSelect" Width="1.5" PointX="33.375" PointY="19.75" />
+        <AssociationConnector Association="KingDeeModels.StocksSelectt_Stock" />
+        <EntityTypeShape EntityType="KingDeeModels.GPScans" Width="1.5" PointX="35.375" PointY="11.75" />
+        <EntityTypeShape EntityType="KingDeeModels.InfoWorks" Width="1.5" PointX="35.375" PointY="14.75" />
+        <EntityTypeShape EntityType="KingDeeModels.InterfaceSelect" Width="1.5" PointX="35.375" PointY="19.75" />
+        <EntityTypeShape EntityType="KingDeeModels.SkladLog" Width="1.5" PointX="35.375" PointY="23.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

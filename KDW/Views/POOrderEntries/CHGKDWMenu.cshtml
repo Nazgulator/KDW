@@ -1,0 +1,101 @@
+﻿
+
+
+
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <Center>
+                <h3>@Resources.Resource.SkladOtpravitel</h3>
+            </Center>
+
+        </td>
+    </tr>
+
+    <tr>
+
+        <td width="100%">
+            @Html.DropDownList("StockId", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMOL()", @style = "height:70px;font-size:30px" })
+        </td>
+       
+
+    </tr>
+    <tr>
+        <td width="100%">
+            @Html.DropDownList("ManagerID", new SelectList(ViewBag.Mols), htmlAttributes: new { @class = "form-control btn btn-warning", @style = "height:70px;font-size:30px" })
+        </td>
+    </tr>
+
+    <tr>
+        <td width="100%">
+            <input id="QRData" class="btn btn-warning btn-block" onkeyup="AddNewEntry()" style="height:70px;font-size:30px" autofocus />
+    
+        
+            <button class="btn btn-success btn-block" style="height:70px;font-size:30px" onclick="AddNewEntry()">Ok</button>
+        </td>
+    </tr>
+
+</table>
+
+
+
+
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockId").val();
+        var Dropdown = $('#ManagerID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+        FindYacheika();
+
+
+    }
+</script>
+
+
+<script>
+    function AddNewEntry( )
+    {
+        var QRData = $('#QRData').val().toString();
+        if (QRData != '') {
+            var URL = '@Url.Action("AddEntryCHGJson", "POOrderEntries")';
+            URL = URL + '?QRData=' + QRData;
+
+
+            var URL2 = '@Url.Action("CHGKDWSobrano", "POOrderEntries")';
+
+            $.post(URL, function (data) {
+                if (data == 'True') {
+                    $("#SOBRANO").load(URL2);
+                    $('#QRData').val('');
+                    $('#QRData').focus();
+
+                }
+                else {
+
+                    
+                    $('#QRData').val('');
+                    $('#QRData').focus();
+                }
+            }
+            );
+        }
+    }
+</script>

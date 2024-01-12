@@ -1,0 +1,246 @@
+﻿@model IEnumerable<KDW.Models.POOrderEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<table id="T" class="table table-bordered table-striped"
+       data-toggle="table"
+       data-filter-control="true">
+    @if (Model != null)
+    {
+        <thead>
+            <tr>
+                <th data-field="Nomenklatura" data-filter-control="input" data-sortable="true">
+                    @Resources.Resource.Nomenklatura
+                </th>
+            </tr>
+
+
+        </thead>
+
+        foreach (var item in Model)
+        {
+            bool Vosstanovit = false;
+            string Cvet = "";
+            string BtnText = Resources.Resource.PostuplenieNaSklad;
+            string BtnCvet = "btn btn-success";
+            Guid G = Guid.NewGuid();
+
+            string Postuplenie = @Math.Round(item.FQty - item.FCommitQty, 3).ToString().Replace(",", ".");
+
+            <tr class="@Cvet ">
+                <td>
+                    <p>
+                        @item.FNote
+                    </p>
+                    <p>
+                        @item.POOrder.t_Supplier.FName
+                    </p>
+                    <p>
+                        @item.POOrder.FBillNo
+                    </p>
+                    <p>
+                        @item.t_Item.FNumber
+                    </p>
+                    <p>
+                        @Resources.Resource.QTYPostupleniya
+                    </p>
+                    <p>
+                        <input id="FQTY_@G" value="@Postuplenie" hidden />
+                    </p>
+                    <p>
+                        <input class="btn btn-warning btn-block" id="FCommit_@G" type="text" pattern="[0-9]+([\.][0-9]{1,2})?" value="@Postuplenie" />
+                    </p>
+                    <p id="ButtonBlock_@G">
+                        <button class="btn btn-success btn-block" id="But_@G" onclick="SavePostuplenie(@item.FInterID, @item.FEntryID, 'POORD','@G')"> OK</button>
+
+                    </p>
+                </td>
+            </tr>
+
+        }
+    }
+
+
+    @foreach (var WW in ViewBag.SCE)
+    {
+        bool Vosstanovit = false;
+        string Cvet = "";
+        string BtnText = Resources.Resource.PostuplenieNaSklad;
+        string BtnCvet = "btn btn-success";
+        Guid G = Guid.NewGuid();
+        string Postuplenie = @Math.Round(WW.FQty - WW.FCommitQty, 3).ToString().Replace(",", ".");
+
+
+
+        <tr class="@Cvet ">
+            <td>
+                <p>
+                        @WW.FOrderNo
+                </p>
+                <p>
+                    @try
+                    {
+
+                        @WW.ICSubContract.Supplier.FName
+                    }
+                    catch
+                    {
+
+                    }
+                </p>
+                <p>
+                    @WW.ICSubContract.FBillNo
+                </p>
+                <p>
+                    @WW.t_Item.FNumber
+                </p>
+                <p>
+                    @Resources.Resource.QTYPostupleniya
+                </p>
+                <p>
+                    <input id="FQTY_@G" value="@Postuplenie" hidden />
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="FCommit_@G" type="text" pattern="[0-9]+([\.][0-9]{1,2})?" value="@Postuplenie" />
+                </p>
+                <p id="ButtonBlock_@G">
+                    <button class="btn btn-success btn-block" id="But_@G" onclick="SavePostuplenie(@WW.FInterID, @WW.FEntryID, 'WW','@G')"> OK</button>
+
+                </p>
+            </td>
+        </tr>
+
+       
+
+    }
+
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+
+<script>
+    function ShowModal(printurl) {
+          // var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+<script>
+    function SavePostuplenie(InterID, EntryID, Tip,G) {
+      //  alert(InterID + " " + EntryID + " " + Tip+""+G);
+       // $('#PeremestitB').hide();
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+
+         var ButBlock = $('#ButtonBlock_' + G);
+
+        var But = $('#But_' + G);
+        But.hide();
+        var Mesto = $('#Mesto').val();
+
+        var FCommitQty = parseFloat($('#FCommit_' + G).val().replace(',', '.'));
+      //  alert(FCommitQty);
+        var FCOM = FCommitQty.toString().replace('.', ',');
+        var FQty = parseFloat($('#FQTY_' + G).val().replace(',', '.'));
+    //    alert(FQty);
+        var Go = true;
+        // FCommitQty= FCommitQty.replace(',', '.');
+        alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCOM + ' FQTY=' + FQty)
+        if (FQty < FCommitQty) {
+            alert('@Resources.Resource.QTYVZakaze < @Resources.Resource.QTYKPeremesheniu');
+            Go = false;
+            But.show();
+        }
+        if (FCommitQty == 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu = 0');
+            Go = false;
+            But.show();
+        }
+             if (FCommitQty < 0) {
+            alert('@Resources.Resource.QTYKPeremesheniu < 0');
+                 Go = false;
+                 But.show();
+        }
+        if ( Go==true)
+        {
+            $.post('@Url.Action("SavePostJson", "POOrderEntries")', {
+                Stock: Stock, Manager: Manager, InterID: InterID, EntryID: EntryID, FCommitQty: FCommitQty, Tip:Tip, Mesto: Mesto
+            }, function (data) {
+                var S = data.split(';');
+                if (S[0] == 'Ok')
+                {
+                    alert('@Resources.Resource.PeremeshenieUspeshno');
+                    // alert(data);
+
+                    var QRID = parseInt(S[1]);
+
+                    var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+                    $('#FCommit_' + InterID).val(FCOM);
+                    printurl = "'" + printurl + "'";
+                    But.show();
+                    ButBlock.append('  <button onclick="ShowModal(' + printurl + ')" class="btn btn-block btn-info glyphicon glyphicon-print">@Resources.Resource.PrintQR @DateTime.Now</button>');
+                 //   window.location.replace(printurl);
+
+                }
+                else
+                {
+                    alert(data);
+                    But.show();
+                }
+                 //   QRID = parseInt(S[1]);
+                 //   console.log('GoToPrint');
+                 //   var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                  //  window.location.replace(url);
+
+
+                //}
+                //else
+                //{
+                 //   alert(data);
+                    //$('#PeremestitB').show();
+                    //location.reload();
+                //}
+
+
+
+
+            }
+
+            );
+        }
+
+    }
+</script>

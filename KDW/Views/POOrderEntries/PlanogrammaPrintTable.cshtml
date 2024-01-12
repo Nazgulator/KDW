@@ -1,0 +1,494 @@
+﻿@model IEnumerable<KDW.Models.Planogramma>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>@ViewBag.Stock</h2>
+
+</center>
+
+
+<!-- Modal -->
+<div class="modal fade" id="Inventar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>Список номенклатуры на выбранном стеллаже</h4>
+                <button id="Close" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+
+
+
+            </div>
+            <div id="InventarSpisok">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="NewCode" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="position:absolute;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.GenerateQR</h4>
+                <button id="Close" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    <!-- @Resources.Resource.Stock-->
+                </p>
+                <p>
+
+
+                    <input id="QRStock" hidden />
+                </p>
+                <p>
+                    <!-- @Resources.Resource.Street-->
+                </p>
+                <p>
+                    <input id="QRStreet" hidden />
+
+                </p>
+                <p>
+                    <!-- @Resources.Resource.Stellag-->
+                </p>
+                <p>
+                    <input id="QRStellag" hidden />
+                </p>
+                <p>
+                    @Resources.Resource.Polka
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="QRPolka" />
+                </p>
+
+                <p>
+                    @Resources.Resource.Yacheika
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="QRYacheika" />
+                </p>
+
+
+                <p>
+                    <button class="btn btn-success btn-block" onclick="GeneryQR()">@Resources.Resource.GenerateQR</button>
+                </p>
+
+
+            </div>
+            <div id="QR">
+
+            </div>
+            <!-- <p>
+        <button onclick="GeneryQR()" class="btn btn-block btn-success glyphicon glyphicon-print">@Resources.Resource.GenerateQR</button>
+    </p>
+      -->
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="Edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document" style="width:100%">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>Редактируем данные...</h4>
+                <button id="Close" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Название
+                </p>
+                <p>
+                    <input class="btn btn-warning" id="YName" />
+                </p>
+                <p>
+                    Номер
+                </p>
+                <p>
+                    <input class="btn btn-warning" id="YNum" />
+                </p>
+                <p>
+                    X
+                </p>
+                <p>
+                    <input class="btn btn-warning" type="number" id="X" />
+                </p>
+                <p>
+                    Y
+                </p>
+                <p>
+                    <input class="btn btn-warning" type="number" id="Y" />
+                </p>
+                <p>
+                    Высота
+                </p>
+                <p>
+
+                    <input class="btn btn-warning" type="number" id="H" />
+                </p>
+                <p>
+                    Ширина
+                </p>
+                <p>
+                    <input class="btn btn-warning" type="number" id="W" />
+                </p>
+                <p>
+                    Цвет
+                </p>
+                <p>
+                    <input class="btn btn-warning" placeholder="Colour" id="C" />
+                </p>
+                <p>
+                    <button class="btn btn-success" onclick="SaveYacheika()">Сохранить</button>
+                </p>
+                <input hidden class="btn btn-warning" id="YId" />
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p>
+    <a href="@Url.Action("PlanogrammaPrintMenu", "POOrderEntries")" class="btn btn-block btn-warning glyphicon glyphicon-map-marker">@Resources.Resource.Planogramma</a>
+
+</p>
+<div style="height:1000px;width:1000px">
+    @foreach (var I in Model)
+    {
+        int Top = 200 + I.Y;
+        decimal Coef = 1M;
+        string X = Math.Round(I.X * Coef, 0) + "px";
+        string Y = Math.Round(Top * Coef) + "px";
+        string H = Math.Round(I.H * Coef) + "px";
+        string W = Math.Round(I.W * Coef) + "px";
+        decimal QTY = 0;
+        bool Naiden = false;
+        int StreetId = 0;
+
+
+
+
+        if (I.StreetId != null) { StreetId = I.StreetId.Value; }
+        string Barcode = I.StockId + ";" + StreetId + ";" + I.Id;
+
+        <div class="card Kletka @I.C " style="position:absolute;overflow:hidden;left:@X;top:@Y;width:@W;height:@H;border:thin">
+            @if (I.C.Equals("btn-warning") == false)
+            {
+                <button class="btn Stellag btn-info" style="
+                    position: absolute;
+                    overflow: auto;
+                    left: 10px;
+                    top: 10px;
+                    width:80px;
+                    height:80px;
+
+" onclick="ShowQR(@I.StockId,@I.Id,@I.StreetId)">
+                    @I.Num
+                </button>
+                // <h2 class="card-title Stellag " style="position: absolute; overflow: hidden; left:40px; top:10px  ">@I.Num </h2>
+
+            }
+            else
+            {
+                <center>
+                    <h4 class="Stellag" style="width:100px;text-align:center;overflow:hidden">@I.Num</h4>
+                </center>
+            }
+            <div class="card-body Stellag" style="text-align:center;overflow:hidden">
+
+
+
+                @if (Naiden)
+
+
+                {
+                    //  <h6 class="card-subtitle mb-2" style="position: absolute; overflow: auto; left:10px; top:10px  "> @ViewBag.Item.FName  </h6>
+                    //  <h5 class="Stellag" style="position: absolute; overflow: hidden; left:10px; top:10px ;text-align:center;width:80px; "> @QTY  </h5>
+
+                }
+                @if (I.C.Equals("btn-warning") == false)
+                {
+                    // <img src="~/Content/Icons/edit.png" class="Stellag" style="height:30px;width:30px;position:absolute;left:60px;top:60px;overflow:hidden" onclick="ShowEdit(@I.Id,@I.X,@I.Y,@I.W,@I.H, '@I.C', '@I.Name', @I.Num)" />
+                    // <img src="~/Content/Icons/qr.png" class="Stellag" style="height:30px;width:30px;position:absolute;left:10px;top:60px;overflow:hidden" onclick="ShowQR(@I.StockId,@I.Id,@I.StreetId)" />
+                    //   <button class="btn btn-info" onclick="ShowInventar(@I.Id)" style="height:25px;width:80px;position:absolute;left:10px;top:10px;text-align:center">ОСТАТКИ</button>
+                    // <img src="~/Content/Icons/stock.png" style="height:25px;width:25px;position:absolute;left:10px;top:60px" onclick="ShowInventar(@I.Id)" />
+
+                    //       <img src="@Url.Action("GenerateQrCode", new { QRText = Barcode })" alt="qr code" style="height:30px;width:30px" name="ImageToPrint" title="@Barcode" />
+                }
+
+
+            </div>
+        </div>
+
+
+    }
+</div>
+
+<p>
+    <a href="/Home/Index" class="btn  btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+</p>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+
+
+<script>
+    function Zoom(K) {
+
+        // var K = parseFloat($('#Zoom').val().replace(',', '.'));
+        alert(" K=" + K);
+        $(".Kletka").each(function () {
+            var h = $(this).height();
+            var w = $(this).width();
+            var pos = $(this).offset();
+
+            $(this).height(h * K);
+            $(this).width(w * K);
+            $(this).offset({ top: pos.top * K, left: pos.left * K });
+            $(this).children().each(function () {
+                var p = $(this).position();
+
+                $(this).position({ top: (p.top * K), left: (p.left * K) });
+                //  $(this).prop("top",p.top*K);
+                $(this).css({
+                    fontSize: h / 4 + "px"
+                });
+            }
+            );
+
+
+        });
+
+        $(".Stellag").each(function () {
+            var h = $(this).height();
+            var w = $(this).width();
+            var pos = $(this).offset();
+
+
+            $(this).height(h * K);
+            $(this).width(w * K);
+            // $(this).prop("FontSize",)
+            //    $(this).offset({ top: pos.top * K, left: pos.left * K });
+
+        });
+
+    }
+</script>
+
+<script>
+    function ZoomIn() {
+        Zoom(1.2);
+    }
+</script>
+<script>
+    function ZoomOut() {
+        Zoom(0.8);
+    }
+</script>
+<script>
+
+    function ImagetoPrint(source) {
+
+
+        var Nom = '@Resources.Resource.PartNumber';
+        var Name = '@Resources.Resource.Nomenklatura';
+        var QTY = ' @Resources.Resource.KolichestvoNomenklaturi';
+        var Date = '@Resources.Resource.Date';
+        var W = "130px";
+     /*   var W = "120px"
+        return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description { width: " + W + "; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";
+        var W = "165px"
+*/
+
+        return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt>" +
+            "<style>@@media print { @@page {padding: 0; margin: 0;}}</style>" +
+            "</head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";
+   //      return "<html><head><scri" + "pt>function step1(){\n" +
+   //         "setTimeout('step2()', 10);}\n" +
+   //         "function step2(){window.print();window.close()}\n" +
+   //         "</scri" + "pt><style> .description { width: "+W+"; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+   //          "<img width ='"+W+"' height = '"+W+"' src='" + source + "' /><br><font size= '5px'>" + XX[0] + " | " + XX[2] + "</font><br><div class='description' lang='zh'>" + XX[1] + " " + XX[3] +"</div></body></html>";
+    }
+
+    function PrintImage(source) {
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+<script>
+    function PrintToEdge(source) {
+
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+
+
+
+        if (isAndroid) {
+            var Pagelink = "about:blank";
+            var pwa = window.open(Pagelink, "_new");
+            pwa.document.open();
+            pwa.document.write(ImagetoPrint(source));
+        }
+        else {
+            PrintImage(source);
+
+            //   pwa.print();
+        }
+
+
+        //  parent.document.getElementsByName("ImageToPrint")[0].document.exe("print", false, null);
+    }
+</script>
+
+<script>
+    function ShowEdit(Id, X, Y, W, H, C, Name, Num) {
+
+        $("#YId").val(Id);
+        $("#X").val(X);
+        $("#Y").val(Y);
+        $("#W").val(W);
+        $("#H").val(H);
+        $("#C").val(C);
+        $("#YName").val(Name.toString());
+        $("#YNum").val(Num);
+        $("#Edit").modal('show');
+    }
+</script>
+
+<script>
+    function ShowQR(StockId, StellagId, StreetId) {
+
+        $("#QRStock").val(StockId);
+        $("#QRStellag").val(StellagId);
+        $("#QRStreet").val(StreetId);
+        $("#QRPolka").val("");
+        $("#QRYacheika").val("");
+
+
+        $("#NewCode").modal('show');
+    }
+</script>
+
+<script>
+    function GeneryQR() {
+
+        var Stock = $("#QRStock").val();
+        var Stellag = $("#QRStellag").val();
+        var Street = $("#QRStreet").val();
+        var Polka = $("#QRPolka").val();
+        var Yacheika = $("#QRYacheika").val();
+        if (Polka == null || Polka== "")
+        {
+            Polka = "0";
+        }
+        if (Yacheika == null || Yacheika== "")
+        {
+            Yacheika = "0";
+        }
+        var Div = $("#QR");
+        var Code = Stock + ";" + Street +";"  + Stellag +";" + Polka + ";" + Yacheika;
+      // alert(Code);
+         var URL = "@Url.Action("GenerateQrCodeNaPolku", "POOrderEntries")?QRText=" + Code;
+     //   alert(URL);
+
+      //  Div.html("<Center><img src='" + URL + "'  style='height:200px;width:200px' id='PrintImage' title='"+Code+"' /><h4>"+Code+"</h4></Center>");
+        PrintToEdge(URL);
+    }
+</script>
+
+<script>
+    function ShowInventar(StellagId)
+    {
+
+        var DIV = $("#InventarSpisok");
+        DIV.html("");
+        var url = "@Url.Action("ShowInventar", "POOrderEntries")?StellagId=" + StellagId ;
+        if (StellagId != null)
+        {
+            DIV.load(url);
+            $("#Inventar").modal('show');
+
+        }
+    }
+</script>
+
+<script>
+    function SaveYacheika() {
+
+        var Id = $("#YId").val();
+        var X = $("#X").val();
+        var Y = $("#Y").val();
+        var W = $("#W").val();
+        var H = $("#H").val();
+        var C = $("#C").val();
+       // C = "default";
+        var Name = $("#YName").val();
+        var Num = $("#YNum").val();
+
+        var url = "@Url.Action("SaveYacheika", "POOrderEntries")?Id=" + Id + "&X=" + X + "&Y=" + Y + "&W=" + W + "&H=" + H + "&C="+C+"&Name=" + Name + "&Num=" + Num;
+         if (Id != null)
+        {
+            $.post(url,
+                function (data)
+                {
+
+
+                     var URL = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+        $("#NTable").load(URL);
+
+
+                }
+            );
+        }
+        $("#Edit").modal('hide');
+    }
+</script>
+

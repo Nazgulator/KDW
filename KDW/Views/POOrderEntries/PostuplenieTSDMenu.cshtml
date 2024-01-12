@@ -1,0 +1,39 @@
+﻿
+
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <a href="/POOrderEntries/Nomenklaturs" class="btn btn-default btn-block">@Resources.Resource.PostuplenieNaSklad </a>
+        </td>
+    </tr>
+    <tr>
+        <td width="80%">
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="NPartNumber" style="height:70px;font-size:30px" onchange="LoadNomenklaturs()" class="btn btn-warning btn-block" />
+        </td>
+        <td width="20%">
+            <button onclick="LoadNomenklaturs()" class="btn btn-success btn-block" style="height:70px;font-size:30px" >Ok</button>
+        </td>
+    </tr>
+
+</table>
+
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#NPartNumber').val().toString();
+      
+        var URL = '@Url.Action("PostuplenieTSDTable", "POOrderEntries")';
+        URL = URL + '?Name=' + Num;
+      //  alert(URL);
+        $("#NTable").load(URL);
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>

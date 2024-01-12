@@ -1,0 +1,88 @@
+﻿@model IEnumerable<string>
+@{string DocNum = "";
+    if (ViewBag.DocNumber != null)
+    {
+        DocNum = ViewBag.DocNumber;
+    }
+}
+<input id="DocumentNo" class="btn btn-warning " value="@DocNum" />
+@Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", ViewBag.CurrentStock), htmlAttributes: new { @class = "btn btn-warning" })
+<button class="btn btn-success" onclick="FindStrings()">Поиск</button>
+<button class="btn btn-success btn-block" onclick="PerenosOstatkov()"> Изменить склад назначения в документе (перенос остатков)</button>
+<table class="table table-striped table-bordered">
+    @foreach (var item in Model)
+    {
+        string[] S = item.Split('/');
+        if (S.Length == 4)
+        {
+            <tr>
+                <td>
+                    @S[0]
+                </td>
+                <td>
+                    @S[1]
+                </td>
+                <td>
+                    @S[2]
+                </td>
+                <td>
+                    @S[3]
+                </td>
+
+            </tr>
+        }
+        else
+        {
+            <tr>
+             
+                <td colspan="4" align="center">
+                    @S[2]
+                </td>
+               
+
+            </tr>
+        }
+
+    }
+</table>
+
+
+
+
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+
+<script>
+    function FindStrings()
+    {
+
+        var Number = $("#DocumentNo").val();
+        var StockId = $("#StockID").val(); 
+        window.location.replace('@Url.Action("CorrectDocks", "POOrderEntries")?DocNumber=' + Number + "&ToStock=" + StockId);
+
+    }
+</script>
+
+
+
+<script>
+    function PerenosOstatkov()
+    {
+        var Number = $("#DocumentNo").val();
+        var StockId = $("#StockID").val();
+        var URL = '@Url.Action("PerenosOstatkov", "POOrderEntries")?DocNumber=' + Number + "&ToStock=" + StockId;
+        $.post(URL,
+            function (data) {
+                alert(data);
+                window.location.replace('@Url.Action("CorrectDocks", "POOrderEntries")?DocNumber=' + Number + "&ToStock=" + StockId);
+
+            }
+        );
+
+
+
+    }
+</script>
+

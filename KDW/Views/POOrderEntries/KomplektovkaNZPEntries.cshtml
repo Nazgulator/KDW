@@ -1,0 +1,749 @@
+﻿@model IEnumerable<KDW.Models.StockWorkEntrys>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+<style>
+    .description {
+        width: 200px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+</style>
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="QRsForPrint" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block close hide" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="QRs">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @{
+        string PartOne = "btn btn-info";
+        string PartTwo = "btn btn-info";
+        string PartThree = "btn btn-info";
+        if (ViewBag.StockWorkPart == 1)
+        {
+            PartOne = "btn btn-success";
+        }
+        if (ViewBag.StockWorkPart == 2)
+        {
+            PartTwo = "btn btn-success";
+        }
+        if (ViewBag.StockWorkPart == 3)
+        {
+            PartThree = "btn btn-success";
+        }
+    }
+    <table>
+        <tr>
+            <td>
+                <button class="@PartOne" onclick="SetPart(1)" style="height:50px;width:400px">Перемещение на буферную зону склада</button>
+            </td>
+            <td rowspan="2">
+                <button class="@PartThree" onclick="SetPart(3)" style="height: 100px; width: 400px">Перемещение в НЗП</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button class="@PartTwo" onclick="SetPart(2)" style="height: 50px; width: 400px">Перемещение на склад участка</button>
+            </td>
+        </tr>
+
+    </table>
+
+
+</p>
+
+<table id="T" class="table table-bordered table-striped">
+    @if (Model != null)
+    {
+        string ShowStock = "";
+        string ShowProhodOne = "";
+        string ShowProhodTwo = "";
+        string ShowProhodThree = "";
+        string ShowOtklonenieOne = "";
+        string ShowOtklonenieTwo = "";
+
+
+
+        <thead>
+            <tr>
+                <td style="font-size:12px">
+                    @Resources.Resource.ZadanieNaProizvodstvo
+                </td>
+                <td style="font-size:12px">
+                    @Resources.Resource.PartNumber
+                </td>
+                <td style="font-size:12px" class="TRIN" hidden>
+                    @Resources.Resource.Nomenklatura
+                </td>
+
+                <td style="font-size:12px">
+                    @Resources.Resource.QTYNaSklade
+                </td>
+                <td style="font-size:12px">
+                    @Resources.Resource.QTYPeremestit
+                </td>
+
+
+                <!--
+                                <td style="font-size:12px" class ="TREM">
+                                    @Resources.Resource.VosmognieDeistviya
+                                </td>
+                -->
+
+            </tr>
+        </thead>
+        foreach (var item in Model)
+        {
+            Guid G = Guid.NewGuid();
+            string Cvet = "";
+            decimal StockQTY = Math.Round(item.QTYStock, 3);
+            decimal QTYMust = Math.Round(item.QTY, 3);
+            decimal Otklonenie = Math.Round(StockQTY - QTYMust);
+
+            string BtnText = Resources.Resource.PostuplenieNaSklad;
+            string BtnCvet = "btn btn-success";
+            string StockName = "";
+            string StockFromName = "";
+
+
+
+            //     string NameTR = item.SWE.Item.FNumber + "_" + item.SWE.DateStart.ToString("dd");
+
+            if (QTYMust == 0)
+            {
+                Cvet = "success";
+            }
+            if (StockQTY == 0)
+            {
+                Cvet = "danger";
+            }
+
+
+
+
+
+
+            <tr class="@Cvet ">
+
+                <td class="TRIN" style="font-size:12px">
+                    @item.StockWorks.WorkNumber
+                </td>
+                <td style="font-size:12px">
+                    <a onclick="ShowTR('@G',@item.WorkId,@item.Item.FItemID)">@item.Item.FNumber</a>
+
+                </td>
+                <td class="TRIN" style="font-size:12px" hidden>
+                    @item.Item.FName
+                </td>
+
+                <td style="font-size:12px" @ShowStock>
+                    @StockQTY
+                </td>
+
+                <td id="QTYFACT_@G" style="font-size:12px" @ShowProhodOne>
+                    @QTYMust
+                </td>
+                <td id="OTKLONENIE_@G" style="font-size:12px" @ShowOtklonenieOne>
+                    @Otklonenie
+                </td>
+
+
+
+
+            </tr>
+            <tr id="DOP_@G" hidden class="TREM">
+                <td colspan="5">
+                    <!--data-toggle="collapse" href="#@G"-->
+                    <!--  <div class="collapse" id="@G">
+                    <div class="card card-body">
+                        -->
+                    <p>
+                        @item.StockWorks.WorkNumber   @item.Item.FName
+                    </p>
+                    <p>
+                        <div class="col-sm-3">
+                            <input id="QTY_@G" value="@QTYMust.ToString().Replace(",",".")" type="number" step="0.001" class="btn btn-warning" />
+                        </div>
+                        <!--   <div class="col-sm-3">
+                            <input id="ZAKAZ_@G" class="btn btn-default" placeholder="@Resources.Resource.ZakazPostavshiku" autocomplete="on" onkeyup="SearchZakaz('@G',@item.ItemId)" />
+                        </div>
+                        <div class="col-sm-3">
+                            <input id="MESTO_@G" class="btn btn-warning" placeholder="@Resources.Resource.ScanMestoRazmesheniya" onclick="ochistka('@G')" />
+                        </div>
+                         -->
+                    <div class="col-sm-3">
+                        @if (ViewBag.StockWorkPart == 1)
+                        {
+                            <button id="BUTTON_@G" class="btn btn-success " onclick="GenerateQRCodeEtap1('@G',@item.StockWorkId)">@Resources.Resource.PodtverditPeremeshenie</button>
+                        }
+                        @if (ViewBag.StockWorkPart == 2)
+                        {
+                            <button id="BUTTON_@G" class="btn btn-success " onclick="GenerateQRCodeEtap2('@G',@item.StockWorkId)">@Resources.Resource.PodtverditPeremeshenie</button>
+                        }
+                        @if (ViewBag.StockWorkPart == 3)
+                        {
+                            <button id="BUTTON_@G" class="btn btn-success " onclick="PeremestitNaProizvodstvo('@G',@item.StockWorkId,@item.WorkId)">@Resources.Resource.PeremestitNaProizvodstvo</button>
+                        }
+                    </div>
+                    </p>
+                    <p>
+                        <div id="QRRRS_@G" class="row">
+
+                        </div>
+                    </p>
+
+
+
+
+
+
+                </td>
+
+            </tr>
+
+
+        }
+    }
+
+</table>
+
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function ochistka(GUID) {
+
+        $("MESTO_" + GUID).val('');
+    }
+</script>
+
+<script>
+    function ShowTR(GUID, Id, ItemId) {
+        var TR = $('#DOP_' + GUID);
+        if ($('#DOP_' + GUID + ':hidden')) {
+
+            TR.show();
+            QRsModal(GUID, Id, ItemId);
+        }
+        else {
+            TR.hide();
+
+        }
+    }
+</script>
+<script>
+    function QRsModal(GUID, WorkId,ItemId)
+    {
+        var Modal = $("#QRsForPrint");
+        var QRs = $("#QRRRS_" + GUID);
+        var STOCKID = $('#StockID').val();
+        QRs.load('@Url.Action("PredNZPQRs", "POOrderEntries")?WorkId=' + WorkId + '&ItemId=' + ItemId);
+       // $("#QRsForPrint").modal('show');;
+
+    }
+</script>
+
+<script>
+    function SearchZakaz(GUID,ItemId)
+    {
+        var Text = $("#ZAKAZ_" + GUID).val();
+       // alert(Text);
+           $("#ZAKAZ_"+GUID).autocomplete
+        (
+            {
+                source: '@Url.Action("AutocompleteSearchZakazPostavshiku", "POOrderEntries")?Text=' + Text + '&ItemId=' + ItemId,
+                minLength: 3,
+                    select: function (event, ui)
+                    {
+                        //  $.post('@Url.Action("SetWork", "Home")', { User: ui.item.label });
+                        //   }
+
+                    }
+                }
+
+        );
+    }
+</script>
+
+<script>
+    function CHGtoSTOCK(Id, DvigenieID)
+    {
+        var Button = $('#Button_' + Id);
+        var Input = $('#' + Id);
+        var QTY = $('#' + Id).val();
+        Button.hide();
+        alert("StockWorkEntryId = " + Id + " & DvigenieId=" + DvigenieID + " & QTY=" + QTY);
+        var url = "@Url.Action("CHGJsonStockWork", "POOrderEntries")?StockWorkEntryId=" + Id + "&DvigenieId=" + DvigenieID + "&QTY=" + QTY ;
+        $.post(url, function (data) {
+            var S = data.split(';');
+            if (S[0] == 'Ok')
+        {
+        QRID = parseInt(S[1]);
+        alert('@Resources.Resource.PeremeshenieUspeshno');
+          //  var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+
+            var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+            Button.text(S[6]);
+                Button.attr('onclick', 'OpenModal("' + QRID + '")');
+         Button.removeClass("btn-success").addClass("btn-info");
+                Button.show();
+                OpenModal(QRID);
+             //   PrintImage(url);
+             //   window.location.(url);
+      //  window.location.replace(url);
+        }
+        else
+        {
+                alert(data);
+                Button.show();
+        //location.reload();
+
+        }
+
+        });
+    }
+</script>
+<script>
+    function FindNumber() {
+        var Number = $('#FindPartNumber').val();
+        $.each($(".table").find("tr"), function () {
+
+            if ($(this).text().toLowerCase().replace(/\s+/g, '').indexOf(Number.replace(/\s+/g, '').toLowerCase()) == -1)
+                $(this).hide();
+            else
+                $(this).show();
+        });
+
+    }
+</script>
+<script>
+    function OpenModal(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                        $("#PrintQR").load(printurl);
+                        $("#PrintQRModal").modal('show');
+    }
+</script>
+<script>
+
+    function ImagetoPrint(source) {
+
+
+        var W = "200px"
+        return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt><style> .description { width: " + W + "; word - wrap: break-word; word -break: break-all; font-size:10px }</style ></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";
+    }
+
+    function PrintImage(source) {
+
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>
+
+<script>
+    function PoiskQR()
+    {
+        var Num = $('#NPartNumber').val();
+          var url2 = "@Url.Action("SkladskieWorks", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                window.location.replace(url2);
+
+
+            }
+
+        );
+    }
+</script>
+<script>
+    function QTYVQR()
+    {
+        var Num = $('#NPartNumber').val();
+        var QR = Num.split(';');
+        var PartNumber = QR[0];
+        alert(PartNumber);
+       // var TR = $('#TRQTYINQR');
+      //  TR.hide();
+          var url2 = "@Url.Action("QTYinQRJSON", "POOrderEntries")?QRData=" + Num ;
+        $.post
+            (url2, function (data)
+            {
+                alert(data);
+                $("#SkolkoVQR").val(data);
+               // TR.show('slow');
+                $('table tr').each(function () {
+                    $(this).hide();
+                });
+                $('#udalit').each(function () {
+                    $(this).remove();
+                });
+                var All = $('[name = "' + PartNumber +'"]');
+
+                All.each(function () {
+                    var Val = $(this).attr('qty');
+                    var Id = $(this).uniqueId();
+                    var Peremestit = $(this).val();
+                    alert(Val);
+                    if (data >= Val)
+                    {
+                        data = Val;
+                    }
+                    $(this).append('<tr id="udalit"><td><input class="btn btn-warning" value = ' + data + ' type="number" step="0.001"></td><td><button class="btn btn-success btn-block">@Resources.Resource.PeremestitNaDrugoiSklad</button></td></tr>')
+                    $(this).show();
+                });
+            }
+
+        );
+    }
+</script>
+<script>
+    function GenerateQRCodeEtap1(GUID, StockWork)
+    {
+       // alert("GUID=" + GUID + "ITEMID=" + ItemId);
+        var QTY = $('#QTY_' + GUID).val();
+        //var QTYFact = $('#QTYFACT_' + GUID);
+        var QTYinQR = $('#QTYinQR_' + GUID);
+        var QTYFACTV = parseFloat(QTYinQR.val());
+        var QTYVAL = parseFloat(QTY);
+        var ScanQR = $("#ScanQR1").val();
+        var URL = "";
+
+        if (ScanQR == "") {
+            alert(@Resources.Resource.OtskaniruiteNomenklaturu);
+        }
+
+     //   var MESTO = $('#MESTO_' + GUID).val();
+        var STOCKID = $('#StockID').val();
+      //  var OTKLONENIE = $('#OTKLONENIE_' + GUID);
+     //   var OTKLONENIEV = parseFloat(OTKLONENIE.text());
+        var BUTTON = $('#BUTTON_' + GUID);
+
+       // alert("QTY = " + QTY + "ZAKAZ = " + ZAKAZ + "MESTO = " + MESTO + "STOCKID = " + STOCKID + "ItemId = " + ItemId + "FACTVAL = " + QTYFACTV + "OTKLON = " + OTKLONENIEV);
+        //  alert("@Resources.Resource.PodtverditPeremeshenie ");
+        if (QTYFACTV == 0 ) {
+            alert(@Resources.Resource.Error);
+        }
+        else
+        {
+            if (confirm("@Resources.Resource.GenerateQR " + QTY + " @Resources.Resource.Edinic ?")) {
+                BUTTON.hide();
+               // var URL2 = '@Url.Action("SWEtap1", "POOrderEntries")?QRData=' + ScanQR + '&ToStockId=' + STOCKID + '&QTY=' + QTY + '&StockWorkId=' + StockWork;
+            //    alert(URL2);string QRData, string QTY, int StockWorkId, int ToStockId
+                URL = '@Url.Action("SWEtap1", "POOrderEntries")?QRData=' + ScanQR + '&ToStockId=' + STOCKID + '&QTY=' + QTY + '&StockWorkId=' + StockWork;//, { QRData: ScanQR, ToStockId: STOCKID, QTY: QTY, StockWorkId: StockWork }
+               // alert(URL);
+                $.post(URL,
+                    function (data) {
+                        if (data.indexOf(';') > -1) {
+                              alert('@Resources.Resource.PeremeshenieUspeshno');
+                            var S = data.split(';');
+
+                            if (S[0] == 'Ok') {
+
+
+                                if (S[2].indexOf("True") >= 0) {
+                                    QRID = parseInt(S[1]);
+                                    OpenModal(QRID);
+                                  //  QTYFact.text(QTYFACTV + QTYVAL);
+                                  //  OTKLONENIE.text(OTKLONENIEV + QTYVAL);
+                                  //  QRsModal(GUID, ItemId);
+                                    BUTTON.show();
+                                    LoadVedomost();
+
+                                }
+                                else {
+
+                                    BUTTON.show();
+                                    LoadVedomost();
+
+                                }
+
+
+                            }
+                            else {
+                                alert(data);
+                                $('#PeremestitB').show();
+                                // location.reload();
+
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            alert(data);
+                        }
+                    }
+
+
+                );
+            }
+        }
+    }
+</script>
+<script>
+    function GenerateQRCodeEtap2(GUID, StockWork)
+    {
+       // alert("GUID=" + GUID + "ITEMID=" + ItemId);
+        var QTY = $('#QTY_' + GUID).val();
+        //var QTYFact = $('#QTYFACT_' + GUID);
+        var QTYinQR = $('#QTYinQR_' + GUID);
+        var QTYFACTV = parseFloat(QTYinQR.val());
+        var QTYVAL = parseFloat(QTY);
+        var ScanQR = $("#ScanQR1").val();
+        var URL = "";
+
+        if (ScanQR == "") {
+            alert(@Resources.Resource.OtskaniruiteNomenklaturu);
+        }
+
+     //   var MESTO = $('#MESTO_' + GUID).val();
+        var STOCKID = $('#StockID').val();
+      //  var OTKLONENIE = $('#OTKLONENIE_' + GUID);
+     //   var OTKLONENIEV = parseFloat(OTKLONENIE.text());
+        var BUTTON = $('#BUTTON_' + GUID);
+
+       // alert("QTY = " + QTY + "ZAKAZ = " + ZAKAZ + "MESTO = " + MESTO + "STOCKID = " + STOCKID + "ItemId = " + ItemId + "FACTVAL = " + QTYFACTV + "OTKLON = " + OTKLONENIEV);
+        //  alert("@Resources.Resource.PodtverditPeremeshenie ");
+        if (QTYFACTV == 0 ) {
+            alert(@Resources.Resource.Error);
+        }
+        else
+        {
+            if (confirm("@Resources.Resource.GenerateQR " + QTY + " @Resources.Resource.Edinic ?")) {
+                BUTTON.hide();
+               // var URL2 = '@Url.Action("SWEtap1", "POOrderEntries")?QRData=' + ScanQR + '&ToStockId=' + STOCKID + '&QTY=' + QTY + '&StockWorkId=' + StockWork;
+            //    alert(URL2);
+               URL = '@Url.Action("SWEtap2", "POOrderEntries")?QRData=' + ScanQR + '&ToStockId=' + STOCKID + '&QTY=' + QTY + '&StockWorkId=' + StockWork;//, { QRData: ScanQR, ToStockId: STOCKID, QTY: QTY, StockWorkId: StockWork }
+               $.post(URL,
+                    function (data) {
+                        if (data.indexOf(';') > -1) {
+                              alert('@Resources.Resource.PeremeshenieUspeshno');
+                            var S = data.split(';');
+
+                            if (S[0] == 'Ok') {
+
+
+                                if (S[2].indexOf("True") >= 0) {
+                                    QRID = parseInt(S[1]);
+                                    OpenModal(QRID);
+                                  //  QTYFact.text(QTYFACTV + QTYVAL);
+                                  //  OTKLONENIE.text(OTKLONENIEV + QTYVAL);
+                                  //  QRsModal(GUID, ItemId);
+                                    BUTTON.show();
+                                    LoadVedomost();
+
+                                }
+                                else {
+
+                                    BUTTON.show();
+                                    LoadVedomost();
+
+                                }
+
+
+                            }
+                            else {
+                                alert(data);
+                                $('#PeremestitB').show();
+                                // location.reload();
+
+                            }
+
+
+
+                        }
+                        else
+                        {
+                            alert(data);
+                        }
+                    }
+
+
+                );
+            }
+        }
+    }
+</script>
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function PeremestitNaProizvodstvo(GUID, StockWork, WorkId) {
+        var Num = $('#ScanQR1').val().toString();
+     //   var SkolkoVNZP = parseFloat($("#SkolkoVNZP").val());
+       // var MaxVNZP = parseFloat($("#MaxVNZP").val());
+       // var FQtyFact = parseFloat($("#SkolkoVQR").val());
+       // var FQtyMax = parseFloat($("#MaxVQR").val());
+        var SkolkoPeremestit = parseFloat($("#QTY_"+GUID).val());
+      //  var NugnoVNZP = MaxVNZP - SkolkoVNZP;
+        var Buttons = $('#Buttons');
+        var go = false;
+     /*   if (NugnoVNZP > 0)
+        {
+            if (NugnoVNZP < SkolkoPeremestit)
+            {
+                SkolkoPeremestit = NugnoVNZP;
+            }
+
+
+            if (SkolkoPeremestit > 0 && MaxVNZP > 0) {
+                if (FQtyFact >= SkolkoPeremestit) {
+                    go = true;
+                }
+                else {
+                    if (FQtyFact < SkolkoPeremestit) {
+                        $("#QTYPeremestit").val(FQtyFact);
+                        SkolkoPeremestit = FQtyFact;
+
+                        go = true;
+                    }
+                }
+            }
+            */
+          //  else {
+           //     alert("@Resources.Resource.NomenklaturiNedostatochno");
+          //  }
+      //  }
+
+//Если введены верные значения
+      //  if (go) {
+            if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?")) {
+                Buttons.hide();//скрываем кнопки
+
+                var ADDURL = '@Url.Action("SWEtap3", "POOrderEntries")?QRData=' + Num + '&QTY=' + SkolkoPeremestit + '&StockWorkId=' + WorkId+ '&WorkId=' + WorkId;
+                alert(ADDURL);
+                $.post(ADDURL, function (data) {
+                    Buttons.show();
+                 //  SkolkoVernut();
+
+                     var S = data.split(';');
+                    if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+                        // alert(data);
+
+                        var QRID = S[1];
+
+
+                        OpenModal(QRID);
+                        LoadVedomost();
+                        // window.location.replace(printurl);
+
+                    }
+                    else
+                    {
+                        alert(data);
+                        LoadVedomost();
+                    }
+
+                    // alert(data);
+              //  var URL = '@Url.Action("KomplektovkaTable", "POOrderEntries")';
+             //   URL = URL + '?Number=' + Num;
+                //  alert(URL);
+               //     $("#NTable").load(URL);
+                //    FindAllQTY();
+
+                });
+
+
+
+
+
+            }
+            else {
+
+            }
+    }
+
+      //  else
+      //  {
+      //      alert("@Resources.Resource.Error");
+      //  }
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+
+</script>
+
+<script>
+    function OpenModal(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+        $("#PrintQR").load(printurl);
+      //  $("#QRsForPrint").modal('hode');
+                        $("#PrintQRModal").modal('show');
+    }
+</script>

@@ -1,0 +1,95 @@
+﻿@model Dictionary<string, decimal>
+
+
+<center>
+    <h2>@Resources.Resource.PeremeshenieNaSklad</h2>
+</center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<style>
+    .description {
+        width: 280px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+
+    .allwidth {
+        min-width: 280px;
+    }
+</style>
+@{
+    //       decimal QTYSklad = Math.Round(ViewBag.QTYNaSklade, 2);
+}
+
+@Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value", ViewBag.Stock), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskMinusov()" })
+<table class="table table-bordered" style="text-align:center">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Key
+            </td>
+            <td>
+                @item.Value
+            </td>
+        </tr>
+    }
+</table>
+
+<p>
+    <button class="btn btn-block btn-danger  " id="PeremestitB" onclick="ShlopnutStroki()">Схлопнуть строки на складе</button>
+</p>
+
+
+
+
+
+
+<script>
+    function PoiskMinusov()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#StockID").val();
+
+        var url = "@Url.Action("MinusNaSkladah", "POOrderEntries")?StockId=" + Stock;
+        location.replace(url);
+          
+    }
+</script>
+
+<script>
+    function ShlopnutStroki()
+    {
+
+        var Stock = $("#StockID").val();
+
+        var url = "@Url.Action("ShlopnutStrokiNaSklade", "POOrderEntries")?StockId=" + Stock;
+        var url2 = "@Url.Action("MinusNaSkladah", "POOrderEntries")?StockId=" + Stock;
+        $.post(url, function (data) {
+
+            if (data == 'Ok')
+            {
+                alert('@Resources.Resource.Uspeshno');
+                location.replace(url2);
+            }
+            else
+            {
+                alert(data);
+                location.replace(url2);
+            }
+        });
+        
+
+    }
+</script>

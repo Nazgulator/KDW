@@ -1,0 +1,278 @@
+﻿
+
+@{
+
+
+}
+<!-- Modal -->
+<div class="modal fade" id="NewStreet" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.AddStreet</h4>
+                <button id="Close" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @Resources.Resource.Ulica
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="SName" />
+                </p>
+                <p>
+                    N
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="SNum" />
+                </p>
+
+                <p>
+                    <button class="btn btn-success btn-block" onclick="SaveStreet()">@Resources.Resource.Save</button>
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="NewStellag" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.AddStellag</h4>
+                <button id="Close" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    @Resources.Resource.Stellag
+                </p>
+                <p>
+                    <input class="btn btn-warning btn-block" id="Name" placeholder="Name" />
+                </p>
+                <p>
+                    N
+                </p>
+                <p>
+                    <input type="number" class="btn btn-warning btn-block" id="Number" placeholder="Number" />
+                </p>
+                <p>
+                    @Html.DropDownList("Street", new SelectList(ViewBag.Streets, "Num", "Name"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "PoiskLinii()" })
+
+                </p>
+                <p>
+                    <button onclick="CreateNewStellag()" class="btn btn-success btn-block">@Resources.Resource.Stellag</button>
+
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2">
+            <center>
+
+
+                <h3>
+                    @Resources.Resource.Planogramma
+                </h3>  
+            </center>
+        </td>
+    </tr>
+    <tr width="100%">
+        <td colspan="2">
+            @Html.DropDownList("Stock", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "ReloadPlanogramma()" })
+
+        </td>
+    </tr>
+    <tr>
+        <td width="60%">
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="NPartNumber" onchange="Search()" class="btn btn-warning btn-block">
+        </td>
+        <td width="20%">
+            <button onclick="Search()" class="btn btn-success btn-block">Ok</button>
+        </td>
+
+
+    </tr>
+    <tr>
+        <td>
+        </td>
+        <td>
+        </td>
+        <td>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button onclick="ShowStreet()" class="btn btn-block btn-success">@Resources.Resource.AddStreet</button>
+        </td>
+        <td>
+            <button onclick="ShowNewStellag()" class="btn btn-block btn-success">@Resources.Resource.AddStellag</button>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <a href="/Home/Index" class="btn btn-default btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+        </td>
+    </tr>
+
+</table>
+<button onclick="ZoomOut()" class="btn-success">-</button>
+<button onclick="ZoomIn()" class="btn-success">+</button>
+<div id="Load">
+
+</div>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#NPartNumber').val().toString();
+
+        var URL = '@Url.Action("Add", "POOrderEntries")';
+        URL = URL + '?ItemNumber=' + Num;
+      //  alert(URL);
+        $("#NTable").load(URL);
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function Search() {
+        var Num = $('#NPartNumber').val().toString();
+
+        var URL = '@Url.Action("SavePlanogrammaSearch", "POOrderEntries")';
+        URL = URL + '?Item=' + Num;
+      //  alert(URL);
+
+        $.post(URL, function (data) {
+
+            var URL2 = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+
+            $("#NTable").load(URL2);
+            $("#NewStellag").modal('hide');
+
+        }
+
+        );
+
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+                            // alert("PING!");
+
+                        }
+</script>
+
+<script>
+    function ShowNewStellag() {
+        $("#NewStellag").modal('show');
+    }
+</script>
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function ReloadPlanogramma() {
+        var Num = $('#Stock').val();
+        $("#NTable").hide();
+        var L = $('#Load');
+
+        L.html(' <center> <img src="/Content/Icons/Loading.gif" height = "150" width = "200" /> </center>');
+
+        var url2 = "@Url.Action("ReloadPlanogramma", "POOrderEntries")?Stock=" + Num;
+
+        $.post(url2, function (data) { }); //Меняем номер склада в сессию
+
+        var URL = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+
+        $("#NTable").load(URL);//Прогружаем планограмму выбранного склада
+        L.html('');
+        $("#NTable").show();
+       // alert("Ok");
+    }
+
+</script>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function CreateNewStellag() {
+        var Number = $("#Number").val();
+        var Name = $("#Name").val();
+        var Street = $("#Street").val();
+        var url2 = "@Url.Action("AddStend", "POOrderEntries")?Number=" + Number + "&Name=" + Name+"&StreetId="+Street;
+        var URL = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+        //    string ToWork, string Manager, decimal QTY, string Liniya, string ToStock
+        //  SOUTplusCIN
+
+        //  alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+
+        $.post(url2, function (data) {
+
+            $("#NTable").load(URL);
+            $("#NewStellag").modal('hide');
+
+        }
+
+        );
+    }
+
+</script>
+
+<script>
+    function ShowStreet() {
+
+
+        $("#NewStreet").modal('show');
+    }
+</script>
+
+<script>
+    function SaveStreet() {
+
+        var Name = $("#SName").val();
+        var Num = $("#SNum").val();
+
+        var url = "@Url.Action("SaveStreet", "POOrderEntries")?Name=" + Name + "&Num=" + Num ;
+         if (Name != null&&Num!="")
+        {
+            $.post(url,
+                function (data)
+                {
+
+
+                     var URL = '@Url.Action("PlanogrammaTable", "POOrderEntries")';
+        $("#NTable").load(URL);
+
+
+                }
+            );
+        }
+        $("#NewStreet").modal('hide');
+    }
+</script>

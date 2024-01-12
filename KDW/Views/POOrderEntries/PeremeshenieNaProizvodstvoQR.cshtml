@@ -1,0 +1,357 @@
+﻿@model KDW.Models.ItemView
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>@Resources.Resource.PeremeshenieNaProizvodstvo</h2>
+</center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+    <style>
+        .description {
+            width: 280px;
+            word-wrap: break-word;
+            word-break: break-all;
+            font-size: 10px
+        }
+
+        .allwidth {
+            min-width: 280px;
+        }
+    </style>
+ 
+
+    <table id="T" class="table table-bordered table-striped">
+
+
+        <tr>
+            <th>
+                @Resources.Resource.NaimenovanieIPartNomer
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <div class=" btn btn-block btn-default btn-block">@Model.Item.FNumber  </div>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <Center>
+                    <div class=" description">@Model.Item.FNumber  @Model.Item.FName</div>
+                </Center>
+            </td>
+
+        </tr>
+        <tr>
+
+
+
+
+
+            <th>
+                @Resources.Resource.StockFrom
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <div class="btn btn-success btn-block allwidth">@Model.StockOrDep.FName</div>
+            </td>
+
+
+
+        </tr>
+
+        <tr>
+            <th>
+                @Resources.Resource.LiniyaSborki
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                @Html.DropDownList("LiniyaSborki", new SelectList(ViewBag.LiniiSborki), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+            </td>
+        </tr>
+
+
+
+        <tr>
+
+            <th>
+                @Resources.Resource.ZadanieNaProizvodstvo
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DropDownList("Work", new SelectList(Model.ItemToWork.Select(x => x.Work).ToList()), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "LoadKomplektovka()" })
+            </td>
+
+
+
+
+        </tr>
+
+        <tr>
+            <th>
+                @Resources.Resource.MOL
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DropDownList("ManagerID", new SelectList(ViewBag.Users), htmlAttributes: new { @class = "form-control btn btn-default  btn-block", @readonly = true })
+
+               
+            </td>
+        </tr>
+
+        <tr>
+
+            <th>
+                @Resources.Resource.QTYVZakaze
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input value="@Math.Round(ViewBag.QTYVZakaze,3)" id="QTYVZakaze"  class=" btn btn-warning btn-block" readonly />
+            </td>
+
+
+
+        </tr>
+
+        <tr>
+
+            <th>
+                @Resources.Resource.QTYKPeremesheniu
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <input value="@Model.QTY" id="QTY"  class="form-control btn btn-warning btn-block" />
+            </td>
+
+
+
+        </tr>
+
+
+        <tr>
+            <td colspan="1">
+                <button class="btn btn-block btn-success  allwidth" id="PeremestitB" onclick="AddNZP()">@Resources.Resource.PodtverditDvigenie</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="/Home/Index" class="btn  btn-success btn-block allwidth">@Resources.Resource.VGlavnoeMenu &raquo;</a>
+            </td>
+        </tr>
+    </table>
+
+
+    <script>
+    function LoadKomplektovka()
+    {
+        var Work = $('#Work').val();
+         var ADDURL = '@Url.Action("GenerateKomplektovkaByWork", "POOrderEntries")?Work=' + Work;
+
+                $.post(ADDURL, function (data) {
+                        alert(data);
+                });
+        
+    }
+    </script>
+
+    <script>
+        function AddNZP()
+        {
+            var SkolkoPeremestit = parseFloat($('#QTY').val().replace(',','.'));
+            var Buttons = $('#PeremestitB');
+            if (confirm("@Resources.Resource.PeremeshaemNaPrVo " + SkolkoPeremestit + " @Resources.Resource.Edinic ?")) {
+                Buttons.hide();//скрываем кнопки
+                var ADDURL = '@Url.Action("AddNZP", "POOrderEntries")?QRData=' + '@Model.LastDvig.QRTable.QRstring' + '&QTYFact=' + SkolkoPeremestit;
+
+                $.post(ADDURL, function (data) {
+                    Buttons.show();
+                    var S = data.split(';');
+                 //   alert(data);
+                       if (S[0] == 'True') {
+                        alert('@Resources.Resource.PeremeshenieUspeshno');
+                        // alert(data);
+
+                            var QRID = S[1];
+
+                        var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+
+                           window.location.replace(printurl);
+                        }
+                       else {
+                             alert('@Resources.Resource.PeremeshenieUspeshno');
+                            var url = "@Url.Action("QRScan", "POOrderEntries")?QRData=" + "@Model.LastDvig.QRTable.QRstring";
+                            window.location.replace(url);
+                        }
+                    $('#PeremestitB').show();
+
+                });
+                  
+
+
+                
+            }
+        }
+    </script>
+
+    <script>
+
+    function PeremestitNaSklad()
+    {
+        $('#PeremestitB').removeClass("btn-success").addClass("btn-default");
+        var QTY = $('#QTY').val();
+        QTY = QTY.replace(',', '.');
+        var ToWork = $('#Work').val();
+        var Manager = $('#ManagerID').val();
+        var Liniya = $('#LiniyaSborki').val();
+
+        var StockFrom = '@Model.Stock.FName';
+        var ItemID = @Model.Item.FItemID;
+
+        var url = "@Url.Action("PeremeshenieNaProizvodstvoJsonQR", "POOrderEntries")?Manager=" + Manager + "&ToWork=" + ToWork + "&QTY=" + QTY + "&DvigenieId=" +@Model.LastDvig.Id+"&Liniya=" + Liniya;
+        if (ToWork != null)
+        {
+            $.post(url,
+                function (data)
+                {
+                     var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                    alert('@Resources.Resource.PeremeshenieUspeshno');
+                                   // alert(data);
+                                    if (S[2].indexOf("True") >= 0) {
+                                        var QRID = S[1];
+
+                                        var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                                        window.location.replace(url);
+                                    }
+                                    else
+                                    {
+                                         var url = "@Url.Action("QRScan", "POOrderEntries")?QRData=" + "@Model.LastDvig.QRTable.QRstring";
+                                        window.location.replace(url);
+                                    }
+
+                                }
+                                else
+                                {
+                                    alert(data);
+                                    //location.reload();
+
+                                }
+
+
+                }
+            );
+        }
+
+    }
+    </script>
+<script>
+
+    function SearchWork() {
+        $("#Work").autocomplete
+        (
+                {
+                source: '@Url.Action("AutocompleteSearchWork", "POOrderEntries")',
+                minLength: 3,
+                    select: function (event, ui)
+                    {
+                        //  $.post('@Url.Action("SetWork", "Home")', { User: ui.item.label });
+                        //   }
+
+                    }
+                }
+
+        );
+
+    }
+
+
+
+    
+
+
+</script>
+<script>
+    function PoiskLinii()
+    {
+        alert("Поиск линии");
+        var Work = $("#Work").val();
+        var Dropdown = $('#LiniyaSborki');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchLiniiSborki", "POOrderEntries")?Work=" + Work;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+          var url2 = "@Url.Action("AutocompleteMOLfromWORK", "POOrderEntries")?WORK=" + Work;
+
+            $.post(url2,
+                function (data)
+                {
+                    $("#ManagerID").val(data);
+
+
+                }
+            );
+
+       
+    }
+</script>
+
+<script>
+
+
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchManager", "POOrderEntries")',
+                    minLength: 0,
+                     select: function (event, ui)
+                     {
+                      
+
+                     }
+
+
+                });
+
+
+            }
+
+
+
+
+
+
+</script>
+
+

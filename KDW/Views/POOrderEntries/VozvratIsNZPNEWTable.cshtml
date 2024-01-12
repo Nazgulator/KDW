@@ -1,0 +1,131 @@
+﻿@model IEnumerable<KDW.Models.PPBOMEntry>
+
+
+
+@{string cl50 = "btn-default";
+    string clAll = "btn-default";
+    if (ViewBag.Count == 50)
+    {
+        cl50 = "btn-success";
+    }
+    if (ViewBag.Count == 9999)
+    {
+        clAll = "btn-success";
+    }
+}
+<button class="btn @cl50" onclick="SetCount(50)">50</button>
+<button class="btn @clAll" onclick="SetCount(0)">ALL</button>
+<table id="T" class="table table-bordered table-striped">
+    @if (Model != null)
+    {
+
+
+
+
+        <tr>
+            <td>
+                @Resources.Resource.ZadanieNaProizvodstvo
+            </td>
+            <td>
+                @Resources.Resource.OstatkiInWork
+            </td>
+
+            <td>
+                @Resources.Resource.VosmognieDeistviya
+            </td>
+
+        </tr>
+
+        foreach (var BOM in Model)
+        {
+            string ID = BOM.FInterID + "_" + BOM.FItemID;
+            string Cl = "";
+            string Vipusk = Resources.Resource.VipuskNeNachat;
+            if (BOM.ICMO.FCommitQty >= 0)
+            {
+                Cl = "warning";
+                Vipusk = Resources.Resource.VipuskVProcesse;
+
+                if (BOM.ICMO.FQty < BOM.ICMO.FCommitQty)
+                {
+                    Cl = "success";
+                    Vipusk = Resources.Resource.VipuskEnd;
+                }
+            }
+
+            <tr class="@Cl">
+                <td>
+                    <p>@BOM.ICMO.FBillNo</p>
+                    <p>@BOM.t_Item.FNumber</p>
+                    <p>@Vipusk</p>
+                </td>
+                <td>
+                    <input class="btn btn-warning" id="QTY_@ID" style="width:200px" value="@Math.Round(BOM.FWIPQTY.Value,3).ToString().Replace(",",".")" />
+                </td>
+
+                <td>
+                    <button class="btn btn-success btn-block" id="BTN_@ID" onclick="ReturnNZP(@BOM.FInterID,@BOM.FItemID)"> @Resources.Resource.VernutIsNZP </button>
+                </td>
+
+            </tr>
+
+        }
+
+    }
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<script>
+    function ReturnNZP(BOMInterId, BOMItemId) {
+
+        var QTY = parseFloat($('#QTY_' + BOMInterId + "_" + BOMItemId).val().replace(',', '.'));
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+        var PrichinaText = $('#PrichinaText').val();
+        var Prichina = $('#Prichina').val();
+        var Prich = PrichinaText +";"+ Prichina;
+      //  alert(Prich);
+        var Button = $('#BTN_' + BOMInterId + "_" + BOMItemId)
+        var url2 = "@Url.Action("StornoPeremensheniyaNaProizvodstvoNEWJson", "POOrderEntries")?Manager=" + Manager + "&QTY=" + QTY + "&StockTo=" + Stock + "&ItemId=" + BOMItemId + "&BOMId=" + BOMInterId + "&Prichina=" + Prich;
+
+        if (QTY >= 0)
+        {
+            Button.hide();
+            if (confirm("@Resources.Resource.Podtverdit " + QTY + "?")) {
+                $.post
+                    (url2, function (data) {
+                    var S = data.split(';');
+                    if (S[0] == 'Ok') {
+                        QRID = parseInt(S[1]);
+                        console.log('GoToPrint');
+                        var url = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID;
+                        ShowModal(QRID);
+
+
+
+                    }
+                    else {
+                        alert(data);
+                        Button.show();
+                        //  location.reload();
+                    }
+
+                    }
+                    );
+            }
+        }
+        else
+        {
+            alert('@Resources.Resource.NomenklaturiNedostatochno');
+            Button.show();
+        }
+    }
+</script>
+<script>
+    function ShowModal(QRID) {
+
+        var printurl = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>

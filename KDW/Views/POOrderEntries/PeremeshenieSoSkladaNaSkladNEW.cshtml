@@ -1,0 +1,286 @@
+﻿@model KDW.Models.DvigenieNEW
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<center>
+    <h2>@Resources.Resource.PeremeshenieNaSklad</h2>
+</center>
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<style>
+    .description {
+        width: 280px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+
+    .allwidth {
+        min-width: 280px;
+    }
+</style>
+@{
+    //       decimal QTYSklad = Math.Round(ViewBag.QTYNaSklade, 2);
+}
+
+
+<table class="table table-bordered" style="text-align:center">
+
+    <tr>
+        <td class="description">
+            @Model.Postavshik
+        </td>
+        <td>
+            @Model.t_Item.FNumber
+        </td>
+
+    </tr>
+    <tr class="success">
+        <td>
+            @Resources.Resource.QTYFact
+        </td>
+        <td>@Model.QTYFact</td>
+    </tr>
+    <tr>
+        <td>
+            @Resources.Resource.Stock
+        </td>
+        <td>@Model.StockName</td>
+    </tr>
+    <tr>
+        <td colspan="2" class="description">
+            @Model.t_Item.FName
+        </td>
+
+    </tr>
+    @if (ViewBag.StatusesOTK.Status > 0 && ViewBag.StatusesOTK.StatusOTK.Id > 0)
+    {
+        <tr class="@ViewBag.StatusesOTK.StatusOTK.Colour">
+            <td>
+                @Resources.Resource.StatusOTK
+            </td>
+            <td>
+                @ViewBag.StatusesOTK.StatusOTK.NameZh
+            </td>
+        </tr>
+    }
+    <tr>
+
+        <td>
+            <input class="btn btn-block btn-default" id="StockFilter" placeholder="@Resources.Resource.PoiskSklada" onkeyup="FilterStock()" />
+        </td>
+
+        <td>
+            @Html.DropDownList("ToStockID", new SelectList(ViewBag.Stocks, "Key", "Value", 13689), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block", @onchange = "PoiskMOL()" })
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Resources.Resource.MOL
+        </th>
+        <th>
+            @Html.DropDownList("Manager", new SelectList(ViewBag.Users), htmlAttributes: new { @class = "form-control btn btn-warning  btn-block" })
+        </th>
+    </tr>
+    <tr>
+
+        <th>
+            @Resources.Resource.QTYKPeremesheniu
+        </th>
+
+        <td>
+            <input value="@Model.QTYFact.ToString().Replace(",",".")" id="QTY" type="number" step="0.01" class="form-control btn btn-warning btn-block" />
+        </td>
+    </tr>
+    <tr>
+        <th>
+            @Resources.Resource.ScanMestoRazmesheniya
+        </th>
+        <td>
+            <input id="Mesto" class="form-control btn btn-warning btn-block" />
+        </td>
+    </tr>
+
+
+</table>
+<p>
+    <button class="btn btn-block btn-success  allwidth" id="PeremestitB" onclick="PeremestitNaSklad()">@Resources.Resource.PodtverditPeremeshenie</button>
+</p>
+
+      
+
+
+<script>
+    function PoiskMOL()
+    {
+       // alert("Поиск мола");
+        var Stock = $("#ToStockID").val();
+        var Dropdown = $('#Manager');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchMOLs", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+
+
+                }
+        );
+
+
+
+
+    }
+</script>
+
+<script>
+    function FilterStock()
+    {
+        var Filter = $('#StockFilter').val();
+        var Dropdown = $('#ToStockID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorage", "POOrderEntries")?term=" + Filter;
+
+            $.post(url,
+                function (data)
+                {
+                   // alert(data);
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+
+
+                }
+        );
+
+    }
+</script>
+<script>
+
+    function PeremestitNaSklad()
+    {
+        $('#PeremestitB').hide();//removeClass("btn-success").addClass("btn-default");
+        var QTY = $('#QTY').val();
+        QTY = QTY.replace(',', '.');
+        var ToStock = $('#ToStockID').val();
+        var Manager = $('#Manager').val();
+        var Mesto = $('#Mesto').val();
+        var StockFrom = '@Model.StockId';
+
+      //  alert(QTY + ";" + ToStock + ";" + Manager + ";" + StockFrom + ";" + ItemID);
+        var url = "@Url.Action("PeremeshenieSoSkladaNaSkladJsonNEW", "POOrderEntries")?Manager=" + Manager + "&StockTo=" + ToStock + "&QTY=" + QTY + "&DvigenieId=" +@Model.Id+"&Mesto="+Mesto;
+        if (ToStock != null)
+        {
+          //  alert("Ok");
+             $.post(url,
+                function (data)
+                {
+
+                     var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                    if (S[2].indexOf("True") >= 0)
+                                    {
+                                        QRID = parseInt(S[1]);
+                                     var url = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID ;
+                                     window.location.replace(url);
+                                    }
+                                     else
+                                    {
+                                        var url = "@Url.Action("ScanirovanieQR", "POOrderEntries")?QRData=" + "@Model.QRString";
+                                        window.location.replace(url);
+                                    }
+                                     alert('@Resources.Resource.PeremeshenieUspeshno');
+
+                                }
+                                else
+                                {
+                                    alert(data);
+                                    $('#PeremestitB').show();
+                                   // location.reload();
+
+                                }
+
+
+                }
+            );
+        }
+
+    }
+</script>
+<script>
+
+
+    function Peremestit() {
+        var QTY = $('#QTY').val();
+        var ToStock = $('#ToStockID').val();
+
+        if (ToStock != null) {
+            $.post('@Url.Action("PeremeshenieNaSkladJSON", "POOrderEntries")', { ItemID:@Model.ItemID, QTY: QTY, StockID:@Model.ItemID, plus: false },
+                function (data)
+                {
+                    if (data == true) {
+                        $.post('@Url.Action("PeremeshenieNaSkladJSON", "POOrderEntries")', { ItemID:@Model.ItemID, QTY: QTY, StockID: ToStock, plus: true },
+                            function (data) {
+                                var S = data.split(';');
+                                if (S[0] == 'Ok')
+                                {
+                                     QRID = parseInt(S[1]);
+                                     alert('@Resources.Resource.PeremeshenieUspeshno');
+                                     var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                                     window.location.replace(url);
+                                }
+                                else
+                                {
+                                    alert(data);
+                                    location.reload();
+
+                                }
+                            });
+                    }
+                    else
+                    {
+                        alert(data);
+                    }
+
+
+                }
+            );
+        }
+    }
+
+</script>
+<script>
+    function FindStends()
+    {
+        var Stock = $("#ToStockID").val();
+        var Dropdown = $('#StendID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStends", "POOrderEntries")?Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: value }).text(value));
+                    });
+                }
+        );
+    }
+</script>

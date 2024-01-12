@@ -1,0 +1,411 @@
+﻿@model IEnumerable<KDW.Models.StarWorkView>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<center>
+    <h2>@Resources.Resource.VyberiteZakazNaProizvodstvo</h2>
+
+</center>
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+
+<!-- Modal -->
+<div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4>@Resources.Resource.ZagruzkaDannih...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+
+                    <div id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <center>
+                        <label id="nadpis">@Resources.Resource.ZagruzkaDannih...</label>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{ string[] BClass = { "btn - default", "btn - default", "btn - default", "btn - default", "btn - default" };
+    BClass[2 + ViewBag.Day] = "btn-success";
+
+}
+<table class="table table-bordered table-striped">
+    <tr>
+        <td>
+            <button class="btn @BClass[0] btn-block" onclick="SelectDay(-2)">-2 前天</button>
+        </td>
+        <td>
+            <button class="btn @BClass[1] btn-block" onclick="SelectDay(-1)">-1 昨天</button>
+        </td>
+        <td>
+            <button class="btn @BClass[2] btn-block" onclick="SelectDay(0)">今天</button>
+        </td>
+        <td>
+            <button class="btn @BClass[3] btn-block" onclick="SelectDay(1)">+1 明天</button>
+        </td>
+        <td>
+            <button class="btn @BClass[4] btn-block" onclick="SelectDay(2)">+2 后天</button>
+        </td>
+    </tr>
+</table>
+<table class="table table-bordered table-striped">
+    @if (ViewBag.SW!=null)
+    {
+    foreach (var item in ViewBag.SW)
+    {
+        DateTime D = DateTime.Now.Date;
+        decimal raznica = Math.Round(item.QTY - item.QTYFact, 0);
+        if (ViewBag.Day != 0)
+        {
+            D = D.AddDays(ViewBag.Day).Date;
+
+        }
+
+        int PID = 0;
+        string GC = "";
+        if (item.QTYFact > 0)
+        {
+            GC = "warning";
+        }
+        if (item.Complete || item.QTYFact >= item.QTY)
+        {
+            GC = "success";
+        }
+
+
+
+
+
+
+
+
+    <tr class="@GC">
+        <th>
+            @item.Poryadok  @item.ComputerNames.Name
+
+
+        </th>
+
+        <th>
+            @item.DateStart.ToString("yyyy.MM.dd")  @Resources.Resource.WorkInPlan
+        </th>
+
+        <th>
+            @Math.Round(item.QTYFact, 0)  / @Math.Round(item.QTY, 0) = @raznica
+        </th>
+
+    </tr>
+        }
+
+    }
+</table>
+<center>
+
+      <input id="DatePlan" value=" @ViewBag.DN.ToString("dd.MM.yyyy")" readonly class="btn btn-default btn-block"/>  
+       
+
+</center>
+<table id="T" class="table table-bordered table-striped"
+       data-toggle="table"
+       data-search="true"
+       data-filter-control="true">
+    <thead>
+        <tr>
+  
+            <th data-field="ZakazPostavshiku" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.ZadanieNaProizvodstvo
+            </th>
+
+            <th data-field="PartNumber" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.PartNumber
+            </th>
+            <th data-field="Nomenklatura" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.Nomenklatura
+            </th>
+            <th data-field="Kolvo" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.QTYPoProizvodstvennomuZadaniu
+            </th>
+            <th data-field="Planshet" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.TochkaVipuska
+            </th>
+            <th data-field="Deistviya" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.VosmognieDeistviya
+            </th>
+
+
+        </tr>
+
+
+    </thead>
+
+    @foreach (var item in Model)
+    {
+        string ID = item.WORK.FInterID + "_" + item.PW.Id;
+        string PlanshetId = "Planshet" + item.WORK.FInterID + "_" + item.PW.Id;
+        string Dates = "Date" + item.WORK.FInterID + "_" + item.PW.Id;//item.FStartDate.Value.ToString("yyyy.MM.dd");
+        decimal Proizvesti = item.Raznica;
+        if (Proizvesti < 0)
+        {
+            Proizvesti = 0;
+        }
+        int SMWID = 0;
+        int PlanshetID = 0;
+        DateTime D = DateTime.Now.Date;
+        if (item.SMWork != null )
+        {
+
+            PlanshetID = item.SMWork.PlanshetId;
+
+        }
+        <tr>
+           
+            <th>
+                <p> @Html.DisplayFor(ModelItem => item.WORK.FBillNo)</p>
+                @if (item.SMWork != null)
+                {<p> ★@Html.DisplayFor(ModelItem => item.SMWork.Id)</p>}
+                else
+                {
+                 <p> ⚑@item.PW.Id</p>
+                }
+                <p> @item.StartDate.ToString("yyyy.MM.dd") </p>
+                <p> @Html.DisplayFor(ModelItem => item.WORK.t_Department.FName)</p>
+            </th>
+            <th>
+                @Html.DisplayFor(ModelItem => item.Item.FNumber)
+            </th>
+            <th>
+                @Html.DisplayFor(ModelItem => item.Item.FName)
+            </th>
+
+            <th>
+                @Math.Round(item.Proizvedeno, 0) / @Math.Round(item.Proizvesti, 0) = @Math.Round(item.Raznica, 0)
+            </th>
+
+            <th>
+
+                @Html.DropDownList(PlanshetId, new SelectList(ViewBag.Planshets, "Id", "Name", PlanshetID), htmlAttributes: new { @class = "form-control", @Style = "width:200px" })
+                @Html.DropDownList(Dates, new SelectList(ViewBag.DateNaznacheniya), htmlAttributes: new { @class = "form-control", @Style = "width:200px" })
+
+            </th>
+            <th id="Buttons_@item.WORK.FInterID">
+                @if (item.SMWork == null)
+                {
+                    <p>
+                        <table>
+                            <tr>
+                                <td colspan="2">
+                                    <div id="Save_@ID">
+                                        <button class="form-control btn btn-success" style="height: 100px; width: 170px " onclick="AddToPlanshet(@item.WORK.FInterID, '@item.WORK.FBillNo', @item.PW.Id,@item.Raznica)">@Resources.Resource.ZadanieNaTochku</button>
+                                    </div>
+
+                                </td>
+                            </tr>
+                            <tr>
+
+                                <td id="Number_@ID">
+                                </td>
+
+                                <td>
+                                    <div id="SaveTwo_@ID">
+
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </p>
+                }
+                else
+                {
+
+                    if (item.SMWork != null&&item.SMWork.Id>0)
+                    {
+                       
+                            <table>
+
+
+                                <tr>
+                                    <td colspan="2">
+                                        <div id="Save_@ID">
+                                            <button class="form-control btn btn-info" style="height: 45px; width: 170px ; word-break: break-all;">@item.SMWork.ComputerNames.Name</button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                <tr>
+
+                                    <td id="Number_@ID">
+                                        <button class="form-control btn btn-info" style="height: 45px; width: 50px ; word-break: break-all;">@item.SMWork.Poryadok</button>
+                                    </td>
+
+                                    <td>
+                                        <div id="SaveTwo_@ID">
+                                            <button onclick="RemoveStarWork(@item.SMWork.Id, '@item.WORK.FInterID',@item.PW.Id)" class="form-control btn btn-danger" style="height: 45px; width: 120px ">X</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </table>
+
+
+                       }
+                    
+                }
+
+            </th>
+
+
+
+
+        </tr>
+    }
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<p><a href="/POOrderEntries/SpisokAllWorks" class="btn btn-success btn-block"> @Resources.Resource.NaznachitZadaniyaVPlan</a></p>
+<p>
+    <a href="/POOrderEntries/SmenaToPlanshet" class="btn btn-success btn-block">@Resources.Resource.NaznachitSmenu &raquo;</a>
+</p>
+<script>
+    function SelectDay(Day)
+    {
+           var url2 = "@Url.Action("SpisokStarWork", "POOrderEntries")?Day=" + Day;
+
+
+     //   alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty);
+
+        window.location.replace(url2);
+    }
+</script>
+<script>
+    function AddToPlanshet(WorkId, WorkNumber,PWId, QTY, Date)
+    {
+        var BUTTONID = WorkId + "_" + PWId;
+        var PlanshetId = $("#Planshet" + BUTTONID).val();
+        var Buttons = $("#Buttons_" + BUTTONID);
+        var Date = $("#Date" + BUTTONID).val();
+        var DatePlan = $("#DatePlan").val();
+        
+       // alert(Date);
+     //   alert(WorkId + " " + WorkNumber + " " + QTY + " " + PlanshetId);
+        // WorkId, WorkNumber,  PlanshetId,  QTY
+        var url2 = "@Url.Action("AddToPlanshetJson", "POOrderEntries")?WorkId=" + WorkId + "&WorkNumber=" + WorkNumber +"&PWId="+PWId+ "&QTY=" + QTY + "&PlanshetId=" + PlanshetId + "&WorkDate=" + Date + "&PlanDate=" + DatePlan;
+
+
+     //   alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty);
+        if (QTY != 0)
+        {
+            $.post(url2, function (data) {
+             //   alert(data);
+                var S = data.split(';');
+                var X = S[0];
+
+              //  $('#Save_' + WorkId).removeClass("btn-success").addClass("btn-default");
+              //  $("#Download").modal('true');
+                if (X == "Ok")
+                {
+                 //   alert(X);
+                 //   var SB = $('#Save_' + WorkId);
+                  //  alert(SB);
+                    // alert(data);
+              //      alert("@Resources.Resource.Ok");
+                  //  $('#Save_' + WorkId).removeClass("btn-default").addClass("btn-success").text = "@Resources.Resource.Ok";
+                //    $('#Save_' + WorkId).html('<button class="form-control btn btn-info" style="height: 100px; width: 120px ; word-break: break-all;">' + S[1] + '</button>');
+
+                    $('#Save_' + BUTTONID).html('<button class="form-control btn btn-info" style="height: 45px; width: 170px ; word-break: break-all;">' + S[1] + '</button> ');
+                    $('#Number_' + BUTTONID).html('<button class="form-control btn btn-info" style="height: 45px; width: 50px ; word-break: break-all;">' + S[6] + '</button> ');
+                    $('#SaveTwo_' + BUTTONID).html('<button onclick="RemoveStarWork(' + S[2] + ',' +S[5]+','+ S[8] +')" class="form-control btn btn-danger" style="height: 45px; width: 120px ">X</button>');
+
+
+                }
+                else
+                {
+                    alert(data);
+                    $('#Save_'+WorkId).removeClass("btn-default").addClass("btn-success");
+                  //  location.reload();
+                }
+
+              //  $("#Download").modal('hide');
+
+
+            }
+
+            );
+        }
+        else
+        {
+            alert('@Resources.Resource.NomenklaturiNedostatochno');
+            $('#Save').removeClass("btn-default").addClass("btn-success");
+        }
+    }
+</script>
+
+<script>
+    function RemoveStarWork(StarWorkId,WorkId, PWId)
+    {
+
+        var DatePlan = $("#DatePlan").val();
+        var BUTTONID = WorkId + "_" + PWId;
+        // WorkId, WorkNumber,  PlanshetId,  QTY
+        var url2 = "@Url.Action("RemoveFromPlanshetJson", "POOrderEntries")?WorkId=" + StarWorkId + "&PWId=" + PWId;
+
+
+      //  alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+
+            $.post(url2, function (data) {
+                var S = data.split(';');
+
+                var X = S[0];
+           //     alert(StarWorkId);
+               // $('#Save_' + WorkId).removeClass("btn-success").addClass("btn-default");
+               // $("#Download").modal('true');
+                if (X != 'Ok')
+                {
+
+                    alert(data);
+
+
+                //    $('#Save_' + WorkId).removeClass("btn-default").addClass("btn-success");
+
+                }
+                else
+                {
+              //      alert(S[2]);
+              //      alert("@Resources.Resource.Ok");
+                    $('#Save_' + BUTTONID).html(' <button class="form-control btn btn-success" style="height: 100px; width: 170px " onclick="AddToPlanshet(' + WorkId + ', \'' + S[2] + '\',' + S[3] + ',\'' + S[4] +'\')" >@Resources.Resource.ZadanieNaTochku</button > ');
+                    $('#SaveTwo_' + BUTTONID).html('');
+                    $('#Number_' + BUTTONID).html('');
+
+                 //   $('#Save_' + WorkId).removeClass("btn-default").addClass("btn-success").text = "@Resources.Resource.Ok";
+
+                  //  location.reload();
+                }
+
+              //  $("#Download").modal('hide');
+
+
+            }
+
+            );
+
+    }
+</script>

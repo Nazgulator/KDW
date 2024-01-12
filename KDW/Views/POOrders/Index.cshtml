@@ -1,0 +1,102 @@
+﻿@model IEnumerable<KDW.Models.POOrder>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.Resource.Header</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Resources.Resource.ZakazPostavshiku
+        </th>
+        <th>
+            @Resources.Resource.Postavshik
+        </th>
+        <th>
+            @Resources.Resource.Date
+        </th>
+        <th>
+            Номенклатура
+        </th>
+        <th>
+            Количество
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FEmpID)
+        </th>
+        <th>
+            @Resources.Resource.Podrazdelenie
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FCheckerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FBillerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FMangerID)
+        </th>
+        <th>
+            Закрыто
+        </th>
+        <th>
+            @Resources.Resource.Status
+        </th>
+        <th>
+            Номер в Enterprise
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+
+    <td>
+
+        @Html.ActionLink(item.FBillNo, "Details", new { id = item.FInterID }, new { @class = "btn btn-success btn-icon glyphicon glyphicon-info-sign" })
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.t_Supplier.FName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FDate)
+    </td>
+ 
+        <td>
+            @Html.DisplayFor(modelItem => item.POOrderEntry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEmpID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FDeptID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FCheckerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FBillerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FMangerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FClosed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FStatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FEnterpriseID)
+        </td>
+
+    </tr>
+    }
+
+</table>

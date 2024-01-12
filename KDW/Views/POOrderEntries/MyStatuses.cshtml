@@ -1,0 +1,87 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<Center>
+    <h5>@Resources.Resource.StatusOTK @ViewBag.U.Name</h5>
+</Center>
+
+
+    @foreach (var X in ViewBag.Dvigs)
+    {
+      
+
+<div class="btn btn-@X.StatusOTK.Colour" style="height:120px;width:200px;font-size:14px" title="@X.Dvigenie.ZakazPostavshiku @X.Dvigenie.FBillNo @X.Dat.ToString("MM-dd HH:mm")">
+    <div class="btn btn-default" style="position:inherit;overflow:auto;left:10px;top:10px;width:180px;height:30px;border:thin;font-size:12px">
+        @X.Dvigenie.Item.FNumber
+    </div>
+    
+    <p>
+        <div class="btn btn-default" style="position:inherit;overflow:auto;left:20px;top:70px;width:90px;height:27px;border:thin;font-size:10px;">
+            @X.Dvigenie.FBillNo
+        </div>
+
+        <div class="btn btn-@X.StatusOTK.Colour" style="position:inherit;overflow:auto;left:20px;top:70px;width:80px;height:30px;border:thin;font-size:12px">
+            @X.StatusOTK.NameZh
+        </div>
+    </p>
+
+    <p>
+        <div class="btn btn-default" style="position:inherit;overflow:auto;width:80px;height:27px;border:thin;font-size:10px">
+            @Math.Round(X.Dvigenie.QTYFact, 0)
+        </div>
+        <div class="btn btn-success" style="position: inherit; overflow: auto; width: 100px; height: 27px; border: thin; font-size: 10px; -webkit-appearance: none; " onclick="Print(@X.Dvigenie.QRID)">
+            QR
+        </div>
+    </p>
+    <p>
+
+    </p>
+
+</div>
+
+          
+
+
+       
+    }
+
+
+
+
+<div class="container">
+
+
+
+    <p>
+        <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+    </p>
+    <p>
+        <a href="/Home/SkladskoiUchet" class="btn  btn-success btn-block allwidth">@Resources.Resource.SkladskoiUchet &raquo;</a>
+    </p>
+   
+
+
+
+
+</div>
+
+<script>
+    function Print(QRID)
+    {
+        var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+        window.location.replace(url);
+    }
+</script>
+
+
+
+
+
+

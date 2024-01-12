@@ -1,0 +1,293 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="VirtualQR" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>@Resources.Resource.StockTo</p>
+                <p> @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Key", "Value"), htmlAttributes: new { @class = "form-control btn btn-warning", @onchange = "PoiskQTY()" })</p>
+
+                <p>@Resources.Resource.QTYPostupleniya</p>
+                <p><input class="btn btn-block btn-warning" id="QTY" type="number" step="0.001" /></p>
+                <p>
+                    @Resources.Resource.ScanMesto
+                </p>
+                <p>
+                    <input id="Mesto" class="form-control btn btn-warning btn-block" />
+                </p>
+
+
+
+                <button class="btn btn-success btn-block" onclick="AddVirtualQRNEW()">Ok</button>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" class="close hide" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+        
+
+             
+                <center>
+                    <label id="nadpis">@Resources.Resource.ZagruzkaDannih...</label>
+                    <button class="seconds btn btn-success btn-block">20</button>
+
+                </center>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<table width="100%">
+    <tr width="100%">
+        <td colspan="2" style="font-size:30px">
+            @Resources.Resource.GenerateQR
+        </td>
+    </tr>
+    <tr>
+        <td width="80%">
+            <input placeholder="@Resources.Resource.VveditePartNumber" id="NPartNumber" class="btn btn-warning btn-block">
+        </td>
+        <td width="20%">
+            @if (ViewBag.Roles.Contains("Кладовщик")|| ViewBag.Roles.Contains("Начальник склада")|| ViewBag.Roles.Contains("Администратор"))
+            {
+            <button onclick="LoadNomenklaturs()" id="Find" class="btn btn-success btn-block">Ok</button>
+            }
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <p>
+                <button onclick="ShowVirtualQR()" class="btn btn-danger btn-block">@Resources.Resource.GenerateQR</button>
+
+            </p>
+        </td>
+    </tr>
+
+</table>
+
+
+<script>
+    function PoiskQTY()
+    {
+        var Item = $('#NPartNumber').val();
+        var Stock = $('#StockID').val();
+        var url = "@Url.Action("AutocompleteSearchQTYInStock", "POOrderEntries")?Item=" + Item + "&Stock=" + Stock;
+
+            $.post(url,
+                function (data)
+                {
+                    $('#QTY').val(data);
+
+                }
+        );
+
+    }
+</script>
+
+<script>
+    function LoadStocks()
+    {
+        var Item = $('#NPartNumber').val();
+         var Dropdown = $('#StockID');
+        Dropdown.empty();
+        var url = "@Url.Action("AutocompleteSearchStorageByItem", "POOrderEntries")?term=" + Item;
+
+            $.post(url,
+                function (data)
+                {
+                    $.each(data, function (key, value) {
+                        Dropdown.append($('<option>', { value: key }).text(value));
+                    });
+                    PoiskQTY();
+                    $("#VirtualQR").modal("show");
+                }
+        );
+    }
+</script>
+
+<script>
+    //скрипт для обработки выбора года чтоб выводить дома по году и месяцу
+    function LoadNomenklaturs() {
+        var Num = $('#NPartNumber').val().toString();
+        var Find = $('#Find');
+        var Download = $('#Download');
+        const time = $('.seconds');
+        time.text(0);
+       // time.val(0);
+        intervalId = setInterval(timerDecrement, 1000);
+
+
+        var URL = '@Url.Action("VosstanovitTSDNEWTable", "POOrderEntries")';
+        URL = URL + '?Name=' + Num;
+        //  alert(URL);
+        Find.hide();
+        $("#NTable").hide();
+        Download.modal('show');
+       // $("#NTable").load(URL);
+        $("#NTable").load(URL, function () {
+            Find.show();
+            $("#NTable").show();
+            Download.modal('hide');
+            clearInterval(intervalId);
+        });
+
+
+                           //идем в комплит воркс контроллер и там действие поиск по жэу отправляем выбранное значение в селекте, получаем дату список всех домов по жэу из БД перекинутых в лист стринг
+
+        // alert("PING!");
+
+    }
+    function timerDecrement() {
+        const time = $('.seconds');
+        const newTime = parseInt(time.text()) + 1;
+
+        time.text(newTime);
+
+        if (newTime === 60) clearInterval(intervalId);
+    }
+</script>
+
+
+<script>
+    function ShowVirtualQR() {
+        LoadStocks();
+
+    }
+</script>
+<script>
+    function AddVirtualQR()
+    {
+        var QTY = $('#QTY').val();
+        var StockID = $('#StockID').val();
+        var Mesto = $('#Mesto').val();
+        var Num = $('#NPartNumber').val();
+
+       // alert(Num + ' ' + StockID + ' ' + QTY);
+       // string ItemNum, decimal QTY, int ToStock, string Mesto = ""
+        if (confirm("@Resources.Resource.GenerateQR " + QTY + " @Resources.Resource.Edinic ?")) {
+            var ADDURL = '@Url.Action("GenerateMnimiQR", "POOrderEntries")?ItemNum=' + Num + '&QTY=' + QTY + '&ToStock=' + StockID + '&Mesto=' + Mesto;
+
+            $.post(ADDURL, function (data) {
+
+                var S = data.split(';');
+                if (S[0] == 'True') {
+                    alert('@Resources.Resource.PeremeshenieUspeshno');
+                    // alert(data);
+
+                    var QRID = S[1];
+
+                    var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+                 //   window.location.replace(printurl);
+
+                }
+                else {
+                    alert(data);
+                }
+
+                // alert(data);
+            });
+            }
+            else {
+
+            }
+    }
+</script>
+
+
+
+
+<script>
+    function AddVirtualQRNEW()
+    {
+        var QTY = $('#QTY').val();
+        var StockID = $('#StockID').val();
+        var Mesto = $('#Mesto').val();
+        var Num = $('#NPartNumber').val();
+
+        //alert(Num + ' ' + StockID + ' ' + QTY);
+       // string ItemNum, decimal QTY, int ToStock, string Mesto = ""
+        if (confirm("@Resources.Resource.GenerateQR " + QTY + " @Resources.Resource.Edinic ?")) {
+            var ADDURL = '@Url.Action("GenerateMnimiQRNEW", "POOrderEntries")?ItemNum=' + Num + '&QTY=' + QTY + '&ToStock=' + StockID + '&Mesto=' + Mesto;
+
+            $.post(ADDURL, function (data) {
+
+                var S = data.split(';');
+                if (S[0] == 'True') {
+                    alert('@Resources.Resource.PeremeshenieUspeshno');
+                    // alert(data);
+
+                    var QRID = S[1];
+
+                    var printurl = "@Url.Action("PrintToPrinterNEW", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+                 //   window.location.replace(printurl);
+
+                }
+                else {
+                    alert(data);
+                }
+
+                // alert(data);
+            });
+            }
+            else {
+
+            }
+    }
+</script>

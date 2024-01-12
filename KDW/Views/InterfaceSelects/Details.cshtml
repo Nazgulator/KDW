@@ -1,0 +1,90 @@
+﻿@model KDW.Models.InterfaceSelect
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>InterfaceSelect</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InterfaceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterfaceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPriemki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPriemki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBraka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBraka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBrakaUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBrakaUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladVozvrataNZP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladVozvrataNZP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBuferZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPeremesheniyaBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPeremesheniyaBuferZone)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

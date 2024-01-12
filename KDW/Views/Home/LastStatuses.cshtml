@@ -1,0 +1,71 @@
+﻿
+
+
+
+<table class="table table-bordered table-striped">
+    @foreach (var X in ViewBag.Dvigs)
+    {
+        <tr class="@X.StatusOTK.Colour">
+
+            <td>
+                <p>
+                    @X.Dvigenie.FBillNo
+                </p>
+                <p>
+                    @X.Dvigenie.ZakazPostavshiku
+                </p>
+
+            </td>
+
+            <td>
+                @X.Dvigenie.Item.FNumber
+                @X.Dvigenie.Item.FName
+            </td>
+            <td>
+                <p>
+                    @X.Dat.ToString("MM-dd")
+                </p>
+                <p>
+                    @X.Dat.ToString("HH:mm")
+
+                </p>
+
+            </td>
+            <td>
+                @X.StatusOTK.NameZh
+            </td>
+
+        </tr>
+    }
+    <tr>
+        <td colspan="4">
+            <a href="~/Home/LastStatuses" class="btn btn-block btn-success">  @Resources.Resource.StatusOTK</a>
+        </td>
+    </tr>
+</table>
+
+
+<div class="container">
+
+
+
+    <p>
+        <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+    </p>
+    <p>
+        <a href="/Home/SkladskoiUchet" class="btn  btn-success btn-block allwidth">@Resources.Resource.SkladskoiUchet &raquo;</a>
+    </p>
+   
+
+
+
+
+</div>
+
+
+
+
+
+
+
+

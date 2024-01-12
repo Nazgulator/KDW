@@ -1,0 +1,54 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+<div class="table table-striped">
+    <div class="row">
+        <div class="col">
+            <h5>              </h5>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="text-align:center">
+            <h1>@Resources.Resource.Proizvodstvo</h1>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <center>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-align-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZWorks")'"> YZ Работы</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-align-center" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZRoles")'"> YZ Роли</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-user" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZUsers")'"> YZ Пользователи</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-road" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZRoleWorks")'"> YZ Соответствие работа - роль</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-random" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZUserRoles")'"> YZ Соответствие пользователь - роль</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-tree-deciduous" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "YZUserDepartments")'"> YZ Соответствие пользователь - подразделение</button>
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon " style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("YZInfo", "POOrderEntries")'"> YZ Отчет</button>
+                    </p>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>

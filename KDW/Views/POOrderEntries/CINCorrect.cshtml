@@ -1,0 +1,15 @@
+﻿
+@model IEnumerable<string>
+
+    <table class="table table-bordered table-striped">
+        @foreach (var item in Model)
+                {
+                    string[] S = item.Split(';');
+                <tr class="@S[0]">
+                    <td>
+                        @S[1]
+                    </td>
+                    
+                </tr>
+            }
+    </table>

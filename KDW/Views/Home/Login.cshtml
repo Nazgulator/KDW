@@ -1,0 +1,174 @@
+﻿
+
+
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <Center>
+                    <h1 style="font-size: 40px">KING DEE WEB </h1>
+
+                   
+                    <h3>@Resources.Resource.VoiditeVProgrammu</h3>
+                </Center>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center>
+    <table class="table table-condensed">
+        <tr>
+            <td colspan="2">
+                <input type="text" name="name" id="UserID" onkeyup="SearchUser()" class=" btn btn-default btn-block" title="@Resources.Resource.VvediteLogin" placeholder="@Resources.Resource.VvediteLogin" />
+            </td>
+
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="number" name="password" id="password" class=" btn btn-default btn-block" title="@Resources.Resource.Password" placeholder="@Resources.Resource.VveditePassword" />
+            </td>
+
+        </tr>
+
+
+
+        <!--
+            <tr>
+                <td colspan="2">
+                    <input type="text" name="name" id="DepartmentID" onkeyup="" class=" btn btn-default btn-block" title="@Resources.Resource.VvediteDepartment" placeholder="@Resources.Resource.VvediteDepartment" />
+                </td>
+
+            </tr>
+            -->
+
+        <tr>
+            <td colspan="2">
+                <select name="lang" id="LanguageSelect" onchange="LS()" class="btn btn-default btn-block">
+                    <option disabled selected>@Resources.Resource.ChooseLang</option>
+                    <option value="ru">Русский</option>
+                    <option value="zh"> 中文 </option>
+
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="ProverkaParolya()" class="btn btn-block btn-success glyphicon glyphicon-lock">@Resources.Resource.Podtverdit</button>
+
+            </td>
+
+        </tr>
+
+    </table>
+</center>
+
+<p>
+    Comp1 =  @ViewBag.Comp1
+
+</p>
+<p>
+    Comp2 =  @ViewBag.Comp2
+</p>
+<p>
+    Comp3 =  @ViewBag.Comp3
+</p>
+<p>
+    Host  =  @ViewBag.Host
+</p>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src='@Url.Content("~/Scripts/js.cookie.min.js")'></script>
+
+<script>
+        function LSold()
+        {
+
+
+                var Lang = $('#LanguageSelect').val();
+            console.log('Выбран ' + Lang);
+
+            var url = "@Url.Action("ChangeCultureJson", "Home")?lang=" + Lang ;
+
+
+            $.post(url, function (data) {
+                    if (data == "Ok") {
+                        console.log('Обновляем ' + data);
+                      //  location.reload();
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+
+                );
+
+
+
+        }
+
+
+</script>
+<script>
+        function ProverkaParolya() {
+            var Name = $('#UserID').val();
+            var Pass = $('#password').val();
+            var url = "@Url.Action("ProverkaParolya", "Home")?Login=" + Name + '&Password=' + Pass;
+
+
+            $.post(url, function (data) {
+                    if (data != "0") {
+                      //  console.log('Обновляем ' + data);
+                        //  location.reload();
+                   
+  
+    
+                        console.log('Пользователь ' + data);
+                        Cookies.set('user', data);
+                        console.log('Установлен пользак' + data + ' обновляем страницу');
+       
+    
+
+
+                        location.replace('@Url.Action("Index", "Home")');
+                    }
+                    else {
+                        alert("@Resources.Resource.NevernyParol");
+                    }
+                }
+
+                );
+        }
+</script>
+
+<script>
+    function LS() {
+        var Lang = $('#LanguageSelect').val();
+        console.log('Выбран ' + Lang);
+        Cookies.set('lang', Lang);
+        console.log('Установлен ' + Lang + ' обновляем страницу');
+        location.reload();
+    }
+</script>
+
+
+
+
+
+

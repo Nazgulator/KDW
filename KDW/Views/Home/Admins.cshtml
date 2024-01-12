@@ -1,0 +1,151 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+<!-- Modal -->
+<div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+
+                    <div id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <center>
+                        <label id="nadpis">@Resources.Resource.ZagruzkaDannih...</label>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>@Resources.Resource.Admins</h1>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <center>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-import" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "DepartmentsToUsers")'">@Resources.Resource.NaznachenieDepartment</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-alert" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "KingDeeWebRoles")'">@Resources.Resource.NaznachenieRoli</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-save" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "ComputerNames")'">Регистрация планшетов</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-new-window" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "MonitorToLines")'">Регистрация мониторов</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-apple" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "UsersKDWs")'">Регистрация пользователей</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-stats" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanogrammaView", "POOrderEntries")'">Планограмма склада</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-tree-deciduous" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "DepartmentToStocks")'">Производственные цепочки</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-cog" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "Buildings")'">Справочник помещений</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-edit" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "StockPriems")'">Справочник складов приемки</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-warning-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ZalivkaPOOrder", "POOrderEntries")'">Залить заказы поставщику из прода</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-warning-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ZalivkaWORKS", "POOrderEntries")'">Залить задания на производство из прода</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-asterisk" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "StockBufers")'">Назначение буферных зон</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-blackboard" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "PeremeshenieWorks")'">Цепочка заданий на перемещение</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-user" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "StocksMOLs")'">МОЛЫ складов</button>
+
+                    </p>
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-credit-card" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "StocksSelects")'">Настройка складов</button>
+
+                    </p>
+
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-info-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Index", "InterfaceSelects")'">Настройка интерфейс - склады</button>
+
+                    </p>
+
+                    <p>
+                        <button type="button" class="btn btn-block btn-success glyphicon glyphicon-info-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("InterfaceTest", "InterfaceSelects")'">Настройка интерфейсов - тест</button>
+
+                    </p>
+
+                    <p>
+                        <button type="button" class="btn btn-block btn-danger glyphicon glyphicon-book" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("SkladInfo", "POOrderEntries")'">Проверка складских перемещений</button>
+
+                    </p>
+
+                </center>
+            </div>
+        </div>
+
+
+
+    </div>
+
+        </div>
+
+
+
+
+
+
+
+

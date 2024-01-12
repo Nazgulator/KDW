@@ -1,0 +1,56 @@
+﻿@model IEnumerable<KDW.Models.PredNZP>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    @foreach (var item in Model)
+    {
+<div class="col-sm-1" id="QR_@item.QRId">
+    <img src="~/Content/Icons/qr.png" onclick="OpenPrint(@item.QRId)" width="50" height="50" />
+
+    @item.QTY
+    <button class="btn btn-danger" onclick="DeleteQR(@item.QRId)">X</button>
+</div>
+                
+        
+    }
+
+   
+<script>
+    function OpenPrint(QRID) {
+           var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+        $("#PrintQR").load(printurl);
+      //  $("#QRsForPrint").modal('hode');
+                        $("#PrintQRModal").modal('show');
+    }
+</script>
+<script>
+    function DeleteQR(QRID)
+    {
+        var url2 = "@Url.Action("DeleteQRJson", "POOrderEntries")?QRID=" + QRID ;
+        $.post
+            (url2, function (data)
+            {
+                if (data == "True")
+                {
+                    $("#QR_" + QRID).hide();
+                }
+
+          
+            }
+
+        );
+    }
+</script>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,107 @@
+﻿
+
+<h1> </h1>
+
+<div class="container">
+    <div class="table">
+        <div class="row">
+            <div class="col-lg-12 ">
+                <center>
+                    <label>  @Resources.Resource.OtskaniruiteNomenklaturu</label>
+                    <p>
+                        <img src="~/Content/Icons/qr.png" width="70" height="70" /><input class="btn btn-default" id="QRScan" style="height:70px;font-size:30px;width:500px" onchange="FindNomenklaturaByQR()" autofocus /> <button class="btn btn-success" onclick="FindNomenklaturaByQR()" style="height:70px;font-size:30px">Ok</button>
+
+                    </p>
+
+                </center>
+
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12 ">
+                <select name="lang" id="LanguageSelect" onchange="LS()" class="btn btn-default btn-block">
+                    <option disabled selected>@Resources.Resource.ChooseLang</option>
+                    <option value="ru">Русский</option>
+                    <option value="zh"> 中文 </option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+
+    function FindNomenklaturaByQR() {
+        var QRData = $('#QRScan').val();
+        var characters = QRData.split(";");
+        if (characters.length > 1) {
+           // alert('QRData=' + QRData)
+            if (QRData != '' && QRData != 0) {
+                if (characters[0] == 'YZ')
+                {
+                    var url = "@Url.Action("YZ", "POOrderEntries")?UserId=" + characters[2] ;
+                    window.location.replace(url);
+                }
+                else
+                {
+                    alert('@Resources.Resource.OtskaniruiteNomenklaturu');
+                }
+
+
+
+            }
+            else {
+                alert('@Resources.Resource.OtskaniruiteNomenklaturu');
+            }
+        }
+        else
+        {
+            alert("Неверный QR код!");
+        }
+    }
+
+</script>
+<script type="text/javascript" src='@Url.Content("~/Scripts/js.cookie.min.js")'></script>
+<script>
+    function LS() {
+        var Lang = $('#LanguageSelect').val();
+        console.log('Выбран ' + Lang);
+        Cookies.set('lang', Lang);
+        console.log('Установлен ' + Lang + ' обновляем страницу');
+        location.reload();
+    }
+</script>
+
+<script>
+        function LSold()
+        {
+
+
+                var Lang = $('#LanguageSelect').val();
+            console.log('Выбран ' + Lang);
+
+            var url = "@Url.Action("ChangeCultureJson", "Home")?lang=" + Lang ;
+
+
+            $.post(url, function (data) {
+                    if (data == "Ok") {
+                        console.log('Обновляем ' + data);
+                      //  location.reload();
+                    }
+                    else {
+                        alert(data);
+                    }
+                }
+
+                );
+
+
+
+        }
+
+
+</script>

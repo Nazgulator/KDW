@@ -1,0 +1,66 @@
+﻿@model IEnumerable<KDW.Models.POOrderEntry>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.Resource.PeremeshenieNaSklad</h2>
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+
+<table id="T" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+      
+
+
+
+
+            <th data-field="ZakazPostavshiku" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.OtskaniruiteNomenklaturu
+            </th>
+            <th data-field="Postavshik" data-filter-control="input" data-sortable="true">
+                @Resources.Resource.Stock
+            </th>
+            
+        </tr>
+
+
+    </thead>
+
+ 
+        <tr>
+
+            <td>
+<Input class="btn btn-info btn-block" autofocus /> 
+            </td>
+            <td>
+                @Html.DropDownList("StockID", new SelectList(ViewBag.Stocks, "Value", "Text"), htmlAttributes: new { @class = "form-control btn btn-info" })
+            </td>
+          
+
+
+        </tr>
+
+    
+    <tr>
+        <td colspan="2">
+            <button class="btn btn-block btn-success">@Resources.Resource.PodtverditPeremeshenie</button>
+        </td>
+        </tr>
+
+</table>
+<p><a href="/Home/Index" class="btn btn-default btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>

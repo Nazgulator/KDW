@@ -1,0 +1,153 @@
+﻿@model IEnumerable<KDW.Models.YZUsers>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Главная</h2>
+
+<p>
+    @Html.ActionLink("Создать", "Create", null, new { @class = "btn btn-success btn-block" })
+</p>
+<table id="T" class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QRString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Active)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <img src="@Url.Action("GenerateQrCodeWORKER","POOrderEntries", new { QRText = item.QRString })" width="50" height="50" alt="qr code" id="ImageQR" name="ImageToPrint" title="@ViewBag.QR" />
+                @Html.DisplayFor(modelItem => item.QRString)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Active)
+            </td>
+            <td>
+       
+                <button class="btn btn-success  glyphicon glyphicon-print "  onclick="PrintToEdge('@Url.Action("GenerateQrCodeWORKER","POOrderEntries", new { QRText = item.QRString})')">QR код</button>
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+<p><a href="/Home/YZ" class="btn btn-success btn-block">В главное меню &raquo;</a> </p>
+<script>
+    function ShowModal(QR) {
+      var printurl = "@Url.Action("PrintToPrinterNew", "POOrderEntries")?QRID=" + QRID;
+          // var printurl = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID;
+                    $("#PrintQR").load(printurl);
+                    $("#PrintQRModal").modal('show');
+    }
+</script>
+<!-- Modal -->
+<div class="modal fade" id="PrintQRModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xxl" style="width:100%" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+                <button class="btn btn-danger btn-block" type="button" data-dismiss="modal">X</button>
+
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div id="PrintQR">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function PrintToEdge(source) {
+        var ua = navigator.userAgent.toLowerCase();
+        var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+
+
+
+
+        if (isAndroid)
+        {
+            var Pagelink = "about:blank";
+            var pwa = window.open(Pagelink, "_new");
+            pwa.document.open();
+            pwa.document.write(ImagetoPrint(source));
+        }
+        else
+        {
+
+PrintImage(source);
+
+        }
+
+
+
+    }
+</script>
+
+<script>
+
+    function ImagetoPrint(source) {
+
+      
+        var Nom = '@Resources.Resource.PartNumber';
+        var Name = '@Resources.Resource.Nomenklatura';
+        var QTY = ' @Resources.Resource.KolichestvoNomenklaturi';
+        var Date = '@Resources.Resource.Date';
+        var W = "160px"
+        var H = "128px"
+
+
+         return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt>"+
+			"<style>@@media print { @@page {padding: 0; margin: 0;}}</style>"+
+			"</head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + H + "' src='" + source + "' /></body></html>";
+     /*   return "<html><head><scri" + "pt>function step1(){\n" +
+            "setTimeout('step2()', 10);}\n" +
+            "function step2(){window.print();window.close()}\n" +
+            "</scri" + "pt></head><body onload='step1()'>\n" +
+            "<img width ='" + W + "' height = '" + W + "' src='" + source + "' /></body></html>";*/
+
+     }
+
+    function PrintImage(source) {
+        var Pagelink = "about:blank";
+        var pwa = window.open(Pagelink, "_new");
+        pwa.document.open();
+        pwa.document.write(ImagetoPrint(source));
+        pwa.document.close();
+    }
+
+</script>

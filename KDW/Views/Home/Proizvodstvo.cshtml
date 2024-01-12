@@ -1,0 +1,190 @@
+﻿
+
+<!-- Modal -->
+<div class="modal fade" id="Download" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+
+
+
+                <h4>@Resources.Resource.ZagruzkaDannih...</h4>
+                <button id="X" type="button" class="close hide" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+
+                    <div id="progressBar" class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    <center>
+                        <label id="nadpis">@Resources.Resource.ZagruzkaDannih...</label>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>@Resources.Resource.Proizvodstvo</h1>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col" style="text-align:center">
+                    <center>
+                        <p>
+                            <button type="button" class="btn btn-block btn-success glyphicon glyphicon-qrcode" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("MyDvigenies", "POOrderEntries")'"> @Resources.Resource.MyDocs</button>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-block btn-success glyphicon glyphicon-qrcode" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ScanQR", "POOrderEntries")'">@Resources.Resource.ScanNomenklaturs</button>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-block btn-success glyphicon glyphicon-new-window" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("VosstanovitTSD", "POOrderEntries")'">@Resources.Resource.GenerateQR</button>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-info-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("OtchetKomplektovkaZadaniy", "POOrderEntries")'">@Resources.Resource.OtchetKomplekt</button>
+                        </p>
+
+                        @if (ViewBag.Roles.Contains("Комплектовщик"))
+                        {
+
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-import" style="width:500Px" onclick="location.href='@Url.Action("Nomenklaturs", "POOrderEntries")'">@Resources.Resource.OstatkiNomenklaturi</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-right" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("KomplektovkaNZPNEW", "POOrderEntries")'">@Resources.Resource.KomplektovanieNew</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-scissors" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ScanGP", "GPScans")'">@Resources.Resource.ScanGP</button>
+                            </p>
+
+                        }
+                        @if (ViewBag.Roles.Contains("Мастер"))
+                        {
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-import" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanshetWorksNEW", "POOrderEntries")'">@Resources.Resource.PeremestitSProizvodstva</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-right" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("KomplektovkaNZPNEW", "POOrderEntries")'">@Resources.Resource.KomplektovanieNew</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-sort-by-order" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Nomenklaturs", "POOrderEntries")'">@Resources.Resource.OstatkiNomenklaturi</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("VozvratIsNZPNEW", "POOrderEntries")'">@Resources.Resource.VernutIsNZP</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-scissors" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ScanGP", "GPScans")'">@Resources.Resource.ScanGP</button>
+                            </p>
+
+                        }
+                        @if (ViewBag.Roles.Contains("Старший мастер"))
+                        {
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-dashboard" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("SpisokStarWORK", "POOrderEntries")'">@Resources.Resource.ZadanieNaTochku</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-filter" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("OstatkiInWork", "POOrderEntries")'">@Resources.Resource.OstatkiInWork</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-sort-by-order" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Nomenklaturs", "POOrderEntries")'">@Resources.Resource.OstatkiNomenklaturi</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-align-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanoviWorks", "POOrderEntries")'">@Resources.Resource.Plan3Days</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-scissors" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ScanGP", "GPScans")'">@Resources.Resource.ScanGP</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-star-empty" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("DayResultBlue", "POOrderEntries")'">@Resources.Resource.DayResult</button>
+                            </p>
+
+                        }
+
+                        @if (ViewBag.Roles.Contains("Администратор") || ViewBag.Roles.Contains("Директор производства") || ViewBag.Roles.Contains("Плановый отдел"))
+                        {
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-import" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanshetWorksNEW", "POOrderEntries")'">@Resources.Resource.PeremestitSProizvodstva</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-align-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanoviWorks", "POOrderEntries")'">@Resources.Resource.Plan3Days</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-info-sign" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("OtchetMinusNZP", "POOrderEntries")'">@Resources.Resource.MinusovieOstatki</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-right" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("KomplektovkaNZPNEW", "POOrderEntries")'">@Resources.Resource.KomplektovanieNew</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-dashboard" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("SpisokStarWORK", "POOrderEntries")'">@Resources.Resource.ZadanieNaTochku</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-sort-by-order" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("Nomenklaturs", "POOrderEntries")'">@Resources.Resource.OstatkiNomenklaturi</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-qrcode" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("WorkInfo", "POOrderEntries")'">@Resources.Resource.WorkInfo</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-qrcode" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("SuperKomplektovkaMenu", "POOrderEntries")'">Быстрая комплектовка (только админ)</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-alert" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("CorrectDocks", "POOrderEntries")'">Смена склада в документах (переброс остатков только админ)</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-alert" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("StatusWork", "POOrderEntries")'">@Resources.Resource.Status</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='~/POOrderEntries/CHGKDW'">@Resources.Resource.CHGMass</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-book" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("SpisokKomplektovki", "POOrderEntries")'">@Resources.Resource.Komplektovka </button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-stats" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("PlanogrammaView", "POOrderEntries")'">@Resources.Resource.Planogramma</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-success glyphicon glyphicon-chevron-left" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("VozvratIsNZPNEW", "POOrderEntries")'">@Resources.Resource.OstatkiVWorks</button>
+                            </p>
+                            <p>
+                                <button type="button" class="btn btn-block btn-warning glyphicon glyphicon-scissors" style="width:500Px" data-toggle="modal" data-target="#Download" onclick="location.href='@Url.Action("ScanGP", "GPScans")'">@Resources.Resource.ScanGP</button>
+                            </p>
+
+
+                        }
+
+
+                    </center>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+    @Html.Action("UserNow", "POOrderEntries")
+    @ViewBag.IPAdress
+    @ViewBag.CompName
+
+
+
+
+
+
+

@@ -1,0 +1,297 @@
+﻿
+@model  IEnumerable<KDW.Models.YZActiveWorks>
+
+@{
+    ViewBag.Title = "Index";
+    // Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime D = DateTime.Now.Date;
+    DateTime DN = DateTime.Now;
+}
+
+<center>
+    @ViewBag.DateStart.ToString("yyyy-MM-dd") -> @ViewBag.DateEnd.ToString("yyyy-MM-dd")
+</center>
+<p>
+    <input type="date" id="Date1" value="@ViewBag.DateStart">
+
+    <input type="date" id="Date2" value="@ViewBag.DateEnd">
+    <button class="btn btn-success " onclick="FindByPeriod()">Ok</button>
+    <button class="btn btn-success" onclick="ExportToExcel()"> Excel </button>
+    <!-- <button class="btn btn-success" onclick="ExportToExcelToday()"> ExcelDay </button> -->
+</p>
+
+@if (Model != null && Model.Count() > 0)
+{
+
+
+ 
+    <table class="table table-bordered table-striped" id="T">
+        <tr>
+            <td>
+                @Resources.Resource.Date
+            </td>
+            <td>
+                @Resources.Resource.Department
+            </td>
+            <td>
+                @Resources.Resource.YZUsers
+            </td>
+            <td>
+                @Resources.Resource.YZWorks
+            </td>
+            <td>
+                @Resources.Resource.YZTime
+            </td>
+        </tr>
+
+        @foreach (var AW in Model)
+        {
+        var Duration = (DN - AW.DateStart).Duration();
+        try
+        {
+
+        <tr>
+            <td style="font-size:20px">
+                @AW.DateStart.ToString("MM-dd")
+            </td>
+            <td style="font-size:20px">
+                @AW.YZWorks.t_Department.FName
+            </td>
+            <td style="font-size:20px">
+                @AW.YZUsers.Name
+            </td>
+            <td style="font-size:20px">
+                @AW.YZWorks.Name
+            </td>
+            <td style="font-size:20px">
+                @Duration.Hours : @Duration.Minutes
+            </td>
+
+        </tr>
+
+        }
+        catch
+        {
+
+        }
+        }
+    </table>
+        }
+    
+
+
+
+
+<p>
+    <a href="/POOrderEntries/YZSelectWork" class="btn btn-success btn-block form-control">@Resources.Resource.YZStartWork &raquo;</a>
+</p>
+
+
+
+
+
+<!-- Тут список выполненных работ сегодня
+<table class="table table-bordered table-striped" id="Today">
+    <tr>
+        <td>
+            @Resources.Resource.YZUsers
+        </td>
+        <td>
+            @Resources.Resource.Roles
+        </td>
+        <td>
+            @Resources.Resource.Department
+        </td>
+        <td>
+            @Resources.Resource.YZWorkName
+        </td>
+        <td>
+            @Resources.Resource.YZStartWork
+        </td>
+        <td>
+            @Resources.Resource.YZEndWork
+        </td>
+        <td>
+            @Resources.Resource.YZTime
+        </td>
+        <td>
+            @Resources.Resource.YZComment
+        </td>
+    </tr>
+    @foreach (var AW in Model.Where(x => x.DateEnd >= D).ToList())
+    {
+        var Duration = (AW.DateEnd - AW.DateStart).Duration();
+        <tr class="success">
+            @try
+            {
+            <td>
+                @AW.YZUsers.Name
+            </td>
+            <td>
+                @AW.YZUsers.YZUserRoles.First().YZRoles.Name
+            </td>
+            }
+            catch
+                {
+                    <td>
+NoName
+                    </td>
+                    <td>
+                        NoRole
+                    </td>
+                }
+            <td>
+                @AW.YZWorks.t_Department.FName
+            </td>
+            <td>
+                @AW.YZWorks.Name
+            </td>
+
+            <td>
+                @AW.DateStart
+            </td>
+            <td>
+                @AW.DateEnd
+            </td>
+
+            <td>
+                @Duration.Hours:@Duration.Minutes
+            </td>
+            <td>
+                @AW.Comment
+            </td>
+        </tr>
+    }
+
+</table>
+   -->
+
+
+
+<p><a href="/POOrderEntries/YZScan" class="btn btn-default btn-block form-control">@Resources.Resource.VGlavnoeMenu </a></p>
+<script>
+    function EndWork(Id)
+    {
+
+        var Comment = $("#Comment").val();
+
+        var url = "@Url.Action("YZEndActiveWork", "POOrderEntries")?ActiveWorkId=" + Id + "&Comment=" + Comment;
+        var url2 = "@Url.Action("YZ", "POOrderEntries")";
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.replace(url2);
+
+                }
+        );
+
+    }
+</script>
+
+<script>
+    function FindByPeriod()
+    {
+
+        var Date1 = $("#Date1").val();
+        var Date2 = $("#Date2").val();
+
+        var url = "@Url.Action("YZSetPeriod", "POOrderEntries")?Date1=" + Date1 + "&Date2=" + Date2;
+        var url2 = "@Url.Action("YZInfo", "POOrderEntries")";
+
+        $.post(url,
+            function (data) {
+                window.location.replace(url2);
+
+            }
+        );
+
+
+
+    }
+</script>
+<script>
+    function ExportToExcel() {
+
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('T'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+        {
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        }
+        LoadVedomost();
+
+        return (sa);
+
+
+
+
+    }
+
+</script>
+
+<script>
+    function ExportToExcelToday() {
+
+        var tab_text = "<table border='2px'><tr bgcolor='#87AFC6'>";
+        var textRange; var j = 0;
+        tab = document.getElementById('Today'); // id of table
+
+        for (j = 0; j < tab.rows.length; j++) {
+            tab_text = tab_text + tab.rows[j].innerHTML + "</tr>";
+            //tab_text=tab_text+"</tr>";
+        }
+
+        tab_text = tab_text + "</table>";
+        tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+        tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+        tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf("MSIE ");
+
+        if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+        {
+            txtArea1.document.open("txt/html", "replace");
+            txtArea1.document.write(tab_text);
+            txtArea1.document.close();
+            txtArea1.focus();
+            sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+        }
+        else                 //other browser not tested on IE 11
+        {
+            sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+        }
+        LoadVedomost();
+
+        return (sa);
+
+
+
+
+    }
+
+</script>

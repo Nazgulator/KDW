@@ -1,0 +1,290 @@
+﻿@model KDW.Models.DayView
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+
+<body onload="FindHour()">
+
+    @if (Model.SW.Count() > 0)
+    {
+        <center> <h3>@Model.SW.OrderBy(x => x.Poryadok).First().WorkNumber</h3></center>
+    }
+<table>
+    <tr>
+        <td colspan="2">
+            @{ int MaxHeight = 250;
+                int MaxDatch = Model.SH.Max(x => x.QTYDatchik);
+                int MaxPlan = Model.SH.Max(x => x.QTYPlan);
+                int MaxFact = Model.SH.Max(x => x.QTYFact);
+                int Max = 0;
+                if (MaxFact > Max)
+                {
+                    Max = MaxFact;
+                }
+                if (MaxDatch > Max)
+                {
+                    Max = MaxDatch;
+                }
+                if (MaxPlan > Max)
+                {
+                    Max = MaxPlan;
+                }
+                if (Max == 0)
+                {
+                    Max = 1;
+                }
+
+                string Names = "";
+                string[] Ns = new string[Model.SH.Count];
+                List<int> DQTYs = new List<int>();
+                List<int> PQTYs = new List<int>();
+
+            }
+
+
+            <table>
+                <tr style="vertical-align:bottom">
+
+
+
+                    @foreach (var i in Model.SH)
+                    {
+                        int PlanHeight = Convert.ToInt32(Math.Round(Convert.ToDecimal(i.QTYPlan) / Convert.ToDecimal(Max) * MaxHeight, 0));
+                        int DatHeight = Convert.ToInt32(Math.Round(Convert.ToDecimal(i.QTYDatchik) / Convert.ToDecimal(Max) * MaxHeight, 0));
+                        int FactHeight = Convert.ToInt32(Math.Round(Convert.ToDecimal(i.QTYFact) / Convert.ToDecimal(Max) * MaxHeight, 0));
+                        if (PlanHeight > MaxHeight) { PlanHeight = MaxHeight; }
+                        if (DatHeight > MaxHeight) { DatHeight = MaxHeight; }
+                        if (FactHeight > MaxHeight) { FactHeight = MaxHeight; }
+                        string DatchikText = "";
+                        string PlanText = "";
+                        if (i.QTYPlan > 0)
+                        {
+                            PlanText = i.QTYPlan.ToString();
+                        }
+                        if (i.QTYDatchik > 0)
+                        {
+                            DatchikText = i.QTYDatchik.ToString();
+                        }
+                        <td>
+                            <div style="width:40px;height: @(PlanHeight + "px");background:#F0AD4E;border:1px solid #000;font-size:30px">@PlanText</div>
+                        </td>
+                        <td>
+                            <div style="width:40px;height: @(DatHeight + "px");background:#5CB85C;border:1px solid #000;font-size:30px">@DatchikText</div>
+
+                        </td>
+
+                        /*     <td>
+                                 <button class=" btn-info" style="width: 20px; height: @(FactHeight+"px"); font-size:7px; color:black">@i.QTYFact</button>
+                             </td>
+                        */
+
+
+                    }
+                </tr>
+                <tr style="vertical-align:bottom">
+
+
+
+                    @foreach (var i in Model.SH)
+                    {
+                        <td colspan="2" style="font-size:25px;text-align:center">
+                            @i.Opisanie
+                        </td>
+
+
+
+
+                    }
+                </tr>
+            </table>
+
+        </td>
+        <td rowspan="2">
+            <table>
+                <tr style="vertical-align:bottom;text-align:center">
+                    <td>
+                        <h4>
+                            计划数据
+                        </h4>
+                    </td>
+                    <td>
+                        <h4>
+                            进仓数据
+                        </h4>
+
+                    </td>
+                    <td>
+                        <h4>
+                            显示器数据
+                        </h4>
+
+                    </td>
+                </tr>
+
+                <tr style="vertical-align:bottom">
+                    <td>
+
+                        <div id="Plan">
+
+                        </div>
+                    </td>
+                    <td>
+                        <div id="Fact">
+
+                        </div>
+                    </td>
+                    <td>
+                        <div id="Datchik">
+
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </td>
+    </tr>
+
+    <tr>
+        <td style="font-size:50px;color:coral;text-align:center">
+            计划数量
+        </td>
+        <td style="font-size: 50px; color: forestgreen; text-align: center">
+            实际数量
+
+        </td>
+        <td>
+        </td>
+    </tr>
+    @try
+    {
+        <tr>
+            <td style="font-size: 70px; color: coral; text-align: center">
+                @Model.SH.Where(x => x.ChasSmeni == DateTime.Now.Hour).First().QTYPlan
+            </td>
+            <td style="font-size: 70px; color: forestgreen; text-align: center">
+                @Model.SH.Where(x => x.ChasSmeni == DateTime.Now.Hour).First().QTYDatchik
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+    catch
+    {
+        <tr>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>
+        </tr>
+    }
+    @{ string TIME = "假日"; }
+    @try
+    {
+        TIME = @Model.SH.Where(x => x.ChasSmeni == DateTime.Now.Hour).First().Opisanie;
+    }
+    catch
+    {
+
+    }
+
+    <tr>
+        <td style="text-align: center" colspan="2">
+            <center> <h1> 时间段  @TIME </h1> </center>
+        </td>
+        <td>
+            <h1>  当前时间 @DateTime.Now.ToString("HH:mm")</h1>
+        </td>
+    </tr>
+</table>
+
+
+    @Html.DropDownList("PlanshetId", new SelectList(ViewBag.Planshets, "Id", "Name", ViewBag.PlanshetId), htmlAttributes: new { @class = "form-control", OnChange = "SetPlanshet()" })
+    <p>
+        <a href="/POOrderEntries/SmenaToPlanshet" class="btn btn-success btn-block">@Resources.Resource.NaznachitSmenu &raquo;</a>
+    </p>
+    <div id="Info">
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <!-- График --><div id="chart">
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+
+
+
+
+<script>
+    function SetPlanshet()
+    {
+        var Planshet = $("#PlanshetId").val();
+        var url = "@Url.Action("SetPlanshet", "POOrderEntries")?PlanshetId="+Planshet;
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.reload();
+
+                }
+        );
+    }
+</script>
+
+<script>
+    function FindHour()
+    {
+         var url = "@Url.Action("PlansInHour", "POOrderEntries")";
+
+            $.post(url,
+                function (data) {
+                    var S = data.split(';');
+                    var x = Math.random() * S[0];
+                    var hh = x / S[0] * 500;
+                    var h = Math.round(hh, 0);
+                    //alert(S[0]);
+                    $("#Plan").html('<button class="btn btn-warning" style="width:100px;height:500px">' + S[0] + '</button>');
+                    $("#Fact").html('<button class="btn btn-info" style="width:100px;height:' + S[2] + 'px">' + S[1] + '</button>');
+                    $("#Datchik").html('<button class="btn btn-success" style="width:100px;height:' + S[4] + 'px">' + S[3] + '</button>');
+                  //  $("#Datchik").html('<button class="btn btn-warning" style="width:300px;height:' + h + 'px">' + Math.round(x,0) + '</button>');
+
+
+                }
+        );
+    }
+</script>
+<script>
+    setInterval(function () {
+        FindHour();
+
+    }, 500);
+</script>
+
+<script>
+    setTimeout(function () {
+        window.location.reload();
+
+
+    }, 50000);
+</script>

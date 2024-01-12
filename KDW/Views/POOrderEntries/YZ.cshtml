@@ -1,0 +1,189 @@
+﻿
+@model  KDW.Models.YZUsers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime D = DateTime.Now.Date;
+    DateTime DN = DateTime.Now;
+}
+<style>
+    .description {
+        width: 200px;
+        word-wrap: break-word;
+        word-break: break-all;
+        font-size: 10px
+    }
+</style>
+<div style="align-content:center">
+    <Center>
+        <h3>
+            @Model.Name
+        </h3>
+        <div>
+            <table>
+                <tr>
+                    @foreach (var r in Model.YZUserRoles)
+                    {
+
+
+                        <td>
+                            @r.YZRoles.Name
+                        </td>
+
+
+
+                    }
+                </tr>
+            </table>
+        </div>
+    </Center>
+</div>
+
+
+@if (Model.YZActiveWorks.Count > 0)
+{
+
+    if (Model.YZActiveWorks.Where(x => x.Complete==false).Count() > 0)
+    {
+        foreach (var AW in Model.YZActiveWorks.Where(x => x.Complete == false).ToList())
+        {
+            var Duration = (DN - AW.DateStart).Duration();
+            <table class="table table-bordered table-striped">
+                <tr class="description">
+                    <td style="font-size:15px">
+                        @AW.YZWorks.Name
+                    </td>
+                  
+
+                </tr>
+                <tr>
+                    <td style="font-size:20px">
+                        <Center>
+                            @Duration.Hours : @Duration.Minutes
+                        </Center>
+                     
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input id="Comment" class="btn btn-warning btn-block" placeholder="@Resources.Resource.YZComment" style="height:100px;text-align:center;vertical-align:central;" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button class="btn btn-success btn-block" onclick="EndWork(@AW.Id)" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.YZEndWork </button>
+                    </td>
+                </tr>
+            </table>
+            break;
+        }
+    }
+    else
+    {
+        if (ViewBag.UserId != null && ViewBag.UserId > 0)
+        {
+            <p>
+                <button class="btn btn-success btn-block" onclick="location.href='/POOrderEntries/YZSelectWork'" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.YZStartWork &raquo;  </button>
+            </p>
+        }
+    }
+
+}
+else
+{
+    if (ViewBag.UserId != null && ViewBag.UserId > 0)
+    {
+        <p>
+            <button class="btn btn-success btn-block" onclick="location.href='/POOrderEntries/YZSelectWork'" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.YZStartWork &raquo;  </button>
+        </p>
+
+    }
+}
+
+@if (Model.YZActiveWorks.Count > 0)
+{
+    if (ViewBag.AW != null && ViewBag.AW.Count > 0)
+    {
+     
+    <!-- Тут список выполненных работ сегодня-->
+    <table class="table table-bordered table-striped">
+
+
+
+        <tr>
+            <td>
+                @Resources.Resource.YZWorkName
+            </td>
+            <td>
+                @Resources.Resource.YZStartWork
+            </td>
+            <td>
+                @Resources.Resource.YZEndWork
+            </td>
+            <td>
+                @Resources.Resource.YZTime
+            </td>
+            <td>
+                @Resources.Resource.YZComment
+            </td>
+        </tr>
+   
+        @foreach (var AW in ViewBag.AW)
+        {
+            string color = "success";
+            if (AW.DateStart>AW.DateEnd)
+                        {
+                color = "warning";
+                        }
+            var Duration = (AW.DateEnd - AW.DateStart).Duration();
+            <tr class="@color">
+
+
+
+                <td>
+                    @AW.YZWorks.Name
+                </td>
+                <td>
+                    @AW.DateStart
+                </td>
+                <td>
+                    @AW.DateEnd
+                </td>
+
+                <td>
+                    @Duration.Hours : @Duration.Minutes
+                </td>
+                <td>
+                    @AW.Comment
+                </td>
+            </tr>
+
+        }
+
+    </table>
+    }
+}
+
+<p>
+    <button class="btn btn-default btn-block" onclick="location.href='/POOrderEntries/YZScan'" style="height:100px;text-align:center;vertical-align:central;"> @Resources.Resource.VGlavnoeMenu &raquo;  </button>
+</p>
+<script>
+    function EndWork(Id)
+    {
+
+        var Comment = $("#Comment").val();
+
+        var url = "@Url.Action("YZEndActiveWork", "POOrderEntries")?ActiveWorkId=" + Id + "&Comment=" + Comment;
+        var url2 = "@Url.Action("YZ", "POOrderEntries")";
+
+            $.post(url,
+                function (data)
+                {
+                    window.location.replace(url2);
+
+                }
+        );
+
+    }
+</script>

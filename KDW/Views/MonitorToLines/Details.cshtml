@@ -1,0 +1,34 @@
+﻿@model KDW.Models.MonitorToLine
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MonitorToLine</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MonitorIPAdress)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonitorIPAdress)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComputerNames.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComputerNames.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

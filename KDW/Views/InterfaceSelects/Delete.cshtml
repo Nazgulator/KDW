@@ -1,0 +1,108 @@
+﻿@model KDW.Models.InterfaceSelect
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2><Удалить></h2>
+
+<h3>Удаление элемента?</h3>
+<div>
+    <h4>InterfaceSelect</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.InterfaceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterfaceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPriemki)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPriemki)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBraka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBraka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBrakaUchastka)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBrakaUchastka)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladVozvrataNZP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladVozvrataNZP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladBuferZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SkladPeremesheniyaBuferZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SkladPeremesheniyaBuferZone)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+       
+           
+            
+       
+		<div class="row col-md-6 col-md-offset-3">
+            <div class=" form-group">
+                <div class=" col-md-6  ">
+                    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-success btn-block" })
+                </div>
+                <div class=" col-md-6  ">
+                    <input type="submit" value="Delete" class="btn btn-success" /> 
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>

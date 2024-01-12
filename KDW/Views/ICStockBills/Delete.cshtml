@@ -1,0 +1,1069 @@
+﻿@model KDW.Models.ICStockBill
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><Удалить></h2>
+
+<h3>Удаление элемента?</h3>
+<div>
+    <h4>ICStockBill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FBrNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBrNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTranType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTranType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FUse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FUse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDCStockID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDCStockID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSCStockID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSCStockID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDeptID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDeptID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEmpID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEmpID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSupplyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSupplyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPosterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPosterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCheckerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCheckerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FFManagerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FFManagerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSManagerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSManagerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBillerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBillerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReturnBillInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReturnBillInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSCBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSCBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHookInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHookInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FVchInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FVchInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPosted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPosted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCheckSelect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCheckSelect)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCurrencyID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCurrencyID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSaleStyle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSaleStyle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAcctID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAcctID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FROB)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FROB)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRSCBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRSCBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FUpStockWhenSave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FUpStockWhenSave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCancellation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCancellation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOrgBillInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOrgBillInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBillTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBillTypeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPOStyle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPOStyle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckLevel6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckLevel6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMultiCheckDate6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMultiCheckDate6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCurCheckLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCurCheckLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTaskID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTaskID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FResourceID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FResourceID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBackFlushed)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBackFlushed)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FWBInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FWBInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FTranStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FTranStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FZPBillInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FZPBillInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRelateBrID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRelateBrID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPurposeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPurposeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FUUID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FUUID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRelateInvoiceID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRelateInvoiceID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOperDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOperDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FImport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FImport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSystemType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSystemType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FMarketingStyle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FMarketingStyle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPayBillID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPayBillID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCheckDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCheckDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FExplanation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FExplanation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FFetchAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FFetchAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FFetchDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FFetchDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FManagerID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FManagerID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FRefType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FRefType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSelTranType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSelTranType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FChildren)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FChildren)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHookStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHookStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FActPriceVchTplID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FActPriceVchTplID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPlanPriceVchTplID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPlanPriceVchTplID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FProcID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FProcID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FActualVchTplID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FActualVchTplID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPlanVchTplID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPlanVchTplID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBrID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBrID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FVIPCardID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FVIPCardID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FVIPScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FVIPScore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHolisticDiscountRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHolisticDiscountRate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPOSName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPOSName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FWorkShiftId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FWorkShiftId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCussentAcctID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCussentAcctID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FZanGuCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FZanGuCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPOOrdBillNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPOOrdBillNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FLSSrcInterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FLSSrcInterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSettleDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSettleDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FManageType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FManageType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FOrderAffirm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FOrderAffirm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAutoCreType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAutoCreType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConsignee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConsignee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FDrpRelateTranType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FDrpRelateTranType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPrintCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPrintCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPOMode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPOMode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FInventoryType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FInventoryType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FObjectItem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FObjectItem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConfirmStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConfirmStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConfirmMem)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConfirmMem)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConfirmDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConfirmDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConfirmer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConfirmer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAutoCreatePeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAutoCreatePeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FYearPeriod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FYearPeriod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FPayCondition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FPayCondition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FsourceType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FsourceType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiver)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiver)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0154)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0154)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0143)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfA0143)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0435)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0435)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0537)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfA0537)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0836)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0836)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfA9738)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfA9738)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0939)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0939)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfD0134)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfD0134)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfC0131)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfC0131)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfC0231)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfC0231)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0230)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfA0230)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0837)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0837)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfB0436)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfB0436)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FInvoiceStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FInvoiceStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FSendStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FSendStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FEnterpriseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FEnterpriseID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBillReviewer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBillReviewer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FBillReviewDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FBillReviewDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FCod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FCod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiveMan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiveMan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FConsigneeAdd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FConsigneeAdd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FISUpLoad)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FISUpLoad)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FReceiverMobile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FReceiverMobile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FAccessoryCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FAccessoryCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FHeadSelfA0233)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FHeadSelfA0233)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+       
+           
+            
+       
+		<div class="row col-md-6 col-md-offset-3">
+            <div class=" form-group">
+                <div class=" col-md-6  ">
+                    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-success btn-block" })
+                </div>
+                <div class=" col-md-6  ">
+                    <input type="submit" value="Delete" class="btn btn-success" /> 
+                </div>
+
+            </div>
+        </div>
+
+    }
+</div>

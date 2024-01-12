@@ -1,0 +1,209 @@
+﻿@model KDW.Models.ICMO
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Resources.Resource.ZakazPostavshiku</h2>
+
+
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+    </script>
+}
+
+
+<table class="table table-bordered table-striped ">
+    <tr style="align-content:center;text-align:center">
+        <th align="center">
+            @Resources.Resource.Department
+        </th>
+        <th align="center">
+            @Resources.Resource.Stock
+        </th>
+        <th align="center">
+            @Resources.Resource.MOL
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-block btn-outline-success">@Model.t_Department.FName</button>
+        </td>
+
+        <td>
+            <input type="text" name="name" id="StockID" onkeypress="SearchStorage()" class="btn btn-warning"  />
+        </td>
+        <td>
+            <input type="text" name="name" id="ManagerID" onkeypress="SearchManager()" class=" btn btn-warning" />
+        </td>
+
+
+    </tr>
+
+</table>
+<table  class="table table-bordered table-striped">
+    <tr>
+
+        <th align="center">
+            @Resources.Resource.ZadanieNaProizvodstvo
+        </th>
+        <th align="center">
+            @Resources.Resource.Nomenklatura
+        </th>
+        <th align="center">
+            @Resources.Resource.PartNumber
+        </th>
+
+        <th align="center">
+            @Resources.Resource.QTYPoProizvodstvennomuZadaniu
+        </th>
+        <th align="center">
+            @Resources.Resource.Proizvedeno
+        </th>
+        <th align="center">
+            @Resources.Resource.Date
+        </th>
+        <th></th>
+
+
+
+    </tr>
+
+    @{
+        string QR = Model.t_Item.FName + ";" + Model.t_Item.FNumber + ";" + Model.FCommitQty;
+        var OststokVZakaze = Model.FQty - Model.FCommitQty;
+    }
+
+    @Html.Hidden("FInterID", Model.FInterID)
+
+
+    <tr>
+
+        <th>
+
+            @Html.ActionLink(Model.FBillNo, "Index", null, new { @class = "btn btn-success btn-icon glyphicon glyphicon-chevron-left" })
+        </th>
+
+        <th>
+            @Html.DisplayFor(ModelItem => Model.t_Item.FName)
+        </th>
+        <th>
+            @Html.DisplayFor(ModelItem => Model.t_Item.FNumber)
+        </th>
+
+        <th>
+            <input class="btn btn-default" id="FQty" value="@OststokVZakaze" readonly />
+        </th>
+        <th>
+
+            <input class="btn btn-warning" id="FCommitQty" value="" autofocus required />
+
+
+        </th>
+        <th>
+            @Html.DisplayFor(ModelItem => Model.FCheckDate)
+        </th>
+        <th>
+            <button class="btn btn-block btn-success" onclick="SaveCompleteWork()">@Resources.Resource.Save</button>
+        </th>
+
+
+
+    </tr>
+
+
+
+
+
+</table>
+<p><a href="/Home/Index" class="btn btn-success btn-block">@Resources.Resource.VGlavnoeMenu &raquo;</a> </p>
+<script>
+    function SaveCompleteWork() {
+        var Stock = $('#StockID').val();
+        var Manager = $('#ManagerID').val();
+
+
+
+        var InterID = $('#FInterID').val();
+        var EntryID = $('#FEntryID').val();
+        var FCommitQty = $('#FCommitQty').val();
+        alert('StockId=' + Stock + ' ManagerID=' + Manager + ' InterId=' + InterID + ' EntryId=' + EntryID + ' FCommitQty=' + FCommitQty)
+        if (FCommitQty != ''&& FCommitQty!=0) {
+            $.post('@Url.Action("SaveCompleteWorkJson", "ICMOes")', {
+                Stock: Stock, Manager: Manager, InterID: InterID, FCommitQty: FCommitQty
+            }, function (data) {
+                var S = data.split(';');
+                if (S[0] == 'Ok')
+                {
+                    QRID = parseInt(S[1]);
+                    console.log('GoToPrint');
+                    var url = "@Url.Action("PrintToPrinter", "POOrderEntries")?QRID=" + QRID ;
+                    window.location.replace(url);
+
+
+                }
+                else
+                {
+                    alert(data);
+                    location.reload();
+                }
+
+
+
+
+            }
+
+            );
+        }
+        else
+        {
+            alert('@Resources.Resource.NomenklaturiNedostatochno');
+        }
+    }
+</script>
+<script>
+      //  var Mam = "@ViewBag.Managers";
+      //  var availableTags =  Mam.split(",");
+       // var availableTags =  source: '@Url.Action("SearchNumber", "Poligons")'
+        function SearchManager () {
+            $("#ManagerID").autocomplete({
+                    source: '@Url.Action("AutocompleteSearchMOL", "POOrderEntries")',
+                    minLength: 1
+
+            });
+        };
+</script>
+
+
+<script>
+
+        function SearchStorage () {
+            $("#StockID").each(function () {
+                var target = $(this);
+              //  alert('Search' + availableTags);
+                target.autocomplete({
+                    source: '@Url.Action("AutocompleteSearchStorage", "POOrderEntries")',
+                    minLength: 0,
+                       select: function (event, ui)
+                     {
+                           $.post('@Url.Action("FindMOL", "POOrderEntries")', { storage: ui.item.label },
+                               function (data)
+                               {
+                                 //  alert(data);
+                                   $("#ManagerID").val(data);
+                               }
+                           );
+
+                       }
+
+                });
+            });
+        };
+</script>

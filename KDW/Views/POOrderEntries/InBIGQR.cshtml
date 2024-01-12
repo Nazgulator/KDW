@@ -1,0 +1,63 @@
+﻿@model IEnumerable<KDW.Models.DvigenieNEW>
+
+<table class="table table-bordered table-stripped">
+    <tr>
+        <td>
+            @Resources.Resource.Nomenklatura
+        </td>
+        <td>
+            @Resources.Resource.QTYKPeremesheniyu
+        </td>
+        <td>
+            @Resources.Resource.Stock
+        </td>
+        <td>
+            X
+        </td>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @item.ItemNumber
+    </td>
+    <td>
+        @item.QTYFact
+    </td>
+    <td>
+        @item.StockName
+    </td>
+    <td>
+        <button class="btn btn-danger" onclick="RemoveFromBIGQR(@item.Id)">X</button>
+    </td>
+    
+</tr>
+
+
+    }
+
+</table>
+
+<script>
+    function RemoveFromBIGQR(DvigenieId)
+    {
+        var WorkId = $("#WorkId").val();
+        var url = "@Url.Action("RemoveFromBIGQR", "POOrderEntries")?DvigenieId=" + DvigenieId;
+        var Reloadurl = "@Url.Action("AddBigQRViewMenu", "POOrderEntries")";
+        var Tableurl = "@Url.Action("AddBigQRViewTable", "POOrderEntries")?WorkId=" + WorkId;
+
+        $.post(url,
+            function (data) {
+                $("#Menu").load(Reloadurl);
+
+
+            }
+        );
+
+
+    }
+</script>
+
+
+

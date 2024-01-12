@@ -1,0 +1,64 @@
+﻿
+
+@{
+    ViewBag.Title = "Home Page";
+
+    ViewBag.Title = "Index";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+}
+
+
+
+
+
+<div class="container">
+
+    <div class="table table-striped">
+        <div class="row">
+            <div class="col">
+                <h5>              </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" style="text-align:center">
+                <h1>@Resources.Resource.SkladskoiUchet</h1>
+            </div>
+        </div>
+
+        <p>
+            <a href="~/POOrderEntries/ScanQR" class="btn btn-block btn-success glyphicon glyphicon-qrcode">@Resources.Resource.OtskaniruiteNomenklaturu</a>
+        </p>
+
+        <p>
+            <a href="~/POOrderEntries/Index" class="btn btn-block btn-success glyphicon glyphicon-import">@Resources.Resource.PostuplenieNaSklad</a>
+        </p>
+
+        <p>
+            <a href="~/POOrderEntries/Nomenklaturs" class="btn btn-block btn-success glyphicon glyphicon-menu-hamburger">@Resources.Resource.OstatkiNomenklaturi</a>
+        </p>
+
+        <p>
+            <a href="~/POOrderEntries/SpisokWORK?Regim=1" class="btn btn-block btn-success glyphicon glyphicon-tower">@Resources.Resource.PeremeshenieNaProizvodstvo</a>
+        </p>
+        <p>
+            <a href="~/ICStockBills/Index" class="btn btn-block btn-success glyphicon ">ICStockBill</a>
+        </p>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
